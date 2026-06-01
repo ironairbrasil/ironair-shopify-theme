@@ -1,0 +1,64 @@
+{% assign variant = product.selected_or_first_available_variant %}
+{% assign price = variant.price %}
+{% assign compare_price = variant.compare_at_price %}
+{% assign pix_price = price | times: 90 | divided_by: 100 %}
+{% assign installments = price | divided_by: 12 %}
+{% if compare_price > price %}
+  {% assign discount = compare_price | minus: price | times: 100 | divided_by: compare_price %}
+{% endif %}
+
+<article class="product-card" id="{{ product.handle }}">
+  <div class="pc-badge-wrap">
+    {% unless variant.available %}
+      {% render 'badge', label: 'Esgotado', class: 'badge-out' %}
+    {% endunless %}
+    {% if compare_price > price %}
+      {% capture discount_label %}{{ discount }}% OFF{% endcapture %}
+      {% render 'badge', label: discount_label, class: 'badge-off' %}
+    {% endif %}
+  </div>
+  <div class="pc-img">
+    <a href="{{ product.url }}" class="product-figure-link">
+      {% if product.featured_image %}
+        {{ product.featured_image | image_url: width: 700 | image_tag: alt: product.title, class: 'pc-img-photo', loading: 'lazy' }}
+      {% else %}
+        <img src="{{ 'ironair-principal.png' | asset_url }}" alt="{{ product.title | escape }}" loading="lazy">
+      {% endif %}
+    </a>
+  </div>
+  <div class="pc-body">
+    <div class="pc-brand">{{ product.vendor | default: shop.name }}</div>
+    <a href="{{ product.url }}" class="pc-name">{{ product.title }}</a>
+    <div class="pc-stars">{% render 'stars', rating: 5 %}<span class="count">(847)</span></div>
+    {% render 'product-price', product: product, variant: variant %}
+    <div class="product-card-payment-lines">
+      <div class="product-card-payment-pix">
+        <strong>{{ pix_price | money }}</strong>
+        <span>com 10% OFF no Pix</span>
+      </div>
+      <div class="product-card-payment-card">
+        ou {{ price | money }} em até <strong>12x de {{ installments | money }}</strong> s/juros
+      </div>
+    </div>
+
+    {% if variant.inventory_management and variant.inventory_quantity > 0 %}
+      <div class="pc-stock">{{ variant.inventory_quantity }} unidade(s) em estoque</div>
+    {% elsif variant.available %}
+      <div class="pc-stock">Em estoque</div>
+    {% else %}
+      <div class="pc-stock is-out">Esgotado no momento</div>
+    {% endif %}
+
+    {% if product.has_only_default_variant %}
+      <form method="post" action="{{ routes.cart_add_url }}" class="product-card-form">
+        <input type="hidden" name="id" value="{{ variant.id }}">
+        <button class="pc-btn" type="submit" {% unless variant.available %}disabled{% endunless %}>
+          Adicionar ao carrinho
+        </button>
+      </form>
+    {% else %}
+      <a class="pc-btn" href="{{ product.url }}">Escolher opção</a>
+    {% endif %}
+    <a class="pc-btn-ghost" href="{{ product.url }}">Ver detalhes</a>
+  </div>
+</article>

@@ -1,0 +1,70 @@
+{{ 'home-slider.css' | asset_url | stylesheet_tag }}
+{{ 'slider.js' | asset_url | script_tag }}
+
+<section class="home-slider" aria-label="{{ section.settings.aria_label }}">
+  <div class="home-slider-stage" data-home-slider>
+    {% for block in section.blocks %}
+      {% assign fallback_asset = 'banner-slide-5.webp' %}
+      {% if forloop.index == 2 %}{% assign fallback_asset = 'banner-slide-6.webp' %}{% endif %}
+      {% if forloop.index == 3 %}{% assign fallback_asset = 'banner-slide-7.webp' %}{% endif %}
+      <a
+        href="{{ block.settings.url | default: routes.all_products_collection_url }}"
+        class="home-slide tone-{{ block.settings.tone }} {% if forloop.first %}is-active{% endif %}"
+        aria-label="{{ block.settings.label }}"
+        {{ block.shopify_attributes }}
+      >
+        {% if block.settings.image != blank %}
+          {{ block.settings.image | image_url: width: 2400 | image_tag: alt: block.settings.label, class: 'home-slide-image', loading: 'eager' }}
+        {% else %}
+          <img class="home-slide-image" src="{{ fallback_asset | asset_url }}" alt="{{ block.settings.label | escape }}">
+        {% endif %}
+      </a>
+    {% endfor %}
+    {% if section.blocks.size > 1 %}
+      <div class="home-slider-nav">
+        <button type="button" class="home-slider-arrow" data-slider-prev aria-label="Banner anterior">‹</button>
+        <button type="button" class="home-slider-arrow" data-slider-next aria-label="Próximo banner">›</button>
+      </div>
+      <div class="home-slider-dots" role="tablist" aria-label="Selecionar banner">
+        {% for block in section.blocks %}
+          <button type="button" class="home-slider-dot {% if forloop.first %}is-active{% endif %}" data-slider-dot="{{ forloop.index0 }}" aria-label="Ir para banner {{ forloop.index }}"></button>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Slider principal",
+  "settings": [
+    { "type": "text", "id": "aria_label", "label": "Rótulo acessível", "default": "Banners principais da Iron Air" }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Banner",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Imagem" },
+        { "type": "text", "id": "label", "label": "Texto alternativo", "default": "Banner da Iron Air" },
+        { "type": "url", "id": "url", "label": "Link" },
+        { "type": "select", "id": "tone", "label": "Tom", "default": "navy", "options": [
+          { "value": "navy", "label": "Azul" },
+          { "value": "gold", "label": "Dourado" },
+          { "value": "teal", "label": "Verde" }
+        ] }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Slider principal",
+      "blocks": [
+        { "type": "slide", "settings": { "label": "Banner 1 da Iron Air", "url": "/collections/all", "tone": "navy" } },
+        { "type": "slide", "settings": { "label": "Banner 2 da Iron Air", "url": "/collections/all", "tone": "gold" } },
+        { "type": "slide", "settings": { "label": "Banner 3 da Iron Air", "url": "/collections/all", "tone": "teal" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

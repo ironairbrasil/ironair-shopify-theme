@@ -1,0 +1,61 @@
+{{ 'how-it-works.css' | asset_url | stylesheet_tag }}
+
+<section class="hiw-section section-anchor" id="como-funciona">
+  <div class="section-head">
+    <div>
+      <div class="section-kicker">{{ section.settings.subtitle }}</div>
+      <h2>{{ section.settings.title }}</h2>
+    </div>
+  </div>
+  <div class="hiw-steps">
+    {% for block in section.blocks %}
+      {% assign fallback_asset = 'passo-1.jpg' %}
+      {% if forloop.index == 2 %}{% assign fallback_asset = 'passo-2.jpg' %}{% endif %}
+      {% if forloop.index == 3 %}{% assign fallback_asset = 'passo-3.jpg' %}{% endif %}
+      {% if forloop.index == 4 %}{% assign fallback_asset = 'passo-4.jpg' %}{% endif %}
+      <div class="hiw-step" {{ block.shopify_attributes }}>
+        <div class="hiw-media">
+          {% if block.settings.image != blank %}
+            {{ block.settings.image | image_url: width: 320 | image_tag: alt: block.settings.title, class: 'hiw-media-image', loading: 'lazy' }}
+          {% else %}
+            <img class="hiw-media-image" src="{{ fallback_asset | asset_url }}" alt="{{ block.settings.title | escape }}">
+          {% endif %}
+        </div>
+        <div class="hiw-title">{{ block.settings.title }}</div>
+        <div class="hiw-desc">{{ block.settings.description }}</div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Como funciona",
+  "settings": [
+    { "type": "text", "id": "subtitle", "label": "Subtítulo", "default": "4 passos simples" },
+    { "type": "text", "id": "title", "label": "Título", "default": "Como funciona" }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Passo",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Imagem" },
+        { "type": "text", "id": "title", "label": "Título", "default": "Coloque a roupa" },
+        { "type": "textarea", "id": "description", "label": "Descrição", "default": "Prenda sua camisa, calça ou vestido no balão. Leva menos de 30 segundos." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Como funciona",
+      "blocks": [
+        { "type": "step", "settings": { "title": "Coloque a roupa", "description": "Prenda sua camisa, calça ou vestido no balão. Leva menos de 30 segundos." } },
+        { "type": "step", "settings": { "title": "Ajuste as configurações", "description": "Coloque no modo ferro, acerte o tempo e temperatura pelo painel digital." } },
+        { "type": "step", "settings": { "title": "Relaxe enquanto aguarda", "description": "O Iron Air assume. Faça outras coisas enquanto a roupa fica pronta." } },
+        { "type": "step", "settings": { "title": "Vista e saia", "description": "Em 10 a 12 minutos suas roupas estão lisas, secas e prontas para vestir." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

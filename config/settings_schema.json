@@ -1,0 +1,25 @@
+[
+  {
+    "name": "Tema Iron Air",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Cor principal",
+        "default": "#103d3e"
+      },
+      {
+        "type": "color",
+        "id": "color_primary_dark",
+        "label": "Cor principal escura",
+        "default": "#0b2d2e"
+      },
+      {
+        "type": "color",
+        "id": "color_primary_light",
+        "label": "Cor principal clara",
+        "default": "#e7efef"
+      }
+    ]
+  }
+]

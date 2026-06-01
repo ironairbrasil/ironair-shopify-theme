@@ -1,0 +1,25 @@
+<section class="page page-stack custom-liquid-section">
+  {% if section.settings.title != blank %}
+    <div class="section-head">
+      <div>
+        {% if section.settings.kicker != blank %}<div class="section-kicker">{{ section.settings.kicker }}</div>{% endif %}
+        <h1>{{ section.settings.title }}</h1>
+      </div>
+    </div>
+  {% endif %}
+  <div class="content-card custom-liquid-content">
+    {{ section.settings.custom_liquid }}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Liquid customizado",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Selo" },
+    { "type": "text", "id": "title", "label": "Título" },
+    { "type": "liquid", "id": "custom_liquid", "label": "Liquid", "default": "<p>Adicione seu conteúdo.</p>" }
+  ],
+  "presets": [{ "name": "Liquid customizado" }]
+}
+{% endschema %}

@@ -1,0 +1,193 @@
+.products-grid {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.mobile-scroll-shell {
+  min-width: 0;
+  overflow: visible;
+}
+
+.products-carousel-shell {
+  min-width: 0;
+  overflow: visible;
+}
+
+.products-carousel-nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.products-carousel-arrow {
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(var(--iron-green-rgb), 0.16);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--dark-green);
+  box-shadow: var(--shadow);
+  font-size: 26px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.2s, opacity 0.2s;
+}
+
+.products-carousel-arrow:hover:not(:disabled) {
+  background: var(--dark-green);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.products-carousel-arrow:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.products-grid.is-carousel {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 0 8px;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: 0;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.products-grid.is-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.products-grid.is-carousel .product-card {
+  width: calc((100% - 36px) / 4);
+  min-width: calc((100% - 36px) / 4);
+  scroll-snap-align: start;
+  flex-shrink: 0;
+}
+
+.product-site-video {
+  position: relative;
+  width: 100vw;
+  margin: 0 calc(50% - 50vw) 32px;
+  background: #000;
+  overflow: hidden;
+  min-height: clamp(520px, 64vw, 760px);
+  display: grid;
+  place-items: center;
+}
+
+.product-site-video video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-site-video::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.48);
+}
+
+.product-site-video-copy {
+  position: relative;
+  z-index: 1;
+  width: min(720px, calc(100% - 40px));
+  color: #fff;
+  text-align: center;
+  display: grid;
+  justify-items: center;
+  gap: 20px;
+  padding: 72px 0;
+}
+
+.product-site-video-copy span {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.product-site-video-copy h2 {
+  margin: 0;
+  font-size: clamp(38px, 5vw, 68px);
+  line-height: 0.98;
+  font-weight: 500;
+  max-width: 680px;
+}
+
+.product-site-video-copy p {
+  margin: 0;
+  max-width: 620px;
+  font-size: 15px;
+  line-height: 1.75;
+  font-weight: 500;
+}
+
+.product-site-video-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  padding: 0 34px;
+  background: #fff;
+  color: #111;
+  border: 1px solid #fff;
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.product-site-video-cta:hover {
+  background: transparent;
+  color: #fff;
+}
+
+.cols3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.cols4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.shopify-featured-product {
+  max-width: var(--shell-max-width);
+  margin: 0 auto;
+}
+
+.shopify-featured-product .section-head {
+  padding-inline: 0;
+}
+
+.shopify-featured-product .products-grid {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (max-width: 900px) {
+  .shopify-featured-product { padding: 0 20px; }
+  .products-grid.cols4,
+  .products-grid.cols3 { grid-template-columns: repeat(2, 1fr); }
+  .products-grid.is-carousel .product-card { width: calc((100% - 12px) / 2); min-width: calc((100% - 12px) / 2); }
+}
+
+@media (max-width: 640px) {
+  .products-carousel-nav { display: none; }
+  .mobile-scroll-shell { overflow: visible; margin-left: -16px; margin-right: -16px; }
+  .products-grid.is-carousel { padding-left: 16px; padding-right: 16px; scroll-padding-left: 16px; }
+  .products-grid.is-carousel .product-card { width: min(82%, 320px); min-width: min(82%, 320px); }
+  .products-grid.is-stack-mobile { grid-template-columns: 1fr; gap: 12px; }
+}

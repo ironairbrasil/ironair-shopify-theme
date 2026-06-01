@@ -1,0 +1,28 @@
+{{ 'collection-page.css' | asset_url | stylesheet_tag }}
+{{ 'featured-products.css' | asset_url | stylesheet_tag }}
+{{ 'product-card.css' | asset_url | stylesheet_tag }}
+
+<section class="page page-stack">
+  <div class="section-head">
+    <div>
+      <div class="section-kicker">{{ collection.products_count }} produtos</div>
+      <h1>{{ collection.title }}</h1>
+    </div>
+  </div>
+  <div class="products-grid cols3 is-stack-mobile">
+    {% for product in collection.products %}
+      {% render 'product-card', product: product %}
+    {% else %}
+      <div class="content-card collection-empty">
+        <p>Nenhum produto encontrado nesta coleção.</p>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Coleção",
+  "settings": []
+}
+{% endschema %}

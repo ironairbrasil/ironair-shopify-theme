@@ -1,0 +1,8 @@
+{% assign variant = variant | default: product.selected_or_first_available_variant %}
+{% assign price = variant.price %}
+{% assign compare_price = variant.compare_at_price %}
+
+{% if compare_price > price %}
+  <div class="pc-price-old">{{ compare_price | money }}</div>
+{% endif %}
+<div class="pc-price">{{ price | money }}</div>

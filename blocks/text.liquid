@@ -1,0 +1,5 @@
+<div class="content-card" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+
+{% schema %}
+{ "name": "Texto", "settings": [ { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Texto</p>" } ] }
+{% endschema %}

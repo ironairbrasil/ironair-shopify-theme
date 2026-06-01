@@ -1,0 +1,159 @@
+footer {
+  background: var(--footer-color, #111);
+  border-top: 3px solid var(--dark-green);
+  padding: 40px 20px 24px;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.f-logo {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.f-logo img {
+  width: auto;
+  height: 46px;
+  display: block;
+}
+
+.f-logo span {
+  color: #fff;
+}
+
+.footer-brand p {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.f-social {
+  display: flex;
+  gap: 8px;
+}
+
+.f-social a {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transition: all 0.2s;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.f-social svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.f-social-fb svg,
+.f-social-tk svg {
+  fill: currentColor;
+  stroke: none;
+}
+
+.f-social-yt svg {
+  stroke: none;
+  width: 20px;
+  height: 20px;
+}
+
+.f-social-youtube-shape {
+  fill: #ff0000;
+}
+
+.f-social-youtube-play {
+  fill: #fff;
+}
+
+.f-social a:hover {
+  background: var(--dark-green);
+  color: #fff;
+}
+
+.f-col h4 {
+  font-size: 13px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.f-col ul {
+  list-style: none;
+}
+
+.f-col li {
+  margin-bottom: 8px;
+}
+
+.f-col a {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.4);
+  transition: color 0.2s;
+}
+
+.f-col a:hover {
+  color: #fff;
+}
+
+.footer-bottom {
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.footer-bottom p {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.f-pgto {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.f-pgto-item {
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+@media (max-width: 900px) {
+  .footer-top { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 640px) {
+  .footer-top { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
+}

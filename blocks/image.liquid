@@ -1,0 +1,7 @@
+{% if block.settings.image %}
+  {{ block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: block.settings.alt }}
+{% endif %}
+
+{% schema %}
+{ "name": "Imagem", "settings": [ { "type": "image_picker", "id": "image", "label": "Imagem" }, { "type": "text", "id": "alt", "label": "Texto alternativo" } ] }
+{% endschema %}

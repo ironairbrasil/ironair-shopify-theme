@@ -1,0 +1,7 @@
+{% if block.settings.video_url != blank %}
+  <video controls src="{{ block.settings.video_url }}"></video>
+{% endif %}
+
+{% schema %}
+{ "name": "Vídeo", "settings": [ { "type": "url", "id": "video_url", "label": "URL do vídeo" } ] }
+{% endschema %}

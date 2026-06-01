@@ -1,0 +1,24 @@
+{{ 'page.css' | asset_url | stylesheet_tag }}
+
+<section class="page page-stack">
+  <div class="section-head">
+    <div>
+      <div class="section-kicker">Blog</div>
+      <h1>{{ blog.title }}</h1>
+    </div>
+  </div>
+  <div class="blog-list">
+    {% for article in blog.articles %}
+      <article class="content-card blog-article-card">
+        <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
+        <p>{{ article.excerpt_or_content | strip_html | truncate: 180 }}</p>
+      </article>
+    {% else %}
+      <div class="content-card">Nenhum artigo publicado.</div>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Blog", "settings": [] }
+{% endschema %}

@@ -1,0 +1,115 @@
+.trust-banner {
+  background: var(--ink);
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  border-radius: 0;
+  padding: 22px 40px;
+  margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  padding-inline: max(20px, calc((100vw - var(--shell-max-width)) / 2));
+}
+
+.trust-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 16px;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  gap: 10px;
+}
+
+.trust-item:last-child {
+  border-right: none;
+}
+
+.trust-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(var(--iron-green-rgb), 0.2);
+}
+
+.trust-icon svg {
+  width: 22px;
+  height: 22px;
+  color: #fff;
+}
+
+.trust-label-title {
+  display: block;
+  font-size: 14px;
+  font-weight: 800;
+  color: #fff;
+  margin: 0;
+}
+
+.trust-label span {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.header-search svg,
+.hicon svg,
+.navcat-item svg,
+.mobile-nav-link svg,
+.mobile-header-action svg,
+.trust-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+@media (max-width: 900px) {
+  .trust-banner { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .trust-item {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .trust-banner {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    justify-items: initial;
+    text-align: initial;
+    background: transparent;
+    width: auto;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 14px 12px 16px;
+    scroll-padding-left: 12px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .trust-banner::-webkit-scrollbar { display: none; }
+  .trust-item {
+    width: calc((100vw - 44px) / 3);
+    min-width: calc((100vw - 44px) / 3);
+    margin: 0;
+    padding: 12px 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    background: var(--ink);
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    text-align: center;
+    gap: 7px;
+  }
+  .trust-item .trust-icon { width: 34px; height: 34px; }
+  .trust-item .trust-icon svg { width: 16px; height: 16px; }
+  .trust-label-title { font-size: 11px; line-height: 1.15; }
+  .trust-label span {
+    display: block;
+    max-width: 86px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 9px;
+  }
+}

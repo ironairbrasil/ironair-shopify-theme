@@ -1,0 +1,136 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body.site-body {
+  font-family: "Nunito", sans-serif;
+  background: var(--page-color, var(--bg));
+  color: var(--ink);
+  font-size: 14px;
+}
+
+p {
+  font-size: 15px;
+}
+
+h2 {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 30px;
+}
+
+h3 {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 20px;
+}
+
+.site-shell {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-main {
+  flex: 1;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  border: none;
+  background: transparent;
+}
+
+.section-anchor {
+  scroll-margin-top: 150px;
+}
+
+footer#contato {
+  scroll-margin-top: 150px;
+}
+
+.page {
+  max-width: var(--shell-max-width);
+  margin: 0 auto;
+  padding: 24px 20px;
+  background: var(--page-color, transparent);
+}
+
+.page-home {
+  padding-top: 0;
+}
+
+.home-section-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.page-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.shopify-section {
+  display: block;
+}
+
+.section-head {
+  max-width: var(--shell-max-width);
+  margin: 0 auto 18px;
+  padding: 0 20px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.section-head h2 {
+  margin: 0;
+}
+
+.section-kicker {
+  color: var(--dark-green);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.section-head > a {
+  color: var(--dark-green);
+  font-weight: 900;
+}
+
+@media (max-width: 900px) {
+  .section-head { align-items: flex-start; flex-direction: column; }
+}
+
+@media (max-width: 640px) {
+  .page { padding: 16px; }
+  .page-home { padding-top: 0; }
+}

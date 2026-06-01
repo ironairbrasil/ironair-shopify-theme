@@ -1,0 +1,32 @@
+{{ 'featured-products.css' | asset_url | stylesheet_tag }}
+{{ 'product-card.css' | asset_url | stylesheet_tag }}
+
+{% assign related_collection = product.collections.first %}
+{% if related_collection != blank %}
+  <section class="page page-stack related-products-section">
+    <div class="section-head">
+      <div>
+        <div class="section-kicker">{{ section.settings.kicker }}</div>
+        <h2>{{ section.settings.title }}</h2>
+      </div>
+    </div>
+    <div class="products-grid cols3 is-stack-mobile">
+      {% for related_product in related_collection.products limit: section.settings.limit %}
+        {% unless related_product.id == product.id %}
+          {% render 'product-card', product: related_product %}
+        {% endunless %}
+      {% endfor %}
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Produtos relacionados",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Selo", "default": "Você também pode gostar" },
+    { "type": "text", "id": "title", "label": "Título", "default": "Produtos relacionados" },
+    { "type": "range", "id": "limit", "label": "Limite", "min": 2, "max": 8, "step": 1, "default": 4 }
+  ]
+}
+{% endschema %}

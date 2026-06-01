@@ -1,0 +1,5 @@
+<a class="btn-hero" href="{{ block.settings.url }}" {{ block.shopify_attributes }}>{{ block.settings.label }}</a>
+
+{% schema %}
+{ "name": "Botão", "settings": [ { "type": "text", "id": "label", "label": "Texto", "default": "Comprar" }, { "type": "url", "id": "url", "label": "Link" } ] }
+{% endschema %}

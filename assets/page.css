@@ -1,0 +1,31 @@
+.page-content {
+  line-height: 1.7;
+}
+
+.page-content > * + * {
+  margin-top: 12px;
+}
+
+.blog-list,
+.search-results-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.blog-article-card {
+  display: grid;
+  gap: 8px;
+}
+
+.search-form {
+  display: flex;
+  gap: 8px;
+}
+
+.search-form input {
+  flex: 1;
+  min-height: 46px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0 14px;
+}

@@ -1,0 +1,50 @@
+{{ 'trust-banner.css' | asset_url | stylesheet_tag }}
+
+<div class="mobile-scroll-shell mobile-scroll-shell-trust">
+  <section class="trust-banner">
+    {% for block in section.blocks %}
+      <div class="trust-item" {{ block.shopify_attributes }}>
+        <div class="trust-icon">{% render 'icon', icon: block.settings.icon %}</div>
+        <div class="trust-label">
+          <h1 class="trust-label-title">{{ block.settings.title }}</h1>
+          <span>{{ block.settings.text }}</span>
+        </div>
+      </div>
+    {% endfor %}
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Faixa de confiança",
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Título", "default": "Frete Grátis" },
+        { "type": "text", "id": "text", "label": "Texto", "default": "Para todo o Brasil" },
+        { "type": "select", "id": "icon", "label": "Ícone", "default": "truck", "options": [
+          { "value": "truck", "label": "Frete" },
+          { "value": "card", "label": "Cartão" },
+          { "value": "shield", "label": "Segurança" },
+          { "value": "refresh", "label": "Troca" },
+          { "value": "check", "label": "Garantia" }
+        ] }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Faixa de confiança",
+      "blocks": [
+        { "type": "item", "settings": { "title": "Frete Grátis", "text": "Para todo o Brasil", "icon": "truck" } },
+        { "type": "item", "settings": { "title": "12x sem juros", "text": "Em todos os cartões", "icon": "card" } },
+        { "type": "item", "settings": { "title": "Compra Segura", "text": "Site 100% protegido", "icon": "shield" } },
+        { "type": "item", "settings": { "title": "30 dias de troca", "text": "Sem burocracia", "icon": "refresh" } },
+        { "type": "item", "settings": { "title": "Garantia 1 ano", "text": "Contra defeitos", "icon": "check" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

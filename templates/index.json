@@ -1,0 +1,46 @@
+{
+  "sections": {
+    "slider": {
+      "type": "home-slider",
+      "settings": {}
+    },
+    "trust": {
+      "type": "trust-banner",
+      "settings": {}
+    },
+    "products": {
+      "type": "featured-collection",
+      "settings": {}
+    },
+    "how_it_works": {
+      "type": "how-it-works",
+      "settings": {}
+    },
+    "compare": {
+      "type": "compare",
+      "settings": {}
+    },
+    "reviews": {
+      "type": "reviews",
+      "settings": {}
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {}
+    },
+    "final_cta": {
+      "type": "final-cta",
+      "settings": {}
+    }
+  },
+  "order": [
+    "slider",
+    "trust",
+    "products",
+    "how_it_works",
+    "compare",
+    "reviews",
+    "faq",
+    "final_cta"
+  ]
+}

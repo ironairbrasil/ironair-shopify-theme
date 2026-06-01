@@ -1,0 +1,93 @@
+{{ 'final-cta.css' | asset_url | stylesheet_tag }}
+
+{% assign featured_product = section.settings.product %}
+{% assign featured_variant = featured_product.selected_or_first_available_variant %}
+{% if featured_variant %}
+  {% assign featured_price = featured_variant.price %}
+  {% assign featured_compare_price = featured_variant.compare_at_price %}
+  {% assign featured_pix_price = featured_price | times: 90 | divided_by: 100 %}
+  {% assign featured_installments = featured_price | divided_by: 12 %}
+  {% if featured_compare_price > featured_price %}
+    {% assign featured_discount = featured_compare_price | minus: featured_price | times: 100 | divided_by: featured_compare_price %}
+  {% endif %}
+{% endif %}
+
+<section class="final-cta">
+  <div class="fc-left">
+    <h2>{{ section.settings.title | newline_to_br }}</h2>
+    <p>{{ section.settings.text }}</p>
+    <div class="final-points">
+      {% for block in section.blocks %}
+        <div {{ block.shopify_attributes }}>✓ {{ block.settings.text }}</div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="fc-right">
+    {% if featured_discount %}
+      <div class="fc-off-tag">{{ featured_discount }}% OFF</div>
+    {% else %}
+      <div class="fc-off-tag">{{ section.settings.badge }}</div>
+    {% endif %}
+    {% if featured_compare_price > featured_price %}
+      <div class="fc-old">De {{ featured_compare_price | money }}</div>
+    {% endif %}
+    <div class="fc-price">
+      {% if featured_variant %}
+        {{ featured_pix_price | money }}
+      {% else %}
+        R$ 269,00
+      {% endif %}
+    </div>
+    {% if featured_variant %}
+      <div class="product-card-payment-pix">com 10% OFF no Pix</div>
+    {% endif %}
+    <div class="fc-parcel">
+      {% if featured_variant %}
+        ou {{ featured_price | money }} em até <strong>12x de {{ featured_installments | money }}</strong> sem juros
+      {% else %}
+        ou 12x de <strong>R$ 22,42</strong> sem juros
+      {% endif %}
+    </div>
+    {% if featured_variant and featured_product.has_only_default_variant %}
+      <form method="post" action="{{ routes.cart_add_url }}">
+        <input type="hidden" name="id" value="{{ featured_variant.id }}">
+        <button class="fc-btn" type="submit">🛒 {{ section.settings.button_label }}</button>
+      </form>
+    {% elsif featured_product != blank %}
+      <a class="fc-btn" href="{{ featured_product.url }}">Escolher opção</a>
+    {% else %}
+      <a class="fc-btn" href="/admin/products">Conecte o produto</a>
+    {% endif %}
+    <div class="fc-trust">
+      <div class="fc-trust-item">🔒 Pagamento seguro</div>
+      <div class="fc-trust-item">🚚 Frete grátis</div>
+      <div class="fc-trust-item">↩ 30 dias de troca</div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "CTA final",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Produto principal" },
+    { "type": "text", "id": "badge", "label": "Selo", "default": "Oferta" },
+    { "type": "textarea", "id": "title", "label": "Título", "default": "Pare de perder tempo\npassando roupa" },
+    { "type": "textarea", "id": "text", "label": "Texto", "default": "O Iron Air passa, seca e desamassa automaticamente para deixar sua rotina mais leve, rápida e prática todos os dias." },
+    { "type": "text", "id": "button_label", "label": "Botão", "default": "Comprar agora com desconto" }
+  ],
+  "blocks": [
+    { "type": "point", "name": "Benefício", "settings": [{ "type": "text", "id": "text", "label": "Texto", "default": "Frete grátis" }] }
+  ],
+  "presets": [
+    {
+      "name": "CTA final",
+      "blocks": [
+        { "type": "point", "settings": { "text": "Frete grátis" } },
+        { "type": "point", "settings": { "text": "12x sem juros" } },
+        { "type": "point", "settings": { "text": "30 dias de garantia" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

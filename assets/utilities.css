@@ -1,0 +1,133 @@
+.btn-hero,
+.btn-hero-ghost,
+.pc-btn,
+.pc-btn-ghost,
+.fc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-hero {
+  background: var(--button-color, var(--dark-green));
+  color: var(--button-text-color, #fff);
+  padding: 14px 32px;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  box-shadow: 0 4px 20px rgba(var(--iron-green-rgb), 0.4);
+}
+
+.btn-hero:hover {
+  background: var(--dark-green-d);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(var(--iron-green-rgb), 0.5);
+}
+
+.btn-hero-ghost {
+  background: transparent;
+  color: #fff;
+  padding: 14px 24px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+}
+
+.btn-hero-ghost:hover {
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.btn-hero-ghost.dark {
+  color: var(--button-2-text-color, var(--dark-green));
+  border-color: rgba(var(--iron-green-rgb), 0.2);
+  background: var(--button-2-color, rgba(255, 255, 255, 0.8));
+}
+
+.btn-hero-ghost.dark:hover {
+  border-color: rgba(var(--iron-green-rgb), 0.5);
+  background: rgba(255, 255, 255, 1);
+}
+
+.btn-hero:disabled,
+.pc-btn:disabled,
+.product-detail-button:disabled {
+  background: #b8b8b8;
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.sec-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.sec-header-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sec-title,
+.page-hero h1 {
+  font-family: "Barlow Condensed", sans-serif;
+}
+
+.sec-title {
+  font-size: 26px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--ink);
+  letter-spacing: -0.3px;
+}
+
+.sec-title::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 24px;
+  background: var(--dark-green);
+  border-radius: 2px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.sec-subtitle {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.sec-link {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--dark-green);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: gap 0.2s;
+}
+
+.sec-link:hover {
+  gap: 8px;
+}
+
+.content-card {
+  background: var(--card-color, #fff);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+@media (max-width: 640px) {
+  .btn-hero,
+  .btn-hero-ghost { width: 100%; }
+
+  .content-card { padding: 24px 20px; }
+}

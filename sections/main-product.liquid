@@ -1,0 +1,118 @@
+{{ 'product-page.css' | asset_url | stylesheet_tag }}
+
+{% assign current_variant = product.selected_or_first_available_variant %}
+{% assign price = current_variant.price %}
+{% assign compare_price = current_variant.compare_at_price %}
+{% assign pix_price = price | times: 90 | divided_by: 100 %}
+{% assign installments = price | divided_by: 12 %}
+{% if compare_price > price %}
+  {% assign discount = compare_price | minus: price | times: 100 | divided_by: compare_price %}
+{% endif %}
+
+<section class="page product-page" data-product-root>
+  <div class="product-detail-shell">
+    <div class="product-gallery">
+      <div class="product-gallery-main">
+        {% if product.featured_media %}
+          {{ product.featured_media | image_url: width: 1100 | image_tag: alt: product.title, data-main-product-image: true }}
+        {% else %}
+          <img src="{{ 'ironair-principal.png' | asset_url }}" alt="{{ product.title | escape }}" data-main-product-image>
+        {% endif %}
+      </div>
+      <div class="product-gallery-thumbs">
+        {% for image in product.images %}
+          <button type="button" class="product-gallery-thumb {% if forloop.first %}is-active{% endif %}" data-gallery-image="{{ image | image_url: width: 1100 }}" aria-label="Ver imagem {{ forloop.index }}">
+            {{ image | image_url: width: 160 | image_tag: alt: product.title, loading: 'lazy' }}
+          </button>
+        {% else %}
+          {% assign fallback_images = 'ironair-principal.png,ironair-1.jpg,ironair-2.jpg,ironair-3.jpg,ironair-4.jpg,ironair-5.jpg' | split: ',' %}
+          {% for fallback in fallback_images %}
+            <button type="button" class="product-gallery-thumb {% if forloop.first %}is-active{% endif %}" data-gallery-image="{{ fallback | asset_url }}" aria-label="Ver imagem {{ forloop.index }}">
+              <img src="{{ fallback | asset_url }}" alt="{{ product.title | escape }}">
+            </button>
+          {% endfor %}
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="product-purchase-panel">
+      <div class="pc-brand">{{ product.vendor | default: shop.name }}</div>
+      <h1>{{ product.title }}</h1>
+      <div class="pc-stars">{% render 'stars', rating: 5 %}<span class="count">(847 avaliações)</span></div>
+      <div class="pc-badge badge-off" data-product-discount {% unless compare_price > price %}hidden{% endunless %}>{{ discount }}% OFF</div>
+      <div class="pc-price-old" data-product-compare-price {% unless compare_price > price %}hidden{% endunless %}>{{ compare_price | money }}</div>
+      <div class="product-main-price" data-product-price>{{ price | money }}</div>
+      <div class="product-card-payment-pix"><strong data-product-pix-price>{{ pix_price | money }}</strong> com 10% OFF no Pix</div>
+      <div class="product-card-payment-card">ou <span data-product-card-price>{{ price | money }}</span> em até <strong>12x de <span data-product-installments>{{ installments | money }}</span></strong> s/juros</div>
+
+      {% form 'product', product, class: 'product-form' %}
+        {% unless product.has_only_default_variant %}
+          <label class="product-option-label" for="ProductSelect-{{ section.id }}">Opção</label>
+          <select id="ProductSelect-{{ section.id }}" name="id" data-product-variant-select>
+            {% for variant in product.variants %}
+              {% assign variant_price = variant.price %}
+              {% assign variant_compare_price = variant.compare_at_price %}
+              {% assign variant_pix_price = variant_price | times: 90 | divided_by: 100 %}
+              {% assign variant_installments = variant_price | divided_by: 12 %}
+              {% assign variant_discount = 0 %}
+              {% if variant_compare_price > variant_price %}
+                {% assign variant_discount = variant_compare_price | minus: variant_price | times: 100 | divided_by: variant_compare_price %}
+              {% endif %}
+              {% capture variant_stock_message %}
+                {% if variant.inventory_management and variant.inventory_quantity > 0 %}
+                  {{ variant.inventory_quantity }} unidade(s) em estoque
+                {% elsif variant.available %}
+                  Em estoque
+                {% else %}
+                  Produto esgotado no momento
+                {% endif %}
+              {% endcapture %}
+              <option
+                value="{{ variant.id }}"
+                data-price="{{ variant_price | money }}"
+                data-compare-price="{{ variant_compare_price | money }}"
+                data-has-compare-price="{% if variant_compare_price > variant_price %}true{% else %}false{% endif %}"
+                data-discount="{{ variant_discount }}% OFF"
+                data-pix-price="{{ variant_pix_price | money }}"
+                data-installments="{{ variant_installments | money }}"
+                data-available="{% if variant.available %}true{% else %}false{% endif %}"
+                data-stock-message="{{ variant_stock_message | strip | escape }}"
+                {% if variant == current_variant %}selected{% endif %}
+                {% unless variant.available %}disabled{% endunless %}
+              >
+                {{ variant.title }}{% unless variant.available %} - esgotado{% endunless %}
+              </option>
+            {% endfor %}
+          </select>
+        {% else %}
+          <input type="hidden" name="id" value="{{ current_variant.id }}">
+        {% endunless %}
+        <button class="btn-hero product-submit" type="submit" data-product-submit {% unless current_variant.available %}disabled{% endunless %}>
+          Comprar agora
+        </button>
+      {% endform %}
+
+      <div class="product-detail-copy">
+        {{ product.description }}
+      </div>
+      <div class="final-points product-points">
+        <div>✓ Frete grátis</div>
+        <div>✓ Checkout Shopify seguro</div>
+        {% if current_variant.inventory_management and current_variant.inventory_quantity > 0 %}
+          <div data-product-stock-message>✓ {{ current_variant.inventory_quantity }} unidade(s) em estoque</div>
+        {% elsif current_variant.available %}
+          <div data-product-stock-message>✓ Em estoque</div>
+        {% else %}
+          <div data-product-stock-message>Produto esgotado no momento</div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Produto principal",
+  "settings": []
+}
+{% endschema %}

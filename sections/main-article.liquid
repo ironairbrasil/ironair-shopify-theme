@@ -1,0 +1,17 @@
+{{ 'page.css' | asset_url | stylesheet_tag }}
+
+<article class="page page-stack">
+  <div class="section-head">
+    <div>
+      <div class="section-kicker">{{ article.published_at | date: '%d/%m/%Y' }}</div>
+      <h1>{{ article.title }}</h1>
+    </div>
+  </div>
+  <div class="content-card page-content">
+    {{ article.content }}
+  </div>
+</article>
+
+{% schema %}
+{ "name": "Artigo", "settings": [] }
+{% endschema %}

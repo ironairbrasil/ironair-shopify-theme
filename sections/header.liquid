@@ -1,0 +1,103 @@
+{{ 'header.css' | asset_url | stylesheet_tag }}
+{{ 'navigation.css' | asset_url | stylesheet_tag }}
+
+<div class="topbar">{{ section.settings.topbar_text }}</div>
+
+<div class="header-shell" data-ironair-header>
+  <header>
+    <div class="header-inner">
+      <button type="button" class="mobile-menu-toggle" data-mobile-menu-toggle aria-label="Abrir menu" aria-expanded="false">
+        {% render 'icon', icon: 'menu' %}
+      </button>
+
+      <a href="{{ routes.root_url }}" class="logo">
+        {% if section.settings.logo != blank %}
+          {{ section.settings.logo | image_url: width: 360 | image_tag: alt: shop.name, loading: 'eager' }}
+        {% else %}
+          <img src="{{ 'logo-1.png' | asset_url }}" alt="{{ shop.name }}" width="180" height="52">
+        {% endif %}
+      </a>
+
+      <form action="{{ routes.search_url }}" method="get" class="header-search" role="search">
+        <div class="header-search-bar">
+          <input name="q" type="search" value="{{ search.terms | escape }}" placeholder="{{ section.settings.search_placeholder }}">
+          <button type="submit" aria-label="Buscar">{% render 'icon', icon: 'search' %}</button>
+        </div>
+      </form>
+
+      <div class="header-icons header-icons-desktop">
+        <a class="hicon" href="{{ routes.account_url }}">Conta</a>
+        <button type="button" class="hicon js-cart-drawer-open" aria-controls="CartDrawer" aria-expanded="false">
+          {% render 'icon', icon: 'bag' %}
+          <span class="hicon-label">Carrinho <span class="badge" data-cart-count>{{ cart.item_count }}</span></span>
+        </button>
+      </div>
+
+      <div class="mobile-header-actions">
+        <button type="button" class="hicon mobile-header-action mobile-cart-button js-cart-drawer-open" aria-controls="CartDrawer" aria-expanded="false" aria-label="Carrinho">
+          {% render 'icon', icon: 'bag' %}
+          <span class="mobile-cart-badge" data-cart-count>{{ cart.item_count }}</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="navcat" aria-label="Menu principal">
+    <div class="navcat-inner">
+      {% for block in section.blocks %}
+        <a class="navcat-item" href="{{ block.settings.url }}" {{ block.shopify_attributes }}>
+          {% render 'icon', icon: block.settings.icon %}
+          {{ block.settings.label }}
+        </a>
+      {% endfor %}
+    </div>
+  </nav>
+</div>
+
+<button type="button" class="mobile-nav-overlay" data-mobile-menu-close aria-label="Fechar menu"></button>
+<aside id="mobile-nav-sidebar" class="mobile-nav-sidebar" data-mobile-sidebar aria-hidden="true">
+  <div class="mobile-nav-sidebar-header">
+    <div>
+      <strong>Menu</strong>
+      <span>Navegue pelas principais áreas da loja</span>
+    </div>
+    <button type="button" class="cart-close" data-mobile-menu-close aria-label="Fechar menu">x</button>
+  </div>
+  <div class="mobile-nav-sidebar-body">
+    {% for block in section.blocks %}
+      <a class="mobile-nav-link" href="{{ block.settings.url }}">
+        {% render 'icon', icon: block.settings.icon %}
+        <span>{{ block.settings.label }}</span>
+      </a>
+    {% endfor %}
+  </div>
+</aside>
+
+{% schema %}
+{
+  "name": "Cabeçalho Iron Air",
+  "settings": [
+    { "type": "text", "id": "topbar_text", "label": "Barra promocional", "default": "🚚 FRETE GRÁTIS em todo Brasil + 12X SEM JUROS no cartão + 10% OFF no Pix" },
+    { "type": "image_picker", "id": "logo", "label": "Logo" },
+    { "type": "text", "id": "search_placeholder", "label": "Placeholder da busca", "default": "Buscar produtos..." }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Texto", "default": "Produtos" },
+        { "type": "url", "id": "url", "label": "URL" },
+        { "type": "select", "id": "icon", "label": "Ícone", "default": "grid", "options": [
+          { "value": "home", "label": "Início" },
+          { "value": "grid", "label": "Grade" },
+          { "value": "truck", "label": "Entrega" },
+          { "value": "check", "label": "Check" },
+          { "value": "shield", "label": "Segurança" },
+          { "value": "refresh", "label": "Troca" }
+        ] }
+      ]
+    }
+  ]
+}
+{% endschema %}

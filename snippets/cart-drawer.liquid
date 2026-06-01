@@ -1,0 +1,53 @@
+<div class="cart-drawer-root" data-cart-drawer-root>
+  <button type="button" class="cart-drawer-overlay" data-cart-drawer-close aria-label="Fechar carrinho"></button>
+
+  <aside id="CartDrawer" class="cart-drawer" aria-hidden="true" aria-labelledby="CartDrawerTitle" tabindex="-1">
+    <div class="cart-drawer-header">
+      <div>
+        <strong id="CartDrawerTitle">Carrinho</strong>
+        <span data-cart-drawer-count>{{ cart.item_count }} item{% unless cart.item_count == 1 %}s{% endunless %}</span>
+      </div>
+      <button type="button" class="cart-drawer-close" data-cart-drawer-close aria-label="Fechar carrinho">x</button>
+    </div>
+
+    <div class="cart-drawer-body" data-cart-drawer-body>
+      {% if cart.item_count > 0 %}
+        <div class="cart-drawer-items">
+          {% for item in cart.items %}
+            <article class="cart-drawer-item">
+              <a href="{{ item.url }}" class="cart-drawer-media" tabindex="-1">
+                {% if item.image %}
+                  {{ item.image | image_url: width: 180 | image_tag: alt: item.product.title, loading: 'lazy' }}
+                {% endif %}
+              </a>
+              <div class="cart-drawer-item-copy">
+                <a href="{{ item.url }}" class="cart-drawer-item-title">{{ item.product.title }}</a>
+                {% unless item.product.has_only_default_variant %}
+                  <span>{{ item.variant.title }}</span>
+                {% endunless %}
+                <div class="cart-drawer-item-meta">
+                  <span>Qtd. {{ item.quantity }}</span>
+                  <strong>{{ item.final_line_price | money }}</strong>
+                </div>
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="cart-drawer-empty">
+          <strong>Seu carrinho está vazio.</strong>
+          <a class="btn-hero" href="{{ routes.all_products_collection_url }}">Ver produtos</a>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="cart-drawer-footer" data-cart-drawer-footer {% if cart.item_count == 0 %}hidden{% endif %}>
+      <div class="cart-drawer-subtotal">
+        <span>Subtotal</span>
+        <strong data-cart-drawer-subtotal>{{ cart.total_price | money }}</strong>
+      </div>
+      <a class="btn-hero cart-drawer-checkout" href="/checkout">Finalizar compra</a>
+      <a class="cart-drawer-cart-link" href="{{ routes.cart_url }}">Ver carrinho completo</a>
+    </div>
+  </aside>
+</div>

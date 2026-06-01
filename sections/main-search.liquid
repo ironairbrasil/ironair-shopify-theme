@@ -1,0 +1,32 @@
+{{ 'page.css' | asset_url | stylesheet_tag }}
+{{ 'featured-products.css' | asset_url | stylesheet_tag }}
+{{ 'product-card.css' | asset_url | stylesheet_tag }}
+{{ 'search.js' | asset_url | script_tag }}
+
+<section class="page page-stack">
+  <div class="section-head">
+    <div>
+      <div class="section-kicker">Busca</div>
+      <h1>Resultados</h1>
+    </div>
+  </div>
+  <form action="{{ routes.search_url }}" method="get" class="search-form" role="search">
+    <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Buscar produtos">
+    <button class="btn-hero" type="submit">Buscar</button>
+  </form>
+  {% if search.performed %}
+    <div class="products-grid cols3 is-stack-mobile">
+      {% for item in search.results %}
+        {% if item.object_type == 'product' %}
+          {% render 'product-card', product: item %}
+        {% endif %}
+      {% else %}
+        <div class="content-card collection-empty">Nenhum resultado encontrado.</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{ "name": "Busca", "settings": [] }
+{% endschema %}

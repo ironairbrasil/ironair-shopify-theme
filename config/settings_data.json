@@ -1,0 +1,106 @@
+{
+  "current": {
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "topbar_text": "🚚 FRETE GRÁTIS em todo Brasil + 12X SEM JUROS no cartão + 10% OFF no Pix",
+          "search_placeholder": "Buscar produtos..."
+        },
+        "blocks": {
+          "inicio": {
+            "type": "link",
+            "settings": {
+              "label": "Início",
+              "url": "/",
+              "icon": "home"
+            }
+          },
+          "produtos": {
+            "type": "link",
+            "settings": {
+              "label": "Produtos",
+              "url": "/collections/all",
+              "icon": "grid"
+            }
+          },
+          "como": {
+            "type": "link",
+            "settings": {
+              "label": "Como Funciona",
+              "url": "/#como-funciona",
+              "icon": "check"
+            }
+          },
+          "depoimentos": {
+            "type": "link",
+            "settings": {
+              "label": "Depoimentos",
+              "url": "/#depoimentos",
+              "icon": "shield"
+            }
+          },
+          "faq": {
+            "type": "link",
+            "settings": {
+              "label": "FAQ",
+              "url": "/#faq",
+              "icon": "refresh"
+            }
+          },
+          "contato": {
+            "type": "link",
+            "settings": {
+              "label": "Contato",
+              "url": "/#contato",
+              "icon": "truck"
+            }
+          }
+        },
+        "block_order": ["inicio", "produtos", "como", "depoimentos", "faq", "contato"]
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "description": "Elevando o padrão de cuidado com roupas através de tecnologia, precisão e confiabilidade.",
+          "support_title": "Suporte",
+          "hours": "seg a sexta - 9h as 17h",
+          "location": "Belo Horizonte, MG",
+          "document": "CNPJ: 64.158.825/0001-11"
+        },
+        "blocks": {
+          "instagram": {
+            "type": "social",
+            "settings": {
+              "label": "IG",
+              "url": "https://www.instagram.com/ironairbrasil/"
+            }
+          },
+          "facebook": {
+            "type": "social",
+            "settings": {
+              "label": "FB",
+              "url": "https://www.facebook.com/profile.php?id=61589217872180"
+            }
+          },
+          "youtube": {
+            "type": "social",
+            "settings": {
+              "label": "YT",
+              "url": "https://www.youtube.com/@IronAirBrasil"
+            }
+          },
+          "tiktok": {
+            "type": "social",
+            "settings": {
+              "label": "TK",
+              "url": "https://www.tiktok.com/@ironairbrasil"
+            }
+          }
+        },
+        "block_order": ["instagram", "facebook", "youtube", "tiktok"]
+      }
+    },
+    "content_for_index": []
+  }
+}

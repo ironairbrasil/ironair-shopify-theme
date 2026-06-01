@@ -1,0 +1,123 @@
+.product-detail-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(320px, .95fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.product-gallery,
+.product-purchase-panel {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.product-gallery {
+  padding: 18px;
+}
+
+.product-gallery-main {
+  aspect-ratio: 1 / 1;
+  display: grid;
+  place-items: center;
+  background: #f8f8f8;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.product-gallery-main img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.product-gallery-thumbs {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.product-gallery-thumb {
+  aspect-ratio: 1;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  background: #fff;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.product-gallery-thumb.is-active {
+  border-color: var(--dark-green);
+}
+
+.product-gallery-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-purchase-panel {
+  padding: 24px;
+}
+
+.product-purchase-panel h1 {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 40px;
+  line-height: 1;
+  margin: 8px 0 10px;
+}
+
+.product-main-price {
+  color: var(--dark-green);
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 48px;
+  font-weight: 900;
+  line-height: 1;
+  margin-top: 8px;
+}
+
+.product-form {
+  display: grid;
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.product-option-label {
+  font-weight: 900;
+}
+
+.product-form select {
+  min-height: 46px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0 12px;
+  background: #fff;
+}
+
+.product-submit {
+  width: 100%;
+  text-align: center;
+}
+
+.product-detail-copy {
+  color: var(--mid);
+  line-height: 1.65;
+}
+
+.product-points {
+  margin-top: 18px;
+}
+
+@media (max-width: 900px) {
+  .product-detail-shell { grid-template-columns: 1fr; }
+  .product-gallery-main { min-height: 420px; }
+}
+
+@media (max-width: 640px) {
+  .product-purchase-panel h1 { font-size: 32px; }
+  .product-main-price { font-size: 40px; }
+  .product-gallery-thumbs { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .product-gallery-main { min-height: 320px; }
+}

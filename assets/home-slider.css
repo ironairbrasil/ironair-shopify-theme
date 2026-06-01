@@ -1,0 +1,214 @@
+.home-slider {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+.home-slider-stage {
+  position: relative;
+  aspect-ratio: 1920 / 600;
+  height: auto;
+  border-radius: 0;
+  overflow: hidden;
+  background: #0f172a;
+  box-shadow: var(--shadow);
+}
+
+.home-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s ease;
+  display: block;
+}
+
+.home-slide picture {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.home-slide-image {
+  object-fit: cover;
+  object-position: center;
+}
+
+.home-slide-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.home-slide-video.is-mobile-media {
+  display: none;
+}
+
+.home-slide.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.home-slide.tone-navy {
+  background-color: #16254c;
+}
+
+.home-slide.tone-gold {
+  background-color: #8a5f07;
+}
+
+.home-slide.tone-teal {
+  background-color: #1b5b59;
+}
+
+.home-slide-footer {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 28px;
+  background: linear-gradient(180deg, rgba(6, 10, 19, 0) 0%, rgba(6, 10, 19, 0.84) 100%);
+}
+
+.home-slide-copy {
+  display: grid;
+  gap: 8px;
+  max-width: 520px;
+  color: #fff;
+}
+
+.home-slide-eyebrow {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.home-slide-copy strong {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: 0.98;
+  text-transform: uppercase;
+}
+
+.home-slide-copy p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.home-slide-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.home-slider-nav {
+  position: absolute;
+  inset-inline: 18px;
+  top: 50%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.home-slider-arrow {
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  background: rgba(10, 15, 27, 0.54);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  font-size: 30px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  pointer-events: auto;
+  backdrop-filter: blur(8px);
+}
+
+.home-slider-arrow:hover {
+  background: rgba(10, 15, 27, 0.74);
+}
+
+.home-slider-dots {
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(10, 15, 27, 0.54);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  z-index: 2;
+}
+
+.home-slider-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.34);
+  cursor: pointer;
+}
+
+.home-slider-dot.is-active {
+  width: 30px;
+  background: #fff;
+}
+
+.home-slide > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.home-slide > img {
+  object-fit: cover;
+}
+
+@media (max-width: 900px) {
+  .home-slider-stage { aspect-ratio: 16 / 9; }
+  .home-slide-video.is-desktop-media { display: none; }
+  .home-slide-video.is-mobile-media { display: block; }
+  .home-slide-footer {
+    padding: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .home-slide-actions { justify-content: flex-start; }
+}
+
+@media (max-width: 640px) {
+  .home-slider { width: 100vw; }
+  .home-slider-stage {
+    aspect-ratio: auto;
+    height: clamp(200px, 55vw, 258px);
+    border-radius: 0;
+  }
+  .home-slide-footer { gap: 14px; padding: 18px 16px 60px; }
+  .home-slide-copy { padding: 0; }
+  .home-slide-copy strong { font-size: 24px; }
+  .home-slide-copy p { font-size: 13px; }
+  .home-slider-nav { inset-inline: 10px; }
+  .home-slider-arrow { width: 40px; height: 40px; font-size: 24px; }
+}

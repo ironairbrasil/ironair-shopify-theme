@@ -1,0 +1,11 @@
+<div class="cart-page-item">
+  <a href="{{ item.url }}" class="cart-page-media">
+    {% if item.image %}{{ item.image | image_url: width: 180 | image_tag: alt: item.product.title, loading: 'lazy' }}{% endif %}
+  </a>
+  <div>
+    <a href="{{ item.url }}" class="pc-name">{{ item.product.title }}</a>
+    <div class="pc-brand">{{ item.variant.title }}</div>
+    <div>{{ item.final_line_price | money }}</div>
+  </div>
+  <input class="cart-page-qty" type="number" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="Quantidade de {{ item.product.title }}">
+</div>

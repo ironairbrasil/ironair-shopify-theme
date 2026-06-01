@@ -1,0 +1,2 @@
+{% assign button_tag = tag | default: 'a' %}
+<{{ button_tag }} class="{{ class | default: 'btn-hero' }}" {% if href %}href="{{ href }}"{% endif %} {{ attributes }}>{{ label }}</{{ button_tag }}>

@@ -1,0 +1,7 @@
+<div class="product-gallery">
+  <div class="product-gallery-main">
+    {% if product.featured_media %}
+      {{ product.featured_media | image_url: width: 1100 | image_tag: alt: product.title, data-main-product-image: true }}
+    {% endif %}
+  </div>
+</div>
