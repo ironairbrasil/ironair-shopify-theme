@@ -1,5 +1,6 @@
 {{ 'featured-products.css' | asset_url | stylesheet_tag }}
 {{ 'product-card.css' | asset_url | stylesheet_tag }}
+{{ 'featured-products.js' | asset_url | script_tag }}
 
 {% assign selected_collection = section.settings.collection | default: collections.all %}
 
@@ -15,10 +16,17 @@
     </a>
   </div>
 
-  <div class="products-grid cols3 is-stack-mobile">
-    {% for product in selected_collection.products limit: 12 %}
-      {% render 'product-card', product: product %}
-    {% endfor %}
+  <div class="products-carousel-shell" data-products-carousel>
+    <div class="products-carousel-nav" aria-label="Navegar produtos">
+      <button type="button" class="products-carousel-arrow" data-products-prev aria-label="Produtos anteriores">‹</button>
+      <button type="button" class="products-carousel-arrow" data-products-next aria-label="Próximos produtos">›</button>
+    </div>
+
+    <div class="products-grid is-carousel" data-products-track>
+      {% for product in selected_collection.products limit: 12 %}
+        {% render 'product-card', product: product %}
+      {% endfor %}
+    </div>
   </div>
 </section>
 

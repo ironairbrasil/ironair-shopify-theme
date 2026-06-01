@@ -173,8 +173,8 @@
   padding-inline: 0;
 }
 
-.shopify-featured-product .products-grid {
-  grid-template-columns: minmax(0, 1fr);
+.shopify-featured-product .products-carousel-shell {
+  position: relative;
 }
 
 @media (max-width: 900px) {
