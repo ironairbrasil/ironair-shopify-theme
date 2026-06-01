@@ -173,20 +173,6 @@
         "tone": "navy"
       }
     },
-    "how_it_works": {
-      "type": "how-it-works",
-      "settings": {
-        "subtitle": "4 passos simples",
-        "title": "Como funciona"
-      }
-    },
-    "compare": {
-      "type": "compare",
-      "settings": {
-        "subtitle": "Compare e decida",
-        "title": "Compare e decida"
-      }
-    },
     "reviews": {
       "type": "reviews",
       "blocks": {
@@ -235,6 +221,58 @@
     },
     "faq": {
       "type": "faq",
+      "blocks": {
+        "item_UmT3c6": {
+          "type": "item",
+          "settings": {
+            "question": "O Iron Air funciona com todo tipo de tecido?",
+            "answer": "Sim. O controle inteligente de temperatura funciona com a maior parte dos tecidos do dia a dia."
+          }
+        },
+        "item_eeBR7m": {
+          "type": "item",
+          "settings": {
+            "question": "O Iron Air funciona com todo tipo de tecido?",
+            "answer": "Sim. O controle inteligente de temperatura funciona com a maior parte dos tecidos do dia a dia."
+          }
+        },
+        "item_qmeG94": {
+          "type": "item",
+          "settings": {
+            "question": "O Iron Air funciona com todo tipo de tecido?",
+            "answer": "Sim. O controle inteligente de temperatura funciona com a maior parte dos tecidos do dia a dia."
+          }
+        },
+        "item_HzWdVL": {
+          "type": "item",
+          "settings": {
+            "question": "O Iron Air funciona com todo tipo de tecido?",
+            "answer": "Sim. O controle inteligente de temperatura funciona com a maior parte dos tecidos do dia a dia."
+          }
+        },
+        "item_Pn8mWx": {
+          "type": "item",
+          "settings": {
+            "question": "O Iron Air funciona com todo tipo de tecido?",
+            "answer": "Sim. O controle inteligente de temperatura funciona com a maior parte dos tecidos do dia a dia."
+          }
+        },
+        "item_kpPECy": {
+          "type": "item",
+          "settings": {
+            "question": "O Iron Air funciona com todo tipo de tecido?",
+            "answer": "Sim. O controle inteligente de temperatura funciona com a maior parte dos tecidos do dia a dia."
+          }
+        }
+      },
+      "block_order": [
+        "item_UmT3c6",
+        "item_eeBR7m",
+        "item_qmeG94",
+        "item_HzWdVL",
+        "item_Pn8mWx",
+        "item_kpPECy"
+      ],
       "settings": {
         "subtitle": "Dúvidas frequentes",
         "title": "Perguntas frequentes"
@@ -256,8 +294,6 @@
     "trust",
     "products",
     "slider",
-    "how_it_works",
-    "compare",
     "reviews",
     "faq",
     "final_cta"
