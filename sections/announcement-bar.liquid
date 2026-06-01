@@ -1,0 +1,31 @@
+{{ 'header.css' | asset_url | stylesheet_tag }}
+
+{% for block in section.blocks %}
+  {% if block.type == 'announcement' and block.settings.text != blank %}
+    <div class="topbar" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+  {% endif %}
+{% endfor %}
+
+{% schema %}
+{
+  "name": "Barra de anúncios",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "Anúncio",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Texto", "default": "🚚 FRETE GRÁTIS em todo Brasil + 12X SEM JUROS no cartão + 10% OFF no Pix" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Barra de anúncios",
+      "blocks": [
+        { "type": "announcement" }
+      ]
+    }
+  ]
+}
+{% endschema %}

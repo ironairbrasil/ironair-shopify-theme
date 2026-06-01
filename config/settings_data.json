@@ -10,45 +10,6 @@
 {
   "current": {
     "sections": {
-      "header": {
-        "type": "header",
-        "blocks": {
-          "announcement_bar": {
-            "type": "announcement_bar",
-            "settings": {
-              "text": "🚚 FRETE GRÁTIS em todo Brasil + 12X SEM JUROS no cartão + 10% OFF no Pix"
-            }
-          },
-          "header_main": {
-            "type": "header_main",
-            "settings": {
-              "search_enabled": true,
-              "search_placeholder": "Buscar produtos...",
-              "search_button_label": "Buscar",
-              "account_enabled": true,
-              "account_label": "Conta",
-              "cart_enabled": true,
-              "cart_label": "Carrinho",
-              "show_icon_labels": true,
-              "menu": "main-menu",
-              "menu_label": "Menu principal",
-              "menu_position": "center"
-            }
-          },
-          "custom_liquid": {
-            "type": "custom_liquid",
-            "settings": {
-              "custom_liquid": ""
-            }
-          }
-        },
-        "block_order": [
-          "announcement_bar",
-          "header_main",
-          "custom_liquid"
-        ],
-        "settings": {}
-      },
       "footer": {
         "type": "footer",
         "blocks": {

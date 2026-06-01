@@ -1,0 +1,28 @@
+{% for block in section.blocks %}
+  {% if block.type == 'custom_liquid' and block.settings.custom_liquid != blank %}
+    <div class="header-custom-liquid" {{ block.shopify_attributes }}>
+      {{ block.settings.custom_liquid }}
+    </div>
+  {% endif %}
+{% endfor %}
+
+{% schema %}
+{
+  "name": "Liquid personalizado",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "custom_liquid",
+      "name": "Liquid personalizado",
+      "settings": [
+        { "type": "liquid", "id": "custom_liquid", "label": "Liquid" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Liquid personalizado"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,79 @@
+{
+  "type": "header",
+  "name": "Header",
+  "sections": {
+    "announcement_bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement": {
+          "type": "announcement",
+          "settings": {
+            "text": "🚚 FRETE GRÁTIS em todo Brasil + 12X SEM JUROS no cartão + 10% OFF no Pix"
+          }
+        }
+      },
+      "block_order": [
+        "announcement"
+      ],
+      "settings": {}
+    },
+    "header_main": {
+      "type": "header-main",
+      "blocks": {
+        "logo": {
+          "type": "logo",
+          "settings": {}
+        },
+        "menu": {
+          "type": "menu",
+          "settings": {
+            "menu": "main-menu",
+            "menu_label": "Menu principal",
+            "menu_position": "center"
+          }
+        },
+        "search": {
+          "type": "search",
+          "settings": {
+            "enabled": true,
+            "placeholder": "Buscar produtos...",
+            "button_label": "Buscar"
+          }
+        },
+        "account": {
+          "type": "account",
+          "settings": {
+            "enabled": true,
+            "label": "Conta",
+            "show_label": true
+          }
+        },
+        "cart": {
+          "type": "cart",
+          "settings": {
+            "enabled": true,
+            "label": "Carrinho",
+            "show_label": true
+          }
+        }
+      },
+      "block_order": [
+        "logo",
+        "menu",
+        "search",
+        "account",
+        "cart"
+      ],
+      "settings": {}
+    },
+    "header_custom_liquid": {
+      "type": "header-custom-liquid",
+      "settings": {}
+    }
+  },
+  "order": [
+    "announcement_bar",
+    "header_main",
+    "header_custom_liquid"
+  ]
+}
