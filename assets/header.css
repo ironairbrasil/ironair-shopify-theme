@@ -202,8 +202,8 @@ header {
 
 .hicon svg,
 .navcat-item svg {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
 }
 
 .hicon-label {
@@ -232,8 +232,8 @@ header {
 .mobile-nav-link svg,
 .mobile-header-action svg,
 .trust-icon svg {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
 }
 
 .header-icons .hicon {

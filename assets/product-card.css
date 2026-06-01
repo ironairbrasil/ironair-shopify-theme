@@ -272,7 +272,6 @@
 }
 
 .pc-btn,
-.pc-btn-ghost,
 .fc-btn {
   width: 100%;
   border-radius: 6px;
@@ -286,24 +285,13 @@
   color: #fff;
   padding: 10px;
   font-size: 13px;
+  min-height: 44px;
+  flex: 0 0 auto;
+  text-align: center;
 }
 
 .pc-btn:hover {
   background: var(--dark-green-d);
-}
-
-.pc-btn-ghost {
-  margin-top: 8px;
-  background: var(--button-2-color, transparent);
-  color: var(--button-2-text-color, var(--dark-green));
-  border: 2px solid var(--dark-green);
-  padding: 8px;
-  font-size: 13px;
-}
-
-.pc-btn-ghost:hover {
-  background: var(--dark-green);
-  color: #fff;
 }
 
 .pc-img img {
@@ -320,5 +308,6 @@
 }
 
 .product-card form {
-  display: contents;
+  display: block;
+  flex: 0 0 auto;
 }

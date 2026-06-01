@@ -26,16 +26,19 @@
       </form>
 
       <div class="header-icons header-icons-desktop">
-        <a class="hicon" href="{{ routes.account_url }}">Conta</a>
-        <button type="button" class="hicon js-cart-drawer-open" aria-controls="CartDrawer" aria-expanded="false">
-          {% render 'icon', icon: 'bag' %}
+        <a class="hicon" href="{{ routes.account_url }}" aria-label="Minha conta">
+          {% render 'icon', icon: 'account' %}
+          <span class="hicon-label">Conta</span>
+        </a>
+        <button type="button" class="hicon js-cart-drawer-open" aria-controls="CartDrawer" aria-expanded="false" aria-label="Carrinho">
+          {% render 'icon', icon: 'cart' %}
           <span class="hicon-label">Carrinho <span class="badge" data-cart-count>{{ cart.item_count }}</span></span>
         </button>
       </div>
 
       <div class="mobile-header-actions">
         <button type="button" class="hicon mobile-header-action mobile-cart-button js-cart-drawer-open" aria-controls="CartDrawer" aria-expanded="false" aria-label="Carrinho">
-          {% render 'icon', icon: 'bag' %}
+          {% render 'icon', icon: 'cart' %}
           <span class="mobile-cart-badge" data-cart-count>{{ cart.item_count }}</span>
         </button>
       </div>
