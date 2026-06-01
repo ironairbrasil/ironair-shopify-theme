@@ -1,32 +1,133 @@
 {{ 'home-slider.css' | asset_url | stylesheet_tag }}
 {{ 'slider.js' | asset_url | script_tag }}
 
+{% assign slide_blocks = section.blocks | where: 'type', 'slide' %}
+
 <section class="home-slider" aria-label="{{ section.settings.aria_label }}">
-  <div class="home-slider-stage" data-home-slider>
-    {% for block in section.blocks %}
-      {% assign fallback_asset = 'banner-slide-5.webp' %}
-      {% if forloop.index == 2 %}{% assign fallback_asset = 'banner-slide-6.webp' %}{% endif %}
-      {% if forloop.index == 3 %}{% assign fallback_asset = 'banner-slide-7.webp' %}{% endif %}
-      <a
-        href="{{ block.settings.url | default: routes.all_products_collection_url }}"
-        class="home-slide tone-{{ block.settings.tone }} {% if forloop.first %}is-active{% endif %}"
-        aria-label="{{ block.settings.label }}"
-        {{ block.shopify_attributes }}
-      >
-        {% if block.settings.image != blank %}
-          {{ block.settings.image | image_url: width: 2400 | image_tag: alt: block.settings.label, class: 'home-slide-image', loading: 'eager' }}
-        {% else %}
-          <img class="home-slide-image" src="{{ fallback_asset | asset_url }}" alt="{{ block.settings.label | escape }}">
+  <div
+    class="home-slider-stage height-{{ section.settings.height }} mobile-height-{{ section.settings.mobile_height }} content-{{ section.settings.content_position }} text-{{ section.settings.text_alignment }}"
+    data-home-slider
+    data-slider-autoplay="{{ section.settings.autoplay }}"
+  >
+    {% if slide_blocks.size > 0 %}
+      {% assign slide_number = 0 %}
+      {% for block in section.blocks %}
+        {% if block.type == 'slide' %}
+          {% assign slide_number = slide_number | plus: 1 %}
+          {% assign slide_index = forloop.index0 %}
+          {% assign has_mobile_media = false %}
+          {% if block.settings.mobile_video != blank or block.settings.mobile_image != blank %}
+            {% assign has_mobile_media = true %}
+          {% endif %}
+          {% assign fallback_asset = 'banner-slide-5.webp' %}
+          {% if slide_number == 2 %}{% assign fallback_asset = 'banner-slide-6.webp' %}{% endif %}
+          {% if slide_number == 3 %}{% assign fallback_asset = 'banner-slide-7.webp' %}{% endif %}
+
+          <article
+            class="home-slide tone-{{ block.settings.tone }} {% if has_mobile_media %}has-mobile-media{% endif %} {% if slide_number == 1 %}is-active{% endif %}"
+            aria-label="{{ block.settings.label | escape }}"
+            aria-hidden="{% if slide_number == 1 %}false{% else %}true{% endif %}"
+            {{ block.shopify_attributes }}
+          >
+            <div class="home-slide-media">
+              {% if block.settings.media_type == 'video' and block.settings.video != blank %}
+                {{ block.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false, image_size: '2400x', class: 'home-slide-video is-desktop-media' }}
+              {% elsif block.settings.image != blank %}
+                {{ block.settings.image | image_url: width: 2400 | image_tag: alt: block.settings.label, class: 'home-slide-image is-desktop-media', loading: 'eager' }}
+              {% else %}
+                <img class="home-slide-image is-desktop-media" src="{{ fallback_asset | asset_url }}" alt="{{ block.settings.label | escape }}">
+              {% endif %}
+
+              {% if block.settings.mobile_media_type == 'video' and block.settings.mobile_video != blank %}
+                {{ block.settings.mobile_video | video_tag: autoplay: true, loop: true, muted: true, controls: false, image_size: '1200x', class: 'home-slide-video is-mobile-media' }}
+              {% elsif block.settings.mobile_image != blank %}
+                {{ block.settings.mobile_image | image_url: width: 1200 | image_tag: alt: block.settings.label, class: 'home-slide-image is-mobile-media', loading: 'eager' }}
+              {% endif %}
+            </div>
+
+            <div class="home-slide-overlay"></div>
+
+            <div class="home-slide-content">
+              {% assign has_content = false %}
+              {% for content_block in section.blocks %}
+                {% if forloop.index0 > slide_index %}
+                  {% if content_block.type == 'slide' %}
+                    {% break %}
+                  {% endif %}
+
+                  {% if content_block.type == 'text' %}
+                    {% assign has_content = true %}
+                    <div class="home-slide-copy copy-size-{{ content_block.settings.text_size }}" {{ content_block.shopify_attributes }}>
+                      {% if content_block.settings.eyebrow != blank %}
+                        <span class="home-slide-eyebrow">{{ content_block.settings.eyebrow }}</span>
+                      {% endif %}
+                      {% if content_block.settings.heading != blank %}
+                        <h2>{{ content_block.settings.heading }}</h2>
+                      {% endif %}
+                      {% if content_block.settings.text != blank %}
+                        <div class="home-slide-text">{{ content_block.settings.text }}</div>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+
+                  {% if content_block.type == 'button' and content_block.settings.label != blank %}
+                    {% assign has_content = true %}
+                    <div class="home-slide-actions" {{ content_block.shopify_attributes }}>
+                      <a
+                        class="home-slide-button is-{{ content_block.settings.style }}"
+                        href="{{ content_block.settings.url | default: routes.all_products_collection_url }}"
+                        {% if content_block.settings.new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+                      >
+                        {{ content_block.settings.label }}
+                      </a>
+                    </div>
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+
+              {% unless has_content %}
+                <div class="home-slide-copy copy-size-large">
+                  <span class="home-slide-eyebrow">Iron Air</span>
+                  <h2>Adicione texto ao seu hero</h2>
+                  <div class="home-slide-text"><p>Use blocos de texto e botão abaixo deste slide para montar a chamada.</p></div>
+                </div>
+              {% endunless %}
+            </div>
+
+            {% if block.settings.url != blank %}
+              <a
+                class="home-slide-link"
+                href="{{ block.settings.url }}"
+                aria-label="{{ block.settings.link_label | default: block.settings.label | escape }}"
+                {% if block.settings.new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+              ></a>
+            {% endif %}
+          </article>
         {% endif %}
-      </a>
-    {% endfor %}
-    {% if section.blocks.size > 1 %}
+      {% endfor %}
+    {% else %}
+      <article class="home-slide is-active tone-navy" aria-hidden="false">
+        <div class="home-slide-media">
+          <img class="home-slide-image is-desktop-media" src="{{ 'banner-slide-5.webp' | asset_url }}" alt="{{ section.settings.aria_label | escape }}">
+        </div>
+        <div class="home-slide-overlay"></div>
+        <div class="home-slide-content">
+          <div class="home-slide-copy copy-size-large">
+            <span class="home-slide-eyebrow">Iron Air</span>
+            <h2>Adicione um slide</h2>
+            <div class="home-slide-text"><p>Escolha imagem ou vídeo e depois adicione blocos de texto e botão.</p></div>
+          </div>
+        </div>
+      </article>
+    {% endif %}
+
+    {% if slide_blocks.size > 1 %}
       <div class="home-slider-nav">
         <button type="button" class="home-slider-arrow" data-slider-prev aria-label="Banner anterior">‹</button>
         <button type="button" class="home-slider-arrow" data-slider-next aria-label="Próximo banner">›</button>
       </div>
       <div class="home-slider-dots" role="tablist" aria-label="Selecionar banner">
-        {% for block in section.blocks %}
+        {% for block in slide_blocks %}
           <button type="button" class="home-slider-dot {% if forloop.first %}is-active{% endif %}" data-slider-dot="{{ forloop.index0 }}" aria-label="Ir para banner {{ forloop.index }}"></button>
         {% endfor %}
       </div>
@@ -38,21 +139,84 @@
 {
   "name": "Slider principal",
   "settings": [
-    { "type": "text", "id": "aria_label", "label": "Rótulo acessível", "default": "Banners principais da Iron Air" }
+    { "type": "text", "id": "aria_label", "label": "Rótulo acessível", "default": "Hero principal da Iron Air" },
+    { "type": "select", "id": "height", "label": "Altura no desktop", "default": "large", "options": [
+      { "value": "medium", "label": "Média" },
+      { "value": "large", "label": "Grande" },
+      { "value": "full", "label": "Tela cheia" }
+    ] },
+    { "type": "select", "id": "mobile_height", "label": "Altura no celular", "default": "medium", "options": [
+      { "value": "small", "label": "Pequena" },
+      { "value": "medium", "label": "Média" },
+      { "value": "large", "label": "Grande" }
+    ] },
+    { "type": "select", "id": "content_position", "label": "Posição do conteúdo", "default": "center", "options": [
+      { "value": "left", "label": "Esquerda" },
+      { "value": "center", "label": "Centro" },
+      { "value": "right", "label": "Direita" }
+    ] },
+    { "type": "select", "id": "text_alignment", "label": "Alinhamento do texto", "default": "center", "options": [
+      { "value": "left", "label": "Esquerda" },
+      { "value": "center", "label": "Centro" },
+      { "value": "right", "label": "Direita" }
+    ] },
+    { "type": "checkbox", "id": "autoplay", "label": "Trocar slides automaticamente", "default": true }
   ],
   "blocks": [
     {
       "type": "slide",
-      "name": "Banner",
+      "name": "Slide",
       "settings": [
+        { "type": "text", "id": "label", "label": "Rótulo do slide", "default": "Slide Iron Air" },
+        { "type": "select", "id": "media_type", "label": "Tipo de mídia", "default": "image", "options": [
+          { "value": "image", "label": "Imagem" },
+          { "value": "video", "label": "Vídeo" }
+        ] },
         { "type": "image_picker", "id": "image", "label": "Imagem" },
-        { "type": "text", "id": "label", "label": "Texto alternativo", "default": "Banner da Iron Air" },
-        { "type": "url", "id": "url", "label": "Link" },
-        { "type": "select", "id": "tone", "label": "Tom", "default": "navy", "options": [
+        { "type": "video", "id": "video", "label": "Vídeo" },
+        { "type": "select", "id": "mobile_media_type", "label": "Tipo de mídia no celular", "default": "image", "options": [
+          { "value": "image", "label": "Imagem" },
+          { "value": "video", "label": "Vídeo" }
+        ] },
+        { "type": "image_picker", "id": "mobile_image", "label": "Imagem para celular" },
+        { "type": "video", "id": "mobile_video", "label": "Vídeo para celular" },
+        { "type": "url", "id": "url", "label": "Link do slide" },
+        { "type": "text", "id": "link_label", "label": "Rótulo acessível do link", "default": "Ver oferta" },
+        { "type": "checkbox", "id": "new_tab", "label": "Abrir link em nova aba", "default": false },
+        { "type": "select", "id": "tone", "label": "Cor de fundo", "default": "navy", "options": [
           { "value": "navy", "label": "Azul" },
           { "value": "gold", "label": "Dourado" },
-          { "value": "teal", "label": "Verde" }
+          { "value": "teal", "label": "Verde" },
+          { "value": "dark", "label": "Escuro" }
         ] }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Texto",
+      "settings": [
+        { "type": "text", "id": "eyebrow", "label": "Badge", "default": "Promoção" },
+        { "type": "text", "id": "heading", "label": "Título", "default": "Suas roupas perfeitas sem esforço" },
+        { "type": "richtext", "id": "text", "label": "Descrição", "default": "<p>Adicione uma descrição curta para o hero.</p>" },
+        { "type": "select", "id": "text_size", "label": "Tamanho", "default": "large", "options": [
+          { "value": "small", "label": "Pequeno" },
+          { "value": "medium", "label": "Médio" },
+          { "value": "large", "label": "Grande" }
+        ] }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Botão",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Texto", "default": "Comprar agora" },
+        { "type": "url", "id": "url", "label": "Link" },
+        { "type": "select", "id": "style", "label": "Estilo", "default": "primary", "options": [
+          { "value": "primary", "label": "Principal" },
+          { "value": "secondary", "label": "Secundário" },
+          { "value": "light", "label": "Claro" }
+        ] },
+        { "type": "checkbox", "id": "new_tab", "label": "Abrir em nova aba", "default": false }
       ]
     }
   ],
@@ -60,9 +224,9 @@
     {
       "name": "Slider principal",
       "blocks": [
-        { "type": "slide", "settings": { "label": "Banner 1 da Iron Air", "url": "/collections/all", "tone": "navy" } },
-        { "type": "slide", "settings": { "label": "Banner 2 da Iron Air", "url": "/collections/all", "tone": "gold" } },
-        { "type": "slide", "settings": { "label": "Banner 3 da Iron Air", "url": "/collections/all", "tone": "teal" } }
+        { "type": "slide", "settings": { "label": "Hero Iron Air", "tone": "navy" } },
+        { "type": "text", "settings": { "eyebrow": "Promoção de inverno", "heading": "Suas roupas perfeitas sem esforço", "text": "<p>O Iron Air passa, seca e cuida das suas roupas automaticamente.</p>", "text_size": "large" } },
+        { "type": "button", "settings": { "label": "Comprar agora", "url": "/collections/all", "style": "primary" } }
       ]
     }
   ]

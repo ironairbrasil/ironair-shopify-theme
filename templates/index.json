@@ -17,6 +17,10 @@
           "settings": {
             "label": "Banner da Iron Air",
             "url": "",
+            "link_label": "Ver oferta",
+            "media_type": "image",
+            "mobile_media_type": "image",
+            "new_tab": false,
             "tone": "navy"
           }
         },
@@ -25,16 +29,45 @@
           "settings": {
             "label": "Banner da Iron Air",
             "url": "",
+            "link_label": "Ver oferta",
+            "media_type": "image",
+            "mobile_media_type": "image",
+            "new_tab": false,
             "tone": "navy"
+          }
+        },
+        "text_ironair_hero": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "Promoção de inverno",
+            "heading": "Suas roupas perfeitas sem esforço",
+            "text": "<p>O Iron Air passa, seca e cuida das suas roupas automaticamente. Você relaxa, ele trabalha.</p>",
+            "text_size": "large"
+          }
+        },
+        "button_ironair_hero": {
+          "type": "button",
+          "settings": {
+            "label": "Comprar agora",
+            "url": "/collections/all",
+            "style": "primary",
+            "new_tab": false
           }
         }
       },
       "block_order": [
         "slide_eKdEVK",
+        "text_ironair_hero",
+        "button_ironair_hero",
         "slide_BCRVQd"
       ],
       "settings": {
-        "aria_label": "Banners principais da Iron Air"
+        "aria_label": "Hero principal da Iron Air",
+        "height": "large",
+        "mobile_height": "medium",
+        "content_position": "center",
+        "text_alignment": "center",
+        "autoplay": true
       }
     },
     "trust": {

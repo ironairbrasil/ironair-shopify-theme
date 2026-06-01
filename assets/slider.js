@@ -5,6 +5,7 @@
       var dots = Array.from(slider.querySelectorAll('[data-slider-dot]'));
       var prev = slider.querySelector('[data-slider-prev]');
       var next = slider.querySelector('[data-slider-next]');
+      var autoplay = slider.dataset.sliderAutoplay !== 'false';
       var active = 0;
       if (slides.length < 2) return;
 
@@ -24,7 +25,7 @@
       dots.forEach(function (dot, idx) {
         dot.addEventListener('click', function () { go(idx); });
       });
-      window.setInterval(function () { go(active + 1); }, 5500);
+      if (autoplay) window.setInterval(function () { go(active + 1); }, 5500);
     });
   }
 
