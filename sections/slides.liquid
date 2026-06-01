@@ -1,0 +1,204 @@
+{{ 'home-slider.css' | asset_url | stylesheet_tag }}
+{{ 'slider.js' | asset_url | script_tag }}
+
+{% assign banner_blocks = section.blocks | where: 'type', 'banner' %}
+
+{% if banner_blocks.size > 0 %}
+  <section class="home-slider slides-section layout-{{ section.settings.layout }} width-{{ section.settings.width }}" aria-label="{{ section.settings.aria_label }}">
+    <div
+      class="home-slider-stage height-{{ section.settings.media_height }} mobile-height-{{ section.settings.mobile_height }} content-{{ section.settings.content_position }} text-{{ section.settings.text_alignment }}"
+      data-home-slider
+      data-slider-autoplay="{{ section.settings.autoplay }}"
+      data-slider-speed="{{ section.settings.speed | times: 1000 }}"
+    >
+      {% for block in banner_blocks %}
+        {% assign has_mobile_media = false %}
+        {% if block.settings.mobile_video != blank or block.settings.mobile_image != blank %}
+          {% assign has_mobile_media = true %}
+        {% endif %}
+
+        <article
+          class="home-slide tone-{{ block.settings.tone }} {% if has_mobile_media %}has-mobile-media{% endif %} {% if forloop.first %}is-active{% endif %}"
+          aria-label="{{ block.settings.label | escape }}"
+          aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}"
+          {{ block.shopify_attributes }}
+        >
+          <div class="home-slide-media">
+            {% if block.settings.media_type == 'video' and block.settings.video != blank %}
+              {{ block.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false, image_size: '2400x', class: 'home-slide-video is-desktop-media' }}
+            {% elsif block.settings.image != blank %}
+              {{ block.settings.image | image_url: width: 2400 | image_tag: alt: block.settings.label, class: 'home-slide-image is-desktop-media', loading: 'eager' }}
+            {% endif %}
+
+            {% if block.settings.mobile_media_type == 'video' and block.settings.mobile_video != blank %}
+              {{ block.settings.mobile_video | video_tag: autoplay: true, loop: true, muted: true, controls: false, image_size: '1200x', class: 'home-slide-video is-mobile-media' }}
+            {% elsif block.settings.mobile_image != blank %}
+              {{ block.settings.mobile_image | image_url: width: 1200 | image_tag: alt: block.settings.label, class: 'home-slide-image is-mobile-media', loading: 'eager' }}
+            {% endif %}
+          </div>
+          <div class="home-slide-overlay"></div>
+
+          <div class="home-slide-content">
+            {% if block.settings.eyebrow != blank or block.settings.heading != blank or block.settings.text != blank %}
+              <div class="home-slide-copy copy-size-{{ block.settings.text_size }}">
+                {% if block.settings.eyebrow != blank %}
+                  <span class="home-slide-eyebrow">{{ block.settings.eyebrow }}</span>
+                {% endif %}
+                {% if block.settings.heading != blank %}
+                  <h2>{{ block.settings.heading }}</h2>
+                {% endif %}
+                {% if block.settings.text != blank %}
+                  <div class="home-slide-text">{{ block.settings.text }}</div>
+                {% endif %}
+              </div>
+            {% endif %}
+
+            {% if block.settings.button_label != blank %}
+              <div class="home-slide-actions">
+                <a
+                  class="home-slide-button is-{{ block.settings.button_style }}"
+                  href="{{ block.settings.button_url | default: routes.all_products_collection_url }}"
+                  {% if block.settings.button_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+                >
+                  {{ block.settings.button_label }}
+                </a>
+              </div>
+            {% endif %}
+          </div>
+
+          {% if block.settings.url != blank %}
+            <a
+              class="home-slide-link"
+              href="{{ block.settings.url }}"
+              aria-label="{{ block.settings.link_label | default: block.settings.label | escape }}"
+              {% if block.settings.new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+            ></a>
+          {% endif %}
+        </article>
+      {% endfor %}
+
+      {% if banner_blocks.size > 1 %}
+        {% unless section.settings.nav_icons == 'none' %}
+          <div class="home-slider-nav nav-{{ section.settings.nav_icons }}">
+            <button type="button" class="home-slider-arrow" data-slider-prev aria-label="Banner anterior">‹</button>
+            <button type="button" class="home-slider-arrow" data-slider-next aria-label="Próximo banner">›</button>
+          </div>
+        {% endunless %}
+
+        {% if section.settings.pagination != 'none' %}
+          <div class="home-slider-dots pagination-{{ section.settings.pagination }}" role="tablist" aria-label="Selecionar banner">
+            {% for block in banner_blocks %}
+              <button type="button" class="home-slider-dot {% if forloop.first %}is-active{% endif %}" data-slider-dot="{{ forloop.index0 }}" aria-label="Ir para banner {{ forloop.index }}"></button>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endif %}
+    </div>
+  </section>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Slides",
+  "settings": [
+    { "type": "text", "id": "aria_label", "label": "Rótulo acessível", "default": "Apresentação de slides da Iron Air" },
+    { "type": "select", "id": "layout", "label": "Layout", "default": "full", "options": [
+      { "value": "full", "label": "Tela cheia" },
+      { "value": "contained", "label": "Com dicas" }
+    ] },
+    { "type": "select", "id": "width", "label": "Largura", "default": "full", "options": [
+      { "value": "page", "label": "Página" },
+      { "value": "full", "label": "Total" }
+    ] },
+    { "type": "select", "id": "media_height", "label": "Altura da mídia", "default": "large", "options": [
+      { "value": "medium", "label": "Média" },
+      { "value": "large", "label": "Grande" },
+      { "value": "full", "label": "Tela cheia" }
+    ] },
+    { "type": "select", "id": "mobile_height", "label": "Altura no celular", "default": "medium", "options": [
+      { "value": "small", "label": "Pequena" },
+      { "value": "medium", "label": "Média" },
+      { "value": "large", "label": "Grande" }
+    ] },
+    { "type": "select", "id": "content_position", "label": "Posição do conteúdo", "default": "center", "options": [
+      { "value": "left", "label": "Esquerda" },
+      { "value": "center", "label": "Na mídia" },
+      { "value": "right", "label": "Direita" }
+    ] },
+    { "type": "select", "id": "text_alignment", "label": "Alinhamento do texto", "default": "center", "options": [
+      { "value": "left", "label": "Esquerda" },
+      { "value": "center", "label": "Centro" },
+      { "value": "right", "label": "Direita" }
+    ] },
+    { "type": "select", "id": "nav_icons", "label": "Ícones", "default": "large", "options": [
+      { "value": "none", "label": "Nenhum" },
+      { "value": "small", "label": "Setas pequenas" },
+      { "value": "large", "label": "Setas grandes" }
+    ] },
+    { "type": "select", "id": "pagination", "label": "Paginação", "default": "dots", "options": [
+      { "value": "none", "label": "Nenhuma" },
+      { "value": "dots", "label": "Pontos" },
+      { "value": "bars", "label": "Barras" }
+    ] },
+    { "type": "checkbox", "id": "autoplay", "label": "Girar slides automaticamente", "default": true },
+    { "type": "range", "id": "speed", "label": "Velocidade", "min": 2, "max": 10, "step": 1, "unit": "s", "default": 4 }
+  ],
+  "blocks": [
+    {
+      "type": "banner",
+      "name": "Banner",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Rótulo do banner", "default": "Banner Iron Air" },
+        { "type": "select", "id": "media_type", "label": "Tipo de mídia", "default": "image", "options": [
+          { "value": "image", "label": "Imagem" },
+          { "value": "video", "label": "Vídeo" }
+        ] },
+        { "type": "image_picker", "id": "image", "label": "Imagem", "visible_if": "{{ block.settings.media_type == 'image' }}" },
+        { "type": "video", "id": "video", "label": "Vídeo", "visible_if": "{{ block.settings.media_type == 'video' }}" },
+        { "type": "select", "id": "mobile_media_type", "label": "Tipo de mídia no celular", "default": "image", "options": [
+          { "value": "image", "label": "Imagem" },
+          { "value": "video", "label": "Vídeo" }
+        ] },
+        { "type": "image_picker", "id": "mobile_image", "label": "Imagem para celular", "visible_if": "{{ block.settings.mobile_media_type == 'image' }}" },
+        { "type": "video", "id": "mobile_video", "label": "Vídeo para celular", "visible_if": "{{ block.settings.mobile_media_type == 'video' }}" },
+        { "type": "url", "id": "url", "label": "Link do banner" },
+        { "type": "text", "id": "link_label", "label": "Rótulo acessível do link", "default": "Ver oferta" },
+        { "type": "checkbox", "id": "new_tab", "label": "Abrir link em nova aba", "default": false },
+        { "type": "header", "content": "Texto do banner" },
+        { "type": "text", "id": "eyebrow", "label": "Badge" },
+        { "type": "text", "id": "heading", "label": "Título" },
+        { "type": "richtext", "id": "text", "label": "Descrição" },
+        { "type": "select", "id": "text_size", "label": "Tamanho", "default": "large", "options": [
+          { "value": "small", "label": "Pequeno" },
+          { "value": "medium", "label": "Médio" },
+          { "value": "large", "label": "Grande" }
+        ] },
+        { "type": "header", "content": "Botão do banner" },
+        { "type": "text", "id": "button_label", "label": "Texto do botão" },
+        { "type": "url", "id": "button_url", "label": "Link do botão" },
+        { "type": "select", "id": "button_style", "label": "Estilo do botão", "default": "primary", "options": [
+          { "value": "primary", "label": "Principal" },
+          { "value": "secondary", "label": "Secundário" },
+          { "value": "light", "label": "Claro" }
+        ] },
+        { "type": "checkbox", "id": "button_new_tab", "label": "Abrir botão em nova aba", "default": false },
+        { "type": "select", "id": "tone", "label": "Cor de fundo", "default": "navy", "options": [
+          { "value": "navy", "label": "Azul" },
+          { "value": "gold", "label": "Dourado" },
+          { "value": "teal", "label": "Verde" },
+          { "value": "dark", "label": "Escuro" }
+        ] }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Slides",
+      "blocks": [
+        { "type": "banner" },
+        { "type": "banner" }
+      ]
+    }
+  ]
+}
+{% endschema %}

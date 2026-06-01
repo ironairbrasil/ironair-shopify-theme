@@ -18,8 +18,7 @@
         "mobile_height": "medium",
         "content_position": "center",
         "text_alignment": "center",
-        "tone": "navy",
-        "autoplay": true
+        "tone": "navy"
       }
     },
     "trust": {
