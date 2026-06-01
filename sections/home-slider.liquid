@@ -20,9 +20,6 @@
         {% if block.settings.mobile_video != blank or block.settings.mobile_image != blank %}
           {% assign has_mobile_media = true %}
         {% endif %}
-        {% assign fallback_asset = 'banner-slide-5.webp' %}
-        {% if slide_number == 2 %}{% assign fallback_asset = 'banner-slide-6.webp' %}{% endif %}
-        {% if slide_number == 3 %}{% assign fallback_asset = 'banner-slide-7.webp' %}{% endif %}
 
         <article
           class="home-slide tone-{{ block.settings.tone }} {% if has_mobile_media %}has-mobile-media{% endif %} {% if forloop.first %}is-active{% endif %}"
@@ -35,8 +32,6 @@
               {{ block.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false, image_size: '2400x', class: 'home-slide-video is-desktop-media' }}
             {% elsif block.settings.image != blank %}
               {{ block.settings.image | image_url: width: 2400 | image_tag: alt: block.settings.label, class: 'home-slide-image is-desktop-media', loading: 'eager' }}
-            {% else %}
-              <img class="home-slide-image is-desktop-media" src="{{ fallback_asset | asset_url }}" alt="{{ block.settings.label | escape }}">
             {% endif %}
 
             {% if block.settings.mobile_media_type == 'video' and block.settings.mobile_video != blank %}
@@ -90,8 +85,6 @@
         <div class="home-slide-media">
           {% if section.settings.image != blank %}
             {{ section.settings.image | image_url: width: 2400 | image_tag: alt: section.settings.aria_label, class: 'home-slide-image is-desktop-media', loading: 'eager' }}
-          {% else %}
-            <img class="home-slide-image is-desktop-media" src="{{ 'banner-slide-5.webp' | asset_url }}" alt="{{ section.settings.aria_label | escape }}">
           {% endif %}
 
           {% if section.settings.mobile_image != blank %}
@@ -105,10 +98,6 @@
         <div class="home-slide-media">
           {% if section.settings.video != blank %}
             {{ section.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false, image_size: '2400x', class: 'home-slide-video is-desktop-media' }}
-          {% elsif section.settings.image != blank %}
-            {{ section.settings.image | image_url: width: 2400 | image_tag: alt: section.settings.aria_label, class: 'home-slide-image is-desktop-media', loading: 'eager' }}
-          {% else %}
-            <img class="home-slide-image is-desktop-media" src="{{ 'banner-slide-5.webp' | asset_url }}" alt="{{ section.settings.aria_label | escape }}">
           {% endif %}
 
           {% if section.settings.mobile_video != blank %}
@@ -119,9 +108,7 @@
       </article>
     {% else %}
       <article class="home-slide is-active tone-navy" aria-hidden="false">
-        <div class="home-slide-media">
-          <img class="home-slide-image is-desktop-media" src="{{ 'banner-slide-5.webp' | asset_url }}" alt="{{ section.settings.aria_label | escape }}">
-        </div>
+        <div class="home-slide-media"></div>
         <div class="home-slide-overlay"></div>
       </article>
     {% endif %}
