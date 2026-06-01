@@ -13,6 +13,18 @@
   scrollbar-width: none;
 }
 
+.navcat-inner.navcat-position-left {
+  justify-content: flex-start;
+}
+
+.navcat-inner.navcat-position-center {
+  justify-content: center;
+}
+
+.navcat-inner.navcat-position-right {
+  justify-content: flex-end;
+}
+
 .navcat-inner::-webkit-scrollbar {
   display: none;
 }
@@ -45,6 +57,10 @@
 .navcat-item:hover svg,
 .navcat-item.active svg {
   opacity: 1;
+}
+
+.header-custom-liquid {
+  width: 100%;
 }
 
 .navcat-promo {

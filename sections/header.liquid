@@ -1,39 +1,27 @@
 {{ 'header.css' | asset_url | stylesheet_tag }}
 {{ 'navigation.css' | asset_url | stylesheet_tag }}
 
-{% assign has_logo_block = false %}
-{% assign has_search_block = false %}
-{% assign has_account_block = false %}
-{% assign has_cart_block = false %}
+{% assign has_header_block = false %}
 
 {% for block in section.blocks %}
   {% case block.type %}
-    {% when 'announcement' %}
+    {% when 'announcement_bar' %}
       {% if block.settings.text != blank %}
         <div class="topbar" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
       {% endif %}
-    {% when 'logo' %}
-      {% assign has_logo_block = true %}
-    {% when 'search' %}
-      {% assign has_search_block = true %}
-    {% when 'account' %}
-      {% assign has_account_block = true %}
-    {% when 'cart' %}
-      {% assign has_cart_block = true %}
-  {% endcase %}
-{% endfor %}
 
-<div class="header-shell" data-ironair-header>
-  <header>
-    <div class="header-inner">
-      <button type="button" class="mobile-menu-toggle" data-mobile-menu-toggle aria-label="Abrir menu" aria-expanded="false">
-        {% render 'icon', icon: 'menu' %}
-      </button>
+    {% when 'header_main' %}
+      {% assign has_header_block = true %}
+      {% assign menu_links = block.settings.menu.links %}
 
-      {% for block in section.blocks %}
-        {% case block.type %}
-          {% when 'logo' %}
-            <a href="{{ routes.root_url }}" class="logo" {{ block.shopify_attributes }}>
+      <div class="header-shell" data-ironair-header {{ block.shopify_attributes }}>
+        <header>
+          <div class="header-inner">
+            <button type="button" class="mobile-menu-toggle" data-mobile-menu-toggle aria-label="Abrir menu" aria-expanded="false">
+              {% render 'icon', icon: 'menu' %}
+            </button>
+
+            <a href="{{ routes.root_url }}" class="logo">
               {% if block.settings.logo != blank %}
                 {{ block.settings.logo | image_url: width: 520 | image_tag: alt: shop.name, loading: 'eager' }}
               {% else %}
@@ -41,116 +29,114 @@
               {% endif %}
             </a>
 
-          {% when 'search' %}
-            {% if block.settings.enabled %}
-              <form action="{{ routes.search_url }}" method="get" class="header-search" role="search" {{ block.shopify_attributes }}>
+            {% if block.settings.search_enabled %}
+              <form action="{{ routes.search_url }}" method="get" class="header-search" role="search">
                 <div class="header-search-bar">
-                  <input name="q" type="search" value="{{ search.terms | escape }}" placeholder="{{ block.settings.placeholder }}">
-                  <button type="submit" aria-label="{{ block.settings.button_label }}">{% render 'icon', icon: 'search' %}</button>
+                  <input name="q" type="search" value="{{ search.terms | escape }}" placeholder="{{ block.settings.search_placeholder }}">
+                  <button type="submit" aria-label="{{ block.settings.search_button_label }}">{% render 'icon', icon: 'search' %}</button>
                 </div>
               </form>
             {% endif %}
-        {% endcase %}
-      {% endfor %}
 
-      {% unless has_logo_block %}
+            <div class="header-icons header-icons-desktop">
+              {% if block.settings.account_enabled %}
+                <a class="hicon" href="{{ routes.account_url }}" aria-label="{{ block.settings.account_label }}">
+                  {% render 'icon', icon: 'account' %}
+                  {% if block.settings.show_icon_labels %}<span class="hicon-label">{{ block.settings.account_label }}</span>{% endif %}
+                </a>
+              {% endif %}
+
+              {% if block.settings.cart_enabled %}
+                <button type="button" class="hicon js-cart-drawer-open" aria-controls="CartDrawer" aria-expanded="false" aria-label="{{ block.settings.cart_label }}">
+                  {% render 'icon', icon: 'cart' %}
+                  {% if block.settings.show_icon_labels %}
+                    <span class="hicon-label">{{ block.settings.cart_label }} <span class="badge" data-cart-count>{{ cart.item_count }}</span></span>
+                  {% else %}
+                    <span class="badge" data-cart-count>{{ cart.item_count }}</span>
+                  {% endif %}
+                </button>
+              {% endif %}
+            </div>
+
+            <div class="mobile-header-actions">
+              <button type="button" class="hicon mobile-header-action mobile-cart-button js-cart-drawer-open" aria-controls="CartDrawer" aria-expanded="false" aria-label="{{ block.settings.cart_label }}">
+                {% render 'icon', icon: 'cart' %}
+                <span class="mobile-cart-badge" data-cart-count>{{ cart.item_count }}</span>
+              </button>
+            </div>
+          </div>
+        </header>
+
+        {% if menu_links.size > 0 %}
+          <nav class="navcat" aria-label="{{ block.settings.menu_label }}">
+            <div class="navcat-inner navcat-position-{{ block.settings.menu_position }}">
+              {% for link in menu_links %}
+                <a class="navcat-item {% if link.current %}active{% endif %}" href="{{ link.url }}">
+                  {{ link.title }}
+                </a>
+              {% endfor %}
+            </div>
+          </nav>
+        {% endif %}
+      </div>
+
+      <button type="button" class="mobile-nav-overlay" data-mobile-menu-close aria-label="Fechar menu"></button>
+      <aside id="mobile-nav-sidebar" class="mobile-nav-sidebar" data-mobile-sidebar aria-hidden="true">
+        <div class="mobile-nav-sidebar-header">
+          <div>
+            <strong>Menu</strong>
+            <span>Navegue pelas principais áreas da loja</span>
+          </div>
+          <button type="button" class="cart-close" data-mobile-menu-close aria-label="Fechar menu">x</button>
+        </div>
+        <div class="mobile-nav-sidebar-body">
+          {% for link in menu_links %}
+            <a class="mobile-nav-link {% if link.current %}active{% endif %}" href="{{ link.url }}">
+              <span>{{ link.title }}</span>
+            </a>
+          {% endfor %}
+        </div>
+      </aside>
+
+    {% when 'custom_liquid' %}
+      {% if block.settings.custom_liquid != blank %}
+        <div class="header-custom-liquid" {{ block.shopify_attributes }}>
+          {{ block.settings.custom_liquid }}
+        </div>
+      {% endif %}
+  {% endcase %}
+{% endfor %}
+
+{% unless has_header_block %}
+  <div class="header-shell" data-ironair-header>
+    <header>
+      <div class="header-inner">
+        <button type="button" class="mobile-menu-toggle" data-mobile-menu-toggle aria-label="Abrir menu" aria-expanded="false">
+          {% render 'icon', icon: 'menu' %}
+        </button>
         <a href="{{ routes.root_url }}" class="logo">
           <img src="{{ 'logo-1.png' | asset_url }}" alt="{{ shop.name }}" width="180" height="52">
         </a>
-      {% endunless %}
-
-      {% unless has_search_block %}
         <form action="{{ routes.search_url }}" method="get" class="header-search" role="search">
           <div class="header-search-bar">
             <input name="q" type="search" value="{{ search.terms | escape }}" placeholder="Buscar produtos...">
             <button type="submit" aria-label="Buscar">{% render 'icon', icon: 'search' %}</button>
           </div>
         </form>
-      {% endunless %}
-
-      <div class="header-icons header-icons-desktop">
-        {% for block in section.blocks %}
-          {% case block.type %}
-            {% when 'account' %}
-              {% if block.settings.enabled %}
-                <a class="hicon" href="{{ routes.account_url }}" aria-label="{{ block.settings.label }}" {{ block.shopify_attributes }}>
-                  {% render 'icon', icon: 'account' %}
-                  {% if block.settings.show_label %}<span class="hicon-label">{{ block.settings.label }}</span>{% endif %}
-                </a>
-              {% endif %}
-
-            {% when 'cart' %}
-              {% if block.settings.enabled %}
-                <button type="button" class="hicon js-cart-drawer-open" aria-controls="CartDrawer" aria-expanded="false" aria-label="{{ block.settings.label }}" {{ block.shopify_attributes }}>
-                  {% render 'icon', icon: 'cart' %}
-                  {% if block.settings.show_label %}
-                    <span class="hicon-label">{{ block.settings.label }} <span class="badge" data-cart-count>{{ cart.item_count }}</span></span>
-                  {% else %}
-                    <span class="badge" data-cart-count>{{ cart.item_count }}</span>
-                  {% endif %}
-                </button>
-              {% endif %}
-          {% endcase %}
-        {% endfor %}
-
-        {% unless has_account_block %}
-          <a class="hicon" href="{{ routes.account_url }}" aria-label="Minha conta">
+        <div class="header-icons header-icons-desktop">
+          <a class="hicon" href="{{ routes.account_url }}" aria-label="Conta">
             {% render 'icon', icon: 'account' %}
             <span class="hicon-label">Conta</span>
           </a>
-        {% endunless %}
-
-        {% unless has_cart_block %}
           <button type="button" class="hicon js-cart-drawer-open" aria-controls="CartDrawer" aria-expanded="false" aria-label="Carrinho">
             {% render 'icon', icon: 'cart' %}
             <span class="hicon-label">Carrinho <span class="badge" data-cart-count>{{ cart.item_count }}</span></span>
           </button>
-        {% endunless %}
+        </div>
       </div>
-
-      <div class="mobile-header-actions">
-        <button type="button" class="hicon mobile-header-action mobile-cart-button js-cart-drawer-open" aria-controls="CartDrawer" aria-expanded="false" aria-label="Carrinho">
-          {% render 'icon', icon: 'cart' %}
-          <span class="mobile-cart-badge" data-cart-count>{{ cart.item_count }}</span>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <nav class="navcat" aria-label="Menu principal">
-    <div class="navcat-inner">
-      {% for block in section.blocks %}
-        {% if block.type == 'link' %}
-          <a class="navcat-item" href="{{ block.settings.url }}" {{ block.shopify_attributes }}>
-            {% render 'icon', icon: block.settings.icon %}
-            {{ block.settings.label }}
-          </a>
-        {% endif %}
-      {% endfor %}
-    </div>
-  </nav>
-</div>
-
-<button type="button" class="mobile-nav-overlay" data-mobile-menu-close aria-label="Fechar menu"></button>
-<aside id="mobile-nav-sidebar" class="mobile-nav-sidebar" data-mobile-sidebar aria-hidden="true">
-  <div class="mobile-nav-sidebar-header">
-    <div>
-      <strong>Menu</strong>
-      <span>Navegue pelas principais áreas da loja</span>
-    </div>
-    <button type="button" class="cart-close" data-mobile-menu-close aria-label="Fechar menu">x</button>
+    </header>
   </div>
-  <div class="mobile-nav-sidebar-body">
-    {% for block in section.blocks %}
-      {% if block.type == 'link' %}
-        <a class="mobile-nav-link" href="{{ block.settings.url }}">
-          {% render 'icon', icon: block.settings.icon %}
-          <span>{{ block.settings.label }}</span>
-        </a>
-      {% endif %}
-    {% endfor %}
-  </div>
-</aside>
+{% endunless %}
 
 {% schema %}
 {
@@ -158,64 +144,42 @@
   "settings": [],
   "blocks": [
     {
-      "type": "announcement",
-      "name": "Barra promocional",
+      "type": "announcement_bar",
+      "name": "Barra de anúncios",
+      "limit": 1,
       "settings": [
         { "type": "text", "id": "text", "label": "Texto", "default": "🚚 FRETE GRÁTIS em todo Brasil + 12X SEM JUROS no cartão + 10% OFF no Pix" }
       ]
     },
     {
-      "type": "logo",
-      "name": "Logo",
+      "type": "header_main",
+      "name": "Cabeçalho",
       "limit": 1,
       "settings": [
-        { "type": "image_picker", "id": "logo", "label": "Logo" }
-      ]
-    },
-    {
-      "type": "search",
-      "name": "Busca",
-      "limit": 1,
-      "settings": [
-        { "type": "checkbox", "id": "enabled", "label": "Mostrar busca", "default": true },
-        { "type": "text", "id": "placeholder", "label": "Placeholder", "default": "Buscar produtos..." },
-        { "type": "text", "id": "button_label", "label": "Rótulo do botão", "default": "Buscar" }
-      ]
-    },
-    {
-      "type": "account",
-      "name": "Conta",
-      "limit": 1,
-      "settings": [
-        { "type": "checkbox", "id": "enabled", "label": "Mostrar conta", "default": true },
-        { "type": "text", "id": "label", "label": "Texto", "default": "Conta" },
-        { "type": "checkbox", "id": "show_label", "label": "Mostrar texto", "default": true }
-      ]
-    },
-    {
-      "type": "cart",
-      "name": "Carrinho",
-      "limit": 1,
-      "settings": [
-        { "type": "checkbox", "id": "enabled", "label": "Mostrar carrinho", "default": true },
-        { "type": "text", "id": "label", "label": "Texto", "default": "Carrinho" },
-        { "type": "checkbox", "id": "show_label", "label": "Mostrar texto", "default": true }
-      ]
-    },
-    {
-      "type": "link",
-      "name": "Link do menu",
-      "settings": [
-        { "type": "text", "id": "label", "label": "Texto", "default": "Produtos" },
-        { "type": "url", "id": "url", "label": "URL" },
-        { "type": "select", "id": "icon", "label": "Ícone", "default": "grid", "options": [
-          { "value": "home", "label": "Início" },
-          { "value": "grid", "label": "Grade" },
-          { "value": "truck", "label": "Entrega" },
-          { "value": "check", "label": "Check" },
-          { "value": "shield", "label": "Segurança" },
-          { "value": "refresh", "label": "Troca" }
+        { "type": "image_picker", "id": "logo", "label": "Logo" },
+        { "type": "checkbox", "id": "search_enabled", "label": "Mostrar busca", "default": true },
+        { "type": "text", "id": "search_placeholder", "label": "Placeholder da busca", "default": "Buscar produtos..." },
+        { "type": "text", "id": "search_button_label", "label": "Rótulo do botão de busca", "default": "Buscar" },
+        { "type": "checkbox", "id": "account_enabled", "label": "Mostrar conta", "default": true },
+        { "type": "text", "id": "account_label", "label": "Texto da conta", "default": "Conta" },
+        { "type": "checkbox", "id": "cart_enabled", "label": "Mostrar carrinho", "default": true },
+        { "type": "text", "id": "cart_label", "label": "Texto do carrinho", "default": "Carrinho" },
+        { "type": "checkbox", "id": "show_icon_labels", "label": "Mostrar texto dos ícones", "default": true },
+        { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
+        { "type": "text", "id": "menu_label", "label": "Rótulo acessível do menu", "default": "Menu principal" },
+        { "type": "select", "id": "menu_position", "label": "Posição do menu", "default": "center", "options": [
+          { "value": "left", "label": "Esquerda" },
+          { "value": "center", "label": "Centralizado" },
+          { "value": "right", "label": "Direita" }
         ] }
+      ]
+    },
+    {
+      "type": "custom_liquid",
+      "name": "Liquid personalizado",
+      "limit": 1,
+      "settings": [
+        { "type": "liquid", "id": "custom_liquid", "label": "Liquid personalizado" }
       ]
     }
   ]

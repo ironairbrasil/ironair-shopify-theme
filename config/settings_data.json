@@ -13,101 +13,39 @@
       "header": {
         "type": "header",
         "blocks": {
-          "announcement_x46rzJ": {
-            "type": "announcement",
+          "announcement_bar": {
+            "type": "announcement_bar",
             "settings": {
               "text": "🚚 FRETE GRÁTIS em todo Brasil + 12X SEM JUROS no cartão + 10% OFF no Pix"
             }
           },
-          "logo_dQeyxB": {
-            "type": "logo",
-            "settings": {}
-          },
-          "search_MNrDmp": {
-            "type": "search",
+          "header_main": {
+            "type": "header_main",
             "settings": {
-              "enabled": true,
-              "placeholder": "Buscar produtos...",
-              "button_label": "Buscar"
+              "search_enabled": true,
+              "search_placeholder": "Buscar produtos...",
+              "search_button_label": "Buscar",
+              "account_enabled": true,
+              "account_label": "Conta",
+              "cart_enabled": true,
+              "cart_label": "Carrinho",
+              "show_icon_labels": true,
+              "menu": "main-menu",
+              "menu_label": "Menu principal",
+              "menu_position": "center"
             }
           },
-          "account_CU7bCX": {
-            "type": "account",
+          "custom_liquid": {
+            "type": "custom_liquid",
             "settings": {
-              "enabled": true,
-              "label": "Conta",
-              "show_label": true
-            }
-          },
-          "cart_knD8Ac": {
-            "type": "cart",
-            "settings": {
-              "enabled": true,
-              "label": "Carrinho",
-              "show_label": true
-            }
-          },
-          "inicio": {
-            "type": "link",
-            "settings": {
-              "label": "Início",
-              "url": "/",
-              "icon": "home"
-            }
-          },
-          "produtos": {
-            "type": "link",
-            "settings": {
-              "label": "Produtos",
-              "url": "/collections/all",
-              "icon": "grid"
-            }
-          },
-          "como": {
-            "type": "link",
-            "settings": {
-              "label": "Como Funciona",
-              "url": "/#como-funciona",
-              "icon": "check"
-            }
-          },
-          "depoimentos": {
-            "type": "link",
-            "settings": {
-              "label": "Depoimentos",
-              "url": "/#depoimentos",
-              "icon": "shield"
-            }
-          },
-          "faq": {
-            "type": "link",
-            "settings": {
-              "label": "FAQ",
-              "url": "/#faq",
-              "icon": "refresh"
-            }
-          },
-          "contato": {
-            "type": "link",
-            "settings": {
-              "label": "Contato",
-              "url": "/#contato",
-              "icon": "truck"
+              "custom_liquid": ""
             }
           }
         },
         "block_order": [
-          "announcement_x46rzJ",
-          "logo_dQeyxB",
-          "search_MNrDmp",
-          "account_CU7bCX",
-          "cart_knD8Ac",
-          "inicio",
-          "produtos",
-          "como",
-          "depoimentos",
-          "faq",
-          "contato"
+          "announcement_bar",
+          "header_main",
+          "custom_liquid"
         ],
         "settings": {}
       },
