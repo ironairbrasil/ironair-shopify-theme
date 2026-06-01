@@ -1,10 +1,22 @@
 {{ 'product-page.css' | asset_url | stylesheet_tag }}
 
 {% assign current_variant = product.selected_or_first_available_variant %}
+{% assign pix_discount_percent = 10 %}
+{% assign installments_count = 12 %}
+
+{% for block in section.blocks %}
+  {% if block.type == 'price' %}
+    {% assign pix_discount_percent = block.settings.pix_discount_percent %}
+    {% assign installments_count = block.settings.installments_count %}
+  {% endif %}
+{% endfor %}
+
+{% assign pix_multiplier = 100 | minus: pix_discount_percent %}
 {% assign price = current_variant.price %}
 {% assign compare_price = current_variant.compare_at_price %}
-{% assign pix_price = price | times: 90 | divided_by: 100 %}
-{% assign installments = price | divided_by: 12 %}
+{% assign pix_price = price | times: pix_multiplier | divided_by: 100 %}
+{% assign installments = price | divided_by: installments_count %}
+{% assign discount = 0 %}
 {% if compare_price > price %}
   {% assign discount = compare_price | minus: price | times: 100 | divided_by: compare_price %}
 {% endif %}
@@ -36,76 +48,143 @@
     </div>
 
     <div class="product-purchase-panel">
-      <div class="pc-brand">{{ product.vendor | default: shop.name }}</div>
-      <h1>{{ product.title }}</h1>
-      <div class="pc-stars">{% render 'stars', rating: 5 %}<span class="count">(847 avaliações)</span></div>
-      <div class="pc-badge badge-off" data-product-discount {% unless compare_price > price %}hidden{% endunless %}>{{ discount }}% OFF</div>
-      <div class="pc-price-old" data-product-compare-price {% unless compare_price > price %}hidden{% endunless %}>{{ compare_price | money }}</div>
-      <div class="product-main-price" data-product-price>{{ price | money }}</div>
-      <div class="product-card-payment-pix"><strong data-product-pix-price>{{ pix_price | money }}</strong> com 10% OFF no Pix</div>
-      <div class="product-card-payment-card">ou <span data-product-card-price>{{ price | money }}</span> em até <strong>12x de <span data-product-installments>{{ installments | money }}</span></strong> s/juros</div>
-
-      {% form 'product', product, class: 'product-form' %}
-        {% unless product.has_only_default_variant %}
-          <label class="product-option-label" for="ProductSelect-{{ section.id }}">Opção</label>
-          <select id="ProductSelect-{{ section.id }}" name="id" data-product-variant-select>
-            {% for variant in product.variants %}
-              {% assign variant_price = variant.price %}
-              {% assign variant_compare_price = variant.compare_at_price %}
-              {% assign variant_pix_price = variant_price | times: 90 | divided_by: 100 %}
-              {% assign variant_installments = variant_price | divided_by: 12 %}
-              {% assign variant_discount = 0 %}
-              {% if variant_compare_price > variant_price %}
-                {% assign variant_discount = variant_compare_price | minus: variant_price | times: 100 | divided_by: variant_compare_price %}
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'vendor' %}
+            <div class="pc-brand" {{ block.shopify_attributes }}>
+              {% if block.settings.text != blank %}
+                {{ block.settings.text }}
+              {% else %}
+                {{ product.vendor | default: shop.name }}
               {% endif %}
-              {% capture variant_stock_message %}
-                {% if variant.inventory_management and variant.inventory_quantity > 0 %}
-                  {{ variant.inventory_quantity }} unidade(s) em estoque
-                {% elsif variant.available %}
-                  Em estoque
-                {% else %}
-                  Produto esgotado no momento
-                {% endif %}
-              {% endcapture %}
-              <option
-                value="{{ variant.id }}"
-                data-price="{{ variant_price | money }}"
-                data-compare-price="{{ variant_compare_price | money }}"
-                data-has-compare-price="{% if variant_compare_price > variant_price %}true{% else %}false{% endif %}"
-                data-discount="{{ variant_discount }}% OFF"
-                data-pix-price="{{ variant_pix_price | money }}"
-                data-installments="{{ variant_installments | money }}"
-                data-available="{% if variant.available %}true{% else %}false{% endif %}"
-                data-stock-message="{{ variant_stock_message | strip | escape }}"
-                {% if variant == current_variant %}selected{% endif %}
-                {% unless variant.available %}disabled{% endunless %}
-              >
-                {{ variant.title }}{% unless variant.available %} - esgotado{% endunless %}
-              </option>
-            {% endfor %}
-          </select>
-        {% else %}
-          <input type="hidden" name="id" value="{{ current_variant.id }}">
-        {% endunless %}
-        <button class="btn-hero product-submit" type="submit" data-product-submit {% unless current_variant.available %}disabled{% endunless %}>
-          Comprar agora
-        </button>
-      {% endform %}
+            </div>
 
-      <div class="product-detail-copy">
-        {{ product.description }}
-      </div>
-      <div class="final-points product-points">
-        <div>✓ Frete grátis</div>
-        <div>✓ Checkout Shopify seguro</div>
-        {% if current_variant.inventory_management and current_variant.inventory_quantity > 0 %}
-          <div data-product-stock-message>✓ {{ current_variant.inventory_quantity }} unidade(s) em estoque</div>
-        {% elsif current_variant.available %}
-          <div data-product-stock-message>✓ Em estoque</div>
-        {% else %}
-          <div data-product-stock-message>Produto esgotado no momento</div>
-        {% endif %}
-      </div>
+          {% when 'title' %}
+            <h1 {{ block.shopify_attributes }}>
+              {% if block.settings.title_override != blank %}
+                {{ block.settings.title_override }}
+              {% else %}
+                {{ product.title }}
+              {% endif %}
+            </h1>
+
+          {% when 'rating' %}
+            <div class="pc-stars" {{ block.shopify_attributes }}>
+              {% render 'stars', rating: block.settings.rating %}
+              <span class="count">({{ block.settings.count_label }})</span>
+            </div>
+
+          {% when 'badge' %}
+            <div
+              class="pc-badge badge-off"
+              {% if block.settings.badge_text == blank %}data-product-discount{% endif %}
+              {{ block.shopify_attributes }}
+              {% unless compare_price > price or block.settings.badge_text != blank %}hidden{% endunless %}
+            >
+              {% if block.settings.badge_text != blank %}
+                {{ block.settings.badge_text }}
+              {% else %}
+                {{ discount }}% OFF
+              {% endif %}
+            </div>
+
+          {% when 'price' %}
+            <div class="product-price-block" {{ block.shopify_attributes }}>
+              {% if block.settings.show_compare_price %}
+                <div class="pc-price-old" data-product-compare-price {% unless compare_price > price %}hidden{% endunless %}>{{ compare_price | money }}</div>
+              {% endif %}
+              {% if block.settings.show_price %}
+                <div class="product-main-price" data-product-price>{{ price | money }}</div>
+              {% endif %}
+              {% if block.settings.show_pix_price %}
+                <div class="product-card-payment-pix">
+                  <strong data-product-pix-price>{{ pix_price | money }}</strong>
+                  {{ block.settings.pix_label | replace: '[discount]', pix_discount_percent }}
+                </div>
+              {% endif %}
+              {% if block.settings.show_installments %}
+                <div class="product-card-payment-card">
+                  ou <span data-product-card-price>{{ price | money }}</span> em até
+                  <strong><span data-product-installments-count>{{ installments_count }}</span>x de <span data-product-installments>{{ installments | money }}</span></strong> s/juros
+                </div>
+              {% endif %}
+            </div>
+
+          {% when 'buy_buttons' %}
+            <div {{ block.shopify_attributes }}>
+              {% form 'product', product, class: 'product-form' %}
+                {% unless product.has_only_default_variant %}
+                  <label class="product-option-label" for="ProductSelect-{{ section.id }}">{{ block.settings.variant_label }}</label>
+                  <select id="ProductSelect-{{ section.id }}" name="id" data-product-variant-select>
+                    {% for variant in product.variants %}
+                      {% assign variant_price = variant.price %}
+                      {% assign variant_compare_price = variant.compare_at_price %}
+                      {% assign variant_pix_price = variant_price | times: pix_multiplier | divided_by: 100 %}
+                      {% assign variant_installments = variant_price | divided_by: installments_count %}
+                      {% assign variant_discount = 0 %}
+                      {% if variant_compare_price > variant_price %}
+                        {% assign variant_discount = variant_compare_price | minus: variant_price | times: 100 | divided_by: variant_compare_price %}
+                      {% endif %}
+                      {% capture variant_stock_message %}
+                        {% if variant.inventory_management and variant.inventory_quantity > 0 %}
+                          {{ variant.inventory_quantity }} unidade(s) em estoque
+                        {% elsif variant.available %}
+                          Em estoque
+                        {% else %}
+                          Produto esgotado no momento
+                        {% endif %}
+                      {% endcapture %}
+                      <option
+                        value="{{ variant.id }}"
+                        data-price="{{ variant_price | money }}"
+                        data-compare-price="{{ variant_compare_price | money }}"
+                        data-has-compare-price="{% if variant_compare_price > variant_price %}true{% else %}false{% endif %}"
+                        data-discount="{{ variant_discount }}% OFF"
+                        data-pix-price="{{ variant_pix_price | money }}"
+                        data-installments="{{ variant_installments | money }}"
+                        data-available="{% if variant.available %}true{% else %}false{% endif %}"
+                        data-stock-message="{{ variant_stock_message | strip | escape }}"
+                        {% if variant == current_variant %}selected{% endif %}
+                        {% unless variant.available %}disabled{% endunless %}
+                      >
+                        {{ variant.title }}{% unless variant.available %} - esgotado{% endunless %}
+                      </option>
+                    {% endfor %}
+                  </select>
+                {% else %}
+                  <input type="hidden" name="id" value="{{ current_variant.id }}">
+                {% endunless %}
+                <button class="btn-hero product-submit" type="submit" data-product-submit {% unless current_variant.available %}disabled{% endunless %}>
+                  {{ block.settings.button_label }}
+                </button>
+              {% endform %}
+            </div>
+
+          {% when 'description' %}
+            <div class="product-detail-copy" {{ block.shopify_attributes }}>
+              {% if block.settings.description_override != blank %}
+                {{ block.settings.description_override }}
+              {% else %}
+                {{ product.description }}
+              {% endif %}
+            </div>
+
+          {% when 'benefits' %}
+            <div class="final-points product-points" {{ block.shopify_attributes }}>
+              {% if block.settings.benefit_1 != blank %}<div>{{ block.settings.benefit_1 }}</div>{% endif %}
+              {% if block.settings.benefit_2 != blank %}<div>{{ block.settings.benefit_2 }}</div>{% endif %}
+              {% if block.settings.show_stock %}
+                {% if current_variant.inventory_management and current_variant.inventory_quantity > 0 %}
+                  <div data-product-stock-message>{{ block.settings.stock_prefix }} {{ current_variant.inventory_quantity }} unidade(s) em estoque</div>
+                {% elsif current_variant.available %}
+                  <div data-product-stock-message>{{ block.settings.stock_prefix }} Em estoque</div>
+                {% else %}
+                  <div data-product-stock-message>Produto esgotado no momento</div>
+                {% endif %}
+              {% endif %}
+            </div>
+        {% endcase %}
+      {% endfor %}
     </div>
   </div>
 </section>
@@ -113,6 +192,75 @@
 {% schema %}
 {
   "name": "Produto principal",
-  "settings": []
+  "settings": [],
+  "blocks": [
+    {
+      "type": "vendor",
+      "name": "Marca",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Texto personalizado", "info": "Deixe vazio para usar o fabricante do produto." }
+      ]
+    },
+    {
+      "type": "title",
+      "name": "Nome",
+      "settings": [
+        { "type": "text", "id": "title_override", "label": "Nome personalizado", "info": "Deixe vazio para usar o nome do produto." }
+      ]
+    },
+    {
+      "type": "rating",
+      "name": "Avaliações",
+      "settings": [
+        { "type": "range", "id": "rating", "label": "Nota", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "text", "id": "count_label", "label": "Texto da quantidade", "default": "847 avaliações" }
+      ]
+    },
+    {
+      "type": "badge",
+      "name": "Badge",
+      "settings": [
+        { "type": "text", "id": "badge_text", "label": "Texto personalizado", "info": "Deixe vazio para calcular o % OFF automaticamente." }
+      ]
+    },
+    {
+      "type": "price",
+      "name": "Preço",
+      "settings": [
+        { "type": "checkbox", "id": "show_compare_price", "label": "Mostrar preço riscado", "default": true },
+        { "type": "checkbox", "id": "show_price", "label": "Mostrar preço atual", "default": true },
+        { "type": "checkbox", "id": "show_pix_price", "label": "Mostrar Pix", "default": true },
+        { "type": "range", "id": "pix_discount_percent", "label": "Desconto visual no Pix", "min": 0, "max": 30, "step": 1, "unit": "%", "default": 10 },
+        { "type": "text", "id": "pix_label", "label": "Texto do Pix", "default": "com [discount]% OFF no Pix" },
+        { "type": "checkbox", "id": "show_installments", "label": "Mostrar parcelamento", "default": true },
+        { "type": "range", "id": "installments_count", "label": "Parcelas", "min": 1, "max": 12, "step": 1, "default": 12 }
+      ]
+    },
+    {
+      "type": "buy_buttons",
+      "name": "Botão",
+      "settings": [
+        { "type": "text", "id": "variant_label", "label": "Texto do seletor de variante", "default": "Opção" },
+        { "type": "text", "id": "button_label", "label": "Texto do botão", "default": "Comprar agora" }
+      ]
+    },
+    {
+      "type": "description",
+      "name": "Descrição",
+      "settings": [
+        { "type": "richtext", "id": "description_override", "label": "Descrição personalizada", "info": "Deixe vazio para usar a descrição do produto." }
+      ]
+    },
+    {
+      "type": "benefits",
+      "name": "Benefícios e estoque",
+      "settings": [
+        { "type": "text", "id": "benefit_1", "label": "Benefício 1", "default": "✓ Frete grátis" },
+        { "type": "text", "id": "benefit_2", "label": "Benefício 2", "default": "✓ Checkout Shopify seguro" },
+        { "type": "checkbox", "id": "show_stock", "label": "Mostrar estoque", "default": true },
+        { "type": "text", "id": "stock_prefix", "label": "Prefixo do estoque", "default": "✓" }
+      ]
+    }
+  ]
 }
 {% endschema %}
