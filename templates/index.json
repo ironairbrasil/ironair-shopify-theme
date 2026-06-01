@@ -63,10 +63,12 @@
       ],
       "settings": {
         "aria_label": "Hero principal da Iron Air",
+        "background_mode": "slides",
         "height": "large",
         "mobile_height": "medium",
         "content_position": "center",
         "text_alignment": "center",
+        "tone": "navy",
         "autoplay": true
       }
     },
