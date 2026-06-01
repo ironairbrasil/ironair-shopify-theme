@@ -1,9 +1,45 @@
+{{ 'navigation.css' | asset_url | stylesheet_tag }}
+
 {% for block in section.blocks %}
-  {% if block.type == 'custom_liquid' and block.settings.custom_liquid != blank %}
-    <div class="header-custom-liquid" {{ block.shopify_attributes }}>
-      {{ block.settings.custom_liquid }}
-    </div>
-  {% endif %}
+  {% case block.type %}
+    {% when 'menu' %}
+      {% if block.settings.menu.links.size > 0 %}
+        <nav class="navcat" aria-label="{{ block.settings.menu_label }}" {{ block.shopify_attributes }}>
+          <div class="navcat-inner navcat-position-{{ block.settings.menu_position }}">
+            {% for link in block.settings.menu.links %}
+              <a class="navcat-item {% if link.current %}active{% endif %}" href="{{ link.url }}">
+                {{ link.title }}
+              </a>
+            {% endfor %}
+          </div>
+        </nav>
+
+        <button type="button" class="mobile-nav-overlay" data-mobile-menu-close aria-label="Fechar menu"></button>
+        <aside id="mobile-nav-sidebar" class="mobile-nav-sidebar" data-mobile-sidebar aria-hidden="true">
+          <div class="mobile-nav-sidebar-header">
+            <div>
+              <strong>Menu</strong>
+              <span>Navegue pelas principais áreas da loja</span>
+            </div>
+            <button type="button" class="cart-close" data-mobile-menu-close aria-label="Fechar menu">x</button>
+          </div>
+          <div class="mobile-nav-sidebar-body">
+            {% for link in block.settings.menu.links %}
+              <a class="mobile-nav-link {% if link.current %}active{% endif %}" href="{{ link.url }}">
+                <span>{{ link.title }}</span>
+              </a>
+            {% endfor %}
+          </div>
+        </aside>
+      {% endif %}
+
+    {% when 'custom_liquid' %}
+      {% if block.settings.custom_liquid != blank %}
+        <div class="header-custom-liquid" {{ block.shopify_attributes }}>
+          {{ block.settings.custom_liquid }}
+        </div>
+      {% endif %}
+  {% endcase %}
 {% endfor %}
 
 {% schema %}
@@ -11,6 +47,20 @@
   "name": "Liquid personalizado",
   "settings": [],
   "blocks": [
+    {
+      "type": "menu",
+      "name": "Menu",
+      "limit": 1,
+      "settings": [
+        { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
+        { "type": "text", "id": "menu_label", "label": "Rótulo acessível", "default": "Menu principal" },
+        { "type": "select", "id": "menu_position", "label": "Posição", "default": "center", "options": [
+          { "value": "left", "label": "Esquerda" },
+          { "value": "center", "label": "Centralizado" },
+          { "value": "right", "label": "Direita" }
+        ] }
+      ]
+    },
     {
       "type": "custom_liquid",
       "name": "Liquid personalizado",
@@ -21,7 +71,10 @@
   ],
   "presets": [
     {
-      "name": "Liquid personalizado"
+      "name": "Liquid personalizado",
+      "blocks": [
+        { "type": "menu" }
+      ]
     }
   ]
 }

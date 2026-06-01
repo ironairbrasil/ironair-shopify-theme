@@ -24,14 +24,6 @@
           "type": "logo",
           "settings": {}
         },
-        "menu": {
-          "type": "menu",
-          "settings": {
-            "menu": "main-menu",
-            "menu_label": "Menu principal",
-            "menu_position": "center"
-          }
-        },
         "search": {
           "type": "search",
           "settings": {
@@ -59,7 +51,6 @@
       },
       "block_order": [
         "logo",
-        "menu",
         "search",
         "account",
         "cart"
@@ -68,6 +59,19 @@
     },
     "header_custom_liquid": {
       "type": "header-custom-liquid",
+      "blocks": {
+        "menu": {
+          "type": "menu",
+          "settings": {
+            "menu": "main-menu",
+            "menu_label": "Menu principal",
+            "menu_position": "center"
+          }
+        }
+      },
+      "block_order": [
+        "menu"
+      ],
       "settings": {}
     }
   },

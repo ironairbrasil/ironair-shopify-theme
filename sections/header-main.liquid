@@ -5,7 +5,6 @@
 {% assign has_search_block = false %}
 {% assign has_account_block = false %}
 {% assign has_cart_block = false %}
-{% assign menu_block = blank %}
 
 {% for block in section.blocks %}
   {% case block.type %}
@@ -17,8 +16,6 @@
       {% assign has_account_block = true %}
     {% when 'cart' %}
       {% assign has_cart_block = true %}
-    {% when 'menu' %}
-      {% assign menu_block = block %}
   {% endcase %}
 {% endfor %}
 
@@ -116,38 +113,7 @@
     </div>
   </header>
 
-  {% if menu_block != blank and menu_block.settings.menu.links.size > 0 %}
-    <nav class="navcat" aria-label="{{ menu_block.settings.menu_label }}" {{ menu_block.shopify_attributes }}>
-      <div class="navcat-inner navcat-position-{{ menu_block.settings.menu_position }}">
-        {% for link in menu_block.settings.menu.links %}
-          <a class="navcat-item {% if link.current %}active{% endif %}" href="{{ link.url }}">
-            {{ link.title }}
-          </a>
-        {% endfor %}
-      </div>
-    </nav>
-  {% endif %}
 </div>
-
-<button type="button" class="mobile-nav-overlay" data-mobile-menu-close aria-label="Fechar menu"></button>
-<aside id="mobile-nav-sidebar" class="mobile-nav-sidebar" data-mobile-sidebar aria-hidden="true">
-  <div class="mobile-nav-sidebar-header">
-    <div>
-      <strong>Menu</strong>
-      <span>Navegue pelas principais áreas da loja</span>
-    </div>
-    <button type="button" class="cart-close" data-mobile-menu-close aria-label="Fechar menu">x</button>
-  </div>
-  <div class="mobile-nav-sidebar-body">
-    {% if menu_block != blank %}
-      {% for link in menu_block.settings.menu.links %}
-        <a class="mobile-nav-link {% if link.current %}active{% endif %}" href="{{ link.url }}">
-          <span>{{ link.title }}</span>
-        </a>
-      {% endfor %}
-    {% endif %}
-  </div>
-</aside>
 
 {% schema %}
 {
@@ -160,20 +126,6 @@
       "limit": 1,
       "settings": [
         { "type": "image_picker", "id": "logo", "label": "Logo" }
-      ]
-    },
-    {
-      "type": "menu",
-      "name": "Menu",
-      "limit": 1,
-      "settings": [
-        { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
-        { "type": "text", "id": "menu_label", "label": "Rótulo acessível", "default": "Menu principal" },
-        { "type": "select", "id": "menu_position", "label": "Posição", "default": "center", "options": [
-          { "value": "left", "label": "Esquerda" },
-          { "value": "center", "label": "Centralizado" },
-          { "value": "right", "label": "Direita" }
-        ] }
       ]
     },
     {
@@ -212,7 +164,6 @@
       "name": "Cabeçalho",
       "blocks": [
         { "type": "logo" },
-        { "type": "menu" },
         { "type": "search" },
         { "type": "account" },
         { "type": "cart" }
