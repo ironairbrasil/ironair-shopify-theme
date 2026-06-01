@@ -1,29 +1,33 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
     "sections": {
       "header": {
         "type": "header",
-        "settings": {},
         "blocks": {
-          "announcement": {
+          "cart_knD8Ac": {
+            "type": "cart",
+            "settings": {
+              "enabled": true,
+              "label": "Carrinho",
+              "show_label": true
+            }
+          },
+          "announcement_x46rzJ": {
             "type": "announcement",
             "settings": {
               "text": "🚚 FRETE GRÁTIS em todo Brasil + 12X SEM JUROS no cartão + 10% OFF no Pix"
             }
           },
-          "logo": {
-            "type": "logo",
-            "settings": {}
-          },
-          "search": {
-            "type": "search",
-            "settings": {
-              "enabled": true,
-              "placeholder": "Buscar produtos...",
-              "button_label": "Buscar"
-            }
-          },
-          "account": {
+          "account_CU7bCX": {
             "type": "account",
             "settings": {
               "enabled": true,
@@ -31,12 +35,16 @@
               "show_label": true
             }
           },
-          "cart": {
-            "type": "cart",
+          "logo_dQeyxB": {
+            "type": "logo",
+            "settings": {}
+          },
+          "search_MNrDmp": {
+            "type": "search",
             "settings": {
               "enabled": true,
-              "label": "Carrinho",
-              "show_label": true
+              "placeholder": "Buscar produtos...",
+              "button_label": "Buscar"
             }
           },
           "inicio": {
@@ -88,17 +96,23 @@
             }
           }
         },
-        "block_order": ["announcement", "logo", "search", "account", "cart", "inicio", "produtos", "como", "depoimentos", "faq", "contato"]
+        "block_order": [
+          "cart_knD8Ac",
+          "announcement_x46rzJ",
+          "account_CU7bCX",
+          "logo_dQeyxB",
+          "search_MNrDmp",
+          "inicio",
+          "produtos",
+          "como",
+          "depoimentos",
+          "faq",
+          "contato"
+        ],
+        "settings": {}
       },
       "footer": {
         "type": "footer",
-        "settings": {
-          "description": "Elevando o padrão de cuidado com roupas através de tecnologia, precisão e confiabilidade.",
-          "support_title": "Suporte",
-          "hours": "seg a sexta - 9h as 17h",
-          "location": "Belo Horizonte, MG",
-          "document": "CNPJ: 64.158.825/0001-11"
-        },
         "blocks": {
           "instagram": {
             "type": "social",
@@ -129,7 +143,20 @@
             }
           }
         },
-        "block_order": ["instagram", "facebook", "youtube", "tiktok"]
+        "block_order": [
+          "instagram",
+          "facebook",
+          "youtube",
+          "tiktok"
+        ],
+        "settings": {
+          "description": "Elevando o padrão de cuidado com roupas através de tecnologia, precisão e confiabilidade.",
+          "support_title": "Suporte",
+          "support_menu": "",
+          "hours": "seg a sexta - 9h as 17h",
+          "location": "Belo Horizonte, MG",
+          "document": "CNPJ: 64.158.825/0001-11"
+        }
       }
     },
     "content_for_index": []

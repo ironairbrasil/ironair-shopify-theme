@@ -12,6 +12,14 @@
     "slider": {
       "type": "home-slider",
       "blocks": {
+        "slide_eKdEVK": {
+          "type": "slide",
+          "settings": {
+            "label": "Banner da Iron Air",
+            "url": "",
+            "tone": "navy"
+          }
+        },
         "slide_BCRVQd": {
           "type": "slide",
           "settings": {
@@ -22,6 +30,7 @@
         }
       },
       "block_order": [
+        "slide_eKdEVK",
         "slide_BCRVQd"
       ],
       "settings": {
