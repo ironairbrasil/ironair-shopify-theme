@@ -12,58 +12,22 @@
     "slider": {
       "type": "home-slider",
       "blocks": {
-        "slide_eKdEVK": {
-          "type": "slide",
-          "settings": {
-            "label": "Banner da Iron Air",
-            "url": "",
-            "link_label": "Ver oferta",
-            "media_type": "image",
-            "mobile_media_type": "image",
-            "new_tab": false,
-            "tone": "navy"
-          }
-        },
-        "slide_BCRVQd": {
-          "type": "slide",
-          "settings": {
-            "label": "Banner da Iron Air",
-            "url": "",
-            "link_label": "Ver oferta",
-            "media_type": "image",
-            "mobile_media_type": "image",
-            "new_tab": false,
-            "tone": "navy"
-          }
-        },
-        "text_ironair_hero": {
+        "text_yjxhLx": {
           "type": "text",
           "settings": {
-            "eyebrow": "Promoção de inverno",
-            "heading": "Suas roupas perfeitas sem esforço",
-            "text": "<p>O Iron Air passa, seca e cuida das suas roupas automaticamente. Você relaxa, ele trabalha.</p>",
-            "text_size": "large"
-          }
-        },
-        "button_ironair_hero": {
-          "type": "button",
-          "settings": {
-            "label": "Comprar agora",
-            "url": "/collections/all",
-            "style": "primary",
-            "new_tab": false
+            "eyebrow": "Promoção",
+            "heading": "A maneira mais fácil de cuidar das suas roupas",
+            "text": "<h5>O fluxo de ar quente automático seca, alisa e refresca as roupas sem que você precise usar as mãos. Sem ferro de passar. Sem tábua de passar. Sem ficar esperando.</h5>",
+            "text_size": "medium"
           }
         }
       },
       "block_order": [
-        "slide_eKdEVK",
-        "text_ironair_hero",
-        "button_ironair_hero",
-        "slide_BCRVQd"
+        "text_yjxhLx"
       ],
       "settings": {
-        "aria_label": "Hero principal da Iron Air",
-        "background_mode": "slides",
+        "aria_label": "Banners principais da Iron Air",
+        "background_mode": "video",
         "height": "large",
         "mobile_height": "medium",
         "content_position": "center",
