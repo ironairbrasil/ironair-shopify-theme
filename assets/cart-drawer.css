@@ -3,6 +3,10 @@
   z-index: 2147483600;
 }
 
+.cart-drawer-root.is-loading .cart-drawer {
+  cursor: progress;
+}
+
 .cart-drawer-overlay {
   position: fixed;
   inset: 0;
@@ -116,7 +120,7 @@
 
 .cart-drawer-item-copy {
   display: grid;
-  gap: 5px;
+  gap: 8px;
   min-width: 0;
 }
 
@@ -138,6 +142,56 @@
   gap: 12px;
 }
 
+.cart-drawer-qty {
+  display: inline-grid;
+  grid-template-columns: 34px 44px 34px;
+  min-height: 34px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.cart-drawer-qty button,
+.cart-drawer-qty input {
+  min-width: 0;
+  border: 0;
+  background: #fff;
+  color: var(--ink);
+  text-align: center;
+}
+
+.cart-drawer-qty button {
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.cart-drawer-qty button:hover {
+  background: #f4f4f4;
+}
+
+.cart-drawer-qty input {
+  border-inline: 1px solid var(--border);
+  font-weight: 800;
+  appearance: textfield;
+}
+
+.cart-drawer-qty input::-webkit-outer-spin-button,
+.cart-drawer-qty input::-webkit-inner-spin-button {
+  margin: 0;
+  appearance: none;
+}
+
+.cart-drawer-remove {
+  justify-self: flex-start;
+  color: var(--red);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 800;
+  text-decoration: underline;
+}
+
 .cart-drawer-empty {
   min-height: 260px;
   display: grid;
@@ -152,6 +206,54 @@
   gap: 12px;
   border-top: 1px solid var(--border);
   border-bottom: 0;
+}
+
+.cart-drawer-discount {
+  display: grid;
+  gap: 7px;
+}
+
+.cart-drawer-discount label {
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.cart-drawer-discount > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+}
+
+.cart-drawer-discount input {
+  min-height: 44px;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0 12px;
+}
+
+.cart-drawer-discount button {
+  min-height: 44px;
+  border-radius: 6px;
+  background: var(--ink);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 900;
+  padding: 0 16px;
+}
+
+.cart-drawer-discount small {
+  min-height: 16px;
+  color: var(--green);
+  font-size: 12px;
+}
+
+.cart-drawer-discount-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--green);
+  font-weight: 900;
 }
 
 .cart-drawer-subtotal strong {
@@ -177,5 +279,10 @@ body.cart-drawer-open {
 @media (max-width: 640px) {
   .cart-drawer {
     width: 100vw;
+  }
+
+  .cart-drawer-item-meta {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }

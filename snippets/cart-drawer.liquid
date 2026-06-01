@@ -26,9 +26,14 @@
                   <span>{{ item.variant.title }}</span>
                 {% endunless %}
                 <div class="cart-drawer-item-meta">
-                  <span>Qtd. {{ item.quantity }}</span>
+                  <div class="cart-drawer-qty" data-cart-item-key="{{ item.key }}">
+                    <button type="button" data-cart-quantity-minus aria-label="Diminuir quantidade">−</button>
+                    <input type="number" min="0" value="{{ item.quantity }}" data-cart-quantity-input aria-label="Quantidade de {{ item.product.title | escape }}">
+                    <button type="button" data-cart-quantity-plus aria-label="Aumentar quantidade">+</button>
+                  </div>
                   <strong>{{ item.final_line_price | money }}</strong>
                 </div>
+                <button type="button" class="cart-drawer-remove" data-cart-remove data-cart-item-key="{{ item.key }}">Excluir</button>
               </div>
             </article>
           {% endfor %}
@@ -42,11 +47,23 @@
     </div>
 
     <div class="cart-drawer-footer" data-cart-drawer-footer {% if cart.item_count == 0 %}hidden{% endif %}>
+      <form class="cart-drawer-discount" data-cart-discount-form>
+        <label for="CartDrawerDiscount">Desconto</label>
+        <div>
+          <input id="CartDrawerDiscount" type="text" placeholder="Código de desconto" data-cart-discount-input>
+          <button type="submit">Aplicar</button>
+        </div>
+        <small data-cart-discount-message></small>
+      </form>
+      <div class="cart-drawer-discount-row" data-cart-discount-row {% if cart.total_discount == 0 %}hidden{% endif %}>
+        <span>Desconto</span>
+        <strong data-cart-drawer-discount>-{{ cart.total_discount | money }}</strong>
+      </div>
       <div class="cart-drawer-subtotal">
-        <span>Subtotal</span>
+        <span>Total estimado</span>
         <strong data-cart-drawer-subtotal>{{ cart.total_price | money }}</strong>
       </div>
-      <a class="btn-hero cart-drawer-checkout" href="/checkout">Finalizar compra</a>
+      <a class="btn-hero cart-drawer-checkout" href="/checkout" data-cart-checkout>Finalizar compra</a>
       <a class="cart-drawer-cart-link" href="{{ routes.cart_url }}">Ver carrinho completo</a>
     </div>
   </aside>
