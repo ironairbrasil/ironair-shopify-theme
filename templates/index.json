@@ -1,36 +1,171 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "slider": {
       "type": "home-slider",
-      "settings": {}
+      "blocks": {
+        "slide_BCRVQd": {
+          "type": "slide",
+          "settings": {
+            "label": "Banner da Iron Air",
+            "url": "",
+            "tone": "navy"
+          }
+        }
+      },
+      "block_order": [
+        "slide_BCRVQd"
+      ],
+      "settings": {
+        "aria_label": "Banners principais da Iron Air"
+      }
     },
     "trust": {
       "type": "trust-banner",
+      "blocks": {
+        "item_kAagTd": {
+          "type": "item",
+          "settings": {
+            "title": "Frete Grátis",
+            "text": "Para todo o Brasil",
+            "icon": "truck"
+          }
+        },
+        "item_WMpXLJ": {
+          "type": "item",
+          "settings": {
+            "title": "Frete Grátis",
+            "text": "Para todo o Brasil",
+            "icon": "truck"
+          }
+        },
+        "item_hhgGUE": {
+          "type": "item",
+          "settings": {
+            "title": "Frete Grátis",
+            "text": "Para todo o Brasil",
+            "icon": "truck"
+          }
+        },
+        "item_hL6MbX": {
+          "type": "item",
+          "settings": {
+            "title": "Frete Grátis",
+            "text": "Para todo o Brasil",
+            "icon": "truck"
+          }
+        },
+        "item_9AKP8H": {
+          "type": "item",
+          "settings": {
+            "title": "Frete Grátis",
+            "text": "Para todo o Brasil",
+            "icon": "truck"
+          }
+        }
+      },
+      "block_order": [
+        "item_kAagTd",
+        "item_WMpXLJ",
+        "item_hhgGUE",
+        "item_hL6MbX",
+        "item_9AKP8H"
+      ],
       "settings": {}
     },
     "products": {
       "type": "featured-collection",
-      "settings": {}
+      "settings": {
+        "kicker": "Oferta especial",
+        "title": "Nossos produtos",
+        "link_label": "Ver todos →",
+        "collection": ""
+      }
     },
     "how_it_works": {
       "type": "how-it-works",
-      "settings": {}
+      "settings": {
+        "subtitle": "4 passos simples",
+        "title": "Como funciona"
+      }
     },
     "compare": {
       "type": "compare",
-      "settings": {}
+      "settings": {
+        "subtitle": "Compare e decida",
+        "title": "Compare e decida"
+      }
     },
     "reviews": {
       "type": "reviews",
-      "settings": {}
+      "blocks": {
+        "review_gKLEY3": {
+          "type": "review",
+          "settings": {
+            "stars": "★★★★★",
+            "text": "Tirei minha camisa da secadora toda amarrotada e em 12 minutos já estava passada, parecia nova.",
+            "name": "Marina Silva",
+            "city": "São Paulo, SP",
+            "tone": "red"
+          }
+        },
+        "review_L6qjDE": {
+          "type": "review",
+          "settings": {
+            "stars": "★★★★★",
+            "text": "Tirei minha camisa da secadora toda amarrotada e em 12 minutos já estava passada, parecia nova.",
+            "name": "Marina Silva",
+            "city": "São Paulo, SP",
+            "tone": "red"
+          }
+        },
+        "review_T6MCbV": {
+          "type": "review",
+          "settings": {
+            "stars": "★★★★★",
+            "text": "Tirei minha camisa da secadora toda amarrotada e em 12 minutos já estava passada, parecia nova.",
+            "name": "Marina Silva",
+            "city": "São Paulo, SP",
+            "tone": "red"
+          }
+        }
+      },
+      "block_order": [
+        "review_gKLEY3",
+        "review_L6qjDE",
+        "review_T6MCbV"
+      ],
+      "settings": {
+        "subtitle": "Clientes reais",
+        "title": "O que dizem os clientes",
+        "rating": "4.8",
+        "count": "847 avaliações"
+      }
     },
     "faq": {
       "type": "faq",
-      "settings": {}
+      "settings": {
+        "subtitle": "Dúvidas frequentes",
+        "title": "Perguntas frequentes"
+      }
     },
     "final_cta": {
       "type": "final-cta",
-      "settings": {}
+      "settings": {
+        "product": "",
+        "badge": "Oferta",
+        "title": "Pare de perder tempo\npassando roupa",
+        "text": "O Iron Air passa, seca e desamassa automaticamente para deixar sua rotina mais leve, rápida e prática todos os dias.",
+        "button_label": "Comprar agora com desconto"
+      }
     }
   },
   "order": [
