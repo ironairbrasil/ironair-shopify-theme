@@ -1,60 +1,89 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "main-product",
       "blocks": {
-        "vendor": {
-          "type": "vendor",
-          "settings": {}
-        },
-        "title": {
-          "type": "title",
-          "settings": {}
-        },
-        "rating": {
+        "rating_DXYtNp": {
           "type": "rating",
-          "settings": {}
+          "settings": {
+            "rating": 5,
+            "count_label": "847 avaliações"
+          }
         },
-        "badge": {
-          "type": "badge",
-          "settings": {}
+        "title_XntNA3": {
+          "type": "title",
+          "settings": {
+            "title_override": ""
+          }
         },
-        "price": {
-          "type": "price",
-          "settings": {}
-        },
-        "buy_buttons": {
-          "type": "buy_buttons",
-          "settings": {}
-        },
-        "description": {
+        "description_Naq8nj": {
           "type": "description",
-          "settings": {}
+          "settings": {
+            "description_override": ""
+          }
         },
-        "benefits": {
+        "price_hhznYQ": {
+          "type": "price",
+          "settings": {
+            "show_compare_price": true,
+            "show_price": true,
+            "show_pix_price": true,
+            "pix_discount_percent": 10,
+            "pix_label": "com [discount]% OFF no Pix",
+            "show_installments": true,
+            "installments_count": 12
+          }
+        },
+        "buy_buttons_zG8CxD": {
+          "type": "buy_buttons",
+          "settings": {
+            "variant_label": "Opção",
+            "button_label": "Comprar agora"
+          }
+        },
+        "benefits_ffUr4E": {
           "type": "benefits",
-          "settings": {}
+          "settings": {
+            "benefit_1": "✓ Frete grátis",
+            "benefit_2": "✓ Checkout Shopify seguro",
+            "show_stock": true,
+            "stock_prefix": "✓"
+          }
         }
       },
       "block_order": [
-        "vendor",
-        "title",
-        "rating",
-        "badge",
-        "price",
-        "buy_buttons",
-        "description",
-        "benefits"
+        "rating_DXYtNp",
+        "title_XntNA3",
+        "description_Naq8nj",
+        "price_hhznYQ",
+        "buy_buttons_zG8CxD",
+        "benefits_ffUr4E"
       ],
       "settings": {}
     },
     "related": {
       "type": "related-products",
-      "settings": {}
+      "settings": {
+        "kicker": "Você também pode gostar",
+        "title": "Produtos relacionados",
+        "limit": 4
+      }
     },
     "faq": {
       "type": "faq",
-      "settings": {}
+      "settings": {
+        "subtitle": "Dúvidas frequentes",
+        "title": "Perguntas frequentes"
+      }
     }
   },
   "order": [
