@@ -150,9 +150,13 @@
             item.setAttribute('aria-pressed', item === button ? 'true' : 'false');
           });
 
-          var matchingVariant = findVariantByOptions(getSelectedOptions());
-          if (!matchingVariant) return;
-          select.value = matchingVariant.id;
+          var directVariantId = button.getAttribute('data-variant-id');
+          var matchingVariant = directVariantId
+            ? variants.find(function (variant) { return String(variant.id) === String(directVariantId); })
+            : findVariantByOptions(getSelectedOptions());
+          var nextVariantId = directVariantId || (matchingVariant && matchingVariant.id);
+          if (!nextVariantId) return;
+          select.value = nextVariantId;
           select.dispatchEvent(new Event('change', { bubbles: true }));
         });
       });

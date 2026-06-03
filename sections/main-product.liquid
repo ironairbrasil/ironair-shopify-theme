@@ -158,12 +158,22 @@
                         <legend class="product-option-label">{{ option.name }}</legend>
                         <div class="product-variant-buttons">
                           {% for value in option.values %}
+                            {% assign value_variant = blank %}
+                            {% if product.options.size == 1 %}
+                              {% for variant in product.variants %}
+                                {% if variant.option1 == value %}
+                                  {% assign value_variant = variant %}
+                                  {% break %}
+                                {% endif %}
+                              {% endfor %}
+                            {% endif %}
                             <button
                               type="button"
                               class="product-variant-button {% if option.selected_value == value %}is-active{% endif %}"
                               data-variant-option-button
                               data-option-position="{{ option.position }}"
                               data-option-value="{{ value | escape }}"
+                              {% if value_variant != blank %}data-variant-id="{{ value_variant.id }}"{% endif %}
                               aria-pressed="{% if option.selected_value == value %}true{% else %}false{% endif %}"
                             >
                               {{ value }}
