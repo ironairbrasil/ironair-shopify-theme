@@ -41,6 +41,7 @@
       {% endif %}
   {% endcase %}
 {% endfor %}
+{% content_for 'blocks' %}
 
 {% schema %}
 {
@@ -67,6 +68,9 @@
       "settings": [
         { "type": "liquid", "id": "custom_liquid", "label": "Liquid" }
       ]
+    },
+    {
+      "type": "@theme"
     }
   ],
   "presets": [

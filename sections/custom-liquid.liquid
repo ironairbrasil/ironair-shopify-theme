@@ -10,6 +10,7 @@
   <div class="content-card custom-liquid-content">
     {{ section.settings.custom_liquid }}
   </div>
+  {% content_for 'blocks' %}
 </section>
 
 {% schema %}
@@ -55,6 +56,11 @@
       "step": 4,
       "unit": "px",
       "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@theme"
     }
   ],
   "presets": [
