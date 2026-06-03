@@ -40,6 +40,10 @@
             {{ block.settings.custom_liquid }}
           </div>
         {% endif %}
+      {% when 'product_vendor', 'product_title', 'product_badge', 'product_rating', 'product_description', 'product_price', 'product_variant_picker', 'product_buy_button', 'product_stock', 'product_benefits', 'product_upsells' %}
+        <div class="custom-liquid-block">
+          {% render 'custom-product-block', block: block %}
+        </div>
     {% endcase %}
   {% endfor %}
 </section>
@@ -154,6 +158,138 @@
           "type": "liquid",
           "id": "custom_liquid",
           "label": "Liquid"
+        }
+      ]
+    },
+    {
+      "type": "product_benefits",
+      "name": "Benefícios do produto",
+      "settings": [
+        {
+          "type": "text",
+          "id": "benefit_1",
+          "label": "Benefício 1",
+          "default": "✓ Frete grátis"
+        },
+        {
+          "type": "text",
+          "id": "benefit_2",
+          "label": "Benefício 2",
+          "default": "✓ Checkout Shopify seguro"
+        },
+        {
+          "type": "text",
+          "id": "benefit_3",
+          "label": "Benefício 3"
+        }
+      ]
+    },
+    {
+      "type": "product_badge",
+      "name": "Badge do produto",
+      "settings": [
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Texto personalizado",
+          "info": "Deixe vazio para calcular o % OFF automaticamente."
+        }
+      ]
+    },
+    {
+      "type": "product_vendor",
+      "name": "Marca do produto",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto personalizado",
+          "info": "Deixe vazio para usar o fabricante do produto."
+        }
+      ]
+    },
+    {
+      "type": "product_title",
+      "name": "Nome do produto",
+      "settings": []
+    },
+    {
+      "type": "product_rating",
+      "name": "Avaliações",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Nota",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "text",
+          "id": "count_label",
+          "label": "Texto da quantidade",
+          "default": "847 avaliações"
+        }
+      ]
+    },
+    {
+      "type": "product_description",
+      "name": "Descrição do produto",
+      "settings": []
+    },
+    {
+      "type": "product_price",
+      "name": "Preço do produto",
+      "settings": []
+    },
+    {
+      "type": "product_variant_picker",
+      "name": "Variantes do produto",
+      "settings": []
+    },
+    {
+      "type": "product_buy_button",
+      "name": "Botão de compra",
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Texto do botão",
+          "default": "Comprar agora"
+        }
+      ]
+    },
+    {
+      "type": "product_stock",
+      "name": "Estoque do produto",
+      "settings": []
+    },
+    {
+      "type": "product_upsells",
+      "name": "Outros produtos",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Outros produtos"
+        },
+        {
+          "type": "product_list",
+          "id": "products",
+          "label": "Produtos",
+          "limit": 6
+        },
+        {
+          "type": "range",
+          "id": "limit",
+          "label": "Limite",
+          "min": 1,
+          "max": 6,
+          "step": 1,
+          "default": 4
         }
       ]
     }

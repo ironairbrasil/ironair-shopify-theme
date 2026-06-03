@@ -1,0 +1,141 @@
+{% assign current_product = product %}
+{% assign current_variant = current_product.selected_or_first_available_variant %}
+
+{% if current_product != blank %}
+  {% case block.type %}
+    {% when 'product_vendor' %}
+      <div class="pc-brand" {{ block.shopify_attributes }}>
+        {% if block.settings.text != blank %}
+          {{ block.settings.text }}
+        {% else %}
+          {{ current_product.vendor | default: shop.name }}
+        {% endif %}
+      </div>
+
+    {% when 'product_title' %}
+      <h2 class="custom-product-title" {{ block.shopify_attributes }}>{{ current_product.title }}</h2>
+
+    {% when 'product_badge' %}
+      {% assign badge_variant_price = current_variant.price %}
+      {% assign badge_compare_price = current_variant.compare_at_price %}
+      {% if badge_compare_price > badge_variant_price or block.settings.badge_text != blank %}
+        {% if badge_compare_price > badge_variant_price %}
+          {% assign badge_discount = badge_compare_price | minus: badge_variant_price | times: 100 | divided_by: badge_compare_price %}
+        {% endif %}
+        <div class="pc-badge badge-off" {{ block.shopify_attributes }}>
+          {% if block.settings.badge_text != blank %}{{ block.settings.badge_text }}{% else %}{{ badge_discount }}% OFF{% endif %}
+        </div>
+      {% endif %}
+
+    {% when 'product_rating' %}
+      <div class="pc-stars custom-product-rating" {{ block.shopify_attributes }}>
+        {% render 'stars', rating: block.settings.rating %}
+        <span class="count">({{ block.settings.count_label }})</span>
+      </div>
+
+    {% when 'product_description' %}
+      <div class="product-detail-copy custom-product-description" {{ block.shopify_attributes }}>
+        {{ current_product.description }}
+      </div>
+
+    {% when 'product_price' %}
+      {% assign custom_price = current_variant.price %}
+      {% assign custom_compare_price = current_variant.compare_at_price %}
+      {% assign custom_pix_price = custom_price | times: 90 | divided_by: 100 %}
+      {% assign custom_installments = custom_price | divided_by: 12 %}
+      <div class="custom-product-price" {{ block.shopify_attributes }}>
+        {% if custom_compare_price > custom_price %}
+          <div class="pc-price-old">{{ custom_compare_price | money }}</div>
+        {% endif %}
+        <div class="product-main-price">{{ custom_price | money }}</div>
+        <div class="product-card-payment-pix">
+          <strong>{{ custom_pix_price | money }}</strong>
+          <span>com 10% OFF no Pix</span>
+        </div>
+        <div class="product-card-payment-card">
+          ou {{ custom_price | money }} em até <strong>12x de {{ custom_installments | money }}</strong> s/juros
+        </div>
+      </div>
+
+    {% when 'product_variant_picker' %}
+      {% unless current_product.has_only_default_variant %}
+        <div class="custom-product-variants" {{ block.shopify_attributes }}>
+          {% for option in current_product.options_with_values %}
+            <div class="product-option-group">
+              <div class="product-option-label">{{ option.name }}</div>
+              <div class="product-variant-buttons">
+                {% for value in option.values %}
+                  <span class="product-variant-button {% if option.selected_value == value %}is-active{% endif %}">{{ value }}</span>
+                {% endfor %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endunless %}
+
+    {% when 'product_buy_button' %}
+      <div class="custom-product-buy" {{ block.shopify_attributes }}>
+        {% form 'product', current_product, class: 'product-form' %}
+          {% unless current_product.has_only_default_variant %}
+            <select name="id" class="product-form-select" aria-label="Selecionar variante">
+              {% for variant in current_product.variants %}
+                <option value="{{ variant.id }}" {% if variant == current_variant %}selected{% endif %} {% unless variant.available %}disabled{% endunless %}>
+                  {{ variant.title }}{% unless variant.available %} - esgotado{% endunless %}
+                </option>
+              {% endfor %}
+            </select>
+          {% else %}
+            <input type="hidden" name="id" value="{{ current_variant.id }}">
+          {% endunless %}
+          <button class="btn-hero product-submit" type="submit" {% unless current_variant.available %}disabled{% endunless %}>
+            {{ block.settings.button_label }}
+          </button>
+        {% endform %}
+      </div>
+
+    {% when 'product_stock' %}
+      {% if current_variant.inventory_management %}
+        <div class="product-stock-line {% unless current_variant.available %}is-out{% endunless %}" {{ block.shopify_attributes }}>
+          {{ current_variant.inventory_quantity }} unidade(s) em estoque
+        </div>
+      {% elsif current_variant.available %}
+        <div class="product-stock-line" {{ block.shopify_attributes }}>Em estoque</div>
+      {% else %}
+        <div class="product-stock-line is-out" {{ block.shopify_attributes }}>Produto esgotado no momento</div>
+      {% endif %}
+
+    {% when 'product_benefits' %}
+      <div class="final-points product-points" {{ block.shopify_attributes }}>
+        {% if block.settings.benefit_1 != blank %}<div>{{ block.settings.benefit_1 }}</div>{% endif %}
+        {% if block.settings.benefit_2 != blank %}<div>{{ block.settings.benefit_2 }}</div>{% endif %}
+        {% if block.settings.benefit_3 != blank %}<div>{{ block.settings.benefit_3 }}</div>{% endif %}
+      </div>
+
+    {% when 'product_upsells' %}
+      {% assign upsell_products = block.settings.products %}
+      {% if upsell_products != blank %}
+        <div class="product-upsells" {{ block.shopify_attributes }}>
+          {% if block.settings.title != blank %}<h2>{{ block.settings.title }}</h2>{% endif %}
+          <div class="product-upsell-list">
+            {% for upsell_product in upsell_products limit: block.settings.limit %}
+              {% unless upsell_product.id == current_product.id %}
+                {% assign upsell_variant = upsell_product.selected_or_first_available_variant %}
+                <article class="product-upsell-card">
+                  <a class="product-upsell-media" href="{{ upsell_product.url }}">
+                    {% if upsell_product.featured_image %}
+                      {{ upsell_product.featured_image | image_url: width: 180 | image_tag: alt: upsell_product.title, loading: 'lazy' }}
+                    {% endif %}
+                  </a>
+                  <div class="product-upsell-copy">
+                    <a href="{{ upsell_product.url }}">{{ upsell_product.title }}</a>
+                    <strong>{{ upsell_variant.price | money }}</strong>
+                  </div>
+                  <a class="product-upsell-action" href="{{ upsell_product.url }}">Ver</a>
+                </article>
+              {% endunless %}
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+  {% endcase %}
+{% endif %}
