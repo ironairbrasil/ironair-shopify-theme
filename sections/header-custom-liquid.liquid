@@ -1,82 +1,109 @@
 {{ 'navigation.css' | asset_url | stylesheet_tag }}
 
-{% for block in section.blocks %}
-  {% case block.type %}
-    {% when 'menu' %}
-      {% if block.settings.menu.links.size > 0 %}
-        <nav class="navcat" aria-label="{{ block.settings.menu_label }}" {{ block.shopify_attributes }}>
-          <div class="navcat-inner navcat-position-{{ block.settings.menu_position }}">
-            {% for link in block.settings.menu.links %}
-              <a class="navcat-item {% if link.current %}active{% endif %}" href="{{ link.url }}">
-                {{ link.title }}
-              </a>
-            {% endfor %}
-          </div>
-        </nav>
-
-        <button type="button" class="mobile-nav-overlay" data-mobile-menu-close aria-label="Fechar menu"></button>
-        <aside id="mobile-nav-sidebar" class="mobile-nav-sidebar" data-mobile-sidebar aria-hidden="true">
-          <div class="mobile-nav-sidebar-header">
-            <div>
-              <strong>Menu</strong>
-              <span>Navegue pelas principais áreas da loja</span>
+<section class="header-custom-liquid-section shopify-padding-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
+  {% for block in section.blocks %}
+    {% case block.type %}
+      {% when 'menu' %}
+        {% if block.settings.menu.links.size > 0 %}
+          <nav class="navcat" aria-label="{{ block.settings.menu_label }}" {{ block.shopify_attributes }}>
+            <div class="navcat-inner navcat-position-{{ block.settings.menu_position }}">
+              {% for link in block.settings.menu.links %}
+                <a class="navcat-item {% if link.current %}active{% endif %}" href="{{ link.url }}">
+                  {{ link.title }}
+                </a>
+              {% endfor %}
             </div>
-            <button type="button" class="cart-close" data-mobile-menu-close aria-label="Fechar menu">x</button>
+          </nav>
+
+          <button type="button" class="mobile-nav-overlay" data-mobile-menu-close aria-label="Fechar menu"></button>
+          <aside id="mobile-nav-sidebar" class="mobile-nav-sidebar" data-mobile-sidebar aria-hidden="true">
+            <div class="mobile-nav-sidebar-header">
+              <div>
+                <strong>Menu</strong>
+                <span>Navegue pelas principais áreas da loja</span>
+              </div>
+              <button type="button" class="cart-close" data-mobile-menu-close aria-label="Fechar menu">x</button>
+            </div>
+            <div class="mobile-nav-sidebar-body">
+              {% for link in block.settings.menu.links %}
+                <a class="mobile-nav-link {% if link.current %}active{% endif %}" href="{{ link.url }}">
+                  <span>{{ link.title }}</span>
+                </a>
+              {% endfor %}
+            </div>
+          </aside>
+        {% endif %}
+
+      {% when 'custom_liquid' %}
+        {% if block.settings.custom_liquid != blank %}
+          <div class="header-custom-liquid" {{ block.shopify_attributes }}>
+            {{ block.settings.custom_liquid }}
           </div>
-          <div class="mobile-nav-sidebar-body">
-            {% for link in block.settings.menu.links %}
-              <a class="mobile-nav-link {% if link.current %}active{% endif %}" href="{{ link.url }}">
-                <span>{{ link.title }}</span>
-              </a>
-            {% endfor %}
+        {% endif %}
+
+      {% when 'text' %}
+        <div class="header-custom-liquid" {{ block.shopify_attributes }}>
+          {{ block.settings.text }}
+        </div>
+
+      {% when 'image' %}
+        {% if block.settings.image != blank %}
+          <div class="header-custom-liquid" {{ block.shopify_attributes }}>
+            {{ block.settings.image | image_url: width: 1600 | image_tag: loading: 'lazy', alt: block.settings.alt }}
           </div>
-        </aside>
-      {% endif %}
+        {% endif %}
 
-    {% when 'custom_liquid' %}
-      {% if block.settings.custom_liquid != blank %}
-        <div class="header-custom-liquid" {{ block.shopify_attributes }}>
-          {{ block.settings.custom_liquid }}
+      {% when 'button' %}
+        {% if block.settings.label != blank %}
+          <div class="header-custom-liquid" {{ block.shopify_attributes }}>
+            <a class="btn-hero" href="{{ block.settings.url | default: routes.root_url }}">{{ block.settings.label }}</a>
+          </div>
+        {% endif %}
+
+      {% when 'video' %}
+        {% if block.settings.video_url != blank %}
+          <div class="header-custom-liquid" {{ block.shopify_attributes }}>
+            <video controls src="{{ block.settings.video_url }}"></video>
+          </div>
+        {% endif %}
+
+      {% when 'product_vendor', 'product_title', 'product_badge', 'product_rating', 'product_description', 'product_price', 'product_variant_picker', 'product_buy_button', 'product_stock', 'product_benefits', 'product_upsells' %}
+        <div class="header-custom-liquid">
+          {% render 'custom-product-block', block: block %}
         </div>
-      {% endif %}
-
-    {% when 'text' %}
-      <div class="header-custom-liquid" {{ block.shopify_attributes }}>
-        {{ block.settings.text }}
-      </div>
-
-    {% when 'image' %}
-      {% if block.settings.image != blank %}
-        <div class="header-custom-liquid" {{ block.shopify_attributes }}>
-          {{ block.settings.image | image_url: width: 1600 | image_tag: loading: 'lazy', alt: block.settings.alt }}
-        </div>
-      {% endif %}
-
-    {% when 'button' %}
-      {% if block.settings.label != blank %}
-        <div class="header-custom-liquid" {{ block.shopify_attributes }}>
-          <a class="btn-hero" href="{{ block.settings.url | default: routes.root_url }}">{{ block.settings.label }}</a>
-        </div>
-      {% endif %}
-
-    {% when 'video' %}
-      {% if block.settings.video_url != blank %}
-        <div class="header-custom-liquid" {{ block.shopify_attributes }}>
-          <video controls src="{{ block.settings.video_url }}"></video>
-        </div>
-      {% endif %}
-
-    {% when 'product_vendor', 'product_title', 'product_badge', 'product_rating', 'product_description', 'product_price', 'product_variant_picker', 'product_buy_button', 'product_stock', 'product_benefits', 'product_upsells' %}
-      <div class="header-custom-liquid">
-        {% render 'custom-product-block', block: block %}
-      </div>
-  {% endcase %}
-{% endfor %}
+    {% endcase %}
+  {% endfor %}
+</section>
 
 {% schema %}
 {
   "name": "Liquid personalizado",
-  "settings": [],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Preenchimento"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Superior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Inferior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
   "blocks": [
     {
       "type": "menu",

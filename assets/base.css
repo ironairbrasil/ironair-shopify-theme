@@ -98,6 +98,20 @@ footer#contato {
   display: block;
 }
 
+.custom-liquid-content,
+.custom-liquid-block {
+  width: 100%;
+  max-width: var(--shell-max-width);
+  margin-inline: auto;
+  box-sizing: border-box;
+}
+
+.custom-liquid-block img,
+.custom-liquid-block video {
+  width: 100%;
+  height: auto;
+}
+
 .section-head {
   max-width: var(--shell-max-width);
   margin: 0 auto 18px;
