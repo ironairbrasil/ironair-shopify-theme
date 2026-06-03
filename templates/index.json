@@ -71,7 +71,9 @@
         "nav_icons": "large",
         "pagination": "dots",
         "autoplay": true,
-        "speed": 4
+        "speed": 4,
+        "padding_top": 48,
+        "padding_bottom": 48
       }
     },
     "trust": {
@@ -125,7 +127,10 @@
         "item_hL6MbX",
         "item_9AKP8H"
       ],
-      "settings": {}
+      "settings": {
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
     },
     "products": {
       "type": "featured-collection",
@@ -133,7 +138,9 @@
         "kicker": "Oferta especial",
         "title": "Nossos produtos",
         "link_label": "Ver todos →",
-        "collection": ""
+        "collection": "",
+        "padding_top": 48,
+        "padding_bottom": 48
       }
     },
     "slider": {
@@ -170,7 +177,9 @@
         "mobile_height": "medium",
         "content_position": "center",
         "text_alignment": "center",
-        "tone": "navy"
+        "tone": "navy",
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "reviews": {
@@ -216,7 +225,9 @@
         "subtitle": "Clientes reais",
         "title": "O que dizem os clientes",
         "rating": "4.8",
-        "count": "847 avaliações"
+        "count": "847 avaliações",
+        "padding_top": 48,
+        "padding_bottom": 48
       }
     },
     "faq": {
@@ -275,7 +286,9 @@
       ],
       "settings": {
         "subtitle": "Dúvidas frequentes",
-        "title": "Perguntas frequentes"
+        "title": "Perguntas frequentes",
+        "padding_top": 48,
+        "padding_bottom": 48
       }
     },
     "final_cta": {
@@ -285,7 +298,9 @@
         "badge": "Oferta",
         "title": "Pare de perder tempo\npassando roupa",
         "text": "O Iron Air passa, seca e desamassa automaticamente para deixar sua rotina mais leve, rápida e prática todos os dias.",
-        "button_label": "Comprar agora com desconto"
+        "button_label": "Comprar agora com desconto",
+        "padding_top": 48,
+        "padding_bottom": 48
       }
     }
   },
