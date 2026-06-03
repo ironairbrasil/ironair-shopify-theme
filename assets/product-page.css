@@ -78,6 +78,34 @@
   margin-top: 8px;
 }
 
+.product-price-block,
+.custom-product-price {
+  display: grid;
+  gap: 4px;
+  margin-top: 14px;
+}
+
+.product-price-block .pc-price-old,
+.custom-product-price .pc-price-old {
+  color: var(--red) !important;
+  text-decoration: line-through;
+  text-decoration-color: var(--red);
+  margin-top: 4px;
+  margin-bottom: 0;
+}
+
+.product-price-block .product-main-price,
+.custom-product-price .product-main-price {
+  color: var(--dark-green) !important;
+}
+
+.product-price-block .product-card-payment-pix strong,
+.custom-product-price .product-card-payment-pix strong,
+.product-price-block .product-card-payment-card strong,
+.custom-product-price .product-card-payment-card strong {
+  color: var(--green) !important;
+}
+
 .product-form {
   display: grid;
   gap: 12px;

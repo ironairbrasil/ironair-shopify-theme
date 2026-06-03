@@ -206,6 +206,10 @@
           {% when 'upsells' %}
             {% assign upsell_products = block.settings.products %}
             {% assign fallback_collection = product.collections.first %}
+            {% assign upsell_display_limit = block.settings.limit | default: 4 %}
+            {% if upsell_products != blank and upsell_products.size > upsell_display_limit %}
+              {% assign upsell_display_limit = upsell_products.size %}
+            {% endif %}
             {% if upsell_products != blank or fallback_collection != blank %}
               <div class="product-upsells" {{ block.shopify_attributes }}>
                 {% if block.settings.title != blank %}
@@ -215,7 +219,7 @@
                   {% if upsell_products != blank %}
                     {% for upsell_product in upsell_products %}
                       {% unless upsell_product.id == product.id %}
-                        {% if upsell_manual_limit < block.settings.limit %}
+                        {% if upsell_manual_limit < upsell_display_limit %}
                           {% assign upsell_manual_limit = upsell_manual_limit | plus: 1 %}
                           {% assign upsell_variant = upsell_product.selected_or_first_available_variant %}
                           <article class="product-upsell-card">
@@ -245,7 +249,7 @@
                   {% else %}
                     {% for upsell_product in fallback_collection.products %}
                       {% unless upsell_product.id == product.id %}
-                        {% if upsell_fallback_limit < block.settings.limit %}
+                        {% if upsell_fallback_limit < upsell_display_limit %}
                           {% assign upsell_fallback_limit = upsell_fallback_limit | plus: 1 %}
                           {% assign upsell_variant = upsell_product.selected_or_first_available_variant %}
                           <article class="product-upsell-card">
