@@ -90,7 +90,7 @@
           "settings": {
             "title": "Frete Grátis",
             "text": "Para todo o Brasil",
-            "icon": "truck"
+            "icon": "card"
           }
         },
         "item_hhgGUE": {
@@ -98,7 +98,7 @@
           "settings": {
             "title": "Frete Grátis",
             "text": "Para todo o Brasil",
-            "icon": "truck"
+            "icon": "shield"
           }
         },
         "item_hL6MbX": {
@@ -106,7 +106,7 @@
           "settings": {
             "title": "Frete Grátis",
             "text": "Para todo o Brasil",
-            "icon": "truck"
+            "icon": "refresh"
           }
         },
         "item_9AKP8H": {
@@ -114,7 +114,7 @@
           "settings": {
             "title": "Frete Grátis",
             "text": "Para todo o Brasil",
-            "icon": "truck"
+            "icon": "check"
           }
         }
       },
