@@ -250,14 +250,14 @@
         "item_qmeG94": {
           "type": "item",
           "settings": {
-            "question": "O Iron Air funciona com todo tipo de tecido?",
+            "question": "Qual a voltagem?",
             "answer": "Temos a opção de 127V (1250W) e 220V (1400W)."
           }
         },
         "item_HzWdVL": {
           "type": "item",
           "settings": {
-            "question": "O Iron Air funciona com todo tipo de tecido?",
+            "question": "Como armazenar quando não estiver usando?",
             "answer": "Esvazie o balão, dobre o suporte e guarde em armário ou gaveta maior. O aparelho pesa cerca de 2,3kg e ocupa pouco espaço."
           }
         },
