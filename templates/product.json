@@ -52,21 +52,17 @@
             "stock_prefix": "✓"
           }
         },
-        "upsells_default": {
+        "upsells_6YLYQj": {
           "type": "upsells",
           "settings": {
             "title": "Outros produtos",
-            "products": [],
+            "products": [
+              "iron-air",
+              "kit-iron-air-borrifador-tira-pelos",
+              "tira-pelo-reutilizavel-premium",
+              "borrifador-de-agua-pressurizado"
+            ],
             "limit": 3
-          }
-        },
-        "benefits_ffUr4E": {
-          "type": "benefits",
-          "settings": {
-            "benefit_1": "✓ Frete grátis",
-            "benefit_2": "✓ Checkout Shopify seguro",
-            "show_stock": false,
-            "stock_prefix": "✓"
           }
         }
       },
@@ -76,8 +72,7 @@
         "description_Naq8nj",
         "price_hhznYQ",
         "buy_buttons_zG8CxD",
-        "upsells_default",
-        "benefits_ffUr4E"
+        "upsells_6YLYQj"
       ],
       "settings": {
         "padding_top": 48,
