@@ -10,7 +10,38 @@
   <div class="content-card custom-liquid-content">
     {{ section.settings.custom_liquid }}
   </div>
-  {% content_for 'blocks' %}
+  {% for block in section.blocks %}
+    {% case block.type %}
+      {% when 'text' %}
+        <div class="content-card custom-liquid-block custom-liquid-text" {{ block.shopify_attributes }}>
+          {{ block.settings.text }}
+        </div>
+      {% when 'image' %}
+        {% if block.settings.image != blank %}
+          <div class="custom-liquid-block custom-liquid-image" {{ block.shopify_attributes }}>
+            {{ block.settings.image | image_url: width: 1600 | image_tag: loading: 'lazy', alt: block.settings.alt }}
+          </div>
+        {% endif %}
+      {% when 'button' %}
+        {% if block.settings.label != blank %}
+          <div class="custom-liquid-block" {{ block.shopify_attributes }}>
+            <a class="btn-hero" href="{{ block.settings.url | default: routes.root_url }}">{{ block.settings.label }}</a>
+          </div>
+        {% endif %}
+      {% when 'video' %}
+        {% if block.settings.video_url != blank %}
+          <div class="custom-liquid-block custom-liquid-video" {{ block.shopify_attributes }}>
+            <video controls src="{{ block.settings.video_url }}"></video>
+          </div>
+        {% endif %}
+      {% when 'custom_liquid' %}
+        {% if block.settings.custom_liquid != blank %}
+          <div class="custom-liquid-block" {{ block.shopify_attributes }}>
+            {{ block.settings.custom_liquid }}
+          </div>
+        {% endif %}
+    {% endcase %}
+  {% endfor %}
 </section>
 
 {% schema %}
@@ -60,7 +91,71 @@
   ],
   "blocks": [
     {
-      "type": "@theme"
+      "type": "text",
+      "name": "Texto",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Texto",
+          "default": "<p>Texto</p>"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Imagem",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagem"
+        },
+        {
+          "type": "text",
+          "id": "alt",
+          "label": "Texto alternativo"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Botão",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Texto",
+          "default": "Comprar"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link"
+        }
+      ]
+    },
+    {
+      "type": "video",
+      "name": "Vídeo",
+      "settings": [
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "URL do vídeo"
+        }
+      ]
+    },
+    {
+      "type": "custom_liquid",
+      "name": "Liquid personalizado",
+      "settings": [
+        {
+          "type": "liquid",
+          "id": "custom_liquid",
+          "label": "Liquid"
+        }
+      ]
     }
   ],
   "presets": [

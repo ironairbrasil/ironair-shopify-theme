@@ -39,9 +39,34 @@
           {{ block.settings.custom_liquid }}
         </div>
       {% endif %}
+
+    {% when 'text' %}
+      <div class="header-custom-liquid" {{ block.shopify_attributes }}>
+        {{ block.settings.text }}
+      </div>
+
+    {% when 'image' %}
+      {% if block.settings.image != blank %}
+        <div class="header-custom-liquid" {{ block.shopify_attributes }}>
+          {{ block.settings.image | image_url: width: 1600 | image_tag: loading: 'lazy', alt: block.settings.alt }}
+        </div>
+      {% endif %}
+
+    {% when 'button' %}
+      {% if block.settings.label != blank %}
+        <div class="header-custom-liquid" {{ block.shopify_attributes }}>
+          <a class="btn-hero" href="{{ block.settings.url | default: routes.root_url }}">{{ block.settings.label }}</a>
+        </div>
+      {% endif %}
+
+    {% when 'video' %}
+      {% if block.settings.video_url != blank %}
+        <div class="header-custom-liquid" {{ block.shopify_attributes }}>
+          <video controls src="{{ block.settings.video_url }}"></video>
+        </div>
+      {% endif %}
   {% endcase %}
 {% endfor %}
-{% content_for 'blocks' %}
 
 {% schema %}
 {
@@ -70,7 +95,34 @@
       ]
     },
     {
-      "type": "@theme"
+      "type": "text",
+      "name": "Texto",
+      "settings": [
+        { "type": "richtext", "id": "text", "label": "Texto", "default": "<p>Texto</p>" }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Imagem",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Imagem" },
+        { "type": "text", "id": "alt", "label": "Texto alternativo" }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Botão",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Texto", "default": "Comprar" },
+        { "type": "url", "id": "url", "label": "Link" }
+      ]
+    },
+    {
+      "type": "video",
+      "name": "Vídeo",
+      "settings": [
+        { "type": "url", "id": "video_url", "label": "URL do vídeo" }
+      ]
     }
   ],
   "presets": [
