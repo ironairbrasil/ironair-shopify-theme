@@ -195,7 +195,7 @@
             "tone": "red"
           }
         },
-        "review_L6qjDE": {
+        "review_h8JLFR": {
           "type": "review",
           "settings": {
             "stars": "★★★★★",
@@ -205,7 +205,7 @@
             "tone": "red"
           }
         },
-        "review_T6MCbV": {
+        "review_L6qjDE": {
           "type": "review",
           "settings": {
             "stars": "★★★★★",
@@ -218,8 +218,8 @@
       },
       "block_order": [
         "review_gKLEY3",
-        "review_L6qjDE",
-        "review_T6MCbV"
+        "review_h8JLFR",
+        "review_L6qjDE"
       ],
       "settings": {
         "subtitle": "Clientes reais",
