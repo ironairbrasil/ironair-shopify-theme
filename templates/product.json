@@ -93,6 +93,15 @@
     },
     "header_custom_liquid_DcAfLy": {
       "type": "header-custom-liquid",
+      "blocks": {
+        "product_description_JLYjtz": {
+          "type": "product_description",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "product_description_JLYjtz"
+      ],
       "name": "Liquid personalizado",
       "settings": {}
     },
