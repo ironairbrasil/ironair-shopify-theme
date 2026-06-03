@@ -264,28 +264,28 @@
         "item_Pn8mWx": {
           "type": "item",
           "settings": {
-            "question": "O Iron Air funciona com todo tipo de tecido?",
+            "question": "Preciso colocar a roupa seca ou molhada?",
             "answer": "O ideal é utilizar a roupa levemente úmida. Você pode colocá-la diretamente após a lavagem ou borrifar um pouco de água antes de iniciar o processo."
           }
         },
         "item_kpPECy": {
           "type": "item",
           "settings": {
-            "question": "O Iron Air funciona com todo tipo de tecido?",
+            "question": "Consome muita energia?",
             "answer": "Não. O Iron Air possui eficiência energética Classe A, garantindo um consumo otimizado mesmo com alta performance."
           }
         },
         "item_GRwLUM": {
           "type": "item",
           "settings": {
-            "question": "O Iron Air funciona com todo tipo de tecido?",
+            "question": "Serve para qualquer tamanho?",
             "answer": "Sim. O balão ajustável atende roupas até o tamanho 3XL. Ele possui zíperes laterais que permitem aumentar ou diminuir o ajuste conforme a peça."
           }
         },
         "item_jpjKQ6": {
           "type": "item",
           "settings": {
-            "question": "O Iron Air funciona com todo tipo de tecido?",
+            "question": "Faz barulho?",
             "answer": "O funcionamento gera um leve ruído semelhante a um secador de cabelo, mas nada que incomode no ambiente."
           }
         }
