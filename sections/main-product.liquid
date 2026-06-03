@@ -114,8 +114,7 @@
             <div {{ block.shopify_attributes }}>
               {% form 'product', product, class: 'product-form' %}
                 {% unless product.has_only_default_variant %}
-                  <label class="product-option-label" for="ProductSelect-{{ section.id }}">{{ block.settings.variant_label }}</label>
-                  <select id="ProductSelect-{{ section.id }}" name="id" class="product-variant-native-select" data-product-variant-select aria-label="{{ block.settings.variant_label }}">
+                  <select id="ProductSelect-{{ section.id }}" name="id" class="product-variant-native-select" data-product-variant-select aria-label="{{ block.settings.variant_label | default: 'Selecionar variante' }}">
                     {% for variant in product.variants %}
                       {% assign variant_price = variant.price %}
                       {% assign variant_compare_price = variant.compare_at_price %}
@@ -439,7 +438,7 @@
           "type": "text",
           "id": "variant_label",
           "label": "Texto do seletor de variante",
-          "default": "Opção"
+          "default": "Selecionar variante"
         },
         {
           "type": "text",

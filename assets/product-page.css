@@ -147,9 +147,8 @@
   color: #fff;
 }
 
-.product-variant-button:disabled {
+.product-variant-button.is-unavailable {
   opacity: 0.42;
-  cursor: not-allowed;
   text-decoration: line-through;
 }
 

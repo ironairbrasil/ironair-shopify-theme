@@ -107,7 +107,7 @@
           var candidateOptions = selectedOptions.slice();
           candidateOptions[position - 1] = button.getAttribute('data-option-value');
           var matchingVariant = findVariantByOptions(candidateOptions);
-          button.disabled = Boolean(matchingVariant && !matchingVariant.available);
+          button.classList.toggle('is-unavailable', Boolean(matchingVariant && !matchingVariant.available));
         });
       }
 

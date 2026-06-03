@@ -46,7 +46,7 @@
         "buy_buttons_zG8CxD": {
           "type": "buy_buttons",
           "settings": {
-            "variant_label": "Opção",
+            "variant_label": "Selecionar variante",
             "button_label": "Comprar agora",
             "show_stock": true,
             "stock_prefix": "✓"
