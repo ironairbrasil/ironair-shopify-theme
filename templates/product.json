@@ -57,12 +57,12 @@
           "settings": {
             "title": "Outros produtos",
             "products": [
-              "iron-air",
               "kit-iron-air-borrifador-tira-pelos",
               "tira-pelo-reutilizavel-premium",
-              "borrifador-de-agua-pressurizado"
+              "borrifador-de-agua-pressurizado",
+              "airbag-para-vestidos-e-jalecos"
             ],
-            "limit": 3
+            "limit": 4
           }
         }
       },

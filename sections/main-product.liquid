@@ -17,6 +17,8 @@
 {% assign pix_price = price | times: pix_multiplier | divided_by: 100 %}
 {% assign installments = price | divided_by: installments_count %}
 {% assign discount = 0 %}
+{% assign upsell_manual_limit = 0 %}
+{% assign upsell_fallback_limit = 0 %}
 {% if compare_price > price %}
   {% assign discount = compare_price | minus: price | times: 100 | divided_by: compare_price %}
 {% endif %}
@@ -211,57 +213,63 @@
                 {% endif %}
                 <div class="product-upsell-list">
                   {% if upsell_products != blank %}
-                    {% for upsell_product in upsell_products limit: block.settings.limit %}
+                    {% for upsell_product in upsell_products %}
                       {% unless upsell_product.id == product.id %}
-                        {% assign upsell_variant = upsell_product.selected_or_first_available_variant %}
-                        <article class="product-upsell-card">
-                          <a class="product-upsell-media" href="{{ upsell_product.url }}">
-                            {% if upsell_product.featured_image %}
-                              {{ upsell_product.featured_image | image_url: width: 180 | image_tag: alt: upsell_product.title, loading: 'lazy' }}
+                        {% if upsell_manual_limit < block.settings.limit %}
+                          {% assign upsell_manual_limit = upsell_manual_limit | plus: 1 %}
+                          {% assign upsell_variant = upsell_product.selected_or_first_available_variant %}
+                          <article class="product-upsell-card">
+                            <a class="product-upsell-media" href="{{ upsell_product.url }}">
+                              {% if upsell_product.featured_image %}
+                                {{ upsell_product.featured_image | image_url: width: 180 | image_tag: alt: upsell_product.title, loading: 'lazy' }}
+                              {% else %}
+                                <img src="{{ 'ironair-principal.png' | asset_url }}" alt="{{ upsell_product.title | escape }}" loading="lazy">
+                              {% endif %}
+                            </a>
+                            <div class="product-upsell-copy">
+                              <a href="{{ upsell_product.url }}">{{ upsell_product.title }}</a>
+                              <strong>{{ upsell_variant.price | money }}</strong>
+                            </div>
+                            {% if upsell_product.has_only_default_variant %}
+                              <form method="post" action="{{ routes.cart_add_url }}">
+                                <input type="hidden" name="id" value="{{ upsell_variant.id }}">
+                                <button type="submit" {% unless upsell_variant.available %}disabled{% endunless %}>Adicionar</button>
+                              </form>
                             {% else %}
-                              <img src="{{ 'ironair-principal.png' | asset_url }}" alt="{{ upsell_product.title | escape }}" loading="lazy">
+                              <a class="product-upsell-action" href="{{ upsell_product.url }}">Escolher</a>
                             {% endif %}
-                          </a>
-                          <div class="product-upsell-copy">
-                            <a href="{{ upsell_product.url }}">{{ upsell_product.title }}</a>
-                            <strong>{{ upsell_variant.price | money }}</strong>
-                          </div>
-                          {% if upsell_product.has_only_default_variant %}
-                            <form method="post" action="{{ routes.cart_add_url }}">
-                              <input type="hidden" name="id" value="{{ upsell_variant.id }}">
-                              <button type="submit" {% unless upsell_variant.available %}disabled{% endunless %}>Adicionar</button>
-                            </form>
-                          {% else %}
-                            <a class="product-upsell-action" href="{{ upsell_product.url }}">Escolher</a>
-                          {% endif %}
-                        </article>
+                          </article>
+                        {% endif %}
                       {% endunless %}
                     {% endfor %}
                   {% else %}
-                    {% for upsell_product in fallback_collection.products limit: block.settings.limit %}
+                    {% for upsell_product in fallback_collection.products %}
                       {% unless upsell_product.id == product.id %}
-                        {% assign upsell_variant = upsell_product.selected_or_first_available_variant %}
-                        <article class="product-upsell-card">
-                          <a class="product-upsell-media" href="{{ upsell_product.url }}">
-                            {% if upsell_product.featured_image %}
-                              {{ upsell_product.featured_image | image_url: width: 180 | image_tag: alt: upsell_product.title, loading: 'lazy' }}
+                        {% if upsell_fallback_limit < block.settings.limit %}
+                          {% assign upsell_fallback_limit = upsell_fallback_limit | plus: 1 %}
+                          {% assign upsell_variant = upsell_product.selected_or_first_available_variant %}
+                          <article class="product-upsell-card">
+                            <a class="product-upsell-media" href="{{ upsell_product.url }}">
+                              {% if upsell_product.featured_image %}
+                                {{ upsell_product.featured_image | image_url: width: 180 | image_tag: alt: upsell_product.title, loading: 'lazy' }}
+                              {% else %}
+                                <img src="{{ 'ironair-principal.png' | asset_url }}" alt="{{ upsell_product.title | escape }}" loading="lazy">
+                              {% endif %}
+                            </a>
+                            <div class="product-upsell-copy">
+                              <a href="{{ upsell_product.url }}">{{ upsell_product.title }}</a>
+                              <strong>{{ upsell_variant.price | money }}</strong>
+                            </div>
+                            {% if upsell_product.has_only_default_variant %}
+                              <form method="post" action="{{ routes.cart_add_url }}">
+                                <input type="hidden" name="id" value="{{ upsell_variant.id }}">
+                                <button type="submit" {% unless upsell_variant.available %}disabled{% endunless %}>Adicionar</button>
+                              </form>
                             {% else %}
-                              <img src="{{ 'ironair-principal.png' | asset_url }}" alt="{{ upsell_product.title | escape }}" loading="lazy">
+                              <a class="product-upsell-action" href="{{ upsell_product.url }}">Escolher</a>
                             {% endif %}
-                          </a>
-                          <div class="product-upsell-copy">
-                            <a href="{{ upsell_product.url }}">{{ upsell_product.title }}</a>
-                            <strong>{{ upsell_variant.price | money }}</strong>
-                          </div>
-                          {% if upsell_product.has_only_default_variant %}
-                            <form method="post" action="{{ routes.cart_add_url }}">
-                              <input type="hidden" name="id" value="{{ upsell_variant.id }}">
-                              <button type="submit" {% unless upsell_variant.available %}disabled{% endunless %}>Adicionar</button>
-                            </form>
-                          {% else %}
-                            <a class="product-upsell-action" href="{{ upsell_product.url }}">Escolher</a>
-                          {% endif %}
-                        </article>
+                          </article>
+                        {% endif %}
                       {% endunless %}
                     {% endfor %}
                   {% endif %}
@@ -494,7 +502,7 @@
           "min": 1,
           "max": 6,
           "step": 1,
-          "default": 3
+          "default": 4
         }
       ]
     },
