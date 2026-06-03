@@ -7,7 +7,10 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 12px;
+  max-width: var(--shell-max-width);
   margin-top: 24px;
+  margin-inline: auto;
+  padding-inline: 20px;
 }
 
 .faq-item {
@@ -89,5 +92,8 @@
 
 @media (max-width: 640px) {
   .faq-section { padding: 24px 20px; }
-  .faq-cols { grid-template-columns: 1fr; }
+  .faq-cols {
+    grid-template-columns: 1fr;
+    padding-inline: 0;
+  }
 }
