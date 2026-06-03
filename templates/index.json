@@ -88,32 +88,32 @@
         "item_WMpXLJ": {
           "type": "item",
           "settings": {
-            "title": "Frete Grátis",
-            "text": "Para todo o Brasil",
+            "title": "12x sem juros",
+            "text": "Em todos os cartões",
             "icon": "card"
           }
         },
         "item_hhgGUE": {
           "type": "item",
           "settings": {
-            "title": "Frete Grátis",
-            "text": "Para todo o Brasil",
+            "title": "Compra Segura",
+            "text": "Site 100% protegido",
             "icon": "shield"
           }
         },
         "item_hL6MbX": {
           "type": "item",
           "settings": {
-            "title": "Frete Grátis",
-            "text": "Para todo o Brasil",
+            "title": "7 dias de troca",
+            "text": "Sem burocracia",
             "icon": "refresh"
           }
         },
         "item_9AKP8H": {
           "type": "item",
           "settings": {
-            "title": "Frete Grátis",
-            "text": "Para todo o Brasil",
+            "title": "Garantia 1 ano",
+            "text": "Contra defeitos",
             "icon": "check"
           }
         }
