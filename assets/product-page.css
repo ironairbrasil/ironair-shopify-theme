@@ -88,6 +88,22 @@
   font-weight: 900;
 }
 
+.product-options,
+.product-option-group {
+  display: grid;
+  gap: 10px;
+}
+
+.product-option-group {
+  border: 0;
+  min-width: 0;
+  padding: 0;
+}
+
+.product-option-group .product-option-label {
+  margin-bottom: 2px;
+}
+
 .product-variant-native-select {
   display: none;
 }

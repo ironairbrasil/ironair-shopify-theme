@@ -152,23 +152,26 @@
                       </option>
                     {% endfor %}
                   </select>
-                  <div class="product-variant-buttons" data-product-variant-buttons>
-                    {% for variant in product.variants %}
-                      {% if product.options.size == 1 %}
-                        {% assign variant_label = variant.option1 %}
-                      {% else %}
-                        {% assign variant_label = variant.title %}
-                      {% endif %}
-                      <button
-                        type="button"
-                        class="product-variant-button {% if variant == current_variant %}is-active{% endif %}"
-                        data-variant-button
-                        data-variant-id="{{ variant.id }}"
-                        aria-pressed="{% if variant == current_variant %}true{% else %}false{% endif %}"
-                        {% unless variant.available %}disabled{% endunless %}
-                      >
-                        {{ variant_label }}
-                      </button>
+                  <script type="application/json" data-product-variants-json>{{ product.variants | json }}</script>
+                  <div class="product-options" data-product-options>
+                    {% for option in product.options_with_values %}
+                      <fieldset class="product-option-group" data-option-position="{{ option.position }}">
+                        <legend class="product-option-label">{{ option.name }}</legend>
+                        <div class="product-variant-buttons">
+                          {% for value in option.values %}
+                            <button
+                              type="button"
+                              class="product-variant-button {% if option.selected_value == value %}is-active{% endif %}"
+                              data-variant-option-button
+                              data-option-position="{{ option.position }}"
+                              data-option-value="{{ value | escape }}"
+                              aria-pressed="{% if option.selected_value == value %}true{% else %}false{% endif %}"
+                            >
+                              {{ value }}
+                            </button>
+                          {% endfor %}
+                        </div>
+                      </fieldset>
                     {% endfor %}
                   </div>
                 {% else %}

@@ -53,7 +53,63 @@
       var installments = root.querySelector('[data-product-installments]');
       var stockMessage = root.querySelector('[data-product-stock-message]');
       var submit = root.querySelector('[data-product-submit]');
-      var variantButtons = root.querySelectorAll('[data-variant-button]');
+      var variantJson = root.querySelector('[data-product-variants-json]');
+      var optionGroups = root.querySelectorAll('[data-option-position]');
+      var optionButtons = root.querySelectorAll('[data-variant-option-button]');
+      var variants = [];
+
+      if (variantJson) {
+        try {
+          variants = JSON.parse(variantJson.textContent || '[]');
+        } catch (error) {
+          variants = [];
+        }
+      }
+
+      function getSelectedOptions() {
+        var selected = [];
+        optionGroups.forEach(function (group) {
+          var position = Number(group.getAttribute('data-option-position'));
+          var active = group.querySelector('[data-variant-option-button].is-active');
+          if (position && active) selected[position - 1] = active.getAttribute('data-option-value');
+        });
+        return selected;
+      }
+
+      function findVariantByOptions(selectedOptions) {
+        return variants.find(function (variant) {
+          if (!variant.options) return false;
+          return variant.options.every(function (value, index) {
+            return value === selectedOptions[index];
+          });
+        });
+      }
+
+      function syncOptionButtons(selectedVariantId) {
+        var selectedVariant = variants.find(function (variant) {
+          return String(variant.id) === String(selectedVariantId);
+        });
+        if (!selectedVariant || !selectedVariant.options) return;
+
+        optionButtons.forEach(function (button) {
+          var position = Number(button.getAttribute('data-option-position'));
+          var isActive = selectedVariant.options[position - 1] === button.getAttribute('data-option-value');
+          button.classList.toggle('is-active', isActive);
+          button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
+      }
+
+      function syncOptionAvailability() {
+        if (!variants.length) return;
+        var selectedOptions = getSelectedOptions();
+        optionButtons.forEach(function (button) {
+          var position = Number(button.getAttribute('data-option-position'));
+          var candidateOptions = selectedOptions.slice();
+          candidateOptions[position - 1] = button.getAttribute('data-option-value');
+          var matchingVariant = findVariantByOptions(candidateOptions);
+          button.disabled = Boolean(matchingVariant && !matchingVariant.available);
+        });
+      }
 
       function update() {
         var option = select.options[select.selectedIndex];
@@ -80,17 +136,23 @@
           stockMessage.classList.toggle('is-out', !isAvailable);
         }
         if (submit) submit.disabled = !isAvailable;
-        variantButtons.forEach(function (button) {
-          var isActive = button.getAttribute('data-variant-id') === selectedVariantId;
-          button.classList.toggle('is-active', isActive);
-          button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-        });
+        syncOptionButtons(selectedVariantId);
+        syncOptionAvailability();
       }
 
-      variantButtons.forEach(function (button) {
+      optionButtons.forEach(function (button) {
         button.addEventListener('click', function () {
           if (button.disabled) return;
-          select.value = button.getAttribute('data-variant-id');
+          var group = button.closest('[data-option-position]');
+          if (!group) return;
+          group.querySelectorAll('[data-variant-option-button]').forEach(function (item) {
+            item.classList.toggle('is-active', item === button);
+            item.setAttribute('aria-pressed', item === button ? 'true' : 'false');
+          });
+
+          var matchingVariant = findVariantByOptions(getSelectedOptions());
+          if (!matchingVariant) return;
+          select.value = matchingVariant.id;
           select.dispatchEvent(new Event('change', { bubbles: true }));
         });
       });
