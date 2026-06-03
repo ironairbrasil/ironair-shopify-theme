@@ -91,6 +91,11 @@
         "padding_bottom": 48
       }
     },
+    "header_custom_liquid_DcAfLy": {
+      "type": "header-custom-liquid",
+      "name": "Liquid personalizado",
+      "settings": {}
+    },
     "home_slider_YjgREV": {
       "type": "home-slider",
       "blocks": {
@@ -211,6 +216,7 @@
   "order": [
     "main",
     "related",
+    "header_custom_liquid_DcAfLy",
     "home_slider_YjgREV",
     "faq_tKB3CR"
   ]
