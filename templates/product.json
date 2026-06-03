@@ -103,7 +103,10 @@
         "product_description_JLYjtz"
       ],
       "name": "Liquid personalizado",
-      "settings": {}
+      "settings": {
+        "padding_top": 0,
+        "padding_bottom": 48
+      }
     },
     "home_slider_YjgREV": {
       "type": "home-slider",
