@@ -4,7 +4,7 @@
 
 {% assign selected_collection = section.settings.collection | default: collections.all %}
 
-<section class="section-anchor shopify-featured-product" id="produtos">
+<section class="section-anchor shopify-featured-product shopify-padding-section" id="produtos" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
   <div class="section-head">
     <div>
       <div class="section-kicker">{{ section.settings.kicker }}</div>
@@ -56,6 +56,30 @@
       "type": "collection",
       "id": "collection",
       "label": "Coleção de produtos"
+    },
+    {
+      "type": "header",
+      "content": "Preenchimento"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Superior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Inferior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
     }
   ],
   "presets": [

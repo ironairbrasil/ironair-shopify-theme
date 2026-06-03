@@ -1,7 +1,7 @@
 {{ 'cart.css' | asset_url | stylesheet_tag }}
 {{ 'cart.js' | asset_url | script_tag }}
 
-<section class="page page-stack">
+<section class="page page-stack shopify-padding-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
   <div class="content-card">
     <h1>Carrinho</h1>
     {% if cart.item_count > 0 %}
@@ -29,6 +29,31 @@
 {% schema %}
 {
   "name": "Carrinho",
-  "settings": []
+  "settings": [
+    {
+      "type": "header",
+      "content": "Preenchimento"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Superior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Inferior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    }
+  ]
 }
 {% endschema %}

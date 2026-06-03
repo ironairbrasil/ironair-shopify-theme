@@ -3,7 +3,7 @@
 
 {% assign related_collection = product.collections.first %}
 {% if related_collection != blank %}
-  <section class="page page-stack related-products-section">
+  <section class="page page-stack related-products-section shopify-padding-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
     <div class="section-head">
       <div>
         <div class="section-kicker">{{ section.settings.kicker }}</div>
@@ -24,9 +24,51 @@
 {
   "name": "Produtos relacionados",
   "settings": [
-    { "type": "text", "id": "kicker", "label": "Selo", "default": "Você também pode gostar" },
-    { "type": "text", "id": "title", "label": "Título", "default": "Produtos relacionados" },
-    { "type": "range", "id": "limit", "label": "Limite", "min": 2, "max": 8, "step": 1, "default": 4 }
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Selo",
+      "default": "Você também pode gostar"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Produtos relacionados"
+    },
+    {
+      "type": "range",
+      "id": "limit",
+      "label": "Limite",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Preenchimento"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Superior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Inferior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    }
   ]
 }
 {% endschema %}

@@ -1,7 +1,7 @@
 {{ 'faq.css' | asset_url | stylesheet_tag }}
 {{ 'faq.js' | asset_url | script_tag }}
 
-<section class="faq-section section-anchor" id="faq">
+<section class="faq-section section-anchor shopify-padding-section" id="faq" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
   <div class="section-head">
     <div>
       <div class="section-kicker">{{ section.settings.subtitle }}</div>
@@ -25,16 +25,60 @@
 {
   "name": "FAQ",
   "settings": [
-    { "type": "text", "id": "subtitle", "label": "Subtítulo", "default": "Dúvidas frequentes" },
-    { "type": "text", "id": "title", "label": "Título", "default": "Perguntas frequentes" }
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Dúvidas frequentes"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Perguntas frequentes"
+    },
+    {
+      "type": "header",
+      "content": "Preenchimento"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Superior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Inferior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    }
   ],
   "blocks": [
     {
       "type": "item",
       "name": "Pergunta",
       "settings": [
-        { "type": "text", "id": "question", "label": "Pergunta", "default": "O Iron Air funciona com todo tipo de tecido?" },
-        { "type": "textarea", "id": "answer", "label": "Resposta", "default": "Sim. O controle inteligente de temperatura funciona com a maior parte dos tecidos do dia a dia." }
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Pergunta",
+          "default": "O Iron Air funciona com todo tipo de tecido?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Resposta",
+          "default": "Sim. O controle inteligente de temperatura funciona com a maior parte dos tecidos do dia a dia."
+        }
       ]
     }
   ],
@@ -42,10 +86,34 @@
     {
       "name": "FAQ",
       "blocks": [
-        { "type": "item", "settings": { "question": "O Iron Air funciona com todo tipo de tecido?", "answer": "Sim. O controle inteligente de temperatura se ajusta e funciona com algodão, poliéster, seda, lã, malha e a maior parte dos tecidos do dia a dia." } },
-        { "type": "item", "settings": { "question": "Quanto tempo leva para passar uma peça?", "answer": "A maioria das camisas e calças fica pronta em 8 a 12 minutos. O diferencial é que você não precisa acompanhar o processo." } },
-        { "type": "item", "settings": { "question": "Qual a voltagem?", "answer": "Cadastre as opções de voltagem como variantes do produto no Shopify para controlar estoque, preço e disponibilidade." } },
-        { "type": "item", "settings": { "question": "Preciso colocar a roupa seca ou molhada?", "answer": "O ideal é utilizar a roupa levemente úmida. Você pode colocá-la diretamente após a lavagem ou borrifar um pouco de água antes de iniciar." } }
+        {
+          "type": "item",
+          "settings": {
+            "question": "O Iron Air funciona com todo tipo de tecido?",
+            "answer": "Sim. O controle inteligente de temperatura se ajusta e funciona com algodão, poliéster, seda, lã, malha e a maior parte dos tecidos do dia a dia."
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "question": "Quanto tempo leva para passar uma peça?",
+            "answer": "A maioria das camisas e calças fica pronta em 8 a 12 minutos. O diferencial é que você não precisa acompanhar o processo."
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "question": "Qual a voltagem?",
+            "answer": "Cadastre as opções de voltagem como variantes do produto no Shopify para controlar estoque, preço e disponibilidade."
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "question": "Preciso colocar a roupa seca ou molhada?",
+            "answer": "O ideal é utilizar a roupa levemente úmida. Você pode colocá-la diretamente após a lavagem ou borrifar um pouco de água antes de iniciar."
+          }
+        }
       ]
     }
   ]

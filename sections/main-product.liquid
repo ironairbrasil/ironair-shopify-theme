@@ -21,7 +21,7 @@
   {% assign discount = compare_price | minus: price | times: 100 | divided_by: compare_price %}
 {% endif %}
 
-<section class="page product-page" data-product-root>
+<section class="page product-page shopify-padding-section" data-product-root style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
   <div class="product-detail-shell">
     <div class="product-gallery">
       <div class="product-gallery-main">
@@ -192,73 +192,203 @@
 {% schema %}
 {
   "name": "Produto principal",
-  "settings": [],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Preenchimento"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Superior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Inferior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    }
+  ],
   "blocks": [
     {
       "type": "vendor",
       "name": "Marca",
       "settings": [
-        { "type": "text", "id": "text", "label": "Texto personalizado", "info": "Deixe vazio para usar o fabricante do produto." }
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto personalizado",
+          "info": "Deixe vazio para usar o fabricante do produto."
+        }
       ]
     },
     {
       "type": "title",
       "name": "Nome",
       "settings": [
-        { "type": "text", "id": "title_override", "label": "Nome personalizado", "info": "Deixe vazio para usar o nome do produto." }
+        {
+          "type": "text",
+          "id": "title_override",
+          "label": "Nome personalizado",
+          "info": "Deixe vazio para usar o nome do produto."
+        }
       ]
     },
     {
       "type": "rating",
       "name": "Avaliações",
       "settings": [
-        { "type": "range", "id": "rating", "label": "Nota", "min": 1, "max": 5, "step": 1, "default": 5 },
-        { "type": "text", "id": "count_label", "label": "Texto da quantidade", "default": "847 avaliações" }
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Nota",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "text",
+          "id": "count_label",
+          "label": "Texto da quantidade",
+          "default": "847 avaliações"
+        }
       ]
     },
     {
       "type": "badge",
       "name": "Badge",
       "settings": [
-        { "type": "text", "id": "badge_text", "label": "Texto personalizado", "info": "Deixe vazio para calcular o % OFF automaticamente." }
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Texto personalizado",
+          "info": "Deixe vazio para calcular o % OFF automaticamente."
+        }
       ]
     },
     {
       "type": "price",
       "name": "Preço",
       "settings": [
-        { "type": "checkbox", "id": "show_compare_price", "label": "Mostrar preço riscado", "default": true },
-        { "type": "checkbox", "id": "show_price", "label": "Mostrar preço atual", "default": true },
-        { "type": "checkbox", "id": "show_pix_price", "label": "Mostrar Pix", "default": true },
-        { "type": "range", "id": "pix_discount_percent", "label": "Desconto visual no Pix", "min": 0, "max": 30, "step": 1, "unit": "%", "default": 10 },
-        { "type": "text", "id": "pix_label", "label": "Texto do Pix", "default": "com [discount]% OFF no Pix" },
-        { "type": "checkbox", "id": "show_installments", "label": "Mostrar parcelamento", "default": true },
-        { "type": "range", "id": "installments_count", "label": "Parcelas", "min": 1, "max": 12, "step": 1, "default": 12 }
+        {
+          "type": "checkbox",
+          "id": "show_compare_price",
+          "label": "Mostrar preço riscado",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_price",
+          "label": "Mostrar preço atual",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_pix_price",
+          "label": "Mostrar Pix",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "pix_discount_percent",
+          "label": "Desconto visual no Pix",
+          "min": 0,
+          "max": 30,
+          "step": 1,
+          "unit": "%",
+          "default": 10
+        },
+        {
+          "type": "text",
+          "id": "pix_label",
+          "label": "Texto do Pix",
+          "default": "com [discount]% OFF no Pix"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_installments",
+          "label": "Mostrar parcelamento",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "installments_count",
+          "label": "Parcelas",
+          "min": 1,
+          "max": 12,
+          "step": 1,
+          "default": 12
+        }
       ]
     },
     {
       "type": "buy_buttons",
       "name": "Botão",
       "settings": [
-        { "type": "text", "id": "variant_label", "label": "Texto do seletor de variante", "default": "Opção" },
-        { "type": "text", "id": "button_label", "label": "Texto do botão", "default": "Comprar agora" }
+        {
+          "type": "text",
+          "id": "variant_label",
+          "label": "Texto do seletor de variante",
+          "default": "Opção"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Texto do botão",
+          "default": "Comprar agora"
+        }
       ]
     },
     {
       "type": "description",
       "name": "Descrição",
       "settings": [
-        { "type": "richtext", "id": "description_override", "label": "Descrição personalizada", "info": "Deixe vazio para usar a descrição do produto." }
+        {
+          "type": "richtext",
+          "id": "description_override",
+          "label": "Descrição personalizada",
+          "info": "Deixe vazio para usar a descrição do produto."
+        }
       ]
     },
     {
       "type": "benefits",
       "name": "Benefícios e estoque",
       "settings": [
-        { "type": "text", "id": "benefit_1", "label": "Benefício 1", "default": "✓ Frete grátis" },
-        { "type": "text", "id": "benefit_2", "label": "Benefício 2", "default": "✓ Checkout Shopify seguro" },
-        { "type": "checkbox", "id": "show_stock", "label": "Mostrar estoque", "default": true },
-        { "type": "text", "id": "stock_prefix", "label": "Prefixo do estoque", "default": "✓" }
+        {
+          "type": "text",
+          "id": "benefit_1",
+          "label": "Benefício 1",
+          "default": "✓ Frete grátis"
+        },
+        {
+          "type": "text",
+          "id": "benefit_2",
+          "label": "Benefício 2",
+          "default": "✓ Checkout Shopify seguro"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_stock",
+          "label": "Mostrar estoque",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "stock_prefix",
+          "label": "Prefixo do estoque",
+          "default": "✓"
+        }
       ]
     }
   ]

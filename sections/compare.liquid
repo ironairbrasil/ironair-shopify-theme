@@ -1,6 +1,6 @@
 {{ 'compare.css' | asset_url | stylesheet_tag }}
 
-<section class="compare-section section-anchor" id="comparativo">
+<section class="compare-section section-anchor shopify-padding-section" id="comparativo" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
   <div class="section-head">
     <div>
       <div class="section-kicker">{{ section.settings.subtitle }}</div>
@@ -36,18 +36,114 @@
 {
   "name": "Comparativo",
   "settings": [
-    { "type": "text", "id": "subtitle", "label": "Subtítulo", "default": "Compare e decida" },
-    { "type": "text", "id": "title", "label": "Título", "default": "Compare e decida" }
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Compare e decida"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Compare e decida"
+    },
+    {
+      "type": "header",
+      "content": "Preenchimento"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Superior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Inferior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    }
   ],
   "blocks": [
     {
       "type": "row",
       "name": "Linha",
       "settings": [
-        { "type": "text", "id": "label", "label": "Característica", "default": "Passa automaticamente" },
-        { "type": "select", "id": "iron_air", "label": "Iron Air", "default": "yes", "options": [{ "value": "yes", "label": "Sim" }, { "value": "no", "label": "Não" }, { "value": "mid", "label": "Parcial" }] },
-        { "type": "select", "id": "traditional", "label": "Ferro", "default": "no", "options": [{ "value": "yes", "label": "Sim" }, { "value": "no", "label": "Não" }, { "value": "mid", "label": "Parcial" }] },
-        { "type": "select", "id": "steamer", "label": "Vaporizador", "default": "no", "options": [{ "value": "yes", "label": "Sim" }, { "value": "no", "label": "Não" }, { "value": "mid", "label": "Parcial" }] }
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Característica",
+          "default": "Passa automaticamente"
+        },
+        {
+          "type": "select",
+          "id": "iron_air",
+          "label": "Iron Air",
+          "default": "yes",
+          "options": [
+            {
+              "value": "yes",
+              "label": "Sim"
+            },
+            {
+              "value": "no",
+              "label": "Não"
+            },
+            {
+              "value": "mid",
+              "label": "Parcial"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "traditional",
+          "label": "Ferro",
+          "default": "no",
+          "options": [
+            {
+              "value": "yes",
+              "label": "Sim"
+            },
+            {
+              "value": "no",
+              "label": "Não"
+            },
+            {
+              "value": "mid",
+              "label": "Parcial"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "steamer",
+          "label": "Vaporizador",
+          "default": "no",
+          "options": [
+            {
+              "value": "yes",
+              "label": "Sim"
+            },
+            {
+              "value": "no",
+              "label": "Não"
+            },
+            {
+              "value": "mid",
+              "label": "Parcial"
+            }
+          ]
+        }
       ]
     }
   ],
@@ -55,12 +151,60 @@
     {
       "name": "Comparativo",
       "blocks": [
-        { "type": "row", "settings": { "label": "Passa automaticamente", "iron_air": "yes", "traditional": "no", "steamer": "no" } },
-        { "type": "row", "settings": { "label": "Você pode fazer outra coisa", "iron_air": "yes", "traditional": "no", "steamer": "no" } },
-        { "type": "row", "settings": { "label": "Sem risco de queimar roupas", "iron_air": "yes", "traditional": "no", "steamer": "yes" } },
-        { "type": "row", "settings": { "label": "Elimina vincos profundos", "iron_air": "yes", "traditional": "yes", "steamer": "no" } },
-        { "type": "row", "settings": { "label": "Design compacto", "iron_air": "yes", "traditional": "mid", "steamer": "no" } },
-        { "type": "row", "settings": { "label": "Garantia de 1 ano", "iron_air": "yes", "traditional": "mid", "steamer": "mid" } }
+        {
+          "type": "row",
+          "settings": {
+            "label": "Passa automaticamente",
+            "iron_air": "yes",
+            "traditional": "no",
+            "steamer": "no"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "Você pode fazer outra coisa",
+            "iron_air": "yes",
+            "traditional": "no",
+            "steamer": "no"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "Sem risco de queimar roupas",
+            "iron_air": "yes",
+            "traditional": "no",
+            "steamer": "yes"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "Elimina vincos profundos",
+            "iron_air": "yes",
+            "traditional": "yes",
+            "steamer": "no"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "Design compacto",
+            "iron_air": "yes",
+            "traditional": "mid",
+            "steamer": "no"
+          }
+        },
+        {
+          "type": "row",
+          "settings": {
+            "label": "Garantia de 1 ano",
+            "iron_air": "yes",
+            "traditional": "mid",
+            "steamer": "mid"
+          }
+        }
       ]
     }
   ]

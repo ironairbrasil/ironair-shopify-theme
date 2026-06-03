@@ -1,6 +1,6 @@
 {{ 'how-it-works.css' | asset_url | stylesheet_tag }}
 
-<section class="hiw-section section-anchor" id="como-funciona">
+<section class="hiw-section section-anchor shopify-padding-section" id="como-funciona" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
   <div class="section-head">
     <div>
       <div class="section-kicker">{{ section.settings.subtitle }}</div>
@@ -32,17 +32,65 @@
 {
   "name": "Como funciona",
   "settings": [
-    { "type": "text", "id": "subtitle", "label": "Subtítulo", "default": "4 passos simples" },
-    { "type": "text", "id": "title", "label": "Título", "default": "Como funciona" }
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "4 passos simples"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Como funciona"
+    },
+    {
+      "type": "header",
+      "content": "Preenchimento"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Superior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Inferior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    }
   ],
   "blocks": [
     {
       "type": "step",
       "name": "Passo",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Imagem" },
-        { "type": "text", "id": "title", "label": "Título", "default": "Coloque a roupa" },
-        { "type": "textarea", "id": "description", "label": "Descrição", "default": "Prenda sua camisa, calça ou vestido no balão. Leva menos de 30 segundos." }
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagem"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Coloque a roupa"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Descrição",
+          "default": "Prenda sua camisa, calça ou vestido no balão. Leva menos de 30 segundos."
+        }
       ]
     }
   ],
@@ -50,10 +98,34 @@
     {
       "name": "Como funciona",
       "blocks": [
-        { "type": "step", "settings": { "title": "Coloque a roupa", "description": "Prenda sua camisa, calça ou vestido no balão. Leva menos de 30 segundos." } },
-        { "type": "step", "settings": { "title": "Ajuste as configurações", "description": "Coloque no modo ferro, acerte o tempo e temperatura pelo painel digital." } },
-        { "type": "step", "settings": { "title": "Relaxe enquanto aguarda", "description": "O Iron Air assume. Faça outras coisas enquanto a roupa fica pronta." } },
-        { "type": "step", "settings": { "title": "Vista e saia", "description": "Em 10 a 12 minutos suas roupas estão lisas, secas e prontas para vestir." } }
+        {
+          "type": "step",
+          "settings": {
+            "title": "Coloque a roupa",
+            "description": "Prenda sua camisa, calça ou vestido no balão. Leva menos de 30 segundos."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Ajuste as configurações",
+            "description": "Coloque no modo ferro, acerte o tempo e temperatura pelo painel digital."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Relaxe enquanto aguarda",
+            "description": "O Iron Air assume. Faça outras coisas enquanto a roupa fica pronta."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Vista e saia",
+            "description": "Em 10 a 12 minutos suas roupas estão lisas, secas e prontas para vestir."
+          }
+        }
       ]
     }
   ]

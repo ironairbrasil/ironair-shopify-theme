@@ -3,7 +3,7 @@
 {% assign text_blocks = section.blocks | where: 'type', 'text' %}
 {% assign button_blocks = section.blocks | where: 'type', 'button' %}
 
-<section class="home-slider" aria-label="{{ section.settings.aria_label }}">
+<section class="home-slider shopify-padding-section" aria-label="{{ section.settings.aria_label }}" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
   <div class="home-slider-stage height-{{ section.settings.height }} mobile-height-{{ section.settings.mobile_height }} content-{{ section.settings.content_position }} text-{{ section.settings.text_alignment }}">
     <article class="home-slide tone-{{ section.settings.tone }} {% if section.settings.mobile_image != blank or section.settings.mobile_video != blank %}has-mobile-media{% endif %} is-active" aria-hidden="false">
       <div class="home-slide-media">
@@ -70,69 +70,267 @@
 {
   "name": "Hero",
   "settings": [
-    { "type": "text", "id": "aria_label", "label": "Rótulo acessível", "default": "Hero principal da Iron Air" },
-    { "type": "select", "id": "background_mode", "label": "Plano de fundo", "default": "image", "options": [
-      { "value": "image", "label": "Imagem" },
-      { "value": "video", "label": "Vídeo" }
-    ] },
-    { "type": "image_picker", "id": "image", "label": "Imagem de fundo", "visible_if": "{{ section.settings.background_mode == 'image' }}" },
-    { "type": "image_picker", "id": "mobile_image", "label": "Imagem de fundo no celular", "visible_if": "{{ section.settings.background_mode == 'image' }}" },
-    { "type": "video", "id": "video", "label": "Vídeo de fundo", "visible_if": "{{ section.settings.background_mode == 'video' }}" },
-    { "type": "video", "id": "mobile_video", "label": "Vídeo de fundo no celular", "visible_if": "{{ section.settings.background_mode == 'video' }}" },
-    { "type": "select", "id": "height", "label": "Altura no desktop", "default": "large", "options": [
-      { "value": "medium", "label": "Média" },
-      { "value": "large", "label": "Grande" },
-      { "value": "full", "label": "Tela cheia" }
-    ] },
-    { "type": "select", "id": "mobile_height", "label": "Altura no celular", "default": "medium", "options": [
-      { "value": "small", "label": "Pequena" },
-      { "value": "medium", "label": "Média" },
-      { "value": "large", "label": "Grande" }
-    ] },
-    { "type": "select", "id": "content_position", "label": "Posição do conteúdo", "default": "center", "options": [
-      { "value": "left", "label": "Esquerda" },
-      { "value": "center", "label": "Centro" },
-      { "value": "right", "label": "Direita" }
-    ] },
-    { "type": "select", "id": "text_alignment", "label": "Alinhamento do texto", "default": "center", "options": [
-      { "value": "left", "label": "Esquerda" },
-      { "value": "center", "label": "Centro" },
-      { "value": "right", "label": "Direita" }
-    ] },
-    { "type": "select", "id": "tone", "label": "Cor de fundo", "default": "navy", "options": [
-      { "value": "navy", "label": "Azul" },
-      { "value": "gold", "label": "Dourado" },
-      { "value": "teal", "label": "Verde" },
-      { "value": "dark", "label": "Escuro" }
-    ] }
+    {
+      "type": "text",
+      "id": "aria_label",
+      "label": "Rótulo acessível",
+      "default": "Hero principal da Iron Air"
+    },
+    {
+      "type": "select",
+      "id": "background_mode",
+      "label": "Plano de fundo",
+      "default": "image",
+      "options": [
+        {
+          "value": "image",
+          "label": "Imagem"
+        },
+        {
+          "value": "video",
+          "label": "Vídeo"
+        }
+      ]
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagem de fundo",
+      "visible_if": "{{ section.settings.background_mode == 'image' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Imagem de fundo no celular",
+      "visible_if": "{{ section.settings.background_mode == 'image' }}"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Vídeo de fundo",
+      "visible_if": "{{ section.settings.background_mode == 'video' }}"
+    },
+    {
+      "type": "video",
+      "id": "mobile_video",
+      "label": "Vídeo de fundo no celular",
+      "visible_if": "{{ section.settings.background_mode == 'video' }}"
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "Altura no desktop",
+      "default": "large",
+      "options": [
+        {
+          "value": "medium",
+          "label": "Média"
+        },
+        {
+          "value": "large",
+          "label": "Grande"
+        },
+        {
+          "value": "full",
+          "label": "Tela cheia"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_height",
+      "label": "Altura no celular",
+      "default": "medium",
+      "options": [
+        {
+          "value": "small",
+          "label": "Pequena"
+        },
+        {
+          "value": "medium",
+          "label": "Média"
+        },
+        {
+          "value": "large",
+          "label": "Grande"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Posição do conteúdo",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Alinhamento do texto",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "tone",
+      "label": "Cor de fundo",
+      "default": "navy",
+      "options": [
+        {
+          "value": "navy",
+          "label": "Azul"
+        },
+        {
+          "value": "gold",
+          "label": "Dourado"
+        },
+        {
+          "value": "teal",
+          "label": "Verde"
+        },
+        {
+          "value": "dark",
+          "label": "Escuro"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Preenchimento"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Superior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Inferior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    }
   ],
   "blocks": [
     {
       "type": "text",
       "name": "Texto",
       "settings": [
-        { "type": "text", "id": "eyebrow", "label": "Badge", "default": "Promoção" },
-        { "type": "text", "id": "heading", "label": "Título", "default": "Adicione texto ao seu hero" },
-        { "type": "richtext", "id": "text", "label": "Descrição", "default": "<p>Use blocos de texto e botão para montar a chamada.</p>" },
-        { "type": "select", "id": "text_size", "label": "Tamanho", "default": "large", "options": [
-          { "value": "small", "label": "Pequeno" },
-          { "value": "medium", "label": "Médio" },
-          { "value": "large", "label": "Grande" }
-        ] }
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Badge",
+          "default": "Promoção"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Título",
+          "default": "Adicione texto ao seu hero"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Descrição",
+          "default": "<p>Use blocos de texto e botão para montar a chamada.</p>"
+        },
+        {
+          "type": "select",
+          "id": "text_size",
+          "label": "Tamanho",
+          "default": "large",
+          "options": [
+            {
+              "value": "small",
+              "label": "Pequeno"
+            },
+            {
+              "value": "medium",
+              "label": "Médio"
+            },
+            {
+              "value": "large",
+              "label": "Grande"
+            }
+          ]
+        }
       ]
     },
     {
       "type": "button",
       "name": "Botão",
       "settings": [
-        { "type": "text", "id": "label", "label": "Texto", "default": "Comprar agora" },
-        { "type": "url", "id": "url", "label": "Link" },
-        { "type": "select", "id": "style", "label": "Estilo", "default": "primary", "options": [
-          { "value": "primary", "label": "Principal" },
-          { "value": "secondary", "label": "Secundário" },
-          { "value": "light", "label": "Claro" }
-        ] },
-        { "type": "checkbox", "id": "new_tab", "label": "Abrir em nova aba", "default": false }
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Texto",
+          "default": "Comprar agora"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link"
+        },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Estilo",
+          "default": "primary",
+          "options": [
+            {
+              "value": "primary",
+              "label": "Principal"
+            },
+            {
+              "value": "secondary",
+              "label": "Secundário"
+            },
+            {
+              "value": "light",
+              "label": "Claro"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "new_tab",
+          "label": "Abrir em nova aba",
+          "default": false
+        }
       ]
     }
   ],
@@ -140,8 +338,12 @@
     {
       "name": "Hero",
       "blocks": [
-        { "type": "text" },
-        { "type": "button" }
+        {
+          "type": "text"
+        },
+        {
+          "type": "button"
+        }
       ]
     }
   ]

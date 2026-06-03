@@ -12,7 +12,7 @@
   {% endif %}
 {% endif %}
 
-<section class="final-cta">
+<section class="final-cta shopify-padding-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
   <div class="fc-left">
     <h2>{{ section.settings.title | newline_to_br }}</h2>
     <p>{{ section.settings.text }}</p>
@@ -70,22 +70,96 @@
 {
   "name": "CTA final",
   "settings": [
-    { "type": "product", "id": "product", "label": "Produto principal" },
-    { "type": "text", "id": "badge", "label": "Selo", "default": "Oferta" },
-    { "type": "textarea", "id": "title", "label": "Título", "default": "Pare de perder tempo\npassando roupa" },
-    { "type": "textarea", "id": "text", "label": "Texto", "default": "O Iron Air passa, seca e desamassa automaticamente para deixar sua rotina mais leve, rápida e prática todos os dias." },
-    { "type": "text", "id": "button_label", "label": "Botão", "default": "Comprar agora com desconto" }
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Produto principal"
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Selo",
+      "default": "Oferta"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Título",
+      "default": "Pare de perder tempo\npassando roupa"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Texto",
+      "default": "O Iron Air passa, seca e desamassa automaticamente para deixar sua rotina mais leve, rápida e prática todos os dias."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Botão",
+      "default": "Comprar agora com desconto"
+    },
+    {
+      "type": "header",
+      "content": "Preenchimento"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Superior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Inferior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    }
   ],
   "blocks": [
-    { "type": "point", "name": "Benefício", "settings": [{ "type": "text", "id": "text", "label": "Texto", "default": "Frete grátis" }] }
+    {
+      "type": "point",
+      "name": "Benefício",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto",
+          "default": "Frete grátis"
+        }
+      ]
+    }
   ],
   "presets": [
     {
       "name": "CTA final",
       "blocks": [
-        { "type": "point", "settings": { "text": "Frete grátis" } },
-        { "type": "point", "settings": { "text": "12x sem juros" } },
-        { "type": "point", "settings": { "text": "30 dias de garantia" } }
+        {
+          "type": "point",
+          "settings": {
+            "text": "Frete grátis"
+          }
+        },
+        {
+          "type": "point",
+          "settings": {
+            "text": "12x sem juros"
+          }
+        },
+        {
+          "type": "point",
+          "settings": {
+            "text": "30 dias de garantia"
+          }
+        }
       ]
     }
   ]

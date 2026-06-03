@@ -1,7 +1,7 @@
 {{ 'reviews.css' | asset_url | stylesheet_tag }}
 {{ 'reviews.js' | asset_url | script_tag }}
 
-<section class="reviews-section section-anchor" id="depoimentos">
+<section class="reviews-section section-anchor shopify-padding-section" id="depoimentos" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
   <div class="section-head">
     <div>
       <div class="section-kicker">{{ section.settings.subtitle }}</div>
@@ -44,26 +44,109 @@
 {
   "name": "Depoimentos",
   "settings": [
-    { "type": "text", "id": "subtitle", "label": "Subtítulo", "default": "Clientes reais" },
-    { "type": "text", "id": "title", "label": "Título", "default": "O que dizem os clientes" },
-    { "type": "text", "id": "rating", "label": "Nota", "default": "4.8" },
-    { "type": "text", "id": "count", "label": "Quantidade", "default": "847 avaliações" }
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Clientes reais"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "O que dizem os clientes"
+    },
+    {
+      "type": "text",
+      "id": "rating",
+      "label": "Nota",
+      "default": "4.8"
+    },
+    {
+      "type": "text",
+      "id": "count",
+      "label": "Quantidade",
+      "default": "847 avaliações"
+    },
+    {
+      "type": "header",
+      "content": "Preenchimento"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Superior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Inferior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    }
   ],
   "blocks": [
     {
       "type": "review",
       "name": "Depoimento",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Foto" },
-        { "type": "text", "id": "stars", "label": "Estrelas", "default": "★★★★★" },
-        { "type": "textarea", "id": "text", "label": "Texto", "default": "Tirei minha camisa da secadora toda amarrotada e em 12 minutos já estava passada, parecia nova." },
-        { "type": "text", "id": "name", "label": "Nome", "default": "Marina Silva" },
-        { "type": "text", "id": "city", "label": "Cidade", "default": "São Paulo, SP" },
-        { "type": "select", "id": "tone", "label": "Cor", "default": "red", "options": [
-          { "value": "red", "label": "Vermelho" },
-          { "value": "blue", "label": "Azul" },
-          { "value": "green", "label": "Verde" }
-        ] }
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Foto"
+        },
+        {
+          "type": "text",
+          "id": "stars",
+          "label": "Estrelas",
+          "default": "★★★★★"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Texto",
+          "default": "Tirei minha camisa da secadora toda amarrotada e em 12 minutos já estava passada, parecia nova."
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Nome",
+          "default": "Marina Silva"
+        },
+        {
+          "type": "text",
+          "id": "city",
+          "label": "Cidade",
+          "default": "São Paulo, SP"
+        },
+        {
+          "type": "select",
+          "id": "tone",
+          "label": "Cor",
+          "default": "red",
+          "options": [
+            {
+              "value": "red",
+              "label": "Vermelho"
+            },
+            {
+              "value": "blue",
+              "label": "Azul"
+            },
+            {
+              "value": "green",
+              "label": "Verde"
+            }
+          ]
+        }
       ]
     }
   ],
@@ -71,9 +154,33 @@
     {
       "name": "Depoimentos",
       "blocks": [
-        { "type": "review", "settings": { "name": "Marina Silva", "city": "São Paulo, SP", "tone": "red", "text": "Tirei minha camisa da secadora toda amarrotada e em 12 minutos já estava passada, parecia nova. Nunca mais precisei de tábua de passar." } },
-        { "type": "review", "settings": { "name": "Roberto Santos", "city": "Curitiba, PR", "tone": "blue", "text": "Trabalho com eventos e preciso estar impecável todo dia. O Iron Air me salva nas manhãs enquanto eu tomo café." } },
-        { "type": "review", "settings": { "name": "Juliana Costa", "city": "Brasília, DF", "tone": "green", "text": "Dei de presente para minha mãe que tem dores nas costas. Ela ficou emocionada e a rotina mudou de verdade." } }
+        {
+          "type": "review",
+          "settings": {
+            "name": "Marina Silva",
+            "city": "São Paulo, SP",
+            "tone": "red",
+            "text": "Tirei minha camisa da secadora toda amarrotada e em 12 minutos já estava passada, parecia nova. Nunca mais precisei de tábua de passar."
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "name": "Roberto Santos",
+            "city": "Curitiba, PR",
+            "tone": "blue",
+            "text": "Trabalho com eventos e preciso estar impecável todo dia. O Iron Air me salva nas manhãs enquanto eu tomo café."
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "name": "Juliana Costa",
+            "city": "Brasília, DF",
+            "tone": "green",
+            "text": "Dei de presente para minha mãe que tem dores nas costas. Ela ficou emocionada e a rotina mudou de verdade."
+          }
+        }
       ]
     }
   ]

@@ -4,7 +4,7 @@
 {% assign banner_blocks = section.blocks | where: 'type', 'banner' %}
 
 {% if banner_blocks.size > 0 %}
-  <section class="home-slider slides-section layout-{{ section.settings.layout }} width-{{ section.settings.width }}" aria-label="{{ section.settings.aria_label }}">
+  <section class="home-slider slides-section layout-{{ section.settings.layout }} width-{{ section.settings.width }} shopify-padding-section" aria-label="{{ section.settings.aria_label }}" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
     <div
       class="home-slider-stage height-{{ section.settings.media_height }} mobile-height-{{ section.settings.mobile_height }} content-{{ section.settings.content_position }} text-{{ section.settings.text_alignment }}"
       data-home-slider
@@ -101,93 +101,392 @@
 {
   "name": "Slides",
   "settings": [
-    { "type": "text", "id": "aria_label", "label": "Rótulo acessível", "default": "Apresentação de slides da Iron Air" },
-    { "type": "select", "id": "layout", "label": "Layout", "default": "full", "options": [
-      { "value": "full", "label": "Tela cheia" },
-      { "value": "contained", "label": "Com dicas" }
-    ] },
-    { "type": "select", "id": "width", "label": "Largura", "default": "full", "options": [
-      { "value": "page", "label": "Página" },
-      { "value": "full", "label": "Total" }
-    ] },
-    { "type": "select", "id": "media_height", "label": "Altura da mídia", "default": "large", "options": [
-      { "value": "medium", "label": "Média" },
-      { "value": "large", "label": "Grande" },
-      { "value": "full", "label": "Tela cheia" }
-    ] },
-    { "type": "select", "id": "mobile_height", "label": "Altura no celular", "default": "medium", "options": [
-      { "value": "small", "label": "Pequena" },
-      { "value": "medium", "label": "Média" },
-      { "value": "large", "label": "Grande" }
-    ] },
-    { "type": "select", "id": "content_position", "label": "Posição do conteúdo", "default": "center", "options": [
-      { "value": "left", "label": "Esquerda" },
-      { "value": "center", "label": "Na mídia" },
-      { "value": "right", "label": "Direita" }
-    ] },
-    { "type": "select", "id": "text_alignment", "label": "Alinhamento do texto", "default": "center", "options": [
-      { "value": "left", "label": "Esquerda" },
-      { "value": "center", "label": "Centro" },
-      { "value": "right", "label": "Direita" }
-    ] },
-    { "type": "select", "id": "nav_icons", "label": "Ícones", "default": "large", "options": [
-      { "value": "none", "label": "Nenhum" },
-      { "value": "small", "label": "Setas pequenas" },
-      { "value": "large", "label": "Setas grandes" }
-    ] },
-    { "type": "select", "id": "pagination", "label": "Paginação", "default": "dots", "options": [
-      { "value": "none", "label": "Nenhuma" },
-      { "value": "dots", "label": "Pontos" },
-      { "value": "bars", "label": "Barras" }
-    ] },
-    { "type": "checkbox", "id": "autoplay", "label": "Girar slides automaticamente", "default": true },
-    { "type": "range", "id": "speed", "label": "Velocidade", "min": 2, "max": 10, "step": 1, "unit": "s", "default": 4 }
+    {
+      "type": "text",
+      "id": "aria_label",
+      "label": "Rótulo acessível",
+      "default": "Apresentação de slides da Iron Air"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "default": "full",
+      "options": [
+        {
+          "value": "full",
+          "label": "Tela cheia"
+        },
+        {
+          "value": "contained",
+          "label": "Com dicas"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "Largura",
+      "default": "full",
+      "options": [
+        {
+          "value": "page",
+          "label": "Página"
+        },
+        {
+          "value": "full",
+          "label": "Total"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "media_height",
+      "label": "Altura da mídia",
+      "default": "large",
+      "options": [
+        {
+          "value": "medium",
+          "label": "Média"
+        },
+        {
+          "value": "large",
+          "label": "Grande"
+        },
+        {
+          "value": "full",
+          "label": "Tela cheia"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_height",
+      "label": "Altura no celular",
+      "default": "medium",
+      "options": [
+        {
+          "value": "small",
+          "label": "Pequena"
+        },
+        {
+          "value": "medium",
+          "label": "Média"
+        },
+        {
+          "value": "large",
+          "label": "Grande"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Posição do conteúdo",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Na mídia"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Alinhamento do texto",
+      "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "nav_icons",
+      "label": "Ícones",
+      "default": "large",
+      "options": [
+        {
+          "value": "none",
+          "label": "Nenhum"
+        },
+        {
+          "value": "small",
+          "label": "Setas pequenas"
+        },
+        {
+          "value": "large",
+          "label": "Setas grandes"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "pagination",
+      "label": "Paginação",
+      "default": "dots",
+      "options": [
+        {
+          "value": "none",
+          "label": "Nenhuma"
+        },
+        {
+          "value": "dots",
+          "label": "Pontos"
+        },
+        {
+          "value": "bars",
+          "label": "Barras"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Girar slides automaticamente",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "Velocidade",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Preenchimento"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Superior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Inferior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    }
   ],
   "blocks": [
     {
       "type": "banner",
       "name": "Banner",
       "settings": [
-        { "type": "text", "id": "label", "label": "Rótulo do banner", "default": "Banner Iron Air" },
-        { "type": "select", "id": "media_type", "label": "Tipo de mídia", "default": "image", "options": [
-          { "value": "image", "label": "Imagem" },
-          { "value": "video", "label": "Vídeo" }
-        ] },
-        { "type": "image_picker", "id": "image", "label": "Imagem", "visible_if": "{{ block.settings.media_type == 'image' }}" },
-        { "type": "video", "id": "video", "label": "Vídeo", "visible_if": "{{ block.settings.media_type == 'video' }}" },
-        { "type": "select", "id": "mobile_media_type", "label": "Tipo de mídia no celular", "default": "image", "options": [
-          { "value": "image", "label": "Imagem" },
-          { "value": "video", "label": "Vídeo" }
-        ] },
-        { "type": "image_picker", "id": "mobile_image", "label": "Imagem para celular", "visible_if": "{{ block.settings.mobile_media_type == 'image' }}" },
-        { "type": "video", "id": "mobile_video", "label": "Vídeo para celular", "visible_if": "{{ block.settings.mobile_media_type == 'video' }}" },
-        { "type": "url", "id": "url", "label": "Link do banner" },
-        { "type": "text", "id": "link_label", "label": "Rótulo acessível do link", "default": "Ver oferta" },
-        { "type": "checkbox", "id": "new_tab", "label": "Abrir link em nova aba", "default": false },
-        { "type": "header", "content": "Texto do banner" },
-        { "type": "text", "id": "eyebrow", "label": "Badge" },
-        { "type": "text", "id": "heading", "label": "Título" },
-        { "type": "richtext", "id": "text", "label": "Descrição" },
-        { "type": "select", "id": "text_size", "label": "Tamanho", "default": "large", "options": [
-          { "value": "small", "label": "Pequeno" },
-          { "value": "medium", "label": "Médio" },
-          { "value": "large", "label": "Grande" }
-        ] },
-        { "type": "header", "content": "Botão do banner" },
-        { "type": "text", "id": "button_label", "label": "Texto do botão" },
-        { "type": "url", "id": "button_url", "label": "Link do botão" },
-        { "type": "select", "id": "button_style", "label": "Estilo do botão", "default": "primary", "options": [
-          { "value": "primary", "label": "Principal" },
-          { "value": "secondary", "label": "Secundário" },
-          { "value": "light", "label": "Claro" }
-        ] },
-        { "type": "checkbox", "id": "button_new_tab", "label": "Abrir botão em nova aba", "default": false },
-        { "type": "select", "id": "tone", "label": "Cor de fundo", "default": "navy", "options": [
-          { "value": "navy", "label": "Azul" },
-          { "value": "gold", "label": "Dourado" },
-          { "value": "teal", "label": "Verde" },
-          { "value": "dark", "label": "Escuro" }
-        ] }
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Rótulo do banner",
+          "default": "Banner Iron Air"
+        },
+        {
+          "type": "select",
+          "id": "media_type",
+          "label": "Tipo de mídia",
+          "default": "image",
+          "options": [
+            {
+              "value": "image",
+              "label": "Imagem"
+            },
+            {
+              "value": "video",
+              "label": "Vídeo"
+            }
+          ]
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagem",
+          "visible_if": "{{ block.settings.media_type == 'image' }}"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Vídeo",
+          "visible_if": "{{ block.settings.media_type == 'video' }}"
+        },
+        {
+          "type": "select",
+          "id": "mobile_media_type",
+          "label": "Tipo de mídia no celular",
+          "default": "image",
+          "options": [
+            {
+              "value": "image",
+              "label": "Imagem"
+            },
+            {
+              "value": "video",
+              "label": "Vídeo"
+            }
+          ]
+        },
+        {
+          "type": "image_picker",
+          "id": "mobile_image",
+          "label": "Imagem para celular",
+          "visible_if": "{{ block.settings.mobile_media_type == 'image' }}"
+        },
+        {
+          "type": "video",
+          "id": "mobile_video",
+          "label": "Vídeo para celular",
+          "visible_if": "{{ block.settings.mobile_media_type == 'video' }}"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link do banner"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Rótulo acessível do link",
+          "default": "Ver oferta"
+        },
+        {
+          "type": "checkbox",
+          "id": "new_tab",
+          "label": "Abrir link em nova aba",
+          "default": false
+        },
+        {
+          "type": "header",
+          "content": "Texto do banner"
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Badge"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Título"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Descrição"
+        },
+        {
+          "type": "select",
+          "id": "text_size",
+          "label": "Tamanho",
+          "default": "large",
+          "options": [
+            {
+              "value": "small",
+              "label": "Pequeno"
+            },
+            {
+              "value": "medium",
+              "label": "Médio"
+            },
+            {
+              "value": "large",
+              "label": "Grande"
+            }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Botão do banner"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Texto do botão"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "Link do botão"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Estilo do botão",
+          "default": "primary",
+          "options": [
+            {
+              "value": "primary",
+              "label": "Principal"
+            },
+            {
+              "value": "secondary",
+              "label": "Secundário"
+            },
+            {
+              "value": "light",
+              "label": "Claro"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "button_new_tab",
+          "label": "Abrir botão em nova aba",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "tone",
+          "label": "Cor de fundo",
+          "default": "navy",
+          "options": [
+            {
+              "value": "navy",
+              "label": "Azul"
+            },
+            {
+              "value": "gold",
+              "label": "Dourado"
+            },
+            {
+              "value": "teal",
+              "label": "Verde"
+            },
+            {
+              "value": "dark",
+              "label": "Escuro"
+            }
+          ]
+        }
       ]
     }
   ],
@@ -195,8 +494,12 @@
     {
       "name": "Slides",
       "blocks": [
-        { "type": "banner" },
-        { "type": "banner" }
+        {
+          "type": "banner"
+        },
+        {
+          "type": "banner"
+        }
       ]
     }
   ]
