@@ -115,7 +115,7 @@
               {% form 'product', product, class: 'product-form' %}
                 {% unless product.has_only_default_variant %}
                   <label class="product-option-label" for="ProductSelect-{{ section.id }}">{{ block.settings.variant_label }}</label>
-                  <select id="ProductSelect-{{ section.id }}" name="id" data-product-variant-select>
+                  <select id="ProductSelect-{{ section.id }}" name="id" class="product-variant-native-select" data-product-variant-select aria-label="{{ block.settings.variant_label }}">
                     {% for variant in product.variants %}
                       {% assign variant_price = variant.price %}
                       {% assign variant_compare_price = variant.compare_at_price %}
@@ -126,7 +126,7 @@
                         {% assign variant_discount = variant_compare_price | minus: variant_price | times: 100 | divided_by: variant_compare_price %}
                       {% endif %}
                       {% capture variant_stock_message %}
-                        {% if variant.inventory_management and variant.inventory_quantity > 0 %}
+                        {% if variant.inventory_management %}
                           {{ variant.inventory_quantity }} unidade(s) em estoque
                         {% elsif variant.available %}
                           Em estoque
@@ -144,6 +144,7 @@
                         data-installments="{{ variant_installments | money }}"
                         data-available="{% if variant.available %}true{% else %}false{% endif %}"
                         data-stock-message="{{ variant_stock_message | strip | escape }}"
+                        data-stock-state="{% if variant.available %}in{% else %}out{% endif %}"
                         {% if variant == current_variant %}selected{% endif %}
                         {% unless variant.available %}disabled{% endunless %}
                       >
@@ -151,14 +152,110 @@
                       </option>
                     {% endfor %}
                   </select>
+                  <div class="product-variant-buttons" data-product-variant-buttons>
+                    {% for variant in product.variants %}
+                      {% if product.options.size == 1 %}
+                        {% assign variant_label = variant.option1 %}
+                      {% else %}
+                        {% assign variant_label = variant.title %}
+                      {% endif %}
+                      <button
+                        type="button"
+                        class="product-variant-button {% if variant == current_variant %}is-active{% endif %}"
+                        data-variant-button
+                        data-variant-id="{{ variant.id }}"
+                        aria-pressed="{% if variant == current_variant %}true{% else %}false{% endif %}"
+                        {% unless variant.available %}disabled{% endunless %}
+                      >
+                        {{ variant_label }}
+                      </button>
+                    {% endfor %}
+                  </div>
                 {% else %}
                   <input type="hidden" name="id" value="{{ current_variant.id }}">
                 {% endunless %}
+                {% if block.settings.show_stock %}
+                  {% if current_variant.inventory_management %}
+                    <div class="product-stock-line {% unless current_variant.available %}is-out{% endunless %}" data-product-stock-message data-stock-prefix="{{ block.settings.stock_prefix | escape }}">{{ block.settings.stock_prefix }} {{ current_variant.inventory_quantity }} unidade(s) em estoque</div>
+                  {% elsif current_variant.available %}
+                    <div class="product-stock-line" data-product-stock-message data-stock-prefix="{{ block.settings.stock_prefix | escape }}">{{ block.settings.stock_prefix }} Em estoque</div>
+                  {% else %}
+                    <div class="product-stock-line is-out" data-product-stock-message data-stock-prefix="{{ block.settings.stock_prefix | escape }}">Produto esgotado no momento</div>
+                  {% endif %}
+                {% endif %}
                 <button class="btn-hero product-submit" type="submit" data-product-submit {% unless current_variant.available %}disabled{% endunless %}>
                   {{ block.settings.button_label }}
                 </button>
               {% endform %}
             </div>
+
+          {% when 'upsells' %}
+            {% assign upsell_products = block.settings.products %}
+            {% assign fallback_collection = product.collections.first %}
+            {% if upsell_products != blank or fallback_collection != blank %}
+              <div class="product-upsells" {{ block.shopify_attributes }}>
+                {% if block.settings.title != blank %}
+                  <h2>{{ block.settings.title }}</h2>
+                {% endif %}
+                <div class="product-upsell-list">
+                  {% if upsell_products != blank %}
+                    {% for upsell_product in upsell_products limit: block.settings.limit %}
+                      {% unless upsell_product.id == product.id %}
+                        {% assign upsell_variant = upsell_product.selected_or_first_available_variant %}
+                        <article class="product-upsell-card">
+                          <a class="product-upsell-media" href="{{ upsell_product.url }}">
+                            {% if upsell_product.featured_image %}
+                              {{ upsell_product.featured_image | image_url: width: 180 | image_tag: alt: upsell_product.title, loading: 'lazy' }}
+                            {% else %}
+                              <img src="{{ 'ironair-principal.png' | asset_url }}" alt="{{ upsell_product.title | escape }}" loading="lazy">
+                            {% endif %}
+                          </a>
+                          <div class="product-upsell-copy">
+                            <a href="{{ upsell_product.url }}">{{ upsell_product.title }}</a>
+                            <strong>{{ upsell_variant.price | money }}</strong>
+                          </div>
+                          {% if upsell_product.has_only_default_variant %}
+                            <form method="post" action="{{ routes.cart_add_url }}">
+                              <input type="hidden" name="id" value="{{ upsell_variant.id }}">
+                              <button type="submit" {% unless upsell_variant.available %}disabled{% endunless %}>Adicionar</button>
+                            </form>
+                          {% else %}
+                            <a class="product-upsell-action" href="{{ upsell_product.url }}">Escolher</a>
+                          {% endif %}
+                        </article>
+                      {% endunless %}
+                    {% endfor %}
+                  {% else %}
+                    {% for upsell_product in fallback_collection.products limit: block.settings.limit %}
+                      {% unless upsell_product.id == product.id %}
+                        {% assign upsell_variant = upsell_product.selected_or_first_available_variant %}
+                        <article class="product-upsell-card">
+                          <a class="product-upsell-media" href="{{ upsell_product.url }}">
+                            {% if upsell_product.featured_image %}
+                              {{ upsell_product.featured_image | image_url: width: 180 | image_tag: alt: upsell_product.title, loading: 'lazy' }}
+                            {% else %}
+                              <img src="{{ 'ironair-principal.png' | asset_url }}" alt="{{ upsell_product.title | escape }}" loading="lazy">
+                            {% endif %}
+                          </a>
+                          <div class="product-upsell-copy">
+                            <a href="{{ upsell_product.url }}">{{ upsell_product.title }}</a>
+                            <strong>{{ upsell_variant.price | money }}</strong>
+                          </div>
+                          {% if upsell_product.has_only_default_variant %}
+                            <form method="post" action="{{ routes.cart_add_url }}">
+                              <input type="hidden" name="id" value="{{ upsell_variant.id }}">
+                              <button type="submit" {% unless upsell_variant.available %}disabled{% endunless %}>Adicionar</button>
+                            </form>
+                          {% else %}
+                            <a class="product-upsell-action" href="{{ upsell_product.url }}">Escolher</a>
+                          {% endif %}
+                        </article>
+                      {% endunless %}
+                    {% endfor %}
+                  {% endif %}
+                </div>
+              </div>
+            {% endif %}
 
           {% when 'description' %}
             <div class="product-detail-copy" {{ block.shopify_attributes }}>
@@ -346,6 +443,46 @@
           "id": "button_label",
           "label": "Texto do botão",
           "default": "Comprar agora"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_stock",
+          "label": "Mostrar estoque perto do botão",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "stock_prefix",
+          "label": "Prefixo do estoque",
+          "default": "✓"
+        }
+      ]
+    },
+    {
+      "type": "upsells",
+      "name": "Outros produtos",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Outros produtos"
+        },
+        {
+          "type": "product_list",
+          "id": "products",
+          "label": "Produtos",
+          "limit": 6,
+          "info": "Se ficar vazio, usa produtos da primeira coleção deste produto."
+        },
+        {
+          "type": "range",
+          "id": "limit",
+          "label": "Limite",
+          "min": 1,
+          "max": 6,
+          "step": 1,
+          "default": 3
         }
       ]
     },

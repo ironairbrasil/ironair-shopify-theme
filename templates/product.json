@@ -47,7 +47,17 @@
           "type": "buy_buttons",
           "settings": {
             "variant_label": "Opção",
-            "button_label": "Comprar agora"
+            "button_label": "Comprar agora",
+            "show_stock": true,
+            "stock_prefix": "✓"
+          }
+        },
+        "upsells_default": {
+          "type": "upsells",
+          "settings": {
+            "title": "Outros produtos",
+            "products": [],
+            "limit": 3
           }
         },
         "benefits_ffUr4E": {
@@ -55,7 +65,7 @@
           "settings": {
             "benefit_1": "✓ Frete grátis",
             "benefit_2": "✓ Checkout Shopify seguro",
-            "show_stock": true,
+            "show_stock": false,
             "stock_prefix": "✓"
           }
         }
@@ -66,6 +76,7 @@
         "description_Naq8nj",
         "price_hhznYQ",
         "buy_buttons_zG8CxD",
+        "upsells_default",
         "benefits_ffUr4E"
       ],
       "settings": {

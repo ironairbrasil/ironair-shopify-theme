@@ -53,12 +53,14 @@
       var installments = root.querySelector('[data-product-installments]');
       var stockMessage = root.querySelector('[data-product-stock-message]');
       var submit = root.querySelector('[data-product-submit]');
+      var variantButtons = root.querySelectorAll('[data-variant-button]');
 
       function update() {
         var option = select.options[select.selectedIndex];
         if (!option) return;
         var hasComparePrice = option.getAttribute('data-has-compare-price') === 'true';
         var isAvailable = option.getAttribute('data-available') === 'true';
+        var selectedVariantId = option.value;
 
         if (discount) {
           discount.textContent = option.getAttribute('data-discount') || '';
@@ -73,11 +75,25 @@
         if (pixPrice) pixPrice.textContent = option.getAttribute('data-pix-price') || '';
         if (installments) installments.textContent = option.getAttribute('data-installments') || '';
         if (stockMessage) {
-          stockMessage.textContent = (isAvailable ? '✓ ' : '') + (option.getAttribute('data-stock-message') || '');
+          var stockPrefix = stockMessage.getAttribute('data-stock-prefix') || '';
+          stockMessage.textContent = (isAvailable && stockPrefix ? stockPrefix + ' ' : '') + (option.getAttribute('data-stock-message') || '');
+          stockMessage.classList.toggle('is-out', !isAvailable);
         }
         if (submit) submit.disabled = !isAvailable;
+        variantButtons.forEach(function (button) {
+          var isActive = button.getAttribute('data-variant-id') === selectedVariantId;
+          button.classList.toggle('is-active', isActive);
+          button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
       }
 
+      variantButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+          if (button.disabled) return;
+          select.value = button.getAttribute('data-variant-id');
+          select.dispatchEvent(new Event('change', { bubbles: true }));
+        });
+      });
       select.addEventListener('change', update);
       update();
     });

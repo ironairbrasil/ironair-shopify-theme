@@ -88,6 +88,10 @@
   font-weight: 900;
 }
 
+.product-variant-native-select {
+  display: none;
+}
+
 .product-form select {
   min-height: 46px;
   border: 2px solid var(--border);
@@ -96,9 +100,133 @@
   background: #fff;
 }
 
+.product-variant-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.product-variant-button {
+  min-height: 44px;
+  min-width: 88px;
+  padding: 0 18px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s, color 0.2s;
+}
+
+.product-variant-button:hover:not(:disabled),
+.product-variant-button.is-active {
+  border-color: var(--dark-green);
+  box-shadow: 0 0 0 2px rgba(var(--iron-green-rgb), 0.12);
+}
+
+.product-variant-button.is-active {
+  background: var(--dark-green);
+  color: #fff;
+}
+
+.product-variant-button:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+.product-stock-line {
+  color: var(--green);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.product-stock-line.is-out {
+  color: var(--red);
+}
+
 .product-submit {
   width: 100%;
   text-align: center;
+}
+
+.product-upsells {
+  border-top: 1px solid var(--border);
+  margin-top: 18px;
+  padding-top: 18px;
+}
+
+.product-upsells h2 {
+  font-size: 18px;
+  line-height: 1;
+  margin: 0 0 12px;
+}
+
+.product-upsell-list {
+  display: grid;
+  gap: 10px;
+}
+
+.product-upsell-card {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.product-upsell-media {
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 7px;
+  background: #f8f8f8;
+}
+
+.product-upsell-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-upsell-copy {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.product-upsell-copy a {
+  color: var(--ink);
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.product-upsell-copy strong {
+  color: var(--dark-green);
+  font-size: 14px;
+}
+
+.product-upsell-card button,
+.product-upsell-action {
+  min-height: 38px;
+  padding: 0 16px;
+  border-radius: 7px;
+  background: var(--dark-green);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-upsell-card button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .product-detail-copy {
@@ -120,4 +248,7 @@
   .product-main-price { font-size: 40px; }
   .product-gallery-thumbs { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .product-gallery-main { min-height: 320px; }
+  .product-upsell-card { grid-template-columns: 64px minmax(0, 1fr); }
+  .product-upsell-card form,
+  .product-upsell-action { grid-column: 1 / -1; }
 }
