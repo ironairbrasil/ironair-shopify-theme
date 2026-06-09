@@ -323,6 +323,7 @@
         "video_2": {
           "type": "video",
           "settings": {
+            "video": "shopify://files/videos/2.mp4",
             "title": "Roupas sem esforço",
             "caption": "No dia a dia",
             "product": "",
@@ -332,6 +333,7 @@
         "video_3": {
           "type": "video",
           "settings": {
+            "video": "shopify://files/videos/3.mp4",
             "title": "Pronto em minutos",
             "caption": "Antes e depois",
             "product": "",
@@ -368,6 +370,7 @@
         "kicker": "Shop your feed",
         "title": "Veja o Iron Air em ação",
         "subtitle": "Vídeos rápidos mostrando o produto no dia a dia.",
+        "product": "",
         "padding_top": 56,
         "padding_bottom": 56
       }
