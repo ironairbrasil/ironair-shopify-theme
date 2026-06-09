@@ -187,33 +187,6 @@
   height: 100%;
 }
 
-.product-card .collection-star-section {
-  margin: 10px 0 8px;
-  min-height: 18px;
-}
-
-.pc-img .collection-star-section {
-  display: none !important;
-}
-
-.pc-stars {
-  display: none !important;
-  align-items: center;
-  gap: 4px;
-  margin-top: 10px;
-  margin-bottom: 8px;
-}
-
-.pc-stars .s {
-  color: var(--gold);
-  font-size: 12px;
-}
-
-.pc-stars .count {
-  font-size: 11px;
-  color: var(--muted);
-}
-
 .pc-price-old {
   font-size: 14px;
   font-weight: 700;

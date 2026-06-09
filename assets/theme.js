@@ -165,33 +165,9 @@
     });
   }
 
-  function initBkReviewPlacement() {
-    function placeStars() {
-      document.querySelectorAll('.product-card').forEach(function (card) {
-        var title = card.querySelector('.pc-name');
-        var body = card.querySelector('.pc-body');
-        var bkStars = card.querySelector('.collection-star-section');
-        if (!title || !body || !bkStars) return;
-
-        if (bkStars.parentElement !== body || bkStars.previousElementSibling !== title) {
-          body.insertBefore(bkStars, title.nextSibling);
-        }
-      });
-    }
-
-    placeStars();
-
-    var observer = new MutationObserver(placeStars);
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true
-    });
-  }
-
   document.addEventListener('DOMContentLoaded', function () {
     initHeader();
     initGallery();
     initVariantPricing();
-    initBkReviewPlacement();
   });
 })();

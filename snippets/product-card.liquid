@@ -36,7 +36,7 @@
   {% endunless %}
   <div class="pc-body">
     <div class="pc-brand">{{ product.vendor | default: shop.name }}</div>
-    <a href="{{ product.url }}" class="pc-name product-link">{{ product.title }}</a>
+    <a href="{{ product.url }}" class="pc-name">{{ product.title }}</a>
     {% render 'product-price', product: product, variant: variant %}
     <div class="product-card-payment-lines">
       <div class="product-card-payment-pix">

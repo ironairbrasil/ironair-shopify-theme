@@ -96,9 +96,6 @@
               {% endif %}
             </h1>
 
-          {% when 'rating' %}
-            <div id="bk-star-section" class="product-bk-stars" {{ block.shopify_attributes }}></div>
-
           {% when 'badge' %}
             <div
               class="pc-badge badge-off"
@@ -377,27 +374,6 @@
           "id": "title_override",
           "label": "Nome personalizado",
           "info": "Deixe vazio para usar o nome do produto."
-        }
-      ]
-    },
-    {
-      "type": "rating",
-      "name": "Avaliações",
-      "settings": [
-        {
-          "type": "range",
-          "id": "rating",
-          "label": "Nota",
-          "min": 1,
-          "max": 5,
-          "step": 1,
-          "default": 5
-        },
-        {
-          "type": "text",
-          "id": "count_label",
-          "label": "Texto da quantidade",
-          "default": "847 avaliações"
         }
       ]
     },
