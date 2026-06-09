@@ -2,7 +2,7 @@
   function pauseCard(card) {
     var video = card.querySelector('video');
     if (!video) return;
-    video.pause();
+    if (!video.paused) video.pause();
     card.classList.remove('is-playing');
   }
 
@@ -10,6 +10,10 @@
     var video = card.querySelector('video');
     if (!video) return;
     video.playsInline = true;
+    if (!video.paused) {
+      card.classList.add('is-playing');
+      return;
+    }
     var promise = video.play();
     if (promise && typeof promise.catch === 'function') {
       promise.catch(function () {});
@@ -47,11 +51,12 @@
     var prev = root.querySelector('[data-action-videos-prev]');
     var next = root.querySelector('[data-action-videos-next]');
     var originalCount = originalCards.length;
-    var cloneSetsEachSide = 5;
+    var cloneSetsEachSide = Math.max(2, Math.ceil(window.innerWidth / Math.max(originalCount * 240, 1)));
     var loopOffset = originalCount * cloneSetsEachSide;
     var cards = originalCards;
     var activeIndex = loopOffset;
     var activeRealIndex = 0;
+    var previousActiveIndex = -1;
     var scrollTimer = null;
     var normalizing = false;
 
@@ -119,12 +124,13 @@
         var isActive = cardIndex === activeIndex;
         card.classList.toggle('is-active', isActive);
         if (isActive) {
-          playCard(card);
+          if (cardIndex !== previousActiveIndex) playCard(card);
           syncSoundButton(card);
-        } else {
+        } else if (cardIndex === previousActiveIndex) {
           pauseCard(card);
         }
       });
+      previousActiveIndex = activeIndex;
     }
 
     function centerCard(index, behavior) {
@@ -190,6 +196,7 @@
       if (!soundButton || !video) return;
 
       video.muted = true;
+      video.preload = cardIndex === activeIndex ? 'auto' : 'metadata';
       syncSoundButton(card);
 
       soundButton.addEventListener('click', function (event) {

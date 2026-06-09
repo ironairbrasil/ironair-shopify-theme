@@ -27,7 +27,7 @@
           <article class="action-video-card" data-action-video-card {{ block.shopify_attributes }}>
             <div class="action-video-media">
               {% if block.settings.video != blank %}
-                {{ block.settings.video | video_tag: autoplay: false, loop: true, muted: true, controls: false, playsinline: true, image_size: '900x', class: 'action-video-player' }}
+                {{ block.settings.video | video_tag: autoplay: false, loop: true, muted: true, controls: false, playsinline: true, preload: 'metadata', image_size: '900x', class: 'action-video-player' }}
               {% elsif block.settings.poster != blank %}
                 {{ block.settings.poster | image_url: width: 900 | image_tag: loading: 'lazy', alt: block.settings.title, class: 'action-video-poster' }}
               {% else %}
