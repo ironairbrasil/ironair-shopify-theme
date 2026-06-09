@@ -1,0 +1,193 @@
+{{ 'action-videos.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'action-videos.js' | asset_url }}" defer></script>
+
+<section class="action-videos shopify-padding-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;" data-action-videos>
+  <div class="action-videos-inner">
+    <div class="action-videos-head">
+      {% if section.settings.kicker != blank %}
+        <div class="action-videos-kicker">{{ section.settings.kicker | escape }}</div>
+      {% endif %}
+      {% if section.settings.title != blank %}
+        <h2 class="action-videos-title">{{ section.settings.title | escape }}</h2>
+      {% endif %}
+      {% if section.settings.subtitle != blank %}
+        <p class="action-videos-subtitle">{{ section.settings.subtitle | escape }}</p>
+      {% endif %}
+    </div>
+
+    <div class="action-videos-shell">
+      {% if section.blocks.size > 1 %}
+        <button type="button" class="action-videos-arrow is-prev" data-action-videos-prev aria-label="Vídeo anterior">‹</button>
+        <button type="button" class="action-videos-arrow is-next" data-action-videos-next aria-label="Próximo vídeo">›</button>
+      {% endif %}
+
+      <div class="action-videos-track" data-action-videos-track>
+        {% for block in section.blocks %}
+          {% assign product = block.settings.product %}
+          <article class="action-video-card" data-action-video-card {{ block.shopify_attributes }}>
+            <div class="action-video-media">
+              {% if block.settings.video != blank %}
+                {{ block.settings.video | video_tag: autoplay: false, loop: true, muted: true, controls: false, playsinline: true, image_size: '900x', class: 'action-video-player' }}
+              {% elsif block.settings.poster != blank %}
+                {{ block.settings.poster | image_url: width: 900 | image_tag: loading: 'lazy', alt: block.settings.title, class: 'action-video-poster' }}
+              {% else %}
+                <div class="action-video-placeholder">
+                  <span>{{ block.settings.title | default: 'Adicione um vídeo vertical' | escape }}</span>
+                </div>
+              {% endif %}
+
+              <button type="button" class="action-video-play" data-action-video-toggle aria-label="Reproduzir vídeo">
+                <span>▶</span>
+              </button>
+            </div>
+
+            {% if product != blank %}
+              <a class="action-video-product" href="{{ product.url }}">
+                {% if product.featured_image %}
+                  {{ product.featured_image | image_url: width: 120 | image_tag: loading: 'lazy', alt: product.title }}
+                {% endif %}
+                <span>
+                  <strong>{{ product.title }}</strong>
+                  <span>{{ block.settings.product_label | default: 'Ver produto' }}</span>
+                </span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M9 18l6-6-6-6"></path>
+                </svg>
+              </a>
+            {% elsif block.settings.title != blank or block.settings.caption != blank %}
+              <div class="action-video-product">
+                {% if block.settings.poster != blank %}
+                  {{ block.settings.poster | image_url: width: 120 | image_tag: loading: 'lazy', alt: block.settings.title }}
+                {% endif %}
+                <span>
+                  {% if block.settings.title != blank %}
+                    <strong>{{ block.settings.title | escape }}</strong>
+                  {% endif %}
+                  {% if block.settings.caption != blank %}
+                    <span>{{ block.settings.caption | escape }}</span>
+                  {% endif %}
+                </span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M9 18l6-6-6-6"></path>
+                </svg>
+              </div>
+            {% endif %}
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Vídeos em ação",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Texto pequeno",
+      "default": "Shop your feed"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Veja o Iron Air em ação"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Vídeos rápidos mostrando o produto no dia a dia."
+    },
+    {
+      "type": "header",
+      "content": "Preenchimento"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Superior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Inferior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "Vídeo",
+      "settings": [
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Vídeo vertical"
+        },
+        {
+          "type": "image_picker",
+          "id": "poster",
+          "label": "Capa"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Iron Air em uso"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Legenda",
+          "default": "Veja o resultado"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Produto"
+        },
+        {
+          "type": "text",
+          "id": "product_label",
+          "label": "Texto do link do produto",
+          "default": "Ver produto"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Vídeos em ação",
+      "blocks": [
+        {
+          "type": "video"
+        },
+        {
+          "type": "video"
+        },
+        {
+          "type": "video"
+        },
+        {
+          "type": "video"
+        },
+        {
+          "type": "video"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
