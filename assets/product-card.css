@@ -197,7 +197,7 @@
 }
 
 .pc-stars {
-  display: flex;
+  display: none !important;
   align-items: center;
   gap: 4px;
   margin-top: 10px;
