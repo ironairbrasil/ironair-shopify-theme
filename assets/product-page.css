@@ -93,12 +93,44 @@
   border: 1px solid var(--border);
 }
 
-.product-description-card h2 {
+.product-description-card > h2,
+.product-description-card .product-detail-copy h1,
+.product-description-card .product-detail-copy h2,
+.product-description-card .product-detail-copy h3,
+.product-description-card .product-detail-copy h4,
+.product-description-card .product-detail-copy h5,
+.product-description-card .product-detail-copy h6 {
   margin: 0 0 12px;
   font-family: "Barlow Condensed", sans-serif;
   font-size: 28px;
   line-height: 1;
   text-transform: uppercase;
+  color: var(--ink);
+}
+
+.product-description-card .product-detail-copy h1,
+.product-description-card .product-detail-copy h2,
+.product-description-card .product-detail-copy h3,
+.product-description-card .product-detail-copy h4,
+.product-description-card .product-detail-copy h5,
+.product-description-card .product-detail-copy h6 {
+  margin-top: 22px;
+  margin-bottom: 8px;
+}
+
+.product-description-card .product-detail-copy h1 {
+  font-size: 32px;
+}
+
+.product-description-card .product-detail-copy h2 {
+  font-size: 28px;
+}
+
+.product-description-card .product-detail-copy h3,
+.product-description-card .product-detail-copy h4,
+.product-description-card .product-detail-copy h5,
+.product-description-card .product-detail-copy h6 {
+  font-size: 24px;
 }
 
 .product-description-card--align-left {
@@ -116,6 +148,30 @@
 .product-description-card .product-detail-copy {
   color: var(--mid);
   line-height: 1.7;
+}
+
+.product-description-card .product-detail-copy p {
+  margin: 0 0 10px;
+}
+
+.product-description-card .product-detail-copy ul,
+.product-description-card .product-detail-copy ol {
+  margin: 8px 0 16px;
+  padding-left: 24px;
+  list-style-position: outside;
+}
+
+.product-description-card .product-detail-copy li {
+  margin: 4px 0;
+  padding-left: 4px;
+}
+
+.product-description-card .product-detail-copy ul {
+  list-style-type: disc;
+}
+
+.product-description-card .product-detail-copy ol {
+  list-style-type: decimal;
 }
 
 .product-description-card .product-detail-copy > :first-child {
