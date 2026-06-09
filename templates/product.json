@@ -75,6 +75,7 @@
     },
     "header_custom_liquid_DcAfLy": {
       "type": "header-custom-liquid",
+      "disabled": true,
       "blocks": {
         "product_description_JLYjtz": {
           "type": "product_description",

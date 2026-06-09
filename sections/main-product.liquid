@@ -23,6 +23,13 @@
   {% assign discount = compare_price | minus: price | times: 100 | divided_by: compare_price %}
 {% endif %}
 
+{% assign product_description_html = product.description %}
+{% for block in section.blocks %}
+  {% if block.type == 'description' and block.settings.description_override != blank %}
+    {% assign product_description_html = block.settings.description_override %}
+  {% endif %}
+{% endfor %}
+
 <section class="page product-page shopify-padding-section" data-product-root style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
   <div class="product-detail-shell">
     <div class="product-media-column">
@@ -50,20 +57,14 @@
         </div>
       </div>
 
-      {% for block in section.blocks %}
-        {% if block.type == 'description' %}
-          <div class="product-description-card" {{ block.shopify_attributes }}>
-            <h2>Descrição</h2>
-            <div class="product-detail-copy">
-              {% if block.settings.description_override != blank %}
-                {{ block.settings.description_override }}
-              {% else %}
-                {{ product.description }}
-              {% endif %}
-            </div>
+      {% if product_description_html != blank %}
+        <div class="product-description-card">
+          <h2>Descrição</h2>
+          <div class="product-detail-copy">
+            {{ product_description_html }}
           </div>
-        {% endif %}
-      {% endfor %}
+        </div>
+      {% endif %}
     </div>
 
     <div class="product-purchase-panel">
