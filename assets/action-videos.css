@@ -120,31 +120,38 @@
     radial-gradient(circle at 80% 18%, rgba(255, 255, 255, .18), transparent 34%);
 }
 
-.action-video-play {
+.action-video-sound {
   position: absolute;
-  inset: 0;
+  right: 12px;
+  bottom: 12px;
+  z-index: 2;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
   display: grid;
   place-items: center;
+  background: rgba(0, 0, 0, .38);
   color: #fff;
   cursor: pointer;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, .35);
 }
 
-.action-video-play span {
-  width: 66px;
-  height: 66px;
-  border-radius: 999px;
-  border: 2px solid rgba(255, 255, 255, .78);
-  background: rgba(0, 0, 0, .18);
-  display: grid;
-  place-items: center;
-  font-size: 28px;
-  line-height: 1;
-  padding-left: 4px;
-  backdrop-filter: blur(4px);
+.action-video-sound svg {
+  width: 20px;
+  height: 20px;
 }
 
-.action-video-card.is-playing .action-video-play {
-  opacity: 0;
+.action-video-sound .sound-on {
+  display: none;
+}
+
+.action-video-card:not(.is-muted) .action-video-sound .sound-off {
+  display: none;
+}
+
+.action-video-card:not(.is-muted) .action-video-sound .sound-on {
+  display: block;
 }
 
 .action-video-product {

@@ -6,6 +6,27 @@
     card.classList.remove('is-playing');
   }
 
+  function playCard(card) {
+    var video = card.querySelector('video');
+    if (!video) return;
+    video.playsInline = true;
+    var promise = video.play();
+    if (promise && typeof promise.catch === 'function') {
+      promise.catch(function () {});
+    }
+    card.classList.add('is-playing');
+  }
+
+  function syncSoundButton(card) {
+    var video = card.querySelector('video');
+    var button = card.querySelector('[data-action-video-sound]');
+    if (!video || !button) return;
+    var isMuted = video.muted;
+    card.classList.toggle('is-muted', isMuted);
+    button.setAttribute('aria-pressed', isMuted ? 'false' : 'true');
+    button.setAttribute('aria-label', isMuted ? 'Ativar som' : 'Desativar som');
+  }
+
   function cleanCloneAttributes(card) {
     Array.prototype.slice.call(card.attributes).forEach(function (attribute) {
       if (attribute.name.indexOf('data-shopify') === 0) {
@@ -95,8 +116,14 @@
       activeIndex = Math.max(0, Math.min(index, cards.length - 1));
       activeRealIndex = Number(cards[activeIndex].dataset.actionVideoRealIndex || 0);
       cards.forEach(function (card, cardIndex) {
-        card.classList.toggle('is-active', cardIndex === activeIndex);
-        if (cardIndex !== activeIndex) pauseCard(card);
+        var isActive = cardIndex === activeIndex;
+        card.classList.toggle('is-active', isActive);
+        if (isActive) {
+          playCard(card);
+          syncSoundButton(card);
+        } else {
+          pauseCard(card);
+        }
       });
     }
 
@@ -149,7 +176,7 @@
     }
 
     cards.forEach(function (card) {
-      var button = card.querySelector('[data-action-video-toggle]');
+      var soundButton = card.querySelector('[data-action-video-sound]');
       var video = card.querySelector('video');
       var cardIndex = cards.indexOf(card);
 
@@ -160,24 +187,28 @@
         }
       });
 
-      if (!button || !video) return;
+      if (!soundButton || !video) return;
 
-      button.addEventListener('click', function () {
+      video.muted = true;
+      syncSoundButton(card);
+
+      soundButton.addEventListener('click', function (event) {
+        event.stopPropagation();
         if (cardIndex !== activeIndex) {
           centerCard(cardIndex, 'smooth');
-          return;
         }
 
         cards.forEach(function (otherCard) {
-          if (otherCard !== card) pauseCard(otherCard);
+          var otherVideo = otherCard.querySelector('video');
+          if (otherCard !== card && otherVideo) {
+            otherVideo.muted = true;
+            syncSoundButton(otherCard);
+          }
         });
 
-        if (video.paused) {
-          video.play();
-          card.classList.add('is-playing');
-        } else {
-          pauseCard(card);
-        }
+        video.muted = !video.muted;
+        playCard(card);
+        syncSoundButton(card);
       });
 
       video.addEventListener('pause', function () {
