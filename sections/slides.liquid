@@ -4,9 +4,22 @@
 {% assign banner_blocks = section.blocks | where: 'type', 'banner' %}
 
 {% if banner_blocks.size > 0 %}
+  {% assign first_banner = banner_blocks.first %}
+  {% assign slide_aspect_ratio = 1.777777 %}
+  {% assign slide_mobile_aspect_ratio = slide_aspect_ratio %}
+
+  {% if first_banner.settings.media_type == 'image' and first_banner.settings.image != blank %}
+    {% assign slide_aspect_ratio = first_banner.settings.image.aspect_ratio %}
+  {% endif %}
+
+  {% if first_banner.settings.mobile_media_type == 'image' and first_banner.settings.mobile_image != blank %}
+    {% assign slide_mobile_aspect_ratio = first_banner.settings.mobile_image.aspect_ratio %}
+  {% endif %}
+
   <section class="home-slider slides-section layout-{{ section.settings.layout }} width-{{ section.settings.width }} shopify-padding-section" aria-label="{{ section.settings.aria_label }}" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
     <div
       class="home-slider-stage height-{{ section.settings.media_height }} mobile-height-{{ section.settings.mobile_height }} content-{{ section.settings.content_position }} text-{{ section.settings.text_alignment }}"
+      style="--slide-aspect-ratio: {{ slide_aspect_ratio }}; --slide-mobile-aspect-ratio: {{ slide_mobile_aspect_ratio }};"
       data-home-slider
       data-slider-autoplay="{{ section.settings.autoplay }}"
       data-slider-speed="{{ section.settings.speed | times: 1000 }}"
@@ -145,6 +158,10 @@
       "label": "Altura da mídia",
       "default": "large",
       "options": [
+        {
+          "value": "original",
+          "label": "Original da imagem"
+        },
         {
           "value": "medium",
           "label": "Média"

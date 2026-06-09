@@ -447,3 +447,23 @@
     font-size: 24px;
   }
 }
+
+.home-slider-stage.height-original {
+  height: auto;
+  min-height: 0;
+  aspect-ratio: var(--slide-aspect-ratio, 1.777777);
+}
+
+.home-slider-stage.height-original .home-slide-image,
+.home-slider-stage.height-original .home-slide-video {
+  object-fit: contain;
+  background: #0f172a;
+}
+
+@media (max-width: 900px) {
+  .home-slider-stage.height-original {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: var(--slide-mobile-aspect-ratio, var(--slide-aspect-ratio, 1.777777));
+  }
+}
