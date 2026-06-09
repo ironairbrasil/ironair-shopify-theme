@@ -1,10 +1,10 @@
 {
   "sections": {
     "main": {
-      "type": "main-collection",
+      "type": "main-collection-blocks",
       "blocks": {
         "title": {
-          "type": "title",
+          "type": "heading",
           "settings": {
             "title": "Todos os produtos",
             "subtitle": "",
@@ -12,7 +12,7 @@
           }
         },
         "products": {
-          "type": "products",
+          "type": "product_grid",
           "settings": {
             "columns_desktop": 4,
             "show_media": true,
