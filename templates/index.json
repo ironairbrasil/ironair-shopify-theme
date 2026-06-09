@@ -149,6 +149,7 @@
         "video_1": {
           "type": "video",
           "settings": {
+            "video": "shopify://files/videos/1.mp4",
             "title": "Iron Air em uso",
             "caption": "Veja o resultado",
             "product": "",
