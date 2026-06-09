@@ -25,7 +25,7 @@
           "settings": {
             "columns_desktop": "4",
             "show_media": true,
-            "media_ratio": "adapt",
+            "media_ratio": "square",
             "border_style": "none",
             "corner_radius": 0
           }
