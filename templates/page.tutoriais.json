@@ -1,0 +1,60 @@
+{
+  "sections": {
+    "main": {
+      "type": "tutorials",
+      "blocks": {
+        "montagem": {
+          "type": "tutorial",
+          "settings": {
+            "video_url": "https://www.youtube.com/embed/x9ecxu1satk",
+            "title": "Montagem do Iron Air"
+          }
+        },
+        "dicas": {
+          "type": "tutorial",
+          "settings": {
+            "video_url": "https://www.youtube.com/embed/SXc2USF11K8",
+            "title": "3 dicas para usar o Iron Air da forma correta"
+          }
+        },
+        "calca": {
+          "type": "tutorial",
+          "settings": {
+            "video_url": "https://www.youtube.com/embed/EQNSCUNYKKA",
+            "title": "Como Passar Calça em Minutos"
+          }
+        },
+        "calcado": {
+          "type": "tutorial",
+          "settings": {
+            "video_url": "https://www.youtube.com/embed/sTqBjEponls",
+            "title": "Como secar seu calçado com o Iron Air"
+          }
+        },
+        "capacete": {
+          "type": "tutorial",
+          "settings": {
+            "video_url": "https://www.youtube.com/embed/Skgc8XyztbQ",
+            "title": "COMO SECAR CAPACETE COM O IRON AIR"
+          }
+        }
+      },
+      "block_order": [
+        "montagem",
+        "dicas",
+        "calca",
+        "calcado",
+        "capacete"
+      ],
+      "settings": {
+        "heading": "Tutoriais",
+        "subtitle": "Conteúdos curtos para tirar dúvidas comuns de montagem, ajuste, preparo das peças e manutenção.",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

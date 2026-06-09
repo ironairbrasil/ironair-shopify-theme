@@ -1,0 +1,136 @@
+.tutorials-page {
+  padding-bottom: 96px;
+}
+
+.tutorials-section {
+  display: grid;
+  gap: 24px;
+}
+
+.tutorials-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.tutorials-empty {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: #fff;
+  padding: 28px;
+  display: grid;
+  gap: 8px;
+}
+
+.tutorials-empty strong {
+  color: var(--ink);
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.tutorials-empty p {
+  color: var(--mid);
+  line-height: 1.6;
+}
+
+.tutorial-card {
+  display: grid;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #fff;
+}
+
+.tutorial-video {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  min-height: 0;
+  background:
+    linear-gradient(135deg, rgba(var(--iron-green-rgb), .9), rgba(17, 17, 17, .96)),
+    radial-gradient(circle at 80% 15%, rgba(255, 255, 255, .22), transparent 30%);
+  display: grid;
+  place-items: center;
+}
+
+.tutorial-video iframe,
+.tutorial-video img,
+.tutorial-video video {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #111;
+}
+
+.tutorial-video img,
+.tutorial-video video {
+  object-fit: cover;
+}
+
+.tutorial-video::before,
+.tutorial-video::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.tutorial-video::before {
+  inset: 22px;
+  border: 1px solid rgba(255, 255, 255, .18);
+  border-radius: 14px;
+}
+
+.tutorial-video::after {
+  inset: auto 24px 24px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .2);
+}
+
+.tutorial-card-copy {
+  display: grid;
+  gap: 12px;
+  padding: 20px;
+}
+
+.tutorial-card-copy > span {
+  color: var(--iron-green);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.tutorial-card-copy h3 {
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 28px;
+  line-height: .98;
+}
+
+.tutorial-card-copy p {
+  color: var(--mid);
+  line-height: 1.65;
+  font-size: 14px;
+}
+
+.tutorial-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tutorial-steps small {
+  border-radius: 999px;
+  background: var(--dark-green-l);
+  color: var(--dark-green);
+  padding: 6px 10px;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+@media (max-width: 640px) {
+  .tutorials-grid {
+    grid-template-columns: 1fr;
+  }
+}

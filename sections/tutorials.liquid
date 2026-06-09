@@ -1,0 +1,183 @@
+{{ 'tutorials.css' | asset_url | stylesheet_tag }}
+
+<div class="page page-stack tutorials-page">
+  <section class="tutorials-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+    <div class="sec-header">
+      <div class="sec-header-copy">
+        <div class="sec-title">{{ section.settings.heading | escape }}</div>
+        {% if section.settings.subtitle != blank %}
+          <span class="sec-subtitle">{{ section.settings.subtitle | escape }}</span>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if section.blocks.size > 0 %}
+      <div class="tutorials-grid">
+        {% for block in section.blocks %}
+          <article class="tutorial-card" {{ block.shopify_attributes }}>
+            <div class="tutorial-video">
+              {% if block.settings.video_url != blank %}
+                <iframe
+                  src="{{ block.settings.video_url }}"
+                  title="{{ block.settings.title | escape }}"
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen>
+                </iframe>
+              {% elsif block.settings.cover != blank %}
+                {{ block.settings.cover | image_url: width: 1200 | image_tag: loading: 'lazy', alt: block.settings.title }}
+              {% endif %}
+            </div>
+            <div class="tutorial-card-copy">
+              {% if block.settings.kicker != blank %}
+                <span>{{ block.settings.kicker | escape }}</span>
+              {% endif %}
+              <h3>{{ block.settings.title | escape }}</h3>
+              {% if block.settings.description != blank %}
+                <p>{{ block.settings.description | escape }}</p>
+              {% endif %}
+              {% assign steps = block.settings.steps | newline_to_br | split: '<br />' %}
+              {% if block.settings.steps != blank %}
+                <div class="tutorial-steps">
+                  {% for step in steps %}
+                    {% assign clean_step = step | strip %}
+                    {% if clean_step != blank %}
+                      <small>{{ clean_step | escape }}</small>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="tutorials-empty">
+        <strong>Nenhum tutorial cadastrado</strong>
+        <p>Adicione blocos de tutorial no editor do tema para exibir os vídeos nesta página.</p>
+      </div>
+    {% endif %}
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Tutoriais",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Tutoriais"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Conteúdos curtos para tirar dúvidas comuns de montagem, ajuste, preparo das peças e manutenção."
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Preenchimento superior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Preenchimento inferior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tutorial",
+      "name": "Tutorial",
+      "settings": [
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "URL embed do YouTube"
+        },
+        {
+          "type": "image_picker",
+          "id": "cover",
+          "label": "Imagem alternativa"
+        },
+        {
+          "type": "text",
+          "id": "kicker",
+          "label": "Etiqueta"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Tutorial Iron Air"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Descrição"
+        },
+        {
+          "type": "textarea",
+          "id": "steps",
+          "label": "Marcadores",
+          "info": "Use uma linha para cada marcador."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Tutoriais",
+      "blocks": [
+        {
+          "type": "tutorial",
+          "settings": {
+            "video_url": "https://www.youtube.com/embed/x9ecxu1satk",
+            "title": "Montagem do Iron Air"
+          }
+        },
+        {
+          "type": "tutorial",
+          "settings": {
+            "video_url": "https://www.youtube.com/embed/SXc2USF11K8",
+            "title": "3 dicas para usar o Iron Air da forma correta"
+          }
+        },
+        {
+          "type": "tutorial",
+          "settings": {
+            "video_url": "https://www.youtube.com/embed/EQNSCUNYKKA",
+            "title": "Como Passar Calça em Minutos"
+          }
+        },
+        {
+          "type": "tutorial",
+          "settings": {
+            "video_url": "https://www.youtube.com/embed/sTqBjEponls",
+            "title": "Como secar seu calçado com o Iron Air"
+          }
+        },
+        {
+          "type": "tutorial",
+          "settings": {
+            "video_url": "https://www.youtube.com/embed/Skgc8XyztbQ",
+            "title": "COMO SECAR CAPACETE COM O IRON AIR"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,16 +1,79 @@
 {{ 'page.css' | asset_url | stylesheet_tag }}
+{% if page.handle == 'tutoriais' %}
+  {{ 'tutorials.css' | asset_url | stylesheet_tag }}
+{% endif %}
 
-<section class="page page-stack shopify-padding-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
-  <div class="section-head">
-    <div>
-      <div class="section-kicker">{{ shop.name }}</div>
-      <h1>{{ page.title }}</h1>
+{% if page.handle == 'tutoriais' %}
+  <div class="page page-stack tutorials-page">
+    <section class="tutorials-section">
+      <div class="sec-header">
+        <div class="sec-header-copy">
+          <div class="sec-title">Tutoriais</div>
+          <span class="sec-subtitle">Conteúdos curtos para tirar dúvidas comuns de montagem, ajuste, preparo das peças e manutenção.</span>
+        </div>
+      </div>
+
+      <div class="tutorials-grid">
+        <article class="tutorial-card">
+          <div class="tutorial-video">
+            <iframe src="https://www.youtube.com/embed/x9ecxu1satk" title="Montagem do Iron Air" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+          <div class="tutorial-card-copy">
+            <h3>Montagem do Iron Air</h3>
+          </div>
+        </article>
+
+        <article class="tutorial-card">
+          <div class="tutorial-video">
+            <iframe src="https://www.youtube.com/embed/SXc2USF11K8" title="3 dicas para usar o Iron Air da forma correta" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+          <div class="tutorial-card-copy">
+            <h3>3 dicas para usar o Iron Air da forma correta</h3>
+          </div>
+        </article>
+
+        <article class="tutorial-card">
+          <div class="tutorial-video">
+            <iframe src="https://www.youtube.com/embed/EQNSCUNYKKA" title="Como Passar Calça em Minutos" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+          <div class="tutorial-card-copy">
+            <h3>Como Passar Calça em Minutos</h3>
+          </div>
+        </article>
+
+        <article class="tutorial-card">
+          <div class="tutorial-video">
+            <iframe src="https://www.youtube.com/embed/sTqBjEponls" title="Como secar seu calçado com o Iron Air" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+          <div class="tutorial-card-copy">
+            <h3>Como secar seu calçado com o Iron Air</h3>
+          </div>
+        </article>
+
+        <article class="tutorial-card">
+          <div class="tutorial-video">
+            <iframe src="https://www.youtube.com/embed/Skgc8XyztbQ" title="COMO SECAR CAPACETE COM O IRON AIR" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+          <div class="tutorial-card-copy">
+            <h3>COMO SECAR CAPACETE COM O IRON AIR</h3>
+          </div>
+        </article>
+      </div>
+    </section>
+  </div>
+{% else %}
+  <section class="page page-stack shopify-padding-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
+    <div class="section-head">
+      <div>
+        <div class="section-kicker">{{ shop.name }}</div>
+        <h1>{{ page.title }}</h1>
+      </div>
     </div>
-  </div>
-  <div class="content-card page-content">
-    {{ page.content }}
-  </div>
-</section>
+    <div class="content-card page-content">
+      {{ page.content }}
+    </div>
+  </section>
+{% endif %}
 
 {% schema %}
 {
