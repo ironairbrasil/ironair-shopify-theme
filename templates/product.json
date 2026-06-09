@@ -73,24 +73,6 @@
         "padding_bottom": 48
       }
     },
-    "header_custom_liquid_DcAfLy": {
-      "type": "header-custom-liquid",
-      "disabled": true,
-      "blocks": {
-        "product_description_JLYjtz": {
-          "type": "product_description",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "product_description_JLYjtz"
-      ],
-      "name": "Liquid personalizado",
-      "settings": {
-        "padding_top": 0,
-        "padding_bottom": 48
-      }
-    },
     "related": {
       "type": "related-products",
       "disabled": true,
@@ -221,7 +203,6 @@
   },
   "order": [
     "main",
-    "header_custom_liquid_DcAfLy",
     "related",
     "home_slider_YjgREV",
     "faq_tKB3CR"
