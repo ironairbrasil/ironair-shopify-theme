@@ -69,7 +69,21 @@
 }
 
 .product-description-card {
-  padding: 22px 24px;
+  padding: var(--description-padding-top, 22px) var(--description-padding-right, 24px) var(--description-padding-bottom, 22px) var(--description-padding-left, 24px);
+}
+
+.product-description-card--fit {
+  justify-self: start;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.product-description-card--fill {
+  width: 100%;
+}
+
+.product-description-card.has-background {
+  background: var(--bg);
 }
 
 .product-description-card h2 {
@@ -78,6 +92,18 @@
   font-size: 28px;
   line-height: 1;
   text-transform: uppercase;
+}
+
+.product-description-card--align-left {
+  text-align: left;
+}
+
+.product-description-card--align-center {
+  text-align: center;
+}
+
+.product-description-card--align-right {
+  text-align: right;
 }
 
 .product-description-card .product-detail-copy {

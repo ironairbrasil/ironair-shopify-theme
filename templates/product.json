@@ -59,6 +59,20 @@
             ],
             "limit": 5
           }
+        },
+        "description_card": {
+          "type": "description",
+          "settings": {
+            "heading": "Descrição",
+            "description_override": "",
+            "width": "fill",
+            "alignment": "left",
+            "show_background": false,
+            "padding_top": 24,
+            "padding_bottom": 24,
+            "padding_left": 24,
+            "padding_right": 24
+          }
         }
       },
       "block_order": [
@@ -66,10 +80,29 @@
         "rating_DXYtNp",
         "price_hhznYQ",
         "buy_buttons_zG8CxD",
-        "upsells_6YLYQj"
+        "upsells_6YLYQj",
+        "description_card"
       ],
       "settings": {
         "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "header_custom_liquid_DcAfLy": {
+      "type": "header-custom-liquid",
+      "disabled": true,
+      "blocks": {
+        "product_description_JLYjtz": {
+          "type": "product_description",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "product_description_JLYjtz"
+      ],
+      "name": "Liquid personalizado",
+      "settings": {
+        "padding_top": 0,
         "padding_bottom": 48
       }
     },
@@ -203,6 +236,7 @@
   },
   "order": [
     "main",
+    "header_custom_liquid_DcAfLy",
     "related",
     "home_slider_YjgREV",
     "faq_tKB3CR"
