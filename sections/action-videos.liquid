@@ -42,22 +42,26 @@
             </div>
 
             {% if product != blank %}
+              {% assign product_thumb = product.featured_media.preview_image | default: product.featured_image %}
               <a class="action-video-product" href="{{ product.url }}">
-                {% if product.featured_image %}
-                  {{ product.featured_image | image_url: width: 120 | image_tag: loading: 'lazy', alt: product.title }}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M9 18l6-6-6-6"></path>
+                </svg>
+                {% if product_thumb %}
+                  {{ product_thumb | image_url: width: 160, height: 160, crop: 'center' | image_tag: loading: 'lazy', alt: product.title }}
                 {% endif %}
                 <span>
                   <strong>{{ product.title }}</strong>
                   <span>{{ block.settings.product_label | default: 'Ver produto' }}</span>
                 </span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M9 18l6-6-6-6"></path>
-                </svg>
               </a>
             {% elsif block.settings.title != blank or block.settings.caption != blank %}
               <div class="action-video-product">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M9 18l6-6-6-6"></path>
+                </svg>
                 {% if block.settings.poster != blank %}
-                  {{ block.settings.poster | image_url: width: 120 | image_tag: loading: 'lazy', alt: block.settings.title }}
+                  {{ block.settings.poster | image_url: width: 160, height: 160, crop: 'center' | image_tag: loading: 'lazy', alt: block.settings.title }}
                 {% endif %}
                 <span>
                   {% if block.settings.title != blank %}
@@ -67,9 +71,6 @@
                     <span>{{ block.settings.caption | escape }}</span>
                   {% endif %}
                 </span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M9 18l6-6-6-6"></path>
-                </svg>
               </div>
             {% endif %}
           </article>
