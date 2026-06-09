@@ -26,7 +26,8 @@
     var prev = root.querySelector('[data-action-videos-prev]');
     var next = root.querySelector('[data-action-videos-next]');
     var originalCount = originalCards.length;
-    var loopOffset = originalCount;
+    var cloneSetsEachSide = 5;
+    var loopOffset = originalCount * cloneSetsEachSide;
     var cards = originalCards;
     var activeIndex = loopOffset;
     var activeRealIndex = 0;
@@ -39,18 +40,27 @@
 
       originalCards.forEach(function (card, index) {
         card.dataset.actionVideoRealIndex = index;
-
-        var beforeClone = card.cloneNode(true);
-        var afterClone = card.cloneNode(true);
-        beforeClone.removeAttribute('id');
-        afterClone.removeAttribute('id');
-        cleanCloneAttributes(beforeClone);
-        cleanCloneAttributes(afterClone);
-        beforeClone.dataset.actionVideoRealIndex = index;
-        afterClone.dataset.actionVideoRealIndex = index;
-        before.appendChild(beforeClone);
-        after.appendChild(afterClone);
       });
+
+      for (var setIndex = 0; setIndex < cloneSetsEachSide; setIndex += 1) {
+        originalCards.forEach(function (card, index) {
+          var beforeClone = card.cloneNode(true);
+          beforeClone.removeAttribute('id');
+          cleanCloneAttributes(beforeClone);
+          beforeClone.dataset.actionVideoRealIndex = index;
+          before.appendChild(beforeClone);
+        });
+      }
+
+      for (var afterSetIndex = 0; afterSetIndex < cloneSetsEachSide; afterSetIndex += 1) {
+        originalCards.forEach(function (card, index) {
+          var afterClone = card.cloneNode(true);
+          afterClone.removeAttribute('id');
+          cleanCloneAttributes(afterClone);
+          afterClone.dataset.actionVideoRealIndex = index;
+          after.appendChild(afterClone);
+        });
+      }
 
       track.insertBefore(before, track.firstChild);
       track.appendChild(after);
@@ -103,12 +113,7 @@
 
     function scroll(direction) {
       if (originalCount > 1) {
-        var targetIndex = activeIndex + direction;
-
-        if (targetIndex < 0 || targetIndex >= cards.length) {
-          normalizeLoopPosition();
-          targetIndex = activeIndex + direction;
-        }
+        normalizeLoopPosition();
       }
 
       centerCard(activeIndex + direction, 'smooth');
@@ -120,7 +125,9 @@
 
     function normalizeLoopPosition() {
       if (normalizing || originalCount < 2) return;
-      if (activeIndex >= loopOffset && activeIndex < loopOffset + originalCount) return;
+      var safeStart = originalCount * 2;
+      var safeEnd = cards.length - (originalCount * 2);
+      if (activeIndex >= safeStart && activeIndex < safeEnd) return;
 
       normalizing = true;
       centerCard(getMiddleIndex(activeRealIndex), 'auto');
@@ -182,6 +189,7 @@
       window.clearTimeout(scrollTimer);
       scrollTimer = window.setTimeout(function () {
         setActive(getClosestIndex());
+        normalizeLoopPosition();
       }, 80);
     }, { passive: true });
 

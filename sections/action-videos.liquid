@@ -23,7 +23,7 @@
 
       <div class="action-videos-track" data-action-videos-track>
         {% for block in section.blocks %}
-          {% assign product = block.settings.product %}
+          {% assign product = block.settings.product | default: section.settings.product %}
           <article class="action-video-card" data-action-video-card {{ block.shopify_attributes }}>
             <div class="action-video-media">
               {% if block.settings.video != blank %}
@@ -44,9 +44,6 @@
             {% if product != blank %}
               {% assign product_thumb = product.featured_media.preview_image | default: product.featured_image %}
               <a class="action-video-product" href="{{ product.url }}">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path d="M9 18l6-6-6-6"></path>
-                </svg>
                 {% if product_thumb %}
                   {{ product_thumb | image_url: width: 160, height: 160, crop: 'center' | image_tag: loading: 'lazy', alt: product.title }}
                 {% endif %}
@@ -54,14 +51,15 @@
                   <strong>{{ product.title }}</strong>
                   <span>{{ block.settings.product_label | default: 'Ver produto' }}</span>
                 </span>
-              </a>
-            {% elsif block.settings.title != blank or block.settings.caption != blank %}
-              <div class="action-video-product">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d="M9 18l6-6-6-6"></path>
                 </svg>
-                {% if block.settings.poster != blank %}
-                  {{ block.settings.poster | image_url: width: 160, height: 160, crop: 'center' | image_tag: loading: 'lazy', alt: block.settings.title }}
+              </a>
+            {% elsif block.settings.title != blank or block.settings.caption != blank %}
+              {% assign video_thumb = block.settings.poster | default: block.settings.video.preview_image %}
+              <div class="action-video-product">
+                {% if video_thumb != blank %}
+                  {{ video_thumb | image_url: width: 160, height: 160, crop: 'center' | image_tag: loading: 'lazy', alt: block.settings.title }}
                 {% endif %}
                 <span>
                   {% if block.settings.title != blank %}
@@ -71,6 +69,9 @@
                     <span>{{ block.settings.caption | escape }}</span>
                   {% endif %}
                 </span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M9 18l6-6-6-6"></path>
+                </svg>
               </div>
             {% endif %}
           </article>
@@ -101,6 +102,11 @@
       "id": "subtitle",
       "label": "Subtítulo",
       "default": "Vídeos rápidos mostrando o produto no dia a dia."
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Produto padrão"
     },
     {
       "type": "header",

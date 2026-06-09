@@ -150,7 +150,7 @@
 .action-video-product {
   min-height: 70px;
   display: none;
-  grid-template-columns: 36px 52px minmax(0, 1fr);
+  grid-template-columns: 52px minmax(0, 1fr) 36px;
   align-items: center;
   gap: 10px;
   padding: 8px 12px;
