@@ -25,28 +25,45 @@
 
 <section class="page product-page shopify-padding-section" data-product-root style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
   <div class="product-detail-shell">
-    <div class="product-gallery">
-      <div class="product-gallery-main">
-        {% if product.featured_media %}
-          {{ product.featured_media | image_url: width: 1100 | image_tag: alt: product.title, data-main-product-image: true }}
-        {% else %}
-          <img src="{{ 'ironair-principal.png' | asset_url }}" alt="{{ product.title | escape }}" data-main-product-image>
-        {% endif %}
-      </div>
-      <div class="product-gallery-thumbs">
-        {% for image in product.images %}
-          <button type="button" class="product-gallery-thumb {% if forloop.first %}is-active{% endif %}" data-gallery-image="{{ image | image_url: width: 1100 }}" aria-label="Ver imagem {{ forloop.index }}">
-            {{ image | image_url: width: 160 | image_tag: alt: product.title, loading: 'lazy' }}
-          </button>
-        {% else %}
-          {% assign fallback_images = 'ironair-principal.png,ironair-1.jpg,ironair-2.jpg,ironair-3.jpg,ironair-4.jpg,ironair-5.jpg' | split: ',' %}
-          {% for fallback in fallback_images %}
-            <button type="button" class="product-gallery-thumb {% if forloop.first %}is-active{% endif %}" data-gallery-image="{{ fallback | asset_url }}" aria-label="Ver imagem {{ forloop.index }}">
-              <img src="{{ fallback | asset_url }}" alt="{{ product.title | escape }}">
+    <div class="product-media-column">
+      <div class="product-gallery">
+        <div class="product-gallery-main">
+          {% if product.featured_media %}
+            {{ product.featured_media | image_url: width: 1100 | image_tag: alt: product.title, data-main-product-image: true }}
+          {% else %}
+            <img src="{{ 'ironair-principal.png' | asset_url }}" alt="{{ product.title | escape }}" data-main-product-image>
+          {% endif %}
+        </div>
+        <div class="product-gallery-thumbs">
+          {% for image in product.images %}
+            <button type="button" class="product-gallery-thumb {% if forloop.first %}is-active{% endif %}" data-gallery-image="{{ image | image_url: width: 1100 }}" aria-label="Ver imagem {{ forloop.index }}">
+              {{ image | image_url: width: 160 | image_tag: alt: product.title, loading: 'lazy' }}
             </button>
+          {% else %}
+            {% assign fallback_images = 'ironair-principal.png,ironair-1.jpg,ironair-2.jpg,ironair-3.jpg,ironair-4.jpg,ironair-5.jpg' | split: ',' %}
+            {% for fallback in fallback_images %}
+              <button type="button" class="product-gallery-thumb {% if forloop.first %}is-active{% endif %}" data-gallery-image="{{ fallback | asset_url }}" aria-label="Ver imagem {{ forloop.index }}">
+                <img src="{{ fallback | asset_url }}" alt="{{ product.title | escape }}">
+              </button>
+            {% endfor %}
           {% endfor %}
-        {% endfor %}
+        </div>
       </div>
+
+      {% for block in section.blocks %}
+        {% if block.type == 'description' %}
+          <div class="product-description-card" {{ block.shopify_attributes }}>
+            <h2>Descrição</h2>
+            <div class="product-detail-copy">
+              {% if block.settings.description_override != blank %}
+                {{ block.settings.description_override }}
+              {% else %}
+                {{ product.description }}
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
     </div>
 
     <div class="product-purchase-panel">
@@ -282,13 +299,6 @@
             {% endif %}
 
           {% when 'description' %}
-            <div class="product-detail-copy" {{ block.shopify_attributes }}>
-              {% if block.settings.description_override != blank %}
-                {{ block.settings.description_override }}
-              {% else %}
-                {{ product.description }}
-              {% endif %}
-            </div>
 
           {% when 'benefits' %}
             <div class="final-points product-points" {{ block.shopify_attributes }}>

@@ -5,8 +5,14 @@
   align-items: start;
 }
 
+.product-media-column {
+  display: grid;
+  gap: 16px;
+}
+
 .product-gallery,
-.product-purchase-panel {
+.product-purchase-panel,
+.product-description-card {
   background: #fff;
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -60,6 +66,31 @@
 
 .product-purchase-panel {
   padding: 24px;
+}
+
+.product-description-card {
+  padding: 22px 24px;
+}
+
+.product-description-card h2 {
+  margin: 0 0 12px;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 28px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.product-description-card .product-detail-copy {
+  color: var(--mid);
+  line-height: 1.7;
+}
+
+.product-description-card .product-detail-copy > :first-child {
+  margin-top: 0;
+}
+
+.product-description-card .product-detail-copy > :last-child {
+  margin-bottom: 0;
 }
 
 .product-purchase-panel h1 {
