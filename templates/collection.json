@@ -2,6 +2,30 @@
   "sections": {
     "main": {
       "type": "main-collection",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+            "title": "Todos os produtos",
+            "subtitle": "",
+            "show_product_count": false
+          }
+        },
+        "products": {
+          "type": "products",
+          "settings": {
+            "columns_desktop": 4,
+            "show_media": true,
+            "media_ratio": "adapt",
+            "border_style": "none",
+            "corner_radius": 0
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "products"
+      ],
       "settings": {}
     }
   },

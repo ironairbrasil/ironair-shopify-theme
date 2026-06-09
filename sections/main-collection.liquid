@@ -3,23 +3,55 @@
 {{ 'product-card.css' | asset_url | stylesheet_tag }}
 
 <section class="page page-stack shopify-padding-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
-  <div class="sec-header">
-    <div class="sec-header-copy">
-      <div class="sec-title">Todos os produtos</div>
-      {% if section.settings.show_product_count %}
-        <span class="sec-subtitle">{{ collection.products_count }} produto{% unless collection.products_count == 1 %}s{% endunless %}</span>
-      {% endif %}
-    </div>
-  </div>
-  <div class="products-grid cols4 is-stack-mobile">
-    {% for product in collection.products %}
-      {% render 'product-card', product: product %}
-    {% else %}
-      <div class="content-card collection-empty">
-        <p>Nenhum produto encontrado nesta coleção.</p>
-      </div>
+  {% if section.blocks.size > 0 %}
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'title' %}
+          <div class="sec-header" {{ block.shopify_attributes }}>
+            <div class="sec-header-copy">
+              <div class="sec-title">{{ block.settings.title | escape }}</div>
+              {% if block.settings.show_product_count %}
+                <span class="sec-subtitle">{{ collection.products_count }} produto{% unless collection.products_count == 1 %}s{% endunless %}</span>
+              {% elsif block.settings.subtitle != blank %}
+                <span class="sec-subtitle">{{ block.settings.subtitle | escape }}</span>
+              {% endif %}
+            </div>
+          </div>
+
+        {% when 'products' %}
+          <div class="products-grid cols{{ block.settings.columns_desktop }} is-stack-mobile" {{ block.shopify_attributes }}>
+            {% for product in collection.products %}
+              {% render 'product-card',
+                product: product,
+                show_media: block.settings.show_media,
+                media_ratio: block.settings.media_ratio,
+                border_style: block.settings.border_style,
+                corner_radius: block.settings.corner_radius
+              %}
+            {% else %}
+              <div class="content-card collection-empty">
+                <p>Nenhum produto encontrado nesta coleção.</p>
+              </div>
+            {% endfor %}
+          </div>
+      {% endcase %}
     {% endfor %}
-  </div>
+  {% else %}
+    <div class="sec-header">
+      <div class="sec-header-copy">
+        <div class="sec-title">Todos os produtos</div>
+      </div>
+    </div>
+    <div class="products-grid cols4 is-stack-mobile">
+      {% for product in collection.products %}
+        {% render 'product-card', product: product %}
+      {% else %}
+        <div class="content-card collection-empty">
+          <p>Nenhum produto encontrado nesta coleção.</p>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
 </section>
 
 {% schema %}
@@ -29,12 +61,6 @@
     {
       "type": "header",
       "content": "Preenchimento"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_product_count",
-      "label": "Mostrar quantidade de produtos",
-      "default": false
     },
     {
       "type": "range",
@@ -55,6 +81,121 @@
       "step": 4,
       "unit": "px",
       "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "title",
+      "name": "Título",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Todos os produtos"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtítulo"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_product_count",
+          "label": "Mostrar quantidade de produtos",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "products",
+      "name": "Produtos",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "range",
+          "id": "columns_desktop",
+          "label": "Colunas no desktop",
+          "min": 3,
+          "max": 4,
+          "step": 1,
+          "default": 4
+        },
+        {
+          "type": "checkbox",
+          "id": "show_media",
+          "label": "Exibe a mídia do produto principal",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "media_ratio",
+          "label": "Proporção",
+          "options": [
+            {
+              "value": "adapt",
+              "label": "Automático"
+            },
+            {
+              "value": "portrait",
+              "label": "Retrato"
+            },
+            {
+              "value": "square",
+              "label": "Quadrado"
+            },
+            {
+              "value": "landscape",
+              "label": "Paisagem"
+            }
+          ],
+          "default": "adapt"
+        },
+        {
+          "type": "header",
+          "content": "Bordas"
+        },
+        {
+          "type": "select",
+          "id": "border_style",
+          "label": "Estilo",
+          "options": [
+            {
+              "value": "none",
+              "label": "Nenhum"
+            },
+            {
+              "value": "solid",
+              "label": "Sólido"
+            }
+          ],
+          "default": "none"
+        },
+        {
+          "type": "range",
+          "id": "corner_radius",
+          "label": "Raio do canto",
+          "min": 0,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 0
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Coleção",
+      "blocks": [
+        {
+          "type": "title"
+        },
+        {
+          "type": "products"
+        }
+      ]
     }
   ]
 }

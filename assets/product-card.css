@@ -1,12 +1,20 @@
 .product-card {
   background: #fff;
-  border-radius: var(--radius);
+  border-radius: var(--product-card-radius, var(--radius));
   border: 1px solid var(--border);
   overflow: hidden;
   transition: box-shadow 0.2s, transform 0.2s;
   position: relative;
   display: flex;
   flex-direction: column;
+}
+
+.product-card.border-style-none {
+  border-color: transparent;
+}
+
+.product-card.border-style-solid {
+  border-color: var(--border);
 }
 
 .product-card:hover {
@@ -100,6 +108,22 @@
   overflow: hidden;
   padding: 0;
   transition: background 0.2s;
+}
+
+.product-card.media-ratio-adapt .pc-img {
+  aspect-ratio: var(--product-card-media-ratio, 1);
+}
+
+.product-card.media-ratio-portrait .pc-img {
+  aspect-ratio: 3 / 4;
+}
+
+.product-card.media-ratio-square .pc-img {
+  aspect-ratio: 1;
+}
+
+.product-card.media-ratio-landscape .pc-img {
+  aspect-ratio: 4 / 3;
 }
 
 .product-card:hover .pc-img {

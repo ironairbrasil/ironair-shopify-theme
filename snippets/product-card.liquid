@@ -3,11 +3,17 @@
 {% assign compare_price = variant.compare_at_price %}
 {% assign pix_price = price | times: 90 | divided_by: 100 %}
 {% assign installments = price | divided_by: 12 %}
+{% assign media_ratio = media_ratio | default: 'square' %}
+{% assign border_style = border_style | default: 'solid' %}
+{% assign corner_radius = corner_radius | default: 8 %}
 {% if compare_price > price %}
   {% assign discount = compare_price | minus: price | times: 100 | divided_by: compare_price %}
 {% endif %}
 
-<article class="product-card" id="{{ product.handle }}">
+<article
+  class="product-card media-ratio-{{ media_ratio }} border-style-{{ border_style }}"
+  id="{{ product.handle }}"
+  style="--product-card-radius: {{ corner_radius }}px; {% if product.featured_image %}--product-card-media-ratio: {{ product.featured_image.aspect_ratio }};{% endif %}">
   <div class="pc-badge-wrap">
     {% unless variant.available %}
       {% render 'badge', label: 'Esgotado', class: 'badge-out' %}
@@ -17,15 +23,17 @@
       {% render 'badge', label: discount_label, class: 'badge-off' %}
     {% endif %}
   </div>
-  <div class="pc-img">
-    <a href="{{ product.url }}" class="product-figure-link">
-      {% if product.featured_image %}
-        {{ product.featured_image | image_url: width: 700 | image_tag: alt: product.title, class: 'pc-img-photo', loading: 'lazy' }}
-      {% else %}
-        <img src="{{ 'ironair-principal.png' | asset_url }}" alt="{{ product.title | escape }}" loading="lazy">
-      {% endif %}
-    </a>
-  </div>
+  {% unless show_media == false %}
+    <div class="pc-img">
+      <a href="{{ product.url }}" class="product-figure-link">
+        {% if product.featured_image %}
+          {{ product.featured_image | image_url: width: 700 | image_tag: alt: product.title, class: 'pc-img-photo', loading: 'lazy' }}
+        {% else %}
+          <img src="{{ 'ironair-principal.png' | asset_url }}" alt="{{ product.title | escape }}" loading="lazy">
+        {% endif %}
+      </a>
+    </div>
+  {% endunless %}
   <div class="pc-body">
     <div class="pc-brand">{{ product.vendor | default: shop.name }}</div>
     <a href="{{ product.url }}" class="pc-name">{{ product.title }}</a>
