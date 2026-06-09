@@ -59,8 +59,8 @@
 
           {% if product_description_html != blank %}
             <div
-              class="product-description-card product-description-card--{{ block.settings.width }} product-description-card--align-{{ block.settings.alignment }} {% if block.settings.show_background %}has-background{% endif %}"
-              style="--description-padding-top: {{ block.settings.padding_top }}px; --description-padding-bottom: {{ block.settings.padding_bottom }}px; --description-padding-left: {{ block.settings.padding_left }}px; --description-padding-right: {{ block.settings.padding_right }}px;"
+              class="product-description-card product-description-card--{{ block.settings.width }} product-description-card--align-{{ block.settings.alignment }} {% if block.settings.show_background %}has-background{% endif %} {% if block.settings.show_border %}has-border{% endif %}"
+              style="--description-padding-top: {{ block.settings.padding_top }}px; --description-padding-bottom: {{ block.settings.padding_bottom }}px; --description-padding-left: {{ block.settings.padding_left }}px; --description-padding-right: {{ block.settings.padding_right }}px; --description-border-radius: {{ block.settings.border_radius }}px;"
               {{ block.shopify_attributes }}
             >
               {% if block.settings.heading != blank %}
@@ -581,6 +581,22 @@
           "default": false
         },
         {
+          "type": "checkbox",
+          "id": "show_border",
+          "label": "Borda",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "border_radius",
+          "label": "Raio do canto",
+          "min": 0,
+          "max": 32,
+          "step": 2,
+          "unit": "px",
+          "default": 0
+        },
+        {
           "type": "header",
           "content": "Preenchimento"
         },
@@ -592,7 +608,7 @@
           "max": 80,
           "step": 4,
           "unit": "px",
-          "default": 24
+          "default": 0
         },
         {
           "type": "range",
@@ -602,7 +618,7 @@
           "max": 80,
           "step": 4,
           "unit": "px",
-          "default": 24
+          "default": 0
         },
         {
           "type": "range",
@@ -612,7 +628,7 @@
           "max": 80,
           "step": 4,
           "unit": "px",
-          "default": 24
+          "default": 0
         },
         {
           "type": "range",
@@ -622,7 +638,7 @@
           "max": 80,
           "step": 4,
           "unit": "px",
-          "default": 24
+          "default": 0
         }
       ]
     },
