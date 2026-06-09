@@ -73,17 +73,6 @@
         "padding_bottom": 48
       }
     },
-    "related": {
-      "type": "related-products",
-      "disabled": true,
-      "settings": {
-        "kicker": "Você também pode gostar",
-        "title": "Produtos relacionados",
-        "limit": 4,
-        "padding_top": 48,
-        "padding_bottom": 48
-      }
-    },
     "header_custom_liquid_DcAfLy": {
       "type": "header-custom-liquid",
       "blocks": {
@@ -98,6 +87,17 @@
       "name": "Liquid personalizado",
       "settings": {
         "padding_top": 0,
+        "padding_bottom": 48
+      }
+    },
+    "related": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+        "kicker": "Você também pode gostar",
+        "title": "Produtos relacionados",
+        "limit": 4,
+        "padding_top": 48,
         "padding_bottom": 48
       }
     },
@@ -127,6 +127,7 @@
         "text_UUHC7r",
         "button_nKLxzC"
       ],
+      "disabled": true,
       "settings": {
         "aria_label": "Hero principal da Iron Air",
         "background_mode": "video",
@@ -210,6 +211,7 @@
         "item_dfeLLE",
         "item_9hKjmE"
       ],
+      "disabled": true,
       "settings": {
         "subtitle": "Dúvidas frequentes",
         "title": "Perguntas frequentes",
@@ -220,8 +222,8 @@
   },
   "order": [
     "main",
-    "related",
     "header_custom_liquid_DcAfLy",
+    "related",
     "home_slider_YjgREV",
     "faq_tKB3CR"
   ]
