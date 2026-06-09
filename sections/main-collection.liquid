@@ -114,13 +114,24 @@
       "limit": 1,
       "settings": [
         {
-          "type": "range",
+          "type": "select",
           "id": "columns_desktop",
           "label": "Colunas no desktop",
-          "min": 3,
-          "max": 4,
-          "step": 1,
-          "default": 4
+          "options": [
+            {
+              "value": "2",
+              "label": "2"
+            },
+            {
+              "value": "3",
+              "label": "3"
+            },
+            {
+              "value": "4",
+              "label": "4"
+            }
+          ],
+          "default": "4"
         },
         {
           "type": "checkbox",
