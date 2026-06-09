@@ -143,70 +143,6 @@
         "padding_bottom": 48
       }
     },
-    "action_videos": {
-      "type": "action-videos",
-      "blocks": {
-        "video_1": {
-          "type": "video",
-          "settings": {
-            "title": "Iron Air em uso",
-            "caption": "Veja o resultado",
-            "product": "",
-            "product_label": "Ver produto"
-          }
-        },
-        "video_2": {
-          "type": "video",
-          "settings": {
-            "title": "Roupas sem esforço",
-            "caption": "No dia a dia",
-            "product": "",
-            "product_label": "Ver produto"
-          }
-        },
-        "video_3": {
-          "type": "video",
-          "settings": {
-            "title": "Pronto em minutos",
-            "caption": "Antes e depois",
-            "product": "",
-            "product_label": "Ver produto"
-          }
-        },
-        "video_4": {
-          "type": "video",
-          "settings": {
-            "title": "Mais praticidade",
-            "caption": "Sem ferro e sem tábua",
-            "product": "",
-            "product_label": "Ver produto"
-          }
-        },
-        "video_5": {
-          "type": "video",
-          "settings": {
-            "title": "Iron Air em ação",
-            "caption": "Veja como funciona",
-            "product": "",
-            "product_label": "Ver produto"
-          }
-        }
-      },
-      "block_order": [
-        "video_1",
-        "video_2",
-        "video_3",
-        "video_4",
-        "video_5"
-      ],
-      "settings": {
-        "kicker": "Shop your feed",
-        "title": "Veja o Iron Air em ação",
-        "subtitle": "Vídeos rápidos mostrando o produto no dia a dia.",
-        "padding_top": 56,
-        "padding_bottom": 56
-      }
-    },
     "slider": {
       "type": "home-slider",
       "blocks": {
@@ -376,7 +312,6 @@
     "slides_hDX8yJ",
     "trust",
     "products",
-    "action_videos",
     "slider",
     "reviews",
     "faq"
