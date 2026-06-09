@@ -6,16 +6,61 @@
     card.classList.remove('is-playing');
   }
 
+  function cleanCloneAttributes(card) {
+    Array.prototype.slice.call(card.attributes).forEach(function (attribute) {
+      if (attribute.name.indexOf('data-shopify') === 0) {
+        card.removeAttribute(attribute.name);
+      }
+    });
+    card.querySelectorAll('[data-shopify-editor-block]').forEach(function (element) {
+      element.removeAttribute('data-shopify-editor-block');
+    });
+  }
+
   function initActionVideos(root) {
     var track = root.querySelector('[data-action-videos-track]');
     if (!track || track.dataset.actionVideosReady === 'true') return;
     track.dataset.actionVideosReady = 'true';
 
-    var cards = Array.prototype.slice.call(track.querySelectorAll('[data-action-video-card]'));
+    var originalCards = Array.prototype.slice.call(track.querySelectorAll('[data-action-video-card]'));
     var prev = root.querySelector('[data-action-videos-prev]');
     var next = root.querySelector('[data-action-videos-next]');
-    var activeIndex = 0;
+    var originalCount = originalCards.length;
+    var loopOffset = originalCount;
+    var cards = originalCards;
+    var activeIndex = loopOffset;
+    var activeRealIndex = 0;
     var scrollTimer = null;
+    var normalizing = false;
+
+    if (originalCount > 1) {
+      var before = document.createDocumentFragment();
+      var after = document.createDocumentFragment();
+
+      originalCards.forEach(function (card, index) {
+        card.dataset.actionVideoRealIndex = index;
+
+        var beforeClone = card.cloneNode(true);
+        var afterClone = card.cloneNode(true);
+        beforeClone.removeAttribute('id');
+        afterClone.removeAttribute('id');
+        cleanCloneAttributes(beforeClone);
+        cleanCloneAttributes(afterClone);
+        beforeClone.dataset.actionVideoRealIndex = index;
+        afterClone.dataset.actionVideoRealIndex = index;
+        before.appendChild(beforeClone);
+        after.appendChild(afterClone);
+      });
+
+      track.insertBefore(before, track.firstChild);
+      track.appendChild(after);
+      cards = Array.prototype.slice.call(track.querySelectorAll('[data-action-video-card]'));
+    } else {
+      originalCards.forEach(function (card, index) {
+        card.dataset.actionVideoRealIndex = index;
+      });
+      activeIndex = 0;
+    }
 
     function getClosestIndex() {
       var trackRect = track.getBoundingClientRect();
@@ -38,13 +83,14 @@
 
     function setActive(index) {
       activeIndex = Math.max(0, Math.min(index, cards.length - 1));
+      activeRealIndex = Number(cards[activeIndex].dataset.actionVideoRealIndex || 0);
       cards.forEach(function (card, cardIndex) {
         card.classList.toggle('is-active', cardIndex === activeIndex);
         if (cardIndex !== activeIndex) pauseCard(card);
       });
     }
 
-    function centerCard(index, behavior) {
+    function centerCard(index, behavior, skipNormalize) {
       var card = cards[index];
       if (!card) return;
       setActive(index);
@@ -53,10 +99,30 @@
         block: 'nearest',
         inline: 'center'
       });
+
+      if (!skipNormalize && originalCount > 1) {
+        window.clearTimeout(scrollTimer);
+        scrollTimer = window.setTimeout(normalizeLoopPosition, behavior === 'auto' ? 40 : 420);
+      }
     }
 
     function scroll(direction) {
       centerCard(activeIndex + direction, 'smooth');
+    }
+
+    function getMiddleIndex(realIndex) {
+      return loopOffset + Number(realIndex || 0);
+    }
+
+    function normalizeLoopPosition() {
+      if (normalizing || originalCount < 2) return;
+      if (activeIndex >= loopOffset && activeIndex < loopOffset + originalCount) return;
+
+      normalizing = true;
+      centerCard(getMiddleIndex(activeRealIndex), 'auto', true);
+      window.setTimeout(function () {
+        normalizing = false;
+      }, 60);
     }
 
     if (prev) {
@@ -112,6 +178,7 @@
       window.clearTimeout(scrollTimer);
       scrollTimer = window.setTimeout(function () {
         setActive(getClosestIndex());
+        normalizeLoopPosition();
       }, 80);
     }, { passive: true });
 
@@ -119,7 +186,7 @@
       centerCard(activeIndex, 'auto');
     });
 
-    setActive(getClosestIndex());
+    setActive(originalCount > 1 ? loopOffset : getClosestIndex());
     window.setTimeout(function () {
       centerCard(activeIndex, 'auto');
     }, 80);
