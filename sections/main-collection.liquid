@@ -3,13 +3,15 @@
 {{ 'product-card.css' | asset_url | stylesheet_tag }}
 
 <section class="page page-stack shopify-padding-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
-  <div class="section-head">
-    <div>
-      <div class="section-kicker">{{ collection.products_count }} produtos</div>
-      <h1>{{ collection.title }}</h1>
+  <div class="sec-header">
+    <div class="sec-header-copy">
+      <div class="sec-title">Todos os produtos</div>
+      {% if section.settings.show_product_count %}
+        <span class="sec-subtitle">{{ collection.products_count }} produto{% unless collection.products_count == 1 %}s{% endunless %}</span>
+      {% endif %}
     </div>
   </div>
-  <div class="products-grid cols3 is-stack-mobile">
+  <div class="products-grid cols4 is-stack-mobile">
     {% for product in collection.products %}
       {% render 'product-card', product: product %}
     {% else %}
@@ -27,6 +29,12 @@
     {
       "type": "header",
       "content": "Preenchimento"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_product_count",
+      "label": "Mostrar quantidade de produtos",
+      "default": false
     },
     {
       "type": "range",
