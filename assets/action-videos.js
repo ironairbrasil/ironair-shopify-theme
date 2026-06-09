@@ -90,7 +90,7 @@
       });
     }
 
-    function centerCard(index, behavior, skipNormalize) {
+    function centerCard(index, behavior) {
       var card = cards[index];
       if (!card) return;
       setActive(index);
@@ -99,14 +99,18 @@
         block: 'nearest',
         inline: 'center'
       });
-
-      if (!skipNormalize && originalCount > 1) {
-        window.clearTimeout(scrollTimer);
-        scrollTimer = window.setTimeout(normalizeLoopPosition, behavior === 'auto' ? 40 : 420);
-      }
     }
 
     function scroll(direction) {
+      if (originalCount > 1) {
+        var targetIndex = activeIndex + direction;
+
+        if (targetIndex < 0 || targetIndex >= cards.length) {
+          normalizeLoopPosition();
+          targetIndex = activeIndex + direction;
+        }
+      }
+
       centerCard(activeIndex + direction, 'smooth');
     }
 
@@ -119,7 +123,7 @@
       if (activeIndex >= loopOffset && activeIndex < loopOffset + originalCount) return;
 
       normalizing = true;
-      centerCard(getMiddleIndex(activeRealIndex), 'auto', true);
+      centerCard(getMiddleIndex(activeRealIndex), 'auto');
       window.setTimeout(function () {
         normalizing = false;
       }, 60);
@@ -178,7 +182,6 @@
       window.clearTimeout(scrollTimer);
       scrollTimer = window.setTimeout(function () {
         setActive(getClosestIndex());
-        normalizeLoopPosition();
       }, 80);
     }, { passive: true });
 
