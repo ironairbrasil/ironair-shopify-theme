@@ -97,10 +97,7 @@
             </h1>
 
           {% when 'rating' %}
-            <div class="pc-stars" {{ block.shopify_attributes }}>
-              {% render 'stars', rating: block.settings.rating %}
-              <span class="count">({{ block.settings.count_label }})</span>
-            </div>
+            <div id="bk-star-section" class="product-bk-stars" {{ block.shopify_attributes }}></div>
 
           {% when 'badge' %}
             <div

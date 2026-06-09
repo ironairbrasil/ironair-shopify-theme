@@ -126,6 +126,11 @@
   margin: 8px 0 10px;
 }
 
+.product-bk-stars {
+  margin: 10px 0 12px;
+  min-height: 20px;
+}
+
 .product-main-price {
   color: var(--dark-green);
   font-family: "Barlow Condensed", sans-serif;

@@ -25,7 +25,7 @@
   </div>
   {% unless show_media == false %}
     <div class="pc-img">
-      <a href="{{ product.url }}" class="product-figure-link">
+      <a href="{{ product.url }}" class="product-figure-media">
         {% if product.featured_image %}
           {{ product.featured_image | image_url: width: 700 | image_tag: alt: product.title, class: 'pc-img-photo', loading: 'lazy' }}
         {% else %}
@@ -36,8 +36,7 @@
   {% endunless %}
   <div class="pc-body">
     <div class="pc-brand">{{ product.vendor | default: shop.name }}</div>
-    <a href="{{ product.url }}" class="pc-name">{{ product.title }}</a>
-    <div class="pc-stars">{% render 'stars', rating: 5 %}<span class="count">(847)</span></div>
+    <a href="{{ product.url }}" class="pc-name product-link">{{ product.title }}</a>
     {% render 'product-price', product: product, variant: variant %}
     <div class="product-card-payment-lines">
       <div class="product-card-payment-pix">

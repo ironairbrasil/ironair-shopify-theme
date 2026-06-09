@@ -179,12 +179,21 @@
   margin-bottom: 12px;
 }
 
-.product-figure-link {
+.product-figure-media {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 100%;
+}
+
+.product-card .collection-star-section {
+  margin: 10px 0 8px;
+  min-height: 18px;
+}
+
+.pc-img .collection-star-section {
+  display: none !important;
 }
 
 .pc-stars {
