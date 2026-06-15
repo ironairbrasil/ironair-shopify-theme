@@ -84,6 +84,10 @@
   pointer-events: none;
 }
 
+.slides-section .home-slide-overlay {
+  background: transparent;
+}
+
 .home-slide-image,
 .home-slide-video {
   position: absolute;
