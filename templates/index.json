@@ -32,17 +32,39 @@
             "button_new_tab": false,
             "tone": "navy"
           }
+        },
+        "banner_4mx4kP": {
+          "type": "banner",
+          "settings": {
+            "label": "Banner Iron Air",
+            "media_type": "image",
+            "image": "shopify://shop_images/2.jpg",
+            "mobile_media_type": "image",
+            "url": "",
+            "link_label": "Ver oferta",
+            "new_tab": false,
+            "eyebrow": "",
+            "heading": "",
+            "text": "",
+            "text_size": "large",
+            "button_label": "",
+            "button_url": "",
+            "button_style": "primary",
+            "button_new_tab": false,
+            "tone": "navy"
+          }
         }
       },
       "block_order": [
-        "banner_Lwe8Br"
+        "banner_Lwe8Br",
+        "banner_4mx4kP"
       ],
       "name": "Slides",
       "settings": {
         "aria_label": "Apresentação de slides da Iron Air",
         "layout": "full",
         "width": "full",
-        "media_height": "large",
+        "media_height": "original",
         "mobile_height": "medium",
         "content_position": "center",
         "text_alignment": "center",
