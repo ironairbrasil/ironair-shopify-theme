@@ -456,7 +456,7 @@
 
 .home-slider-stage.height-original .home-slide-image,
 .home-slider-stage.height-original .home-slide-video {
-  object-fit: contain;
+  object-fit: cover;
   background: #0f172a;
 }
 

@@ -137,10 +137,10 @@
       var card = cards[index];
       if (!card) return;
       setActive(index);
-      card.scrollIntoView({
-        behavior: behavior || 'smooth',
-        block: 'nearest',
-        inline: 'center'
+      var targetLeft = card.offsetLeft - ((track.clientWidth - card.offsetWidth) / 2);
+      track.scrollTo({
+        left: targetLeft,
+        behavior: behavior || 'smooth'
       });
     }
 
