@@ -24,7 +24,7 @@
       {% if forloop.index == 3 %}{% assign fallback_asset = 'depoimento-3.jpg' %}{% endif %}
       <article class="review-card" {{ block.shopify_attributes }}>
         <div class="rv-stars">{{ block.settings.stars }}</div>
-        <p class="rv-text">"{{ block.settings.text }}"</p>
+        <p class="rv-text">{{ block.settings.text }}</p>
         <div class="rv-author">
           <div class="rv-av rv-{{ block.settings.tone }}">
             {% if block.settings.image != blank %}
@@ -34,9 +34,11 @@
             {% endif %}
           </div>
           <div>
-            <div class="rv-name">{{ block.settings.name }}</div>
+            <div class="rv-name">
+              <span>{{ block.settings.name }}</span>
+              <span class="rv-verified-badge" aria-label="Verificado">✓</span>
+            </div>
             <div class="rv-city">{{ block.settings.city }}</div>
-            <div class="rv-check">✓ Compra verificada</div>
           </div>
         </div>
       </article>
