@@ -294,12 +294,14 @@
           "type": "checkbox",
           "id": "show_media",
           "label": "Exibe a mídia do produto principal",
+          "visible_if": "{{ block.settings.display_mode == 'grid' }}",
           "default": true
         },
         {
           "type": "select",
           "id": "media_ratio",
           "label": "Proporção",
+          "visible_if": "{{ block.settings.display_mode == 'grid' }}",
           "options": [
             {
               "value": "adapt",
@@ -322,12 +324,14 @@
         },
         {
           "type": "header",
-          "content": "Bordas"
+          "content": "Bordas",
+          "visible_if": "{{ block.settings.display_mode == 'grid' }}"
         },
         {
           "type": "select",
           "id": "border_style",
           "label": "Estilo",
+          "visible_if": "{{ block.settings.display_mode == 'grid' }}",
           "options": [
             {
               "value": "none",
@@ -344,6 +348,7 @@
           "type": "range",
           "id": "corner_radius",
           "label": "Raio do canto",
+          "visible_if": "{{ block.settings.display_mode == 'grid' }}",
           "min": 0,
           "max": 24,
           "step": 1,
