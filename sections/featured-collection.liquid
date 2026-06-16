@@ -3,6 +3,7 @@
 {{ 'featured-products.js' | asset_url | script_tag }}
 
 {% assign selected_collection = section.settings.collection | default: collections.all %}
+{% assign products_by_creation = selected_collection.products | sort: 'created_at' %}
 
 <section class="section-anchor shopify-featured-product shopify-padding-section" id="produtos" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
   <div class="section-head">
@@ -23,7 +24,7 @@
     </div>
 
     <div class="products-grid is-carousel" data-products-track>
-      {% for product in selected_collection.products limit: 12 %}
+      {% for product in products_by_creation limit: 12 %}
         {% render 'product-card', product: product %}
       {% endfor %}
     </div>
