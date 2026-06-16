@@ -180,20 +180,21 @@ header {
 
 .hicon {
   position: relative;
-  width: 38px;
-  height: 38px;
+  width: 34px;
+  height: 34px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 0;
-  border-radius: 999px;
-  transition: background 0.15s;
-  color: var(--ink);
+  border-radius: 0;
+  transition: color 0.15s;
+  color: #4f4f4f;
   cursor: pointer;
 }
 
 .hicon:hover {
-  background: var(--bg);
+  background: transparent;
+  color: var(--dark-green);
 }
 
 .hicon-button {
@@ -201,14 +202,14 @@ header {
 }
 
 .hicon svg {
-  width: 22px;
-  height: 22px;
+  width: 21px;
+  height: 21px;
 }
 
 .badge {
   position: absolute;
   top: 4px;
-  right: 3px;
+  right: 1px;
   min-width: 16px;
   height: 16px;
   background: var(--dark-green);
