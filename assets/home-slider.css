@@ -16,6 +16,12 @@
   border-radius: 8px;
 }
 
+.slides-section.width-full .home-slider-stage {
+  height: auto;
+  min-height: 0;
+  aspect-ratio: var(--slide-aspect-ratio, 3.84);
+}
+
 .home-slider-stage {
   position: relative;
   height: clamp(480px, 42vw, 720px);
@@ -375,6 +381,12 @@
 
   .home-slider-stage.mobile-height-large {
     height: 620px;
+  }
+
+  .slides-section.width-full .home-slider-stage {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: var(--slide-mobile-aspect-ratio, var(--slide-aspect-ratio, 3.84));
   }
 
   .home-slide.has-mobile-media .home-slide-image.is-desktop-media,
