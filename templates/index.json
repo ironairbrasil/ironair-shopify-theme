@@ -42,7 +42,7 @@
         "aria_label": "Apresentação de slides da Iron Air",
         "layout": "full",
         "width": "full",
-        "media_height": "large",
+        "media_height": "original",
         "mobile_height": "medium",
         "content_position": "center",
         "text_alignment": "center",
