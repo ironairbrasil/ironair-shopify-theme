@@ -16,8 +16,8 @@
           "type": "title",
           "settings": {
             "title": "Todos os produtos",
-            "subtitle": "",
             "title_size": 26,
+            "subtitle": "",
             "subtitle_size": 13,
             "show_product_count": false
           }
@@ -25,7 +25,7 @@
         "products": {
           "type": "products",
           "settings": {
-            "display_mode": "grid",
+            "display_mode": "carousel",
             "products_limit": 50,
             "columns_desktop": "4",
             "show_media": true,
@@ -41,6 +41,7 @@
       ],
       "name": "Galeria de Produtos",
       "settings": {
+        "collection": "",
         "padding_top": 48,
         "padding_bottom": 48
       }

@@ -16,13 +16,17 @@
           "type": "text",
           "settings": {
             "heading": "A maneira mais fácil de cuidar das suas roupas",
-            "text": "<p>O fluxo de ar quente automático seca, alisa e refresca as roupas sem que você precise usar as mãos. Sem ferro de passar. Sem tábua de passar. Sem ficar esperando.</p>"
+            "text": "<p>O fluxo de ar quente automático seca, alisa e refresca as roupas sem que você precise usar as mãos. Sem ferro de passar. Sem tábua de passar. Sem ficar esperando.</p>",
+            "heading_size": 52,
+            "description_size": 16,
+            "text_width": "large"
           }
         },
         "button_DTnD6g": {
           "type": "button",
           "settings": {
             "label": "Ver como funciona",
+            "label_size": 14,
             "url": "",
             "style": "primary",
             "new_tab": false
@@ -105,34 +109,33 @@
     "products": {
       "type": "featured-collection",
       "blocks": {
-        "title": {
+        "title_azetek": {
           "type": "title",
           "settings": {
-            "title": "Nossos produtos",
+            "title": "Todos os produtos",
+            "title_size": 26,
             "subtitle": "",
-            "title_size": 30,
             "subtitle_size": 13,
             "show_product_count": false
           }
         },
-        "products": {
+        "products_agUXYV": {
           "type": "products",
           "settings": {
             "display_mode": "carousel",
-            "products_limit": 12,
+            "products_limit": 50,
             "columns_desktop": "4",
             "show_media": true,
-            "media_ratio": "square",
+            "media_ratio": "adapt",
             "border_style": "none",
             "corner_radius": 0
           }
         }
       },
       "block_order": [
-        "title",
-        "products"
+        "title_azetek",
+        "products_agUXYV"
       ],
-      "name": "Galeria de Produtos",
       "settings": {
         "collection": "",
         "padding_top": 48,
