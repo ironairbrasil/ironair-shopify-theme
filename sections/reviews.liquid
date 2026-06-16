@@ -19,7 +19,12 @@
   <div class="reviews-grid">
     {% for block in section.blocks %}
       {% if block.type == 'title' %}{% continue %}{% endif %}
-      <article class="review-card" {{ block.shopify_attributes }}>
+      <article class="review-card{% if block.settings.image != blank %} has-review-media{% endif %}" {{ block.shopify_attributes }}>
+        {% if block.settings.image != blank %}
+          <div class="rv-media">
+            {{ block.settings.image | image_url: width: 720 | image_tag: alt: block.settings.name, class: 'rv-media-image', loading: 'lazy' }}
+          </div>
+        {% endif %}
         <div class="rv-stars">{{ block.settings.stars }}</div>
         <div class="rv-author">
           <div class="rv-name">
@@ -102,6 +107,11 @@
       "type": "review",
       "name": "Depoimento",
       "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Foto de demonstração"
+        },
         {
           "type": "text",
           "id": "stars",
