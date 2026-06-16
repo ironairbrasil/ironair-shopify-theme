@@ -13,11 +13,18 @@
 {% endif %}
 
 <section class="final-cta shopify-padding-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
+  {% assign title_blocks = section.blocks | where: 'type', 'title' %}
+  {% assign title_block = title_blocks.first %}
   <div class="fc-left">
-    <h2>{{ section.settings.title | newline_to_br }}</h2>
-    <p>{{ section.settings.text }}</p>
+    {% if title_block != blank or section.settings.title != blank %}
+      <h2 style="font-size: {{ title_block.settings.title_size | default: 52 }}px;" {% if title_block != blank %}{{ title_block.shopify_attributes }}{% endif %}>{{ title_block.settings.title | default: section.settings.title | newline_to_br }}</h2>
+    {% endif %}
+    {% if title_block.settings.text != blank or section.settings.text != blank %}
+      <p style="font-size: {{ title_block.settings.text_size | default: 14 }}px;">{{ title_block.settings.text | default: section.settings.text }}</p>
+    {% endif %}
     <div class="final-points">
       {% for block in section.blocks %}
+        {% if block.type == 'title' %}{% continue %}{% endif %}
         <div {{ block.shopify_attributes }}>✓ {{ block.settings.text }}</div>
       {% endfor %}
     </div>
@@ -74,18 +81,6 @@
       "label": "Produto principal"
     },
     {
-      "type": "textarea",
-      "id": "title",
-      "label": "Título",
-      "default": "Pare de perder tempo\npassando roupa"
-    },
-    {
-      "type": "textarea",
-      "id": "text",
-      "label": "Texto",
-      "default": "O Iron Air passa, seca e desamassa automaticamente para deixar sua rotina mais leve, rápida e prática todos os dias."
-    },
-    {
       "type": "text",
       "id": "button_label",
       "label": "Botão",
@@ -117,6 +112,45 @@
     }
   ],
   "blocks": [
+    {
+      "type": "title",
+      "name": "Título",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "title",
+          "label": "Título",
+          "default": "Pare de perder tempo\npassando roupa"
+        },
+        {
+          "type": "range",
+          "id": "title_size",
+          "label": "Tamanho do título",
+          "min": 24,
+          "max": 72,
+          "step": 1,
+          "unit": "px",
+          "default": 52
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Texto",
+          "default": "O Iron Air passa, seca e desamassa automaticamente para deixar sua rotina mais leve, rápida e prática todos os dias."
+        },
+        {
+          "type": "range",
+          "id": "text_size",
+          "label": "Tamanho do texto",
+          "min": 12,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 14
+        }
+      ]
+    },
     {
       "type": "point",
       "name": "Benefício",

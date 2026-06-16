@@ -1,11 +1,15 @@
 {{ 'compare.css' | asset_url | stylesheet_tag }}
 
 <section class="compare-section section-anchor shopify-padding-section" id="comparativo" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
-  <div class="section-head">
-    <div>
-      <h2>{{ section.settings.title }}</h2>
+  {% assign title_blocks = section.blocks | where: 'type', 'title' %}
+  {% assign title_block = title_blocks.first %}
+  {% if title_block != blank or section.settings.title != blank %}
+    <div class="section-head">
+      <div>
+        <h2 style="font-size: {{ title_block.settings.title_size | default: 30 }}px;" {% if title_block != blank %}{{ title_block.shopify_attributes }}{% endif %}>{{ title_block.settings.title | default: section.settings.title }}</h2>
+      </div>
     </div>
-  </div>
+  {% endif %}
   <p class="compare-hint">Arraste para o lado para ver as informações <span aria-hidden="true">→</span></p>
   <div class="compare-scroll">
     <table class="ctable">
@@ -19,6 +23,7 @@
       </thead>
       <tbody>
         {% for block in section.blocks %}
+          {% if block.type == 'title' %}{% continue %}{% endif %}
           <tr {{ block.shopify_attributes }}>
             <td>{{ block.settings.label }}</td>
             <td class="hl"><span class="{{ block.settings.iron_air }}">{{ block.settings.iron_air | replace: 'yes', '✓' | replace: 'no', '✗' | replace: 'mid', '—' }}</span></td>
@@ -35,12 +40,6 @@
 {
   "name": "Comparativo",
   "settings": [
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Título",
-      "default": "Compare e decida"
-    },
     {
       "type": "header",
       "content": "Preenchimento"
@@ -67,6 +66,29 @@
     }
   ],
   "blocks": [
+    {
+      "type": "title",
+      "name": "Título",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Compare e decida"
+        },
+        {
+          "type": "range",
+          "id": "title_size",
+          "label": "Tamanho do título",
+          "min": 18,
+          "max": 56,
+          "step": 1,
+          "unit": "px",
+          "default": 30
+        }
+      ]
+    },
     {
       "type": "row",
       "name": "Linha",
@@ -144,6 +166,9 @@
     {
       "name": "Comparativo",
       "blocks": [
+        {
+          "type": "title"
+        },
         {
           "type": "row",
           "settings": {

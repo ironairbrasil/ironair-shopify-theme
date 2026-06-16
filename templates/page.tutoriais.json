@@ -46,9 +46,19 @@
             "video_url": "https://www.youtube.com/embed/Skgc8XyztbQ",
             "title": "COMO SECAR CAPACETE COM O IRON AIR"
           }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "title": "Tutoriais",
+            "title_size": 26,
+            "subtitle": "Conteúdos curtos para tirar dúvidas comuns de montagem, ajuste, preparo das peças e manutenção.",
+            "subtitle_size": 13
+          }
         }
       },
       "block_order": [
+        "title",
         "montagem",
         "dicas",
         "calca",
@@ -56,8 +66,6 @@
         "capacete"
       ],
       "settings": {
-        "heading": "Tutoriais",
-        "subtitle": "Conteúdos curtos para tirar dúvidas comuns de montagem, ajuste, preparo das peças e manutenção.",
         "padding_top": 0,
         "padding_bottom": 0
       }

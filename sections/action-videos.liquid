@@ -2,24 +2,27 @@
 <script src="{{ 'action-videos.js' | asset_url }}" defer></script>
 
 <section class="action-videos shopify-padding-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;" data-action-videos>
+  {% assign title_blocks = section.blocks | where: 'type', 'title' %}
+  {% assign title_block = title_blocks.first %}
+  {% assign video_blocks = section.blocks | where: 'type', 'video' %}
   <div class="action-videos-inner">
     <div class="action-videos-head">
-      {% if section.settings.title != blank %}
-        <h2 class="action-videos-title">{{ section.settings.title | escape }}</h2>
+      {% if title_block != blank or section.settings.title != blank %}
+        <h2 class="action-videos-title" style="font-size: {{ title_block.settings.title_size | default: 30 }}px;" {% if title_block != blank %}{{ title_block.shopify_attributes }}{% endif %}>{{ title_block.settings.title | default: section.settings.title | escape }}</h2>
       {% endif %}
-      {% if section.settings.subtitle != blank %}
-        <p class="action-videos-subtitle">{{ section.settings.subtitle | escape }}</p>
+      {% if title_block.settings.subtitle != blank or section.settings.subtitle != blank %}
+        <p class="action-videos-subtitle" style="font-size: {{ title_block.settings.subtitle_size | default: 15 }}px;">{{ title_block.settings.subtitle | default: section.settings.subtitle | escape }}</p>
       {% endif %}
     </div>
 
     <div class="action-videos-shell">
-      {% if section.blocks.size > 1 %}
+      {% if video_blocks.size > 1 %}
         <button type="button" class="action-videos-arrow is-prev" data-action-videos-prev aria-label="Vídeo anterior">‹</button>
         <button type="button" class="action-videos-arrow is-next" data-action-videos-next aria-label="Próximo vídeo">›</button>
       {% endif %}
 
       <div class="action-videos-track" data-action-videos-track>
-        {% for block in section.blocks %}
+        {% for block in video_blocks %}
           {% assign product = block.settings.product | default: section.settings.product %}
           <article class="action-video-card" data-action-video-card {{ block.shopify_attributes }}>
             <div class="action-video-media">
@@ -92,18 +95,6 @@
   "name": "Vídeos em ação",
   "settings": [
     {
-      "type": "text",
-      "id": "title",
-      "label": "Título",
-      "default": "Veja o Iron Air em ação"
-    },
-    {
-      "type": "text",
-      "id": "subtitle",
-      "label": "Subtítulo",
-      "default": "Vídeos rápidos mostrando o produto no dia a dia."
-    },
-    {
       "type": "product",
       "id": "product",
       "label": "Produto padrão"
@@ -134,6 +125,45 @@
     }
   ],
   "blocks": [
+    {
+      "type": "title",
+      "name": "Título",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Veja o Iron Air em ação"
+        },
+        {
+          "type": "range",
+          "id": "title_size",
+          "label": "Tamanho do título",
+          "min": 18,
+          "max": 56,
+          "step": 1,
+          "unit": "px",
+          "default": 30
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtítulo",
+          "default": "Vídeos rápidos mostrando o produto no dia a dia."
+        },
+        {
+          "type": "range",
+          "id": "subtitle_size",
+          "label": "Tamanho do subtítulo",
+          "min": 10,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 15
+        }
+      ]
+    },
     {
       "type": "video",
       "name": "Vídeo",

@@ -2,18 +2,23 @@
 
 <div class="page page-stack tutorials-page">
   <section class="tutorials-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
-    <div class="sec-header">
-      <div class="sec-header-copy">
-        <div class="sec-title">{{ section.settings.heading | escape }}</div>
-        {% if section.settings.subtitle != blank %}
-          <span class="sec-subtitle">{{ section.settings.subtitle | escape }}</span>
-        {% endif %}
+    {% assign title_blocks = section.blocks | where: 'type', 'title' %}
+    {% assign title_block = title_blocks.first %}
+    {% if title_block != blank or section.settings.heading != blank %}
+      <div class="sec-header">
+        <div class="sec-header-copy">
+          <div class="sec-title" style="font-size: {{ title_block.settings.title_size | default: 26 }}px;" {% if title_block != blank %}{{ title_block.shopify_attributes }}{% endif %}>{{ title_block.settings.title | default: section.settings.heading | escape }}</div>
+          {% if title_block.settings.subtitle != blank or section.settings.subtitle != blank %}
+            <span class="sec-subtitle" style="font-size: {{ title_block.settings.subtitle_size | default: 13 }}px;">{{ title_block.settings.subtitle | default: section.settings.subtitle | escape }}</span>
+          {% endif %}
+        </div>
       </div>
-    </div>
+    {% endif %}
 
     {% if section.blocks.size > 0 %}
       <div class="tutorials-grid">
         {% for block in section.blocks %}
+          {% if block.type == 'title' %}{% continue %}{% endif %}
           <article class="tutorial-card" {{ block.shopify_attributes }}>
             <div class="tutorial-video">
               {% if block.settings.video_url != blank %}
@@ -62,18 +67,6 @@
   "name": "Tutoriais",
   "settings": [
     {
-      "type": "text",
-      "id": "heading",
-      "label": "Título",
-      "default": "Tutoriais"
-    },
-    {
-      "type": "text",
-      "id": "subtitle",
-      "label": "Subtítulo",
-      "default": "Conteúdos curtos para tirar dúvidas comuns de montagem, ajuste, preparo das peças e manutenção."
-    },
-    {
       "type": "range",
       "id": "padding_top",
       "label": "Preenchimento superior",
@@ -95,6 +88,45 @@
     }
   ],
   "blocks": [
+    {
+      "type": "title",
+      "name": "Título",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Tutoriais"
+        },
+        {
+          "type": "range",
+          "id": "title_size",
+          "label": "Tamanho do título",
+          "min": 18,
+          "max": 56,
+          "step": 1,
+          "unit": "px",
+          "default": 26
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtítulo",
+          "default": "Conteúdos curtos para tirar dúvidas comuns de montagem, ajuste, preparo das peças e manutenção."
+        },
+        {
+          "type": "range",
+          "id": "subtitle_size",
+          "label": "Tamanho do subtítulo",
+          "min": 10,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 13
+        }
+      ]
+    },
     {
       "type": "tutorial",
       "name": "Tutorial",

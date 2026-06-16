@@ -4,11 +4,15 @@
 {% assign related_collection = product.collections.first %}
 {% if related_collection != blank %}
   <section class="page page-stack related-products-section shopify-padding-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
-    <div class="section-head">
-      <div>
-        <h2>{{ section.settings.title }}</h2>
+    {% assign title_blocks = section.blocks | where: 'type', 'title' %}
+    {% assign title_block = title_blocks.first %}
+    {% if title_block != blank or section.settings.title != blank %}
+      <div class="section-head">
+        <div>
+          <h2 style="font-size: {{ title_block.settings.title_size | default: 30 }}px;" {% if title_block != blank %}{{ title_block.shopify_attributes }}{% endif %}>{{ title_block.settings.title | default: section.settings.title }}</h2>
+        </div>
       </div>
-    </div>
+    {% endif %}
     <div class="products-grid cols3 is-stack-mobile">
       {% for related_product in related_collection.products limit: section.settings.limit %}
         {% unless related_product.id == product.id %}
@@ -23,12 +27,6 @@
 {
   "name": "Produtos relacionados",
   "settings": [
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Título",
-      "default": "Produtos relacionados"
-    },
     {
       "type": "range",
       "id": "limit",
@@ -61,6 +59,31 @@
       "step": 4,
       "unit": "px",
       "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "title",
+      "name": "Título",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Produtos relacionados"
+        },
+        {
+          "type": "range",
+          "id": "title_size",
+          "label": "Tamanho do título",
+          "min": 18,
+          "max": 56,
+          "step": 1,
+          "unit": "px",
+          "default": 30
+        }
+      ]
     }
   ]
 }

@@ -2,10 +2,14 @@
 {{ 'reviews.js' | asset_url | script_tag }}
 
 <section class="reviews-section section-anchor shopify-padding-section" id="depoimentos" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
+  {% assign title_blocks = section.blocks | where: 'type', 'title' %}
+  {% assign title_block = title_blocks.first %}
   <div class="section-head">
-    <div>
-      <h2>{{ section.settings.title }}</h2>
-    </div>
+    {% if title_block != blank or section.settings.title != blank %}
+      <div>
+        <h2 style="font-size: {{ title_block.settings.title_size | default: 30 }}px;" {% if title_block != blank %}{{ title_block.shopify_attributes }}{% endif %}>{{ title_block.settings.title | default: section.settings.title }}</h2>
+      </div>
+    {% endif %}
     <div class="section-rating">
       <span>★★★★★</span>
       <strong>{{ section.settings.rating }}</strong>
@@ -14,6 +18,7 @@
   </div>
   <div class="reviews-grid">
     {% for block in section.blocks %}
+      {% if block.type == 'title' %}{% continue %}{% endif %}
       {% assign fallback_asset = 'depoimento-1.jpg' %}
       {% if forloop.index == 2 %}{% assign fallback_asset = 'depoimento-2.jpg' %}{% endif %}
       {% if forloop.index == 3 %}{% assign fallback_asset = 'depoimento-3.jpg' %}{% endif %}
@@ -43,12 +48,6 @@
 {
   "name": "Depoimentos",
   "settings": [
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Título",
-      "default": "O que dizem os clientes"
-    },
     {
       "type": "text",
       "id": "rating",
@@ -87,6 +86,29 @@
     }
   ],
   "blocks": [
+    {
+      "type": "title",
+      "name": "Título",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "O que dizem os clientes"
+        },
+        {
+          "type": "range",
+          "id": "title_size",
+          "label": "Tamanho do título",
+          "min": 18,
+          "max": 56,
+          "step": 1,
+          "unit": "px",
+          "default": 30
+        }
+      ]
+    },
     {
       "type": "review",
       "name": "Depoimento",
@@ -147,6 +169,9 @@
     {
       "name": "Depoimentos",
       "blocks": [
+        {
+          "type": "title"
+        },
         {
           "type": "review",
           "settings": {
