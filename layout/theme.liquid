@@ -34,6 +34,15 @@
       :root {
         --font-title: {{ title_font.family }}, {{ title_font.fallback_families }};
         --font-body: {{ body_font.family }}, {{ body_font.fallback_families }};
+        --font-size-body: {{ settings.font_size_body | default: 14 }}px;
+        --font-size-paragraph: {{ settings.font_size_paragraph | default: 15 }}px;
+        --font-size-small: {{ settings.font_size_small | default: 13 }}px;
+        --font-size-button: {{ settings.font_size_button | default: 13 }}px;
+        --font-size-heading: {{ settings.font_size_heading | default: 30 }}px;
+        --font-size-heading-small: {{ settings.font_size_heading_small | default: 20 }}px;
+        --font-size-hero: {{ settings.font_size_hero | default: 52 }}px;
+        --font-size-product-title: {{ settings.font_size_product_title | default: 40 }}px;
+        --font-size-price: {{ settings.font_size_price | default: 32 }}px;
       }
     </style>
     {{ 'base.css' | asset_url | stylesheet_tag }}

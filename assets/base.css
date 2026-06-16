@@ -12,21 +12,21 @@ body.site-body {
   font-family: var(--font-body);
   background: var(--page-color, var(--bg));
   color: var(--ink);
-  font-size: 14px;
+  font-size: var(--font-size-body);
 }
 
 p {
-  font-size: 15px;
+  font-size: var(--font-size-paragraph);
 }
 
 h2 {
   font-family: var(--font-title);
-  font-size: 30px;
+  font-size: var(--font-size-heading);
 }
 
 h3 {
   font-family: var(--font-title);
-  font-size: 20px;
+  font-size: var(--font-size-heading-small);
 }
 
 .site-shell {

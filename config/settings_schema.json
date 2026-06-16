@@ -15,6 +15,100 @@
         "default": "inter_n4"
       },
       {
+        "type": "header",
+        "content": "Tamanhos de texto"
+      },
+      {
+        "type": "range",
+        "id": "font_size_body",
+        "label": "Texto base",
+        "min": 12,
+        "max": 20,
+        "step": 1,
+        "unit": "px",
+        "default": 14
+      },
+      {
+        "type": "range",
+        "id": "font_size_paragraph",
+        "label": "Descrições e parágrafos",
+        "min": 13,
+        "max": 22,
+        "step": 1,
+        "unit": "px",
+        "default": 15
+      },
+      {
+        "type": "range",
+        "id": "font_size_small",
+        "label": "Textos pequenos",
+        "min": 10,
+        "max": 16,
+        "step": 1,
+        "unit": "px",
+        "default": 13
+      },
+      {
+        "type": "range",
+        "id": "font_size_button",
+        "label": "Menus e botões",
+        "min": 11,
+        "max": 18,
+        "step": 1,
+        "unit": "px",
+        "default": 13
+      },
+      {
+        "type": "range",
+        "id": "font_size_heading",
+        "label": "Títulos de seção",
+        "min": 22,
+        "max": 48,
+        "step": 1,
+        "unit": "px",
+        "default": 30
+      },
+      {
+        "type": "range",
+        "id": "font_size_heading_small",
+        "label": "Títulos menores",
+        "min": 16,
+        "max": 32,
+        "step": 1,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "font_size_hero",
+        "label": "Títulos grandes / banner",
+        "min": 32,
+        "max": 82,
+        "step": 1,
+        "unit": "px",
+        "default": 52
+      },
+      {
+        "type": "range",
+        "id": "font_size_product_title",
+        "label": "Título do produto",
+        "min": 24,
+        "max": 56,
+        "step": 1,
+        "unit": "px",
+        "default": 40
+      },
+      {
+        "type": "range",
+        "id": "font_size_price",
+        "label": "Preços",
+        "min": 24,
+        "max": 60,
+        "step": 1,
+        "unit": "px",
+        "default": 32
+      },
+      {
         "type": "color",
         "id": "color_primary",
         "label": "Cor principal",

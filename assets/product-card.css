@@ -33,7 +33,7 @@
 }
 
 .pc-badge {
-  font-size: 10px;
+  font-size: calc(var(--font-size-small) - 3px);
   font-weight: 800;
   letter-spacing: 0.5px;
   text-transform: uppercase;
@@ -150,7 +150,7 @@
 }
 
 .pc-brand {
-  font-size: 10px;
+  font-size: calc(var(--font-size-small) - 3px);
   font-weight: 700;
   color: var(--dark-green);
   text-transform: uppercase;
@@ -164,7 +164,7 @@
 }
 
 .pc-name {
-  font-size: 14px;
+  font-size: var(--font-size-body);
   font-weight: 700;
   color: var(--ink);
   line-height: 1.35;
@@ -173,7 +173,7 @@
 }
 
 .pc-copy {
-  font-size: 12px;
+  font-size: calc(var(--font-size-small) - 1px);
   color: var(--mid);
   line-height: 1.6;
   margin-bottom: 12px;
@@ -188,7 +188,7 @@
 }
 
 .pc-price-old {
-  font-size: 14px;
+  font-size: var(--font-size-body);
   font-weight: 700;
   color: var(--red) !important;
   text-decoration: line-through;
@@ -198,19 +198,19 @@
 
 .pc-price {
   font-family: var(--font-title);
-  font-size: 32px;
+  font-size: var(--font-size-price);
   font-weight: 800;
   color: var(--ink);
   line-height: 1;
 }
 
 .pc-price small {
-  font-size: 18px;
+  font-size: calc(var(--font-size-heading-small) - 2px);
   font-weight: 600;
 }
 
 .pc-parcel {
-  font-size: 13px;
+  font-size: var(--font-size-small);
   color: var(--muted);
   margin-top: 2px;
 }
@@ -227,7 +227,7 @@
   color: var(--green);
   padding: 5px 10px;
   border-radius: 4px;
-  font-size: 13px;
+  font-size: var(--font-size-small);
   font-weight: 700;
   margin-top: 6px;
   width: fit-content;
@@ -249,7 +249,7 @@
 
 .product-card-payment-pix strong {
   font-family: var(--font-title);
-  font-size: 28px;
+  font-size: calc(var(--font-size-price) - 4px);
   line-height: 1;
   color: var(--green);
 }
@@ -257,7 +257,7 @@
 .product-card-payment-pix span,
 .product-card-payment-card {
   color: var(--muted);
-  font-size: 13px;
+  font-size: var(--font-size-small);
   line-height: 1.25;
 }
 
@@ -268,7 +268,7 @@
 
 .pc-stock {
   margin-top: 8px;
-  font-size: 12px;
+  font-size: calc(var(--font-size-small) - 1px);
   font-weight: 700;
   color: var(--green);
 }
@@ -290,7 +290,7 @@
   background: var(--dark-green);
   color: #fff;
   padding: 10px;
-  font-size: 13px;
+  font-size: var(--font-size-small);
   min-height: 44px;
   flex: 0 0 auto;
   text-align: center;

@@ -14,7 +14,7 @@
   color: var(--button-text-color, #fff);
   padding: 14px 32px;
   border-radius: 6px;
-  font-size: 15px;
+  font-size: var(--font-size-paragraph);
   font-weight: 800;
   letter-spacing: 0.3px;
   box-shadow: 0 4px 20px rgba(var(--iron-green-rgb), 0.4);
@@ -31,7 +31,7 @@
   color: #fff;
   padding: 14px 24px;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: var(--font-size-body);
   font-weight: 600;
   border: 2px solid rgba(255, 255, 255, 0.25);
 }
@@ -81,7 +81,7 @@
 }
 
 .sec-title {
-  font-size: 26px;
+  font-size: calc(var(--font-size-heading) - 4px);
   font-weight: 800;
   text-transform: uppercase;
   color: var(--ink);
@@ -100,12 +100,12 @@
 }
 
 .sec-subtitle {
-  font-size: 13px;
+  font-size: var(--font-size-small);
   color: var(--muted);
 }
 
 .sec-link {
-  font-size: 13px;
+  font-size: var(--font-size-small);
   font-weight: 700;
   color: var(--dark-green);
   display: flex;

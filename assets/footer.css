@@ -34,7 +34,7 @@ footer {
 }
 
 .footer-brand p {
-  font-size: 13px;
+  font-size: var(--font-size-small);
   color: rgba(255, 255, 255, 0.4);
   line-height: 1.7;
   margin-bottom: 16px;
@@ -55,7 +55,7 @@ footer {
   justify-content: center;
   color: #fff;
   transition: all 0.2s;
-  font-size: 12px;
+  font-size: calc(var(--font-size-small) - 1px);
   font-weight: 700;
 }
 
@@ -95,7 +95,7 @@ footer {
 }
 
 .f-col h4 {
-  font-size: 13px;
+  font-size: var(--font-size-small);
   font-weight: 800;
   color: #fff;
   margin-bottom: 14px;
@@ -112,7 +112,7 @@ footer {
 }
 
 .f-col a {
-  font-size: 13px;
+  font-size: var(--font-size-small);
   color: rgba(255, 255, 255, 0.4);
   transition: color 0.2s;
 }
@@ -130,7 +130,7 @@ footer {
 }
 
 .footer-bottom p {
-  font-size: 12px;
+  font-size: calc(var(--font-size-small) - 1px);
   color: rgba(255, 255, 255, 0.25);
 }
 
