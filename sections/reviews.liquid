@@ -19,28 +19,15 @@
   <div class="reviews-grid">
     {% for block in section.blocks %}
       {% if block.type == 'title' %}{% continue %}{% endif %}
-      {% assign fallback_asset = 'depoimento-1.jpg' %}
-      {% if forloop.index == 2 %}{% assign fallback_asset = 'depoimento-2.jpg' %}{% endif %}
-      {% if forloop.index == 3 %}{% assign fallback_asset = 'depoimento-3.jpg' %}{% endif %}
       <article class="review-card" {{ block.shopify_attributes }}>
         <div class="rv-stars">{{ block.settings.stars }}</div>
-        <p class="rv-text">{{ block.settings.text }}</p>
         <div class="rv-author">
-          <div class="rv-av rv-{{ block.settings.tone }}">
-            {% if block.settings.image != blank %}
-              {{ block.settings.image | image_url: width: 96 | image_tag: alt: block.settings.name, class: 'rv-av-image', loading: 'lazy' }}
-            {% else %}
-              <img class="rv-av-image" src="{{ fallback_asset | asset_url }}" alt="{{ block.settings.name | escape }}">
-            {% endif %}
-          </div>
-          <div>
-            <div class="rv-name">
-              <span>{{ block.settings.name }}</span>
-              <span class="rv-verified-badge" aria-label="Verificado">✓</span>
-            </div>
-            <div class="rv-city">{{ block.settings.city }}</div>
+          <div class="rv-name">
+            <span>{{ block.settings.name }}</span>
+            <span class="rv-verified-badge" aria-label="Verificado">✓</span>
           </div>
         </div>
+        <p class="rv-text">{{ block.settings.text }}</p>
       </article>
     {% endfor %}
   </div>
@@ -116,11 +103,6 @@
       "name": "Depoimento",
       "settings": [
         {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Foto"
-        },
-        {
           "type": "text",
           "id": "stars",
           "label": "Estrelas",
@@ -137,32 +119,6 @@
           "id": "name",
           "label": "Nome",
           "default": "Marina Silva"
-        },
-        {
-          "type": "text",
-          "id": "city",
-          "label": "Cidade",
-          "default": "São Paulo, SP"
-        },
-        {
-          "type": "select",
-          "id": "tone",
-          "label": "Cor",
-          "default": "red",
-          "options": [
-            {
-              "value": "red",
-              "label": "Vermelho"
-            },
-            {
-              "value": "blue",
-              "label": "Azul"
-            },
-            {
-              "value": "green",
-              "label": "Verde"
-            }
-          ]
         }
       ]
     }
@@ -178,8 +134,6 @@
           "type": "review",
           "settings": {
             "name": "Marina Silva",
-            "city": "São Paulo, SP",
-            "tone": "red",
             "text": "Tirei minha camisa da secadora toda amarrotada e em 12 minutos já estava passada, parecia nova. Nunca mais precisei de tábua de passar."
           }
         },
@@ -187,8 +141,6 @@
           "type": "review",
           "settings": {
             "name": "Roberto Santos",
-            "city": "Curitiba, PR",
-            "tone": "blue",
             "text": "Trabalho com eventos e preciso estar impecável todo dia. O Iron Air me salva nas manhãs enquanto eu tomo café."
           }
         },
@@ -196,8 +148,6 @@
           "type": "review",
           "settings": {
             "name": "Juliana Costa",
-            "city": "Brasília, DF",
-            "tone": "green",
             "text": "Dei de presente para minha mãe que tem dores nas costas. Ela ficou emocionada e a rotina mudou de verdade."
           }
         }
