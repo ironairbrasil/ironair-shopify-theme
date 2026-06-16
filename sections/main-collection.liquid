@@ -2,6 +2,8 @@
 {{ 'featured-products.css' | asset_url | stylesheet_tag }}
 {{ 'product-card.css' | asset_url | stylesheet_tag }}
 
+{% assign products_by_creation = collection.products | sort: 'created_at' | reverse %}
+
 <section class="page page-stack shopify-padding-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
   {% if section.blocks.size > 0 %}
     {% for block in section.blocks %}
@@ -20,7 +22,7 @@
 
         {% when 'products' %}
           <div class="products-grid cols{{ block.settings.columns_desktop }} is-stack-mobile" {{ block.shopify_attributes }}>
-            {% for product in collection.products %}
+            {% for product in products_by_creation %}
               {% render 'product-card',
                 product: product,
                 show_media: block.settings.show_media,
@@ -43,7 +45,7 @@
       </div>
     </div>
     <div class="products-grid cols4 is-stack-mobile">
-      {% for product in collection.products %}
+      {% for product in products_by_creation %}
         {% render 'product-card', product: product %}
       {% else %}
         <div class="content-card collection-empty">
