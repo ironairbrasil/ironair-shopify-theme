@@ -24,7 +24,7 @@
 
 .tutorials-empty strong {
   color: var(--ink);
-  font-size: 18px;
+  font-size: calc(var(--font-size-heading-small) - 2px);
   font-weight: 900;
 }
 
@@ -96,7 +96,7 @@
 
 .tutorial-card-copy > span {
   color: var(--iron-green);
-  font-size: 12px;
+  font-size: calc(var(--font-size-small) - 1px);
   font-weight: 900;
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -104,14 +104,14 @@
 
 .tutorial-card-copy h3 {
   font-family: var(--font-title);
-  font-size: 28px;
+  font-size: calc(var(--font-size-heading) - 2px);
   line-height: .98;
 }
 
 .tutorial-card-copy p {
   color: var(--mid);
   line-height: 1.65;
-  font-size: 14px;
+  font-size: var(--font-size-body);
 }
 
 .tutorial-steps {
@@ -125,7 +125,7 @@
   background: var(--dark-green-l);
   color: var(--dark-green);
   padding: 6px 10px;
-  font-size: 11px;
+  font-size: calc(var(--font-size-small) - 2px);
   font-weight: 800;
 }
 

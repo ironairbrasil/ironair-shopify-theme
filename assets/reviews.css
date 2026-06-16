@@ -6,16 +6,16 @@
 
 .section-rating span {
   color: var(--gold);
-  font-size: 18px;
+  font-size: calc(var(--font-size-heading-small) - 2px);
 }
 
 .section-rating strong {
-  font-size: 14px;
+  font-size: var(--font-size-body);
 }
 
 .section-rating small {
   color: var(--muted);
-  font-size: 13px;
+  font-size: var(--font-size-small);
 }
 
 .reviews-grid {
@@ -39,12 +39,12 @@
 
 .rv-stars {
   color: var(--gold);
-  font-size: 14px;
+  font-size: var(--font-size-body);
   margin-bottom: 10px;
 }
 
 .rv-text {
-  font-size: 13px;
+  font-size: var(--font-size-small);
   line-height: 1.7;
   color: var(--ink);
   margin-bottom: 14px;
@@ -67,7 +67,7 @@
   align-items: center;
   justify-content: center;
   font-family: var(--font-title);
-  font-size: 16px;
+  font-size: calc(var(--font-size-paragraph) + 1px);
   font-weight: 800;
   flex-shrink: 0;
   overflow: hidden;
@@ -91,12 +91,12 @@
 }
 
 .rv-name {
-  font-size: 13px;
+  font-size: var(--font-size-small);
   font-weight: 700;
 }
 
 .rv-city {
-  font-size: 11px;
+  font-size: calc(var(--font-size-small) - 2px);
   color: var(--muted);
 }
 
@@ -104,7 +104,7 @@
   display: inline-flex;
   align-items: center;
   gap: 3px;
-  font-size: 10px;
+  font-size: calc(var(--font-size-small) - 3px);
   color: var(--green);
   font-weight: 700;
   margin-top: 2px;

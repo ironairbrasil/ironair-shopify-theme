@@ -37,7 +37,7 @@
 .auth-form label {
   display: grid;
   gap: 8px;
-  font-size: 13px;
+  font-size: var(--font-size-small);
   font-weight: 700;
   color: var(--ink);
 }
@@ -102,7 +102,7 @@
 .auth-success {
   border-radius: 8px;
   padding: 12px 14px;
-  font-size: 13px;
+  font-size: var(--font-size-small);
   line-height: 1.6;
 }
 
@@ -260,7 +260,7 @@
 
 .complaints-company-title-row h3 {
   font-family: var(--font-body);
-  font-size: 25px;
+  font-size: calc(var(--font-size-heading-small) + 5px);
   line-height: 1.15;
   margin: 0;
 }
@@ -274,7 +274,7 @@
   border-radius: 999px;
   background: #e7f1ff;
   color: #1f67c8;
-  font-size: 12px;
+  font-size: calc(var(--font-size-small) - 1px);
   font-weight: 800;
 }
 
@@ -290,7 +290,7 @@
 
 .complaints-company-section strong {
   color: var(--ink);
-  font-size: 14px;
+  font-size: var(--font-size-body);
 }
 
 .complaints-company-contact {
@@ -345,7 +345,7 @@
 .complaints-head h3,
 .complaints-history-head h3 {
   font-family: var(--font-body);
-  font-size: 25px;
+  font-size: calc(var(--font-size-heading-small) + 5px);
   line-height: 1.15;
   margin-bottom: 0;
 }
@@ -412,13 +412,13 @@
 
 .complaint-author-name {
   color: var(--mid);
-  font-size: 14px;
+  font-size: var(--font-size-body);
   font-weight: 700;
 }
 
 .complaint-date {
   color: var(--muted);
-  font-size: 14px;
+  font-size: var(--font-size-body);
   font-weight: 700;
   white-space: nowrap;
 }
@@ -466,13 +466,13 @@
   border-radius: 999px;
   background: rgba(31, 103, 200, 0.1);
   color: #1f67c8;
-  font-size: 12px;
+  font-size: calc(var(--font-size-small) - 1px);
   font-weight: 800;
 }
 
 .complaint-response-date {
   color: var(--muted);
-  font-size: 12px;
+  font-size: calc(var(--font-size-small) - 1px);
   font-weight: 700;
 }
 
@@ -506,7 +506,7 @@
   min-height: 36px;
   padding: 8px 14px;
   border-radius: 999px;
-  font-size: 12px;
+  font-size: calc(var(--font-size-small) - 1px);
   font-weight: 800;
   letter-spacing: 0.03em;
   text-transform: uppercase;
@@ -566,7 +566,7 @@
 .auth-card h2,
 .account-head h2 {
   font-family: var(--font-title);
-  font-size: clamp(34px, 4vw, 48px);
+  font-size: clamp(calc(var(--font-size-heading) + 4px), 4vw, calc(var(--font-size-product-title) + 8px));
   line-height: 0.95;
   margin-bottom: 12px;
 }
@@ -592,7 +592,7 @@
 
 .account-orders-head h3 {
   font-family: var(--font-title);
-  font-size: 34px;
+  font-size: calc(var(--font-size-heading) + 4px);
   line-height: 1;
 }
 
@@ -602,7 +602,7 @@
 }
 
 .account-form-section h3 {
-  font-size: 14px;
+  font-size: var(--font-size-body);
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -611,7 +611,7 @@
 
 .account-form-note {
   margin-top: -2px;
-  font-size: 13px;
+  font-size: var(--font-size-small);
   color: var(--muted);
   line-height: 1.6;
 }
@@ -628,16 +628,16 @@
 
 .account-shell .auth-card h2,
 .account-shell .account-head h2 {
-  font-size: 30px;
+  font-size: var(--font-size-heading);
 }
 
 .account-shell .account-orders-head h3 {
-  font-size: clamp(26px, 2.6vw, 32px);
+  font-size: clamp(calc(var(--font-size-heading) - 4px), 2.6vw, calc(var(--font-size-heading) + 2px));
 }
 
 .loading-inline-title {
   font-family: var(--font-title);
-  font-size: 15px;
+  font-size: var(--font-size-paragraph);
   font-weight: 700;
   line-height: 1.1;
   color: var(--ink);
@@ -671,12 +671,12 @@
 
 .order-card-head strong {
   display: block;
-  font-size: 16px;
+  font-size: calc(var(--font-size-paragraph) + 1px);
 }
 
 .order-card-head span {
   color: var(--muted);
-  font-size: 12px;
+  font-size: calc(var(--font-size-small) - 1px);
 }
 
 .order-status {
@@ -685,7 +685,7 @@
   background: var(--dark-green-l);
   color: var(--dark-green);
   text-transform: uppercase;
-  font-size: 11px;
+  font-size: calc(var(--font-size-small) - 2px);
   font-weight: 800;
   letter-spacing: 0.06em;
 }
@@ -698,7 +698,7 @@
 
 .order-line {
   color: var(--mid);
-  font-size: 13px;
+  font-size: var(--font-size-small);
 }
 
 .order-line strong,

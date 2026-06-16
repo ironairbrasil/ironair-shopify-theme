@@ -49,14 +49,14 @@
 }
 
 .hiw-title {
-  font-size: 14px;
+  font-size: var(--font-size-body);
   font-weight: 800;
   color: var(--ink);
   margin-bottom: 6px;
 }
 
 .hiw-desc {
-  font-size: 12px;
+  font-size: calc(var(--font-size-small) - 1px);
   color: var(--muted);
   line-height: 1.6;
 }

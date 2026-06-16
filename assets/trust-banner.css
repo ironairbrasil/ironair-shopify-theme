@@ -40,14 +40,14 @@
 
 .trust-label-title {
   display: block;
-  font-size: 14px;
+  font-size: var(--font-size-body);
   font-weight: 800;
   color: #fff;
   margin: 0;
 }
 
 .trust-label span {
-  font-size: 11px;
+  font-size: calc(var(--font-size-small) - 2px);
   color: rgba(255, 255, 255, 0.5);
 }
 
@@ -103,13 +103,13 @@
   }
   .trust-item .trust-icon { width: 34px; height: 34px; }
   .trust-item .trust-icon svg { width: 16px; height: 16px; }
-  .trust-label-title { font-size: 11px; line-height: 1.15; }
+  .trust-label-title { font-size: calc(var(--font-size-small) - 2px); line-height: 1.15; }
   .trust-label span {
     display: block;
     max-width: 86px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-size: 9px;
+    font-size: calc(var(--font-size-small) - 4px);
   }
 }

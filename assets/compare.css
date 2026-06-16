@@ -22,7 +22,7 @@
 
 .ctable th {
   padding: 14px 16px;
-  font-size: 12px;
+  font-size: calc(var(--font-size-small) - 1px);
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -39,7 +39,7 @@
 
 .ctable td {
   padding: 13px 16px;
-  font-size: 13px;
+  font-size: var(--font-size-small);
   border-bottom: 1px solid var(--border);
   color: var(--mid);
 }
@@ -64,18 +64,18 @@
 
 .yes {
   color: var(--green);
-  font-size: 18px;
+  font-size: calc(var(--font-size-heading-small) - 2px);
   font-weight: 800;
 }
 
 .no {
   color: #ccc;
-  font-size: 18px;
+  font-size: calc(var(--font-size-heading-small) - 2px);
 }
 
 .mid {
   color: var(--muted);
-  font-size: 14px;
+  font-size: var(--font-size-body);
 }
 
 .compare-scroll {
@@ -91,7 +91,7 @@
     gap: 6px;
     margin-top: 10px;
     color: var(--muted);
-    font-size: 12px;
+    font-size: calc(var(--font-size-small) - 1px);
     font-weight: 600;
   }
 }
