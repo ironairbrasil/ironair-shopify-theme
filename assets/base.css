@@ -9,7 +9,7 @@ html {
 }
 
 body.site-body {
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   background: var(--page-color, var(--bg));
   color: var(--ink);
   font-size: 14px;
@@ -20,12 +20,12 @@ p {
 }
 
 h2 {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-title);
   font-size: 30px;
 }
 
 h3 {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-title);
   font-size: 20px;
 }
 

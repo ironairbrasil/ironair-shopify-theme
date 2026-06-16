@@ -1,4 +1,6 @@
 :root {
+  --font-title: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
   --dark-green: #103d3e;
   --dark-green-d: #0b2d2e;
   --dark-green-l: #e7efef;

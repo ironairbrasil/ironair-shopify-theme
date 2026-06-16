@@ -77,7 +77,7 @@ header {
 
 .logo span,
 .f-logo span {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-title);
   font-size: 32px;
   font-weight: 900;
   line-height: 1;

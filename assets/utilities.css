@@ -77,7 +77,7 @@
 
 .sec-title,
 .page-hero h1 {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-title);
 }
 
 .sec-title {

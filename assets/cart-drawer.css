@@ -61,7 +61,7 @@
 
 .cart-drawer-header strong {
   display: block;
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-title);
   font-size: 28px;
   line-height: 1;
 }
@@ -257,7 +257,7 @@
 }
 
 .cart-drawer-subtotal strong {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-title);
   color: var(--dark-green);
   font-size: 26px;
 }
