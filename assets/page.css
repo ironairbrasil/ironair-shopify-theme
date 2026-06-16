@@ -11,6 +11,17 @@
   height: auto;
 }
 
+.page-content ul,
+.page-content ol {
+  margin-left: 0;
+  padding-left: 0;
+  list-style-position: inside;
+}
+
+.page-content li {
+  padding-left: 0;
+}
+
 .page-content > * + * {
   margin-top: 12px;
 }
