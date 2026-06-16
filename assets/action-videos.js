@@ -137,6 +137,7 @@
       var card = cards[index];
       if (!card) return;
       setActive(index);
+      var scrollBehavior = behavior === 'smooth' ? 'auto' : (behavior || 'auto');
 
       function scrollToCard() {
         var trackRect = track.getBoundingClientRect();
@@ -147,7 +148,7 @@
 
         track.scrollTo({
           left: targetLeft,
-          behavior: behavior || 'smooth'
+          behavior: scrollBehavior
         });
       }
 
