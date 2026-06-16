@@ -15,11 +15,27 @@
     {% endif %}
     <link rel="canonical" href="{{ canonical_url }}">
     <link rel="icon" href="{{ 'favicon.png' | asset_url }}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     {{ content_for_header }}
     {{ 'variables.css' | asset_url | stylesheet_tag }}
+    {% liquid
+      assign title_font = settings.type_header_font
+      assign body_font = settings.type_body_font
+      assign title_font_semibold = title_font | font_modify: 'weight', '600'
+      assign body_font_semibold = body_font | font_modify: 'weight', '600'
+      assign body_font_bold = body_font | font_modify: 'weight', '700'
+    %}
+    <style>
+      {{ title_font | font_face: font_display: 'swap' }}
+      {{ title_font_semibold | font_face: font_display: 'swap' }}
+      {{ body_font | font_face: font_display: 'swap' }}
+      {{ body_font_semibold | font_face: font_display: 'swap' }}
+      {{ body_font_bold | font_face: font_display: 'swap' }}
+
+      :root {
+        --font-title: {{ title_font.family }}, {{ title_font.fallback_families }};
+        --font-body: {{ body_font.family }}, {{ body_font.fallback_families }};
+      }
+    </style>
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'utilities.css' | asset_url | stylesheet_tag }}
     {{ 'animations.css' | asset_url | stylesheet_tag }}
