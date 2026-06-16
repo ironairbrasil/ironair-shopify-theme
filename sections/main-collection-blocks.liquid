@@ -1,27 +1,57 @@
 {{ 'collection-page.css' | asset_url | stylesheet_tag }}
 {{ 'featured-products.css' | asset_url | stylesheet_tag }}
 {{ 'product-card.css' | asset_url | stylesheet_tag }}
+{{ 'featured-products.js' | asset_url | script_tag }}
 
-{% assign products_by_creation = collection.products | sort: 'created_at' %}
+{% assign selected_collection = section.settings.collection | default: collection | default: collections.all %}
+{% assign products_by_creation = selected_collection.products | sort: 'created_at' %}
 
 <section class="page page-stack shopify-padding-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
   {% for block in section.blocks %}
     {% case block.type %}
-      {% when 'heading' %}
+      {% when 'title' %}
         <div class="sec-header" {{ block.shopify_attributes }}>
           <div class="sec-header-copy">
             <div class="sec-title" style="font-size: {{ block.settings.title_size | default: 26 }}px;">{{ block.settings.title | escape }}</div>
             {% if block.settings.show_product_count %}
-              <span class="sec-subtitle" style="font-size: {{ block.settings.subtitle_size | default: 13 }}px;">{{ collection.products_count }} produto{% unless collection.products_count == 1 %}s{% endunless %}</span>
+              <span class="sec-subtitle" style="font-size: {{ block.settings.subtitle_size | default: 13 }}px;">{{ selected_collection.products_count }} produto{% unless selected_collection.products_count == 1 %}s{% endunless %}</span>
             {% elsif block.settings.subtitle != blank %}
               <span class="sec-subtitle" style="font-size: {{ block.settings.subtitle_size | default: 13 }}px;">{{ block.settings.subtitle | escape }}</span>
             {% endif %}
           </div>
         </div>
 
-      {% when 'product_grid' %}
-        <div class="products-grid cols{{ block.settings.columns_desktop }} is-stack-mobile" {{ block.shopify_attributes }}>
-          {% for product in products_by_creation %}
+      {% when 'heading' %}
+        <div class="sec-header" {{ block.shopify_attributes }}>
+          <div class="sec-header-copy">
+            <div class="sec-title" style="font-size: {{ block.settings.title_size | default: 26 }}px;">{{ block.settings.title | escape }}</div>
+            {% if block.settings.show_product_count %}
+              <span class="sec-subtitle" style="font-size: {{ block.settings.subtitle_size | default: 13 }}px;">{{ selected_collection.products_count }} produto{% unless selected_collection.products_count == 1 %}s{% endunless %}</span>
+            {% elsif block.settings.subtitle != blank %}
+              <span class="sec-subtitle" style="font-size: {{ block.settings.subtitle_size | default: 13 }}px;">{{ block.settings.subtitle | escape }}</span>
+            {% endif %}
+          </div>
+        </div>
+
+      {% when 'products' %}
+        {% assign display_mode = block.settings.display_mode | default: 'grid' %}
+        {% assign columns_desktop = block.settings.columns_desktop | default: '4' %}
+        {% assign products_limit = block.settings.products_limit | default: 50 %}
+        {% assign use_carousel = false %}
+        {% if display_mode == 'carousel' %}
+          {% assign use_carousel = true %}
+        {% endif %}
+
+        {% if use_carousel %}
+          <div class="products-carousel-shell" data-products-carousel {{ block.shopify_attributes }}>
+            <div class="products-carousel-nav" aria-label="Navegar produtos">
+              <button type="button" class="products-carousel-arrow" data-products-prev aria-label="Produtos anteriores">‹</button>
+              <button type="button" class="products-carousel-arrow" data-products-next aria-label="Próximos produtos">›</button>
+            </div>
+        {% endif %}
+
+        <div class="products-grid cols{{ columns_desktop }} {% if use_carousel %}is-carousel{% else %}is-stack-mobile{% endif %}" {% unless use_carousel %}{{ block.shopify_attributes }}{% endunless %} {% if use_carousel %}data-products-track{% endif %}>
+          {% for product in products_by_creation limit: products_limit %}
             {% render 'product-card',
               product: product,
               show_media: block.settings.show_media,
@@ -35,14 +65,60 @@
             </div>
           {% endfor %}
         </div>
+
+        {% if use_carousel %}
+          </div>
+        {% endif %}
+
+      {% when 'product_grid' %}
+        {% assign display_mode = block.settings.display_mode | default: 'grid' %}
+        {% assign columns_desktop = block.settings.columns_desktop | default: '4' %}
+        {% assign products_limit = block.settings.products_limit | default: 50 %}
+        {% assign use_carousel = false %}
+        {% if display_mode == 'carousel' %}
+          {% assign use_carousel = true %}
+        {% endif %}
+
+        {% if use_carousel %}
+          <div class="products-carousel-shell" data-products-carousel {{ block.shopify_attributes }}>
+            <div class="products-carousel-nav" aria-label="Navegar produtos">
+              <button type="button" class="products-carousel-arrow" data-products-prev aria-label="Produtos anteriores">‹</button>
+              <button type="button" class="products-carousel-arrow" data-products-next aria-label="Próximos produtos">›</button>
+            </div>
+        {% endif %}
+
+        <div class="products-grid cols{{ columns_desktop }} {% if use_carousel %}is-carousel{% else %}is-stack-mobile{% endif %}" {% unless use_carousel %}{{ block.shopify_attributes }}{% endunless %} {% if use_carousel %}data-products-track{% endif %}>
+          {% for product in products_by_creation limit: products_limit %}
+            {% render 'product-card',
+              product: product,
+              show_media: block.settings.show_media,
+              media_ratio: block.settings.media_ratio,
+              border_style: block.settings.border_style,
+              corner_radius: block.settings.corner_radius
+            %}
+          {% else %}
+            <div class="content-card collection-empty">
+              <p>Nenhum produto encontrado nesta coleção.</p>
+            </div>
+          {% endfor %}
+        </div>
+
+        {% if use_carousel %}
+          </div>
+        {% endif %}
     {% endcase %}
   {% endfor %}
 </section>
 
 {% schema %}
 {
-  "name": "Coleção em blocos",
+  "name": "Galeria de Produtos",
   "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Coleção de produtos"
+    },
     {
       "type": "header",
       "content": "Preenchimento"
@@ -70,7 +146,7 @@
   ],
   "blocks": [
     {
-      "type": "heading",
+      "type": "title",
       "name": "Título",
       "limit": 1,
       "settings": [
@@ -114,10 +190,35 @@
       ]
     },
     {
-      "type": "product_grid",
+      "type": "products",
       "name": "Produtos",
       "limit": 1,
       "settings": [
+        {
+          "type": "select",
+          "id": "display_mode",
+          "label": "Modo",
+          "options": [
+            {
+              "value": "grid",
+              "label": "Grade"
+            },
+            {
+              "value": "carousel",
+              "label": "Carrossel"
+            }
+          ],
+          "default": "grid"
+        },
+        {
+          "type": "range",
+          "id": "products_limit",
+          "label": "Quantidade de produtos",
+          "min": 1,
+          "max": 50,
+          "step": 1,
+          "default": 50
+        },
         {
           "type": "select",
           "id": "columns_desktop",
@@ -203,13 +304,13 @@
   ],
   "presets": [
     {
-      "name": "Coleção em blocos",
+      "name": "Galeria de Produtos",
       "blocks": [
         {
-          "type": "heading"
+          "type": "title"
         },
         {
-          "type": "product_grid"
+          "type": "products"
         }
       ]
     }
