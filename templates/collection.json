@@ -25,7 +25,7 @@
         "products": {
           "type": "products",
           "settings": {
-            "display_mode": "carousel",
+            "display_mode": "grid",
             "products_limit": 50,
             "columns_desktop": "4",
             "show_media": true,
