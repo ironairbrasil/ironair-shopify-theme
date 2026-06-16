@@ -4,9 +4,6 @@
 <section class="action-videos shopify-padding-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;" data-action-videos>
   <div class="action-videos-inner">
     <div class="action-videos-head">
-      {% if section.settings.kicker != blank %}
-        <div class="action-videos-kicker">{{ section.settings.kicker | escape }}</div>
-      {% endif %}
       {% if section.settings.title != blank %}
         <h2 class="action-videos-title">{{ section.settings.title | escape }}</h2>
       {% endif %}
@@ -94,12 +91,6 @@
 {
   "name": "Vídeos em ação",
   "settings": [
-    {
-      "type": "text",
-      "id": "kicker",
-      "label": "Texto pequeno",
-      "default": "Shop your feed"
-    },
     {
       "type": "text",
       "id": "title",

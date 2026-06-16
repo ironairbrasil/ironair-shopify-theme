@@ -2,7 +2,6 @@
   {% if section.settings.title != blank %}
     <div class="section-head">
       <div>
-        {% if section.settings.kicker != blank %}<div class="section-kicker">{{ section.settings.kicker }}</div>{% endif %}
         <h1>{{ section.settings.title }}</h1>
       </div>
     </div>
@@ -52,11 +51,6 @@
 {
   "name": "Liquid customizado",
   "settings": [
-    {
-      "type": "text",
-      "id": "kicker",
-      "label": "Selo"
-    },
     {
       "type": "text",
       "id": "title",

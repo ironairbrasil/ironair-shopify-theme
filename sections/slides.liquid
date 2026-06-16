@@ -52,11 +52,8 @@
           <div class="home-slide-overlay"></div>
 
           <div class="home-slide-content">
-            {% if block.settings.eyebrow != blank or block.settings.heading != blank or block.settings.text != blank %}
+            {% if block.settings.heading != blank or block.settings.text != blank %}
               <div class="home-slide-copy copy-size-{{ block.settings.text_size }}">
-                {% if block.settings.eyebrow != blank %}
-                  <span class="home-slide-eyebrow">{{ block.settings.eyebrow }}</span>
-                {% endif %}
                 {% if block.settings.heading != blank %}
                   <h2>{{ block.settings.heading }}</h2>
                 {% endif %}
@@ -404,11 +401,6 @@
         {
           "type": "header",
           "content": "Texto do banner"
-        },
-        {
-          "type": "text",
-          "id": "eyebrow",
-          "label": "Badge"
         },
         {
           "type": "text",

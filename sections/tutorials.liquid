@@ -29,9 +29,6 @@
               {% endif %}
             </div>
             <div class="tutorial-card-copy">
-              {% if block.settings.kicker != blank %}
-                <span>{{ block.settings.kicker | escape }}</span>
-              {% endif %}
               <h3>{{ block.settings.title | escape }}</h3>
               {% if block.settings.description != blank %}
                 <p>{{ block.settings.description | escape }}</p>
@@ -111,11 +108,6 @@
           "type": "image_picker",
           "id": "cover",
           "label": "Imagem alternativa"
-        },
-        {
-          "type": "text",
-          "id": "kicker",
-          "label": "Etiqueta"
         },
         {
           "type": "text",

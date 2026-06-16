@@ -152,7 +152,6 @@
     "products": {
       "type": "featured-collection",
       "settings": {
-        "kicker": "Oferta especial",
         "title": "Nossos produtos",
         "link_label": "Ver todos →",
         "collection": "",
@@ -200,7 +199,6 @@
         "review_L6qjDE"
       ],
       "settings": {
-        "subtitle": "Clientes reais",
         "title": "O que dizem os clientes",
         "rating": "4.8",
         "count": "847 avaliações",
@@ -268,7 +266,6 @@
         "video_5"
       ],
       "settings": {
-        "kicker": "Shop your feed",
         "title": "Veja o Iron Air em ação",
         "subtitle": "Vídeos rápidos mostrando o produto no dia a dia.",
         "product": "",
@@ -347,7 +344,6 @@
         "item_jpjKQ6"
       ],
       "settings": {
-        "subtitle": "Dúvidas frequentes",
         "title": "Perguntas frequentes",
         "padding_top": 48,
         "padding_bottom": 48

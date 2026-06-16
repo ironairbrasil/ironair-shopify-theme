@@ -19,14 +19,6 @@
   margin-bottom: 32px;
 }
 
-.action-videos-kicker {
-  color: var(--dark-green);
-  font-size: 12px;
-  font-weight: 900;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-}
-
 .action-videos-title {
   margin: 0;
   max-width: 680px;

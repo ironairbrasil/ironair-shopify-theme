@@ -176,30 +176,6 @@
   max-width: 760px;
 }
 
-.home-slide-eyebrow {
-  display: inline-flex;
-  width: fit-content;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.16);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  color: #fff;
-  font-size: 12px;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.home-slider-stage.text-center .home-slide-eyebrow {
-  margin-inline: auto;
-}
-
-.home-slider-stage.text-right .home-slide-eyebrow {
-  margin-left: auto;
-}
-
 .home-slide-copy h2 {
   margin: 0;
   font-family: "Barlow Condensed", sans-serif;

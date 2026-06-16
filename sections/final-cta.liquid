@@ -25,8 +25,6 @@
   <div class="fc-right">
     {% if featured_discount %}
       <div class="fc-off-tag">{{ featured_discount }}% OFF</div>
-    {% else %}
-      <div class="fc-off-tag">{{ section.settings.badge }}</div>
     {% endif %}
     {% if featured_compare_price > featured_price %}
       <div class="fc-old">De {{ featured_compare_price | money }}</div>
@@ -74,12 +72,6 @@
       "type": "product",
       "id": "product",
       "label": "Produto principal"
-    },
-    {
-      "type": "text",
-      "id": "badge",
-      "label": "Selo",
-      "default": "Oferta"
     },
     {
       "type": "textarea",
