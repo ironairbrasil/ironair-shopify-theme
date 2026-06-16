@@ -248,6 +248,10 @@
     margin-bottom: 22px;
   }
 
+  .action-videos-shell {
+    width: 100%;
+  }
+
   .action-videos-track {
     --action-side-card-width: min(58vw, 210px);
     --action-active-card-width: min(78vw, 280px);

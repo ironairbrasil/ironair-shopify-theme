@@ -137,11 +137,20 @@
       var card = cards[index];
       if (!card) return;
       setActive(index);
-      var targetLeft = card.offsetLeft - ((track.clientWidth - card.offsetWidth) / 2);
-      track.scrollTo({
-        left: targetLeft,
-        behavior: behavior || 'smooth'
-      });
+
+      function scrollToCard() {
+        var targetLeft = card.offsetLeft - ((track.clientWidth - card.offsetWidth) / 2);
+        track.scrollTo({
+          left: targetLeft,
+          behavior: behavior || 'smooth'
+        });
+      }
+
+      window.requestAnimationFrame(scrollToCard);
+
+      if (behavior !== 'smooth') {
+        window.setTimeout(scrollToCard, 280);
+      }
     }
 
     function scroll(direction) {
