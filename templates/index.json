@@ -16,8 +16,7 @@
           "type": "text",
           "settings": {
             "heading": "A maneira mais fácil de cuidar das suas roupas",
-            "text": "<p>O fluxo de ar quente automático seca, alisa e refresca as roupas sem que você precise usar as mãos. Sem ferro de passar. Sem tábua de passar. Sem ficar esperando.</p>",
-            "text_size": "small"
+            "text": "<p>O fluxo de ar quente automático seca, alisa e refresca as roupas sem que você precise usar as mãos. Sem ferro de passar. Sem tábua de passar. Sem ficar esperando.</p>"
           }
         },
         "button_DTnD6g": {
@@ -105,9 +104,36 @@
     },
     "products": {
       "type": "featured-collection",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+            "title": "Nossos produtos",
+            "title_size": 30,
+            "subtitle": "",
+            "subtitle_size": 13,
+            "show_product_count": false
+          }
+        },
+        "products": {
+          "type": "products",
+          "settings": {
+            "display_mode": "carousel",
+            "products_limit": 12,
+            "columns_desktop": "4",
+            "show_media": true,
+            "media_ratio": "square",
+            "border_style": "none",
+            "corner_radius": 0
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "products"
+      ],
+      "name": "Galeria de Produtos",
       "settings": {
-        "title": "Nossos produtos",
-        "link_label": "Ver todos →",
         "collection": "",
         "padding_top": 48,
         "padding_bottom": 48

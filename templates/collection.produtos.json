@@ -13,16 +13,20 @@
       "type": "main-collection-blocks",
       "blocks": {
         "title": {
-          "type": "heading",
+          "type": "title",
           "settings": {
             "title": "Todos os produtos",
             "subtitle": "",
+            "title_size": 26,
+            "subtitle_size": 13,
             "show_product_count": false
           }
         },
         "products": {
-          "type": "product_grid",
+          "type": "products",
           "settings": {
+            "display_mode": "grid",
+            "products_limit": 50,
             "columns_desktop": "4",
             "show_media": true,
             "media_ratio": "square",
