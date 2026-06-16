@@ -9,6 +9,50 @@
  */
 {
   "sections": {
+    "slides_hDX8yJ": {
+      "type": "slides",
+      "blocks": {
+        "banner_9andEy": {
+          "type": "banner",
+          "settings": {
+            "label": "Banner Iron Air",
+            "media_type": "image",
+            "image": "shopify://shop_images/3.webp",
+            "mobile_media_type": "image",
+            "url": "",
+            "link_label": "Ver oferta",
+            "new_tab": false,
+            "heading": "",
+            "text": "",
+            "text_size": "large",
+            "button_label": "",
+            "button_url": "",
+            "button_style": "primary",
+            "button_new_tab": false,
+            "tone": "navy"
+          }
+        }
+      },
+      "block_order": [
+        "banner_9andEy"
+      ],
+      "name": "Slides",
+      "settings": {
+        "aria_label": "Apresentação de slides da Iron Air",
+        "layout": "full",
+        "width": "full",
+        "media_height": "original",
+        "mobile_height": "medium",
+        "content_position": "center",
+        "text_alignment": "center",
+        "nav_icons": "large",
+        "pagination": "dots",
+        "autoplay": true,
+        "speed": 4,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
     "slider": {
       "type": "home-slider",
       "blocks": {
@@ -16,13 +60,17 @@
           "type": "text",
           "settings": {
             "heading": "A maneira mais fácil de cuidar das suas roupas",
-            "text": "<p>O fluxo de ar quente automático seca, alisa e refresca as roupas sem que você precise usar as mãos. Sem ferro de passar. Sem tábua de passar. Sem ficar esperando.</p>"
+            "text": "<p>O fluxo de ar quente automático seca, alisa e refresca as roupas sem que você precise usar as mãos. Sem ferro de passar. Sem tábua de passar. Sem ficar esperando.</p>",
+            "heading_size": 52,
+            "description_size": 16,
+            "text_width": "large"
           }
         },
         "button_DTnD6g": {
           "type": "button",
           "settings": {
             "label": "Ver como funciona",
+            "label_size": 14,
             "url": "",
             "style": "primary",
             "new_tab": false
@@ -109,8 +157,8 @@
           "type": "title",
           "settings": {
             "title": "Nossos produtos",
-            "subtitle": "",
             "title_size": 30,
+            "subtitle": "",
             "subtitle_size": 13,
             "show_product_count": false
           }
@@ -142,53 +190,18 @@
         "padding_bottom": 48
       }
     },
-    "slides_hDX8yJ": {
-      "type": "slides",
-      "blocks": {
-        "banner_9andEy": {
-          "type": "banner",
-          "settings": {
-            "label": "Banner Iron Air",
-            "media_type": "image",
-            "image": "shopify://shop_images/3.webp",
-            "mobile_media_type": "image",
-            "url": "",
-            "link_label": "Ver oferta",
-            "new_tab": false,
-            "heading": "",
-            "text": "",
-            "text_size": "large",
-            "button_label": "",
-            "button_url": "",
-            "button_style": "primary",
-            "button_new_tab": false,
-            "tone": "navy"
-          }
-        }
-      },
-      "block_order": [
-        "banner_9andEy"
-      ],
-      "name": "Slides",
-      "settings": {
-        "aria_label": "Apresentação de slides da Iron Air",
-        "layout": "full",
-        "width": "full",
-        "media_height": "original",
-        "mobile_height": "medium",
-        "content_position": "center",
-        "text_alignment": "center",
-        "nav_icons": "large",
-        "pagination": "dots",
-        "autoplay": true,
-        "speed": 4,
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
-    },
     "action_videos": {
       "type": "action-videos",
       "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+            "title": "Veja o Iron Air em ação",
+            "title_size": 30,
+            "subtitle": "Vídeos rápidos mostrando o produto no dia a dia.",
+            "subtitle_size": 15
+          }
+        },
         "video_1": {
           "type": "video",
           "settings": {
@@ -236,15 +249,6 @@
             "product": "",
             "product_label": "Ver produto"
           }
-        },
-        "title": {
-          "type": "title",
-          "settings": {
-            "title": "Veja o Iron Air em ação",
-            "title_size": 30,
-            "subtitle": "Vídeos rápidos mostrando o produto no dia a dia.",
-            "subtitle_size": 15
-          }
         }
       },
       "block_order": [
@@ -264,6 +268,13 @@
     "reviews": {
       "type": "reviews",
       "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+            "title": "O que dizem os clientes",
+            "title_size": 30
+          }
+        },
         "review_gKLEY3": {
           "type": "review",
           "settings": {
@@ -293,13 +304,6 @@
             "city": "São Paulo, SP",
             "tone": "red"
           }
-        },
-        "title": {
-          "type": "title",
-          "settings": {
-            "title": "O que dizem os clientes",
-            "title_size": 30
-          }
         }
       },
       "block_order": [
@@ -318,6 +322,13 @@
     "faq": {
       "type": "faq",
       "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+            "title": "Perguntas frequentes",
+            "title_size": 30
+          }
+        },
         "item_UmT3c6": {
           "type": "item",
           "settings": {
@@ -373,13 +384,6 @@
             "question": "Faz barulho?",
             "answer": "O funcionamento gera um leve ruído semelhante a um ar condicionado, mas nada que incomode no ambiente."
           }
-        },
-        "title": {
-          "type": "title",
-          "settings": {
-            "title": "Perguntas frequentes",
-            "title_size": 30
-          }
         }
       },
       "block_order": [
@@ -400,10 +404,10 @@
     }
   },
   "order": [
-    "slider",
+    "slides_hDX8yJ",
     "trust",
     "products",
-    "slides_hDX8yJ",
+    "slider",
     "action_videos",
     "reviews",
     "faq"
