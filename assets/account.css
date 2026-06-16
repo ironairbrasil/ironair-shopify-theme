@@ -126,7 +126,7 @@
   align-items: start;
   max-width: 1280px;
   margin: 0 auto;
-  font-family: Arial, sans-serif;
+  font-family: var(--font-body);
 }
 
 .complaints-layout * {
@@ -259,7 +259,7 @@
 }
 
 .complaints-company-title-row h3 {
-  font-family: Arial, sans-serif;
+  font-family: var(--font-body);
   font-size: 25px;
   line-height: 1.15;
   margin: 0;
@@ -344,7 +344,7 @@
 
 .complaints-head h3,
 .complaints-history-head h3 {
-  font-family: Arial, sans-serif;
+  font-family: var(--font-body);
   font-size: 25px;
   line-height: 1.15;
   margin-bottom: 0;
@@ -565,7 +565,7 @@
 .auth-info h2,
 .auth-card h2,
 .account-head h2 {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-title);
   font-size: clamp(34px, 4vw, 48px);
   line-height: 0.95;
   margin-bottom: 12px;
@@ -591,7 +591,7 @@
 }
 
 .account-orders-head h3 {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-title);
   font-size: 34px;
   line-height: 1;
 }
@@ -636,7 +636,7 @@
 }
 
 .loading-inline-title {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-title);
   font-size: 15px;
   font-weight: 700;
   line-height: 1.1;

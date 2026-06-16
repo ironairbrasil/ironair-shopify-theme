@@ -178,7 +178,7 @@
 
 .home-slide-copy h2 {
   margin: 0;
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-title);
   font-size: clamp(42px, 6vw, 82px);
   line-height: 0.94;
   font-weight: 900;

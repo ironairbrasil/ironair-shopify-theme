@@ -197,7 +197,7 @@
 }
 
 .pc-price {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-title);
   font-size: 32px;
   font-weight: 800;
   color: var(--ink);
@@ -248,7 +248,7 @@
 }
 
 .product-card-payment-pix strong {
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: var(--font-title);
   font-size: 28px;
   line-height: 1;
   color: var(--green);
