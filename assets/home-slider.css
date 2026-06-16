@@ -182,7 +182,6 @@
   font-size: var(--hero-heading-size, clamp(calc(var(--font-size-hero) - 10px), 6vw, calc(var(--font-size-hero) + 30px)));
   line-height: 0.94;
   font-weight: 900;
-  text-transform: uppercase;
   letter-spacing: 0;
   color: #fff;
 }

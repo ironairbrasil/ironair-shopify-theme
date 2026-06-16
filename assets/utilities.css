@@ -83,20 +83,12 @@
 .sec-title {
   font-size: calc(var(--font-size-heading) - 4px);
   font-weight: 800;
-  text-transform: uppercase;
   color: var(--ink);
   letter-spacing: -0.3px;
 }
 
 .sec-title::before {
-  content: "";
-  display: inline-block;
-  width: 4px;
-  height: 24px;
-  background: var(--dark-green);
-  border-radius: 2px;
-  margin-right: 10px;
-  vertical-align: middle;
+  content: none;
 }
 
 .sec-subtitle {
