@@ -1,5 +1,14 @@
+.page-clean {
+  width: 100%;
+}
+
 .page-content {
   line-height: 1.7;
+}
+
+.page-content img {
+  max-width: 100%;
+  height: auto;
 }
 
 .page-content > * + * {
