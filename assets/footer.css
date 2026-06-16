@@ -136,17 +136,26 @@ footer {
 
 .f-pgto {
   display: flex;
-  gap: 8px;
+  align-items: center;
+  gap: 14px;
   flex-wrap: wrap;
 }
 
-.f-pgto-item {
-  background: rgba(255, 255, 255, 0.07);
-  border-radius: 4px;
-  padding: 4px 10px;
-  font-size: 11px;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.4);
+.f-pgto-icon {
+  width: auto;
+  height: 24px;
+  display: block;
+  object-fit: contain;
+}
+
+.f-pgto-icon.is-mastercard,
+.f-pgto-icon.is-elo,
+.f-pgto-icon.is-pix {
+  height: 28px;
+}
+
+.f-pgto-icon.is-pix {
+  height: 26px;
 }
 
 @media (max-width: 900px) {

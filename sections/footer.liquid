@@ -48,12 +48,12 @@
 
     <div class="footer-bottom">
       <p>© {{ 'now' | date: '%Y' }} {{ shop.name }}. Todos os direitos reservados.</p>
-      <div class="f-pgto">
-        <div class="f-pgto-item">VISA</div>
-        <div class="f-pgto-item">MASTER</div>
-        <div class="f-pgto-item">PIX</div>
-        <div class="f-pgto-item">BOLETO</div>
-        <div class="f-pgto-item">ELO</div>
+      <div class="f-pgto" aria-label="Formas de pagamento aceitas">
+        <img class="f-pgto-icon is-visa" src="{{ 'payment-visa.png' | asset_url }}" alt="Visa" width="126" height="48" loading="lazy">
+        <img class="f-pgto-icon is-mastercard" src="{{ 'payment-mastercard.png' | asset_url }}" alt="Mastercard" width="126" height="80" loading="lazy">
+        <img class="f-pgto-icon is-hipercard" src="{{ 'payment-hipercard.png' | asset_url }}" alt="Hipercard" width="129" height="64" loading="lazy">
+        <img class="f-pgto-icon is-elo" src="{{ 'payment-elo.png' | asset_url }}" alt="Elo" width="82" height="80" loading="lazy">
+        <img class="f-pgto-icon is-pix" src="{{ 'payment-pix.png' | asset_url }}" alt="Pix" width="430" height="431" loading="lazy">
       </div>
     </div>
   </div>
