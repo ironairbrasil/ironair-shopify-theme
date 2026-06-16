@@ -12,12 +12,12 @@
     "slides_hDX8yJ": {
       "type": "slides",
       "blocks": {
-        "banner_Lwe8Br": {
+        "banner_9andEy": {
           "type": "banner",
           "settings": {
             "label": "Banner Iron Air",
             "media_type": "image",
-            "image": "shopify://shop_images/Banner_Iron_Air.webp",
+            "image": "shopify://shop_images/3.webp",
             "mobile_media_type": "image",
             "url": "",
             "link_label": "Ver oferta",
@@ -56,7 +56,7 @@
         }
       },
       "block_order": [
-        "banner_Lwe8Br",
+        "banner_9andEy",
         "banner_bhpQx6"
       ],
       "name": "Slides",
