@@ -139,18 +139,23 @@
       setActive(index);
 
       function scrollToCard() {
-        var targetLeft = card.offsetLeft - ((track.clientWidth - card.offsetWidth) / 2);
+        var trackRect = track.getBoundingClientRect();
+        var cardRect = card.getBoundingClientRect();
+        var trackCenter = trackRect.left + trackRect.width / 2;
+        var cardCenter = cardRect.left + cardRect.width / 2;
+        var targetLeft = track.scrollLeft + cardCenter - trackCenter;
+
         track.scrollTo({
           left: targetLeft,
           behavior: behavior || 'smooth'
         });
       }
 
-      window.requestAnimationFrame(scrollToCard);
+      window.requestAnimationFrame(function () {
+        window.requestAnimationFrame(scrollToCard);
+      });
 
-      if (behavior !== 'smooth') {
-        window.setTimeout(scrollToCard, 280);
-      }
+      window.setTimeout(scrollToCard, 280);
     }
 
     function scroll(direction) {

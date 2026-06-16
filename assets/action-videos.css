@@ -58,8 +58,8 @@
   overflow-x: auto;
   overflow-y: visible;
   scroll-snap-type: x mandatory;
-  scroll-padding-inline: calc((100vw - var(--action-active-card-width)) / 2);
-  padding: 8px calc((100vw - var(--action-active-card-width)) / 2) 16px;
+  scroll-padding-inline: calc((100% - var(--action-active-card-width)) / 2);
+  padding: 8px calc((100% - var(--action-active-card-width)) / 2) 16px;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
 }
@@ -72,6 +72,7 @@
   width: var(--action-side-card-width);
   min-width: var(--action-side-card-width);
   scroll-snap-align: center;
+  scroll-snap-stop: always;
   display: grid;
   gap: 10px;
   opacity: .86;
@@ -256,8 +257,8 @@
     --action-side-card-width: min(58vw, 210px);
     --action-active-card-width: min(78vw, 280px);
     gap: 12px;
-    scroll-padding-inline: calc((100vw - var(--action-active-card-width)) / 2);
-    padding-inline: calc((100vw - var(--action-active-card-width)) / 2);
+    scroll-padding-inline: calc((100% - var(--action-active-card-width)) / 2);
+    padding-inline: calc((100% - var(--action-active-card-width)) / 2);
   }
 
   .action-videos-arrow {
