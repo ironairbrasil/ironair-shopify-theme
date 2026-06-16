@@ -15,6 +15,9 @@
     {% endif %}
     <link rel="canonical" href="{{ canonical_url }}">
     <link rel="icon" href="{{ 'favicon.png' | asset_url }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     {{ content_for_header }}
     {{ 'variables.css' | asset_url | stylesheet_tag }}
     {{ 'base.css' | asset_url | stylesheet_tag }}
