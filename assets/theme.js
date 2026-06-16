@@ -174,6 +174,7 @@
 
       form.addEventListener('submit', function (event) {
         event.preventDefault();
+        event.stopImmediatePropagation();
 
         var submit = form.querySelector('[type="submit"]');
         var previousLabel = submit ? submit.textContent : '';
@@ -228,7 +229,7 @@
               }, 2500);
             }
           });
-      });
+      }, true);
     });
   }
 

@@ -179,6 +179,7 @@
 
   function shouldHandleCartAdd(form) {
     var action = form.getAttribute('action') || '';
+    if (form.closest('[data-asaas-checkout]') || form.hasAttribute('data-asaas-product-form')) return false;
     return action.indexOf('/cart/add') !== -1;
   }
 
@@ -253,6 +254,7 @@
 
     document.addEventListener('submit', function (event) {
       var form = event.target;
+      if (event.defaultPrevented) return;
       if (!form || !shouldHandleCartAdd(form)) return;
       event.preventDefault();
       addToCart(form).catch(function () {

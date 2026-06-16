@@ -134,7 +134,7 @@
 
           {% when 'buy_buttons' %}
             <div data-asaas-checkout data-product-handle="{{ product.handle | escape }}" {{ block.shopify_attributes }}>
-              {% form 'product', product, class: 'product-form' %}
+              {% form 'product', product, class: 'product-form', data-asaas-product-form: true %}
                 {% unless product.has_only_default_variant %}
                   <select id="ProductSelect-{{ section.id }}" name="id" class="product-variant-native-select" data-product-variant-select aria-label="{{ block.settings.variant_label | default: 'Selecionar variante' }}">
                     {% for variant in product.variants %}
