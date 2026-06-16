@@ -53,13 +53,12 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s, transform 0.2s, opacity 0.2s;
+  transition: none;
 }
 
 .products-carousel-arrow:hover:not(:disabled) {
   background: var(--dark-green);
   color: #fff;
-  transform: translateY(-1px);
 }
 
 .products-carousel-arrow:disabled {

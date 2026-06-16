@@ -19,7 +19,7 @@
     function scroll(direction) {
       var firstCard = track.querySelector('.product-card');
       var amount = firstCard ? firstCard.getBoundingClientRect().width + 12 : track.clientWidth;
-      track.scrollBy({ left: amount * direction, behavior: 'smooth' });
+      track.scrollBy({ left: amount * direction, behavior: 'auto' });
     }
 
     prev.addEventListener('click', function () { scroll(-1); });
