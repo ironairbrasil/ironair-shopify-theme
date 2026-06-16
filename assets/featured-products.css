@@ -66,11 +66,22 @@
   display: none;
 }
 
+.products-grid.is-carousel.cols4 .product-card,
 .products-grid.is-carousel .product-card {
   width: calc((100% - 36px) / 4);
   min-width: calc((100% - 36px) / 4);
   scroll-snap-align: start;
   flex-shrink: 0;
+}
+
+.products-grid.is-carousel.cols3 .product-card {
+  width: calc((100% - 24px) / 3);
+  min-width: calc((100% - 24px) / 3);
+}
+
+.products-grid.is-carousel.cols2 .product-card {
+  width: calc((100% - 12px) / 2);
+  min-width: calc((100% - 12px) / 2);
 }
 
 .product-site-video {
