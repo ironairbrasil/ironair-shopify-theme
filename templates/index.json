@@ -109,8 +109,8 @@
           "type": "title",
           "settings": {
             "title": "Nossos produtos",
-            "title_size": 30,
             "subtitle": "",
+            "title_size": 30,
             "subtitle_size": 13,
             "show_product_count": false
           }
