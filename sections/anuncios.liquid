@@ -1,0 +1,165 @@
+{{ 'anuncios.css' | asset_url | stylesheet_tag }}
+
+<section class="ads-section shopify-padding-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
+  <div class="ads-grid">
+    {% for block in section.blocks limit: 2 %}
+      {% assign product = block.settings.product %}
+      <article
+        class="ads-card"
+        style="--ads-title-size: {{ block.settings.title_size | default: 34 }}px; --ads-description-size: {{ block.settings.description_size | default: 14 }}px; --ads-button-size: {{ block.settings.button_size | default: 12 }}px;"
+        {{ block.shopify_attributes }}
+      >
+        <div class="ads-media">
+          {% if block.settings.video != blank %}
+            {{ block.settings.video | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true, image_size: '1800x', class: 'ads-video' }}
+          {% elsif block.settings.image != blank %}
+            {{ block.settings.image | image_url: width: 1800 | image_tag: alt: block.settings.title, class: 'ads-image', loading: 'lazy' }}
+          {% else %}
+            <div class="ads-placeholder">Adicione imagem ou vídeo</div>
+          {% endif %}
+        </div>
+
+        <div class="ads-copy">
+          {% if block.settings.title != blank %}
+            <h2 class="ads-title">{{ block.settings.title | escape }}</h2>
+          {% endif %}
+          {% if block.settings.description != blank %}
+            <p class="ads-description">{{ block.settings.description | escape }}</p>
+          {% endif %}
+          {% if block.settings.button_label != blank %}
+            <a class="ads-button" href="{% if product != blank %}{{ product.url }}{% else %}{{ routes.all_products_collection_url }}{% endif %}">
+              {{ block.settings.button_label | escape }}
+            </a>
+          {% endif %}
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Anúncios",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Preenchimento"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Superior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Inferior",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ad",
+      "name": "Anúncio",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagem"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Vídeo"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Título do anúncio"
+        },
+        {
+          "type": "range",
+          "id": "title_size",
+          "label": "Tamanho do título",
+          "min": 18,
+          "max": 64,
+          "step": 1,
+          "unit": "px",
+          "default": 34
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Descrição",
+          "default": "Descrição curta do produto ou oferta."
+        },
+        {
+          "type": "range",
+          "id": "description_size",
+          "label": "Tamanho da descrição",
+          "min": 10,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 14
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Produto do botão"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Texto do botão",
+          "default": "Ver produto"
+        },
+        {
+          "type": "range",
+          "id": "button_size",
+          "label": "Tamanho do botão",
+          "min": 10,
+          "max": 20,
+          "step": 1,
+          "unit": "px",
+          "default": 12
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Anúncios",
+      "blocks": [
+        {
+          "type": "ad",
+          "settings": {
+            "title": "Feito para o cuidado diário",
+            "description": "Roupas lisas, secas e prontas sem esforço.",
+            "button_label": "Ver produto"
+          }
+        },
+        {
+          "type": "ad",
+          "settings": {
+            "title": "Praticidade para sua rotina",
+            "description": "Escolha o produto e destaque a oferta.",
+            "button_label": "Comprar agora"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
