@@ -4,30 +4,54 @@
 
 {% assign selected_collection = section.settings.collection | default: collections.all %}
 {% assign products_by_creation = selected_collection.products | sort: 'created_at' %}
+{% assign display_mode = section.settings.display_mode | default: 'grid' %}
+{% assign columns_desktop = section.settings.columns_desktop | default: '4' %}
+{% assign products_limit = section.settings.products_limit | default: 12 %}
+{% assign use_carousel = false %}
+{% if display_mode == 'carousel' %}
+  {% assign use_carousel = true %}
+{% endif %}
 
 <section class="section-anchor shopify-featured-product shopify-padding-section" id="produtos" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
   <div class="section-head">
     <div>
-      <h2>{{ section.settings.title }}</h2>
+      <h2 style="font-size: {{ section.settings.title_size | default: 30 }}px;">{{ section.settings.title }}</h2>
     </div>
 
-    <a href="{{ routes.all_products_collection_url }}">
-      {{ section.settings.link_label }}
-    </a>
+    {% if section.settings.link_label != blank %}
+      <a href="{{ routes.all_products_collection_url }}">
+        {{ section.settings.link_label }}
+      </a>
+    {% endif %}
   </div>
 
-  <div class="products-carousel-shell" data-products-carousel>
-    <div class="products-carousel-nav" aria-label="Navegar produtos">
-      <button type="button" class="products-carousel-arrow" data-products-prev aria-label="Produtos anteriores">‹</button>
-      <button type="button" class="products-carousel-arrow" data-products-next aria-label="Próximos produtos">›</button>
-    </div>
+  {% if use_carousel %}
+    <div class="products-carousel-shell" data-products-carousel>
+      <div class="products-carousel-nav" aria-label="Navegar produtos">
+        <button type="button" class="products-carousel-arrow" data-products-prev aria-label="Produtos anteriores">‹</button>
+        <button type="button" class="products-carousel-arrow" data-products-next aria-label="Próximos produtos">›</button>
+      </div>
+  {% endif %}
 
-    <div class="products-grid is-carousel" data-products-track>
-      {% for product in products_by_creation limit: 12 %}
-        {% render 'product-card', product: product %}
+    <div class="products-grid cols{{ columns_desktop }} {% if use_carousel %}is-carousel{% else %}is-stack-mobile{% endif %}" {% if use_carousel %}data-products-track{% endif %}>
+      {% for product in products_by_creation limit: products_limit %}
+        {% render 'product-card',
+          product: product,
+          show_media: section.settings.show_media,
+          media_ratio: section.settings.media_ratio,
+          border_style: section.settings.border_style,
+          corner_radius: section.settings.corner_radius
+        %}
+      {% else %}
+        <div class="content-card collection-empty">
+          <p>Nenhum produto encontrado nesta coleção.</p>
+        </div>
       {% endfor %}
     </div>
-  </div>
+
+  {% if use_carousel %}
+    </div>
+  {% endif %}
 </section>
 
 {% schema %}
@@ -41,6 +65,16 @@
       "default": "Nossos produtos"
     },
     {
+      "type": "range",
+      "id": "title_size",
+      "label": "Tamanho do título",
+      "min": 18,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 30
+    },
+    {
       "type": "text",
       "id": "link_label",
       "label": "Link",
@@ -50,6 +84,111 @@
       "type": "collection",
       "id": "collection",
       "label": "Coleção de produtos"
+    },
+    {
+      "type": "select",
+      "id": "display_mode",
+      "label": "Modo",
+      "options": [
+        {
+          "value": "grid",
+          "label": "Grade"
+        },
+        {
+          "value": "carousel",
+          "label": "Carrossel"
+        }
+      ],
+      "default": "carousel"
+    },
+    {
+      "type": "range",
+      "id": "products_limit",
+      "label": "Quantidade de produtos",
+      "min": 1,
+      "max": 24,
+      "step": 1,
+      "default": 12
+    },
+    {
+      "type": "select",
+      "id": "columns_desktop",
+      "label": "Colunas no desktop",
+      "options": [
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_media",
+      "label": "Exibe a mídia do produto principal",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "media_ratio",
+      "label": "Proporção",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "Automático"
+        },
+        {
+          "value": "portrait",
+          "label": "Retrato"
+        },
+        {
+          "value": "square",
+          "label": "Quadrado"
+        },
+        {
+          "value": "landscape",
+          "label": "Paisagem"
+        }
+      ],
+      "default": "adapt"
+    },
+    {
+      "type": "header",
+      "content": "Bordas"
+    },
+    {
+      "type": "select",
+      "id": "border_style",
+      "label": "Estilo",
+      "options": [
+        {
+          "value": "none",
+          "label": "Nenhum"
+        },
+        {
+          "value": "solid",
+          "label": "Sólido"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "Raio do canto",
+      "min": 0,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 0
     },
     {
       "type": "header",

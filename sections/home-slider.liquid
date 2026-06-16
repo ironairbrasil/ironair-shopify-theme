@@ -30,7 +30,11 @@
       {% if text_blocks.size > 0 or button_blocks.size > 0 %}
         {% for block in section.blocks %}
           {% if block.type == 'text' %}
-            <div class="home-slide-copy copy-size-{{ block.settings.text_size }}" {{ block.shopify_attributes }}>
+            <div
+              class="home-slide-copy copy-size-{{ block.settings.text_width | default: block.settings.text_size | default: 'large' }}"
+              style="--hero-heading-size: {{ block.settings.heading_size | default: 52 }}px; --hero-text-size: {{ block.settings.description_size | default: 16 }}px;"
+              {{ block.shopify_attributes }}
+            >
               {% if block.settings.heading != blank %}
                 <h2>{{ block.settings.heading }}</h2>
               {% endif %}
@@ -41,7 +45,7 @@
           {% endif %}
 
           {% if block.type == 'button' and block.settings.label != blank %}
-            <div class="home-slide-actions" {{ block.shopify_attributes }}>
+            <div class="home-slide-actions" style="--hero-button-size: {{ block.settings.label_size | default: 14 }}px;" {{ block.shopify_attributes }}>
               <a
                 class="home-slide-button is-{{ block.settings.style }}"
                 href="{{ block.settings.url | default: routes.all_products_collection_url }}"
@@ -259,18 +263,38 @@
           "default": "<p>Use blocos de texto e botão para montar a chamada.</p>"
         },
         {
+          "type": "range",
+          "id": "heading_size",
+          "label": "Tamanho do título",
+          "min": 24,
+          "max": 88,
+          "step": 1,
+          "unit": "px",
+          "default": 52
+        },
+        {
+          "type": "range",
+          "id": "description_size",
+          "label": "Tamanho da descrição",
+          "min": 12,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 16
+        },
+        {
           "type": "select",
-          "id": "text_size",
-          "label": "Tamanho",
+          "id": "text_width",
+          "label": "Largura",
           "default": "large",
           "options": [
             {
               "value": "small",
-              "label": "Pequeno"
+              "label": "Pequena"
             },
             {
               "value": "medium",
-              "label": "Médio"
+              "label": "Média"
             },
             {
               "value": "large",
@@ -289,6 +313,16 @@
           "id": "label",
           "label": "Texto",
           "default": "Comprar agora"
+        },
+        {
+          "type": "range",
+          "id": "label_size",
+          "label": "Tamanho do texto",
+          "min": 11,
+          "max": 22,
+          "step": 1,
+          "unit": "px",
+          "default": 14
         },
         {
           "type": "url",
