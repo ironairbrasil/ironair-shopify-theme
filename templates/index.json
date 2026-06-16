@@ -17,7 +17,7 @@
           "settings": {
             "heading": "A maneira mais fácil de cuidar das suas roupas",
             "text": "<p>O fluxo de ar quente automático seca, alisa e refresca as roupas sem que você precise usar as mãos. Sem ferro de passar. Sem tábua de passar. Sem ficar esperando.</p>",
-            "text_size": "medium"
+            "text_size": "small"
           }
         },
         "button_DTnD6g": {
@@ -43,50 +43,6 @@
         "content_position": "center",
         "text_alignment": "center",
         "tone": "navy",
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
-    },
-    "slides_hDX8yJ": {
-      "type": "slides",
-      "blocks": {
-        "banner_9andEy": {
-          "type": "banner",
-          "settings": {
-            "label": "Banner Iron Air",
-            "media_type": "image",
-            "image": "shopify://shop_images/3.webp",
-            "mobile_media_type": "image",
-            "url": "",
-            "link_label": "Ver oferta",
-            "new_tab": false,
-            "heading": "",
-            "text": "",
-            "text_size": "large",
-            "button_label": "",
-            "button_url": "",
-            "button_style": "primary",
-            "button_new_tab": false,
-            "tone": "navy"
-          }
-        }
-      },
-      "block_order": [
-        "banner_9andEy"
-      ],
-      "name": "Slides",
-      "settings": {
-        "aria_label": "Apresentação de slides da Iron Air",
-        "layout": "full",
-        "width": "full",
-        "media_height": "original",
-        "mobile_height": "medium",
-        "content_position": "center",
-        "text_alignment": "center",
-        "nav_icons": "large",
-        "pagination": "dots",
-        "autoplay": true,
-        "speed": 4,
         "padding_top": 0,
         "padding_bottom": 0
       }
@@ -157,51 +113,48 @@
         "padding_bottom": 48
       }
     },
-    "reviews": {
-      "type": "reviews",
+    "slides_hDX8yJ": {
+      "type": "slides",
       "blocks": {
-        "review_gKLEY3": {
-          "type": "review",
+        "banner_9andEy": {
+          "type": "banner",
           "settings": {
-            "stars": "★★★★★",
-            "text": "Tirei minha camisa da secadora toda amarrotada e em 12 minutos já estava passada, parecia nova.",
-            "name": "Marina Silva",
-            "city": "São Paulo, SP",
-            "tone": "red"
-          }
-        },
-        "review_h8JLFR": {
-          "type": "review",
-          "settings": {
-            "stars": "★★★★★",
-            "text": "Tirei minha camisa da secadora toda amarrotada e em 12 minutos já estava passada, parecia nova.",
-            "name": "Marina Silva",
-            "city": "São Paulo, SP",
-            "tone": "red"
-          }
-        },
-        "review_L6qjDE": {
-          "type": "review",
-          "settings": {
-            "stars": "★★★★★",
-            "text": "Tirei minha camisa da secadora toda amarrotada e em 12 minutos já estava passada, parecia nova.",
-            "name": "Marina Silva",
-            "city": "São Paulo, SP",
-            "tone": "red"
+            "label": "Banner Iron Air",
+            "media_type": "image",
+            "image": "shopify://shop_images/3.webp",
+            "mobile_media_type": "image",
+            "url": "",
+            "link_label": "Ver oferta",
+            "new_tab": false,
+            "heading": "",
+            "text": "",
+            "text_size": "large",
+            "button_label": "",
+            "button_url": "",
+            "button_style": "primary",
+            "button_new_tab": false,
+            "tone": "navy"
           }
         }
       },
       "block_order": [
-        "review_gKLEY3",
-        "review_h8JLFR",
-        "review_L6qjDE"
+        "banner_9andEy"
       ],
+      "name": "Slides",
       "settings": {
-        "title": "O que dizem os clientes",
-        "rating": "4.8",
-        "count": "847 avaliações",
-        "padding_top": 48,
-        "padding_bottom": 48
+        "aria_label": "Apresentação de slides da Iron Air",
+        "layout": "full",
+        "width": "full",
+        "media_height": "original",
+        "mobile_height": "medium",
+        "content_position": "center",
+        "text_alignment": "center",
+        "nav_icons": "large",
+        "pagination": "dots",
+        "autoplay": true,
+        "speed": 4,
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "action_videos": {
@@ -269,6 +222,53 @@
         "product": "",
         "padding_top": 56,
         "padding_bottom": 56
+      }
+    },
+    "reviews": {
+      "type": "reviews",
+      "blocks": {
+        "review_gKLEY3": {
+          "type": "review",
+          "settings": {
+            "stars": "★★★★★",
+            "text": "Tirei minha camisa da secadora toda amarrotada e em 12 minutos já estava passada, parecia nova.",
+            "name": "Marina Silva",
+            "city": "São Paulo, SP",
+            "tone": "red"
+          }
+        },
+        "review_h8JLFR": {
+          "type": "review",
+          "settings": {
+            "stars": "★★★★★",
+            "text": "Tirei minha camisa da secadora toda amarrotada e em 12 minutos já estava passada, parecia nova.",
+            "name": "Marina Silva",
+            "city": "São Paulo, SP",
+            "tone": "red"
+          }
+        },
+        "review_L6qjDE": {
+          "type": "review",
+          "settings": {
+            "stars": "★★★★★",
+            "text": "Tirei minha camisa da secadora toda amarrotada e em 12 minutos já estava passada, parecia nova.",
+            "name": "Marina Silva",
+            "city": "São Paulo, SP",
+            "tone": "red"
+          }
+        }
+      },
+      "block_order": [
+        "review_gKLEY3",
+        "review_h8JLFR",
+        "review_L6qjDE"
+      ],
+      "settings": {
+        "title": "O que dizem os clientes",
+        "rating": "4.8",
+        "count": "847 avaliações",
+        "padding_top": 48,
+        "padding_bottom": 48
       }
     },
     "faq": {

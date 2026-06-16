@@ -35,6 +35,7 @@
         "title",
         "products"
       ],
+      "name": "Produtos",
       "settings": {
         "padding_top": 48,
         "padding_bottom": 48
