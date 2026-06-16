@@ -69,21 +69,16 @@
           {% case block.type %}
             {% when 'account' %}
               {% if block.settings.enabled %}
-                <a class="hicon" href="{{ routes.account_url }}" aria-label="{{ block.settings.label }}" {{ block.shopify_attributes }}>
+                <a class="hicon" href="{{ routes.account_url }}" aria-label="Conta" {{ block.shopify_attributes }}>
                   {% render 'icon', icon: 'account' %}
-                  {% if block.settings.show_label %}<span class="hicon-label">{{ block.settings.label }}</span>{% endif %}
                 </a>
               {% endif %}
 
             {% when 'cart' %}
               {% if block.settings.enabled %}
-                <button type="button" class="hicon js-cart-drawer-open" aria-controls="CartDrawer" aria-expanded="false" aria-label="{{ block.settings.label }}" {{ block.shopify_attributes }}>
+                <button type="button" class="hicon js-cart-drawer-open" aria-controls="CartDrawer" aria-expanded="false" aria-label="Carrinho" {{ block.shopify_attributes }}>
                   {% render 'icon', icon: 'cart' %}
-                  {% if block.settings.show_label %}
-                    <span class="hicon-label">{{ block.settings.label }} <span class="badge" data-cart-count>{{ cart.item_count }}</span></span>
-                  {% else %}
-                    <span class="badge" data-cart-count>{{ cart.item_count }}</span>
-                  {% endif %}
+                  <span class="badge" data-cart-count>{{ cart.item_count }}</span>
                 </button>
               {% endif %}
           {% endcase %}
@@ -92,14 +87,13 @@
         {% unless has_account_block %}
           <a class="hicon" href="{{ routes.account_url }}" aria-label="Conta">
             {% render 'icon', icon: 'account' %}
-            <span class="hicon-label">Conta</span>
           </a>
         {% endunless %}
 
         {% unless has_cart_block %}
           <button type="button" class="hicon js-cart-drawer-open" aria-controls="CartDrawer" aria-expanded="false" aria-label="Carrinho">
             {% render 'icon', icon: 'cart' %}
-            <span class="hicon-label">Carrinho <span class="badge" data-cart-count>{{ cart.item_count }}</span></span>
+            <span class="badge" data-cart-count>{{ cart.item_count }}</span>
           </button>
         {% endunless %}
       </div>
@@ -143,9 +137,7 @@
       "name": "Conta",
       "limit": 1,
       "settings": [
-        { "type": "checkbox", "id": "enabled", "label": "Mostrar conta", "default": true },
-        { "type": "text", "id": "label", "label": "Texto", "default": "Conta" },
-        { "type": "checkbox", "id": "show_label", "label": "Mostrar texto", "default": true }
+        { "type": "checkbox", "id": "enabled", "label": "Mostrar conta", "default": true }
       ]
     },
     {
@@ -153,9 +145,7 @@
       "name": "Carrinho",
       "limit": 1,
       "settings": [
-        { "type": "checkbox", "id": "enabled", "label": "Mostrar carrinho", "default": true },
-        { "type": "text", "id": "label", "label": "Texto", "default": "Carrinho" },
-        { "type": "checkbox", "id": "show_label", "label": "Mostrar texto", "default": true }
+        { "type": "checkbox", "id": "enabled", "label": "Mostrar carrinho", "default": true }
       ]
     }
   ],

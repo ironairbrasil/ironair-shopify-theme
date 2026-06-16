@@ -107,10 +107,6 @@
   color: var(--iron-green);
 }
 
-.mobile-header-action .hicon-label {
-  display: none;
-}
-
 .mobile-menu-toggle:hover,
 .mobile-header-action:hover,
 .mobile-cart-button:hover {
