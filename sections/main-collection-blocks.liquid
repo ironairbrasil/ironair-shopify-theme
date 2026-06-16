@@ -36,6 +36,9 @@
       {% when 'products' %}
         {% assign display_mode = block.settings.display_mode | default: 'grid' %}
         {% assign columns_desktop = block.settings.columns_desktop | default: '4' %}
+        {% if block.settings.display_mode == 'carousel' %}
+          {% assign columns_desktop = block.settings.carousel_columns_desktop | default: columns_desktop %}
+        {% endif %}
         {% assign products_limit = block.settings.products_limit | default: 50 %}
         {% assign use_carousel = false %}
         {% if display_mode == 'carousel' %}
@@ -44,9 +47,14 @@
 
         {% if use_carousel %}
           <div class="products-carousel-shell" data-products-carousel {{ block.shopify_attributes }}>
-            <div class="products-carousel-nav" aria-label="Navegar produtos">
-              <button type="button" class="products-carousel-arrow" data-products-prev aria-label="Produtos anteriores">‹</button>
-              <button type="button" class="products-carousel-arrow" data-products-next aria-label="Próximos produtos">›</button>
+            <div class="products-carousel-head">
+              {% if block.settings.carousel_link_label != blank %}
+                <a class="products-carousel-link" href="{{ block.settings.carousel_link_url | default: routes.all_products_collection_url }}">{{ block.settings.carousel_link_label }}</a>
+              {% endif %}
+              <div class="products-carousel-nav" aria-label="Navegar produtos">
+                <button type="button" class="products-carousel-arrow" data-products-prev aria-label="Produtos anteriores">‹</button>
+                <button type="button" class="products-carousel-arrow" data-products-next aria-label="Próximos produtos">›</button>
+              </div>
             </div>
         {% endif %}
 
@@ -73,6 +81,9 @@
       {% when 'product_grid' %}
         {% assign display_mode = block.settings.display_mode | default: 'grid' %}
         {% assign columns_desktop = block.settings.columns_desktop | default: '4' %}
+        {% if block.settings.display_mode == 'carousel' %}
+          {% assign columns_desktop = block.settings.carousel_columns_desktop | default: columns_desktop %}
+        {% endif %}
         {% assign products_limit = block.settings.products_limit | default: 50 %}
         {% assign use_carousel = false %}
         {% if display_mode == 'carousel' %}
@@ -81,9 +92,14 @@
 
         {% if use_carousel %}
           <div class="products-carousel-shell" data-products-carousel {{ block.shopify_attributes }}>
-            <div class="products-carousel-nav" aria-label="Navegar produtos">
-              <button type="button" class="products-carousel-arrow" data-products-prev aria-label="Produtos anteriores">‹</button>
-              <button type="button" class="products-carousel-arrow" data-products-next aria-label="Próximos produtos">›</button>
+            <div class="products-carousel-head">
+              {% if block.settings.carousel_link_label != blank %}
+                <a class="products-carousel-link" href="{{ block.settings.carousel_link_url | default: routes.all_products_collection_url }}">{{ block.settings.carousel_link_label }}</a>
+              {% endif %}
+              <div class="products-carousel-nav" aria-label="Navegar produtos">
+                <button type="button" class="products-carousel-arrow" data-products-prev aria-label="Produtos anteriores">‹</button>
+                <button type="button" class="products-carousel-arrow" data-products-next aria-label="Próximos produtos">›</button>
+              </div>
             </div>
         {% endif %}
 
@@ -211,6 +227,19 @@
           "default": "grid"
         },
         {
+          "type": "text",
+          "id": "carousel_link_label",
+          "label": "Texto do link",
+          "default": "Ver todos →",
+          "visible_if": "{{ block.settings.display_mode == 'carousel' }}"
+        },
+        {
+          "type": "url",
+          "id": "carousel_link_url",
+          "label": "Link",
+          "visible_if": "{{ block.settings.display_mode == 'carousel' }}"
+        },
+        {
           "type": "range",
           "id": "products_limit",
           "label": "Quantidade de produtos",
@@ -223,6 +252,28 @@
           "type": "select",
           "id": "columns_desktop",
           "label": "Colunas no desktop",
+          "visible_if": "{{ block.settings.display_mode == 'grid' }}",
+          "options": [
+            {
+              "value": "2",
+              "label": "2"
+            },
+            {
+              "value": "3",
+              "label": "3"
+            },
+            {
+              "value": "4",
+              "label": "4"
+            }
+          ],
+          "default": "4"
+        },
+        {
+          "type": "select",
+          "id": "carousel_columns_desktop",
+          "label": "Produtos visíveis no desktop",
+          "visible_if": "{{ block.settings.display_mode == 'carousel' }}",
           "options": [
             {
               "value": "2",

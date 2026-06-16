@@ -16,8 +16,8 @@
           "type": "title",
           "settings": {
             "title": "Todos os produtos",
-            "subtitle": "",
             "title_size": 26,
+            "subtitle": "",
             "subtitle_size": 13,
             "show_product_count": false
           }

@@ -16,17 +16,13 @@
           "type": "text",
           "settings": {
             "heading": "A maneira mais fácil de cuidar das suas roupas",
-            "text": "<p>O fluxo de ar quente automático seca, alisa e refresca as roupas sem que você precise usar as mãos. Sem ferro de passar. Sem tábua de passar. Sem ficar esperando.</p>",
-            "heading_size": 52,
-            "description_size": 16,
-            "text_width": "large"
+            "text": "<p>O fluxo de ar quente automático seca, alisa e refresca as roupas sem que você precise usar as mãos. Sem ferro de passar. Sem tábua de passar. Sem ficar esperando.</p>"
           }
         },
         "button_DTnD6g": {
           "type": "button",
           "settings": {
             "label": "Ver como funciona",
-            "label_size": 14,
             "url": "",
             "style": "primary",
             "new_tab": false
@@ -109,33 +105,37 @@
     "products": {
       "type": "featured-collection",
       "blocks": {
-        "title_azetek": {
+        "title": {
           "type": "title",
           "settings": {
-            "title": "Todos os produtos",
-            "title_size": 26,
+            "title": "Nossos produtos",
             "subtitle": "",
+            "title_size": 30,
             "subtitle_size": 13,
             "show_product_count": false
           }
         },
-        "products_agUXYV": {
+        "products": {
           "type": "products",
           "settings": {
             "display_mode": "carousel",
-            "products_limit": 50,
+            "carousel_link_label": "Ver todos →",
+            "carousel_link_url": "",
+            "products_limit": 12,
             "columns_desktop": "4",
+            "carousel_columns_desktop": "4",
             "show_media": true,
-            "media_ratio": "adapt",
+            "media_ratio": "square",
             "border_style": "none",
             "corner_radius": 0
           }
         }
       },
       "block_order": [
-        "title_azetek",
-        "products_agUXYV"
+        "title",
+        "products"
       ],
+      "name": "Galeria de Produtos",
       "settings": {
         "collection": "",
         "padding_top": 48,
