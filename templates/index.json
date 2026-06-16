@@ -9,6 +9,45 @@
  */
 {
   "sections": {
+    "slider": {
+      "type": "home-slider",
+      "blocks": {
+        "text_pjPTid": {
+          "type": "text",
+          "settings": {
+            "eyebrow": "",
+            "heading": "A maneira mais fácil de cuidar das suas roupas",
+            "text": "<p>O fluxo de ar quente automático seca, alisa e refresca as roupas sem que você precise usar as mãos. Sem ferro de passar. Sem tábua de passar. Sem ficar esperando.</p>",
+            "text_size": "medium"
+          }
+        },
+        "button_DTnD6g": {
+          "type": "button",
+          "settings": {
+            "label": "Ver como funciona",
+            "url": "",
+            "style": "primary",
+            "new_tab": false
+          }
+        }
+      },
+      "block_order": [
+        "text_pjPTid",
+        "button_DTnD6g"
+      ],
+      "settings": {
+        "aria_label": "Hero principal da Iron Air",
+        "background_mode": "video",
+        "video": "shopify://files/videos/site.mp4",
+        "height": "large",
+        "mobile_height": "medium",
+        "content_position": "center",
+        "text_alignment": "center",
+        "tone": "navy",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
     "slides_hDX8yJ": {
       "type": "slides",
       "blocks": {
@@ -119,45 +158,6 @@
         "collection": "",
         "padding_top": 48,
         "padding_bottom": 48
-      }
-    },
-    "slider": {
-      "type": "home-slider",
-      "blocks": {
-        "text_pjPTid": {
-          "type": "text",
-          "settings": {
-            "eyebrow": "",
-            "heading": "A maneira mais fácil de cuidar das suas roupas",
-            "text": "<p>O fluxo de ar quente automático seca, alisa e refresca as roupas sem que você precise usar as mãos. Sem ferro de passar. Sem tábua de passar. Sem ficar esperando.</p>",
-            "text_size": "medium"
-          }
-        },
-        "button_DTnD6g": {
-          "type": "button",
-          "settings": {
-            "label": "Ver como funciona",
-            "url": "",
-            "style": "primary",
-            "new_tab": false
-          }
-        }
-      },
-      "block_order": [
-        "text_pjPTid",
-        "button_DTnD6g"
-      ],
-      "settings": {
-        "aria_label": "Hero principal da Iron Air",
-        "background_mode": "video",
-        "video": "shopify://files/videos/site.mp4",
-        "height": "large",
-        "mobile_height": "medium",
-        "content_position": "center",
-        "text_alignment": "center",
-        "tone": "navy",
-        "padding_top": 0,
-        "padding_bottom": 0
       }
     },
     "reviews": {
@@ -355,12 +355,12 @@
     }
   },
   "order": [
-    "slides_hDX8yJ",
+    "slider",
     "trust",
     "products",
-    "slider",
-    "reviews",
+    "slides_hDX8yJ",
     "action_videos",
+    "reviews",
     "faq"
   ]
 }
