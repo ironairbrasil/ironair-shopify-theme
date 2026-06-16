@@ -179,7 +179,7 @@
 .home-slide-copy h2 {
   margin: 0;
   font-family: var(--font-title);
-  font-size: clamp(42px, 6vw, 82px);
+  font-size: clamp(calc(var(--font-size-hero) - 10px), 6vw, calc(var(--font-size-hero) + 30px));
   line-height: 0.94;
   font-weight: 900;
   text-transform: uppercase;
@@ -188,17 +188,17 @@
 }
 
 .home-slide-copy.copy-size-small h2 {
-  font-size: clamp(32px, 4vw, 52px);
+  font-size: clamp(calc(var(--font-size-hero) - 20px), 4vw, var(--font-size-hero));
 }
 
 .home-slide-copy.copy-size-medium h2 {
-  font-size: clamp(38px, 5vw, 66px);
+  font-size: clamp(calc(var(--font-size-hero) - 14px), 5vw, calc(var(--font-size-hero) + 14px));
 }
 
 .home-slide-text {
   max-width: 620px;
   color: rgba(255, 255, 255, 0.86);
-  font-size: clamp(15px, 1.4vw, 20px);
+  font-size: clamp(var(--font-size-paragraph), 1.4vw, var(--font-size-heading-small));
   line-height: 1.55;
 }
 
@@ -228,7 +228,7 @@
   justify-content: center;
   padding: 14px 24px;
   border-radius: 8px;
-  font-size: 14px;
+  font-size: var(--font-size-body);
   font-weight: 900;
   text-decoration: none;
   transition: transform 0.16s ease, background 0.16s ease, color 0.16s ease, border-color 0.16s ease;
@@ -284,7 +284,7 @@
   background: rgba(10, 15, 27, 0.54);
   color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.18);
-  font-size: 30px;
+  font-size: var(--font-size-heading);
   line-height: 1;
   display: inline-flex;
   align-items: center;
@@ -297,7 +297,7 @@
 .home-slider-nav.nav-small .home-slider-arrow {
   width: 40px;
   height: 40px;
-  font-size: 24px;
+  font-size: calc(var(--font-size-heading-small) + 4px);
 }
 
 .home-slider-arrow:hover {
@@ -413,15 +413,15 @@
   .home-slide-copy h2,
   .home-slide-copy.copy-size-medium h2,
   .home-slide-copy.copy-size-large h2 {
-    font-size: 38px;
+    font-size: calc(var(--font-size-hero) - 14px);
   }
 
   .home-slide-copy.copy-size-small h2 {
-    font-size: 30px;
+    font-size: var(--font-size-heading);
   }
 
   .home-slide-text {
-    font-size: 14px;
+    font-size: var(--font-size-body);
   }
 
   .home-slide-button {
@@ -436,7 +436,7 @@
   .home-slider-arrow {
     width: 40px;
     height: 40px;
-    font-size: 24px;
+    font-size: calc(var(--font-size-heading-small) + 4px);
   }
 }
 

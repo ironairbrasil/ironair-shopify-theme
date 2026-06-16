@@ -60,11 +60,11 @@
 
 @media (max-width: 640px) {
   .product-purchase-panel h1 {
-    font-size: 32px;
+    font-size: calc(var(--font-size-heading) + 2px);
   }
 
   .product-main-price {
-    font-size: 40px;
+    font-size: var(--font-size-product-title);
   }
 
   .product-gallery-thumbs {

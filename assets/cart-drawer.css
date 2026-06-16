@@ -62,13 +62,13 @@
 .cart-drawer-header strong {
   display: block;
   font-family: var(--font-title);
-  font-size: 28px;
+  font-size: calc(var(--font-size-heading) - 2px);
   line-height: 1;
 }
 
 .cart-drawer-header span {
   color: var(--muted);
-  font-size: 13px;
+  font-size: var(--font-size-small);
 }
 
 .cart-drawer-close {
@@ -80,7 +80,7 @@
   background: #f4f4f4;
   color: var(--ink);
   cursor: pointer;
-  font-size: 20px;
+  font-size: var(--font-size-heading-small);
   line-height: 1;
 }
 
@@ -131,7 +131,7 @@
 
 .cart-drawer-item-copy span {
   color: var(--muted);
-  font-size: 12px;
+  font-size: calc(var(--font-size-small) - 1px);
 }
 
 .cart-drawer-item-meta,
@@ -163,7 +163,7 @@
 
 .cart-drawer-qty button {
   cursor: pointer;
-  font-size: 18px;
+  font-size: calc(var(--font-size-heading-small) - 2px);
   line-height: 1;
 }
 
@@ -187,7 +187,7 @@
   justify-self: flex-start;
   color: var(--red);
   cursor: pointer;
-  font-size: 12px;
+  font-size: calc(var(--font-size-small) - 1px);
   font-weight: 800;
   text-decoration: underline;
 }
@@ -214,7 +214,7 @@
 }
 
 .cart-drawer-discount label {
-  font-size: 13px;
+  font-size: var(--font-size-small);
   font-weight: 900;
 }
 
@@ -245,7 +245,7 @@
 .cart-drawer-discount small {
   min-height: 16px;
   color: var(--green);
-  font-size: 12px;
+  font-size: calc(var(--font-size-small) - 1px);
 }
 
 .cart-drawer-discount-row {
@@ -259,7 +259,7 @@
 .cart-drawer-subtotal strong {
   font-family: var(--font-title);
   color: var(--dark-green);
-  font-size: 26px;
+  font-size: calc(var(--font-size-heading) - 4px);
 }
 
 .cart-drawer-checkout {

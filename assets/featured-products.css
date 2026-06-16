@@ -29,7 +29,7 @@
   background: #fff;
   color: var(--dark-green);
   box-shadow: var(--shadow);
-  font-size: 26px;
+  font-size: calc(var(--font-size-heading) - 4px);
   line-height: 1;
   display: inline-flex;
   align-items: center;
@@ -112,7 +112,7 @@
 }
 
 .product-site-video-copy span {
-  font-size: 13px;
+  font-size: var(--font-size-small);
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -120,7 +120,7 @@
 
 .product-site-video-copy h2 {
   margin: 0;
-  font-size: clamp(38px, 5vw, 68px);
+  font-size: clamp(calc(var(--font-size-hero) - 14px), 5vw, calc(var(--font-size-hero) + 16px));
   line-height: 0.98;
   font-weight: 500;
   max-width: 680px;
@@ -129,7 +129,7 @@
 .product-site-video-copy p {
   margin: 0;
   max-width: 620px;
-  font-size: 15px;
+  font-size: var(--font-size-paragraph);
   line-height: 1.75;
   font-weight: 500;
 }
@@ -144,7 +144,7 @@
   color: #111;
   border: 1px solid #fff;
   text-decoration: none;
-  font-size: 11px;
+  font-size: calc(var(--font-size-small) - 2px);
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;

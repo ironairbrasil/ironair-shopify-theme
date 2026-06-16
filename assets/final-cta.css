@@ -2,7 +2,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 11px;
+  font-size: calc(var(--font-size-small) - 2px);
   font-weight: 800;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -19,7 +19,7 @@
 .hero-de,
 .dc-de,
 .fc-old {
-  font-size: 14px;
+  font-size: var(--font-size-body);
   color: rgba(255, 255, 255, 0.35);
   text-decoration: line-through;
 }
@@ -33,14 +33,14 @@
 }
 
 .hero-por {
-  font-size: 52px;
+  font-size: var(--font-size-hero);
   color: #ffd700;
 }
 
 .hero-parcel,
 .fc-parcel,
 .dc-parcel {
-  font-size: 14px;
+  font-size: var(--font-size-body);
   color: rgba(255, 255, 255, 0.6);
 }
 
@@ -95,14 +95,14 @@
 }
 
 .fc-left h2 {
-  font-size: clamp(32px, 4vw, 52px);
+  font-size: clamp(calc(var(--font-size-hero) - 20px), 4vw, var(--font-size-hero));
   line-height: 1;
   color: #fff;
   margin-bottom: 12px;
 }
 
 .fc-left p {
-  font-size: 15px;
+  font-size: var(--font-size-paragraph);
   color: rgba(255, 255, 255, 0.72);
   line-height: 1.6;
   margin-bottom: 24px;
@@ -115,7 +115,7 @@
 }
 
 .final-points div {
-  font-size: 13px;
+  font-size: var(--font-size-small);
   color: rgba(255, 255, 255, 0.65);
 }
 
@@ -143,20 +143,20 @@
 }
 
 .fc-price {
-  font-size: 56px;
+  font-size: calc(var(--font-size-hero) + 4px);
   color: #fff;
   margin-bottom: 4px;
 }
 
 .fc-price span {
-  font-size: 28px;
+  font-size: calc(var(--font-size-heading) - 2px);
 }
 
 .fc-btn {
   background: #7fd38f;
   color: #fff;
   padding: 16px;
-  font-size: 16px;
+  font-size: calc(var(--font-size-paragraph) + 1px);
   margin-top: 14px;
 }
 
@@ -177,7 +177,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 11px;
+  font-size: calc(var(--font-size-small) - 2px);
   color: rgba(255, 255, 255, 0.55);
 }
 

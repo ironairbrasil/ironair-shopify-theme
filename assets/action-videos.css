@@ -23,7 +23,7 @@
   margin: 0;
   max-width: 680px;
   font-family: var(--font-title);
-  font-size: 30px;
+  font-size: var(--font-size-heading);
   font-weight: 800;
   line-height: 1.15;
   text-transform: uppercase;
@@ -179,14 +179,14 @@
 
 .action-video-product strong {
   color: var(--ink);
-  font-size: 13px;
+  font-size: var(--font-size-small);
   line-height: 1.2;
 }
 
 .action-video-product span {
   margin-top: 3px;
   color: var(--muted);
-  font-size: 12px;
+  font-size: calc(var(--font-size-small) - 1px);
 }
 
 .action-video-product svg {
@@ -210,7 +210,7 @@
   box-shadow: 0 8px 28px rgba(0, 0, 0, .16);
   display: grid;
   place-items: center;
-  font-size: 34px;
+  font-size: calc(var(--font-size-heading) + 4px);
   line-height: 1;
   cursor: pointer;
 }
@@ -257,7 +257,7 @@
     width: 44px;
     height: 44px;
     top: calc(50% - 22px);
-    font-size: 28px;
+    font-size: calc(var(--font-size-heading) - 2px);
   }
 
   .action-videos-arrow.is-prev {

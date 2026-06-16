@@ -121,7 +121,7 @@
 
 .product-purchase-panel h1 {
   font-family: var(--font-title);
-  font-size: 40px;
+  font-size: var(--font-size-product-title);
   line-height: 1;
   margin: 8px 0 10px;
 }
@@ -129,7 +129,7 @@
 .product-main-price {
   color: var(--dark-green);
   font-family: var(--font-title);
-  font-size: 48px;
+  font-size: calc(var(--font-size-price) + 16px);
   font-weight: 900;
   line-height: 1;
   margin-top: 8px;
@@ -215,7 +215,7 @@
   border-radius: 8px;
   background: #fff;
   color: var(--ink);
-  font-size: 13px;
+  font-size: var(--font-size-small);
   font-weight: 900;
   cursor: pointer;
   transition: border-color 0.2s, box-shadow 0.2s, background 0.2s, color 0.2s;
@@ -239,7 +239,7 @@
 
 .product-stock-line {
   color: var(--green);
-  font-size: 13px;
+  font-size: var(--font-size-small);
   font-weight: 900;
 }
 
@@ -259,7 +259,7 @@
 }
 
 .product-upsells h2 {
-  font-size: 18px;
+  font-size: calc(var(--font-size-heading-small) - 2px);
   line-height: 1;
   margin: 0 0 12px;
 }
@@ -307,7 +307,7 @@
 
 .product-upsell-copy strong {
   color: var(--dark-green);
-  font-size: 14px;
+  font-size: var(--font-size-body);
 }
 
 .product-upsell-card button,
@@ -317,7 +317,7 @@
   border-radius: 7px;
   background: var(--dark-green);
   color: #fff;
-  font-size: 12px;
+  font-size: calc(var(--font-size-small) - 1px);
   font-weight: 900;
   display: inline-flex;
   align-items: center;
@@ -344,8 +344,8 @@
 }
 
 @media (max-width: 640px) {
-  .product-purchase-panel h1 { font-size: 32px; }
-  .product-main-price { font-size: 40px; }
+  .product-purchase-panel h1 { font-size: calc(var(--font-size-heading) + 2px); }
+  .product-main-price { font-size: calc(var(--font-size-price) + 8px); }
   .product-gallery-thumbs { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .product-gallery-main { min-height: 320px; }
   .product-upsell-card { grid-template-columns: 64px minmax(0, 1fr); }
