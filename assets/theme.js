@@ -165,78 +165,9 @@
     });
   }
 
-  function initAsaasCheckout() {
-    var endpoint = 'https://ironair-payments.vercel.app/api/checkout/start';
-
-    document.querySelectorAll('[data-asaas-checkout]').forEach(function (wrapper) {
-      var form = wrapper.querySelector('form.product-form');
-      if (!form) return;
-
-      form.addEventListener('submit', function (event) {
-        event.preventDefault();
-        event.stopImmediatePropagation();
-
-        var submit = form.querySelector('[type="submit"]');
-        var previousLabel = submit ? submit.textContent : '';
-        var formData = new FormData(form);
-        var variantId = formData.get('id');
-        var quantity = Number(formData.get('quantity') || 1);
-
-        if (!variantId) {
-          if (submit) submit.textContent = 'Selecione uma opção';
-          return;
-        }
-
-        if (submit) {
-          submit.disabled = true;
-          submit.textContent = 'Abrindo checkout...';
-        }
-
-        fetch(endpoint, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            variantId: String(variantId),
-            variantGid: 'gid://shopify/ProductVariant/' + String(variantId),
-            quantity: quantity > 0 ? quantity : 1,
-            productHandle: wrapper.getAttribute('data-product-handle') || '',
-            source: 'shopify-theme'
-          })
-        })
-          .then(function (response) {
-            return response.json().catch(function () {
-              return {};
-            }).then(function (data) {
-              if (!response.ok) {
-                throw new Error(data.error || data.message || 'Erro ao abrir checkout');
-              }
-              return data;
-            });
-          })
-          .then(function (data) {
-            var checkoutUrl = data.checkoutUrl || data.url || data.redirectUrl;
-            if (!checkoutUrl) throw new Error('Checkout sem URL');
-            window.location.href = checkoutUrl;
-          })
-          .catch(function () {
-            if (submit) {
-              submit.disabled = false;
-              submit.textContent = 'Tentar novamente';
-              window.setTimeout(function () {
-                submit.textContent = previousLabel;
-              }, 2500);
-            }
-          });
-      }, true);
-    });
-  }
-
   document.addEventListener('DOMContentLoaded', function () {
     initHeader();
     initGallery();
     initVariantPricing();
-    initAsaasCheckout();
   });
 })();

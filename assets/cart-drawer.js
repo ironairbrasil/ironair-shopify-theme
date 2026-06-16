@@ -3,6 +3,7 @@
   var drawer;
   var lastFocused;
   var discountCode = window.sessionStorage ? window.sessionStorage.getItem('ironair_discount_code') || '' : '';
+  var checkoutEndpoint = 'https://ironair-payments.vercel.app/api/checkout/start';
 
   function money(cents) {
     if (window.Shopify && typeof window.Shopify.formatMoney === 'function') {
@@ -66,11 +67,7 @@
 
     if (input && discountCode) input.value = discountCode;
     if (message) message.textContent = discountCode ? 'Cupom aplicado no checkout: ' + discountCode : '';
-    if (checkout) {
-      checkout.href = discountCode
-        ? '/discount/' + encodeURIComponent(discountCode) + '?redirect=/checkout'
-        : '/checkout';
-    }
+    if (checkout) checkout.disabled = cart.item_count <= 0;
     if (row && amount) {
       row.hidden = totalDiscount <= 0;
       amount.textContent = '-' + money(totalDiscount);
@@ -179,8 +176,83 @@
 
   function shouldHandleCartAdd(form) {
     var action = form.getAttribute('action') || '';
-    if (form.closest('[data-asaas-checkout]') || form.hasAttribute('data-asaas-product-form')) return false;
     return action.indexOf('/cart/add') !== -1;
+  }
+
+  function buildAsaasCheckoutPayload(cart) {
+    return {
+      name: 'Cliente Iron Air',
+      email: 'checkout@ironair.com.br',
+      cpfCnpj: '12345678909',
+      value: Number(((cart.total_price || 0) / 100).toFixed(2)),
+      externalReference: 'shopify_cart_' + Date.now(),
+      discountCode: discountCode,
+      currency: cart.currency || 'BRL',
+      source: 'shopify-cart',
+      items: (cart.items || []).map(function (item) {
+        var quantity = Number(item.quantity || 1);
+        var unitPrice = quantity > 0 ? (item.final_line_price || item.final_price || item.price || 0) / quantity : 0;
+        return {
+          variantId: String(item.variant_id),
+          variantGid: 'gid://shopify/ProductVariant/' + String(item.variant_id),
+          productId: String(item.product_id),
+          title: item.product_title,
+          variantTitle: item.variant_title,
+          sku: item.sku,
+          quantity: quantity,
+          price: Number((unitPrice / 100).toFixed(2)),
+          linePrice: Number(((item.final_line_price || 0) / 100).toFixed(2))
+        };
+      })
+    };
+  }
+
+  function startAsaasCheckout(button) {
+    var originalText = button ? button.textContent : '';
+
+    if (button) {
+      button.disabled = true;
+      button.textContent = 'Abrindo checkout...';
+    }
+
+    return fetchCart()
+      .then(function (cart) {
+        if (!cart.item_count) {
+          if (root) renderCart(cart);
+          throw new Error('Carrinho vazio');
+        }
+
+        return fetch(checkoutEndpoint, {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(buildAsaasCheckoutPayload(cart))
+        });
+      })
+      .then(function (response) {
+        return response.json().catch(function () {
+          return {};
+        }).then(function (data) {
+          if (!response.ok) throw new Error(data.error || data.message || 'Erro ao abrir checkout');
+          return data;
+        });
+      })
+      .then(function (data) {
+        var checkoutUrl = data.checkoutUrl || data.url || data.redirectUrl || data.invoiceUrl;
+        if (!checkoutUrl) throw new Error('Checkout sem URL');
+        window.location.href = checkoutUrl;
+      })
+      .catch(function () {
+        if (button) {
+          button.disabled = false;
+          button.textContent = 'Tentar novamente';
+          window.setTimeout(function () {
+            button.textContent = originalText;
+          }, 2500);
+        }
+      });
   }
 
   function handleDrawerClick(event) {
@@ -250,6 +322,13 @@
 
     document.addEventListener('keydown', function (event) {
       if (event.key === 'Escape' && root.classList.contains('is-open')) closeDrawer();
+    });
+
+    document.addEventListener('click', function (event) {
+      var checkout = event.target.closest('[data-cart-checkout]');
+      if (!checkout) return;
+      event.preventDefault();
+      startAsaasCheckout(checkout);
     });
 
     document.addEventListener('submit', function (event) {

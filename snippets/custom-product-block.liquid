@@ -74,8 +74,8 @@
       {% endunless %}
 
     {% when 'product_buy_button' %}
-      <div class="custom-product-buy" data-asaas-checkout data-product-handle="{{ current_product.handle | escape }}" {{ block.shopify_attributes }}>
-        {% form 'product', current_product, class: 'product-form', data-asaas-product-form: true %}
+      <div class="custom-product-buy" {{ block.shopify_attributes }}>
+        {% form 'product', current_product, class: 'product-form' %}
           {% unless current_product.has_only_default_variant %}
             <select name="id" class="product-form-select" aria-label="Selecionar variante">
               {% for variant in current_product.variants %}
