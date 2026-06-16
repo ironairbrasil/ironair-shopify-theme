@@ -27,7 +27,11 @@
         <h4>{{ section.settings.support_title }}</h4>
         <ul>
           {% for link in linklists[section.settings.support_menu].links %}
-            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {% if link.title == 'Fale conosco' %}
+              <li><a href="/pages/compra-segura">Compra 100% segura</a></li>
+            {% else %}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {% endif %}
           {% else %}
             <li><a href="/#faq">FAQ</a></li>
             <li><a href="/policies/refund-policy">Política de trocas</a></li>
