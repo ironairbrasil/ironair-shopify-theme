@@ -32,32 +32,10 @@
             "button_new_tab": false,
             "tone": "navy"
           }
-        },
-        "banner_bhpQx6": {
-          "type": "banner",
-          "settings": {
-            "label": "Banner Iron Air",
-            "media_type": "image",
-            "image": "shopify://shop_images/4.webp",
-            "mobile_media_type": "image",
-            "url": "",
-            "link_label": "Ver oferta",
-            "new_tab": false,
-            "eyebrow": "",
-            "heading": "",
-            "text": "",
-            "text_size": "large",
-            "button_label": "",
-            "button_url": "",
-            "button_style": "primary",
-            "button_new_tab": false,
-            "tone": "navy"
-          }
         }
       },
       "block_order": [
-        "banner_9andEy",
-        "banner_bhpQx6"
+        "banner_9andEy"
       ],
       "name": "Slides",
       "settings": {
