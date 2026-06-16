@@ -14,11 +14,29 @@
   overflow: visible;
 }
 
+.products-carousel-head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.products-carousel-link {
+  color: var(--dark-green);
+  font-size: var(--font-size-small);
+  font-weight: 900;
+}
+
 .products-carousel-nav {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
   margin-bottom: 12px;
+}
+
+.products-carousel-head .products-carousel-nav {
+  margin-bottom: 0;
 }
 
 .products-carousel-arrow {

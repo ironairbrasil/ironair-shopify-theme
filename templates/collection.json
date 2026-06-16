@@ -26,8 +26,11 @@
           "type": "products",
           "settings": {
             "display_mode": "grid",
+            "carousel_link_label": "Ver todos →",
+            "carousel_link_url": "",
             "products_limit": 50,
             "columns_desktop": "4",
+            "carousel_columns_desktop": "4",
             "show_media": true,
             "media_ratio": "square",
             "border_style": "none",
