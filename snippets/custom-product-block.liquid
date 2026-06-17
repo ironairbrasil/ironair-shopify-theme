@@ -75,19 +75,19 @@
 
     {% when 'product_buy_button' %}
       <div class="custom-product-buy" {{ block.shopify_attributes }}>
-        {% form 'product', current_product, class: 'product-form' %}
+        {% form 'product', current_product, class: 'product-form', data-asaas-checkout: true, data-product-handle: current_product.handle, data-product-title: current_product.title %}
           {% unless current_product.has_only_default_variant %}
             <select name="id" class="product-form-select" aria-label="Selecionar variante">
               {% for variant in current_product.variants %}
-                <option value="{{ variant.id }}" {% if variant == current_variant %}selected{% endif %} {% unless variant.available %}disabled{% endunless %}>
+                <option value="{{ variant.id }}" data-price-cents="{{ variant.price }}" {% if variant == current_variant %}selected{% endif %} {% unless variant.available %}disabled{% endunless %}>
                   {{ variant.title }}{% unless variant.available %} - esgotado{% endunless %}
                 </option>
               {% endfor %}
             </select>
           {% else %}
-            <input type="hidden" name="id" value="{{ current_variant.id }}">
+            <input type="hidden" name="id" value="{{ current_variant.id }}" data-price-cents="{{ current_variant.price }}">
           {% endunless %}
-          <button class="btn-hero product-submit" type="submit" {% unless current_variant.available %}disabled{% endunless %}>
+          <button class="btn-hero product-submit" type="submit" data-asaas-checkout {% unless current_variant.available %}disabled{% endunless %}>
             {{ block.settings.button_label }}
           </button>
         {% endform %}

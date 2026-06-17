@@ -3,7 +3,6 @@
   var drawer;
   var lastFocused;
   var discountCode = window.sessionStorage ? window.sessionStorage.getItem('ironair_discount_code') || '' : '';
-  var checkoutEndpoint = 'https://ironair-payments.vercel.app/api/checkout/start';
 
   function money(cents) {
     if (window.Shopify && typeof window.Shopify.formatMoney === 'function') {
@@ -179,27 +178,28 @@
     return action.indexOf('/cart/add') !== -1;
   }
 
-  function buildAsaasCheckoutPayload(cart) {
+  function buildAsaasCheckoutPayload(cart, customer) {
     return {
-      name: 'Cliente Iron Air',
-      email: 'checkout@ironair.com.br',
-      cpfCnpj: '12345678909',
+      name: customer.name,
+      email: customer.email,
+      cpfCnpj: customer.cpfCnpj,
       value: Number(((cart.total_price || 0) / 100).toFixed(2)),
-      externalReference: 'shopify_cart_' + Date.now(),
+      externalReference: window.IronAirCheckout ? window.IronAirCheckout.uniqueReference('theme') : 'theme-' + Date.now() + '-' + Math.random().toString(16).slice(2),
       discountCode: discountCode,
       currency: cart.currency || 'BRL',
-      source: 'shopify-cart',
+      source: 'shopify-theme',
       items: (cart.items || []).map(function (item) {
         var quantity = Number(item.quantity || 1);
         var unitPrice = quantity > 0 ? (item.final_line_price || item.final_price || item.price || 0) / quantity : 0;
         return {
           variantId: String(item.variant_id),
           variantGid: 'gid://shopify/ProductVariant/' + String(item.variant_id),
+          quantity: quantity,
+          productHandle: item.handle || '',
           productId: String(item.product_id),
           title: item.product_title,
           variantTitle: item.variant_title,
           sku: item.sku,
-          quantity: quantity,
           price: Number((unitPrice / 100).toFixed(2)),
           linePrice: Number(((item.final_line_price || 0) / 100).toFixed(2))
         };
@@ -210,46 +210,54 @@
   function startAsaasCheckout(button) {
     var originalText = button ? button.textContent : '';
 
+    if (button && button.getAttribute('data-asaas-checkout-loading') === 'true') return;
     if (button) {
       button.disabled = true;
-      button.textContent = 'Abrindo checkout...';
+      button.setAttribute('data-asaas-checkout-loading', 'true');
+      button.textContent = 'Gerando pagamento...';
     }
 
-    return fetchCart()
-      .then(function (cart) {
+    if (!window.IronAirCheckout) {
+      if (button) {
+        button.disabled = false;
+        button.removeAttribute('data-asaas-checkout-loading');
+        button.textContent = originalText;
+      }
+      window.alert('Nao foi possivel abrir o checkout agora. Recarregue a pagina e tente novamente.');
+      return;
+    }
+
+    return window.IronAirCheckout.collectCustomer()
+      .then(function (customer) {
+        return fetchCart().then(function (cart) {
+          return { cart: cart, customer: customer };
+        });
+      })
+      .then(function (checkoutContext) {
+        var cart = checkoutContext.cart;
         if (!cart.item_count) {
           if (root) renderCart(cart);
           throw new Error('Carrinho vazio');
         }
 
-        return fetch(checkoutEndpoint, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'text/plain;charset=UTF-8'
-          },
-          body: JSON.stringify(buildAsaasCheckoutPayload(cart))
-        });
-      })
-      .then(function (response) {
-        return response.json().catch(function () {
-          return {};
-        }).then(function (data) {
-          if (!response.ok) throw new Error(data.error || data.message || 'Erro ao abrir checkout');
-          return data;
-        });
+        return window.IronAirCheckout.postCheckout(buildAsaasCheckoutPayload(cart, checkoutContext.customer));
       })
       .then(function (data) {
         var checkoutUrl = data.checkoutUrl || data.url || data.redirectUrl || data.invoiceUrl;
         if (!checkoutUrl) throw new Error('Checkout sem URL');
         window.location.href = checkoutUrl;
       })
-      .catch(function () {
+      .catch(function (error) {
         if (button) {
           button.disabled = false;
+          button.removeAttribute('data-asaas-checkout-loading');
           button.textContent = 'Tentar novamente';
           window.setTimeout(function () {
             button.textContent = originalText;
           }, 2500);
+        }
+        if (!error || error.message !== 'checkout_cancelado') {
+          window.alert((error && error.message) || 'Nao foi possivel gerar o pagamento. Confira seus dados e tente novamente.');
         }
       });
   }

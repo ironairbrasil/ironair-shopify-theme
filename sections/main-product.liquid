@@ -23,7 +23,7 @@
   {% assign discount = compare_price | minus: price | times: 100 | divided_by: compare_price %}
 {% endif %}
 
-<section class="page product-page shopify-padding-section" data-product-root style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
+<section class="page product-page shopify-padding-section" data-product-root data-product-handle="{{ product.handle | escape }}" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
   <div class="product-detail-shell">
     <div class="product-media-column">
       <div class="product-gallery">
@@ -134,7 +134,7 @@
 
           {% when 'buy_buttons' %}
             <div {{ block.shopify_attributes }}>
-              {% form 'product', product, class: 'product-form' %}
+              {% form 'product', product, class: 'product-form', data-asaas-checkout: true, data-product-handle: product.handle, data-product-title: product.title %}
                 {% unless product.has_only_default_variant %}
                   <select id="ProductSelect-{{ section.id }}" name="id" class="product-variant-native-select" data-product-variant-select aria-label="{{ block.settings.variant_label | default: 'Selecionar variante' }}">
                     {% for variant in product.variants %}
@@ -157,6 +157,7 @@
                       {% endcapture %}
                       <option
                         value="{{ variant.id }}"
+                        data-price-cents="{{ variant_price }}"
                         data-price="{{ variant_price | money }}"
                         data-compare-price="{{ variant_compare_price | money }}"
                         data-has-compare-price="{% if variant_compare_price > variant_price %}true{% else %}false{% endif %}"
@@ -206,7 +207,7 @@
                     {% endfor %}
                   </div>
                 {% else %}
-                  <input type="hidden" name="id" value="{{ current_variant.id }}">
+                  <input type="hidden" name="id" value="{{ current_variant.id }}" data-price-cents="{{ current_variant.price }}">
                 {% endunless %}
                 {% if block.settings.show_stock %}
                   {% if current_variant.inventory_management %}
@@ -217,7 +218,7 @@
                     <div class="product-stock-line is-out" data-product-stock-message data-stock-prefix="{{ block.settings.stock_prefix | escape }}">Produto esgotado no momento</div>
                   {% endif %}
                 {% endif %}
-                <button class="btn-hero product-submit" type="submit" data-product-submit {% unless current_variant.available %}disabled{% endunless %}>
+                <button class="btn-hero product-submit" type="submit" data-product-submit data-asaas-checkout {% unless current_variant.available %}disabled{% endunless %}>
                   {{ block.settings.button_label }}
                 </button>
               {% endform %}

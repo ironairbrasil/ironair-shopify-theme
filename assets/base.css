@@ -63,6 +63,79 @@ button {
   background: transparent;
 }
 
+.asaas-customer-modal[hidden] {
+  display: none;
+}
+
+.asaas-customer-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+
+.asaas-customer-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.54);
+}
+
+.asaas-customer-modal__dialog {
+  position: relative;
+  width: min(100%, 420px);
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-h);
+  padding: 22px;
+}
+
+.asaas-customer-modal__dialog form,
+.asaas-customer-modal__dialog label {
+  display: grid;
+  gap: 10px;
+}
+
+.asaas-customer-modal__dialog form {
+  gap: 14px;
+}
+
+.asaas-customer-modal__dialog h2 {
+  font-size: var(--font-size-heading-small);
+  line-height: 1.1;
+}
+
+.asaas-customer-modal__dialog label {
+  color: var(--ink);
+  font-weight: 900;
+}
+
+.asaas-customer-modal__dialog input {
+  min-height: 46px;
+  width: 100%;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0 12px;
+}
+
+.asaas-customer-modal__dialog p {
+  min-height: 18px;
+  color: var(--red);
+  font-size: var(--font-size-small);
+  font-weight: 800;
+}
+
+.asaas-customer-modal__dialog form > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.asaas-customer-modal-open {
+  overflow: hidden;
+}
+
 .section-anchor {
   scroll-margin-top: 150px;
 }
