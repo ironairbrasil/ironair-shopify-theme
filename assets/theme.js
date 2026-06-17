@@ -1,5 +1,6 @@
 (function () {
   var checkoutEndpoint = 'https://ironair-payments.vercel.app/api/checkout/start';
+  var customerPromise;
 
   function uniqueReference(prefix) {
     var randomPart = '';
@@ -64,7 +65,96 @@
     node.style.color = isError ? 'var(--red)' : 'var(--dark-green)';
   }
 
-  function buildProductCheckoutPayload(form) {
+  function ensureCustomerModal() {
+    var existing = document.querySelector('[data-asaas-customer-modal]');
+    if (existing) return existing;
+
+    var modal = document.createElement('div');
+    modal.className = 'asaas-customer-modal';
+    modal.setAttribute('data-asaas-customer-modal', '');
+    modal.hidden = true;
+    modal.innerHTML = [
+      '<div class="asaas-customer-modal__backdrop" data-asaas-customer-cancel></div>',
+      '<div class="asaas-customer-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="AsaasCustomerTitle">',
+        '<form data-asaas-customer-form novalidate>',
+          '<h2 id="AsaasCustomerTitle">Dados para pagamento</h2>',
+          '<label>Nome<input type="text" name="name" autocomplete="name" required></label>',
+          '<label>Email<input type="email" name="email" autocomplete="email" required></label>',
+          '<label>CPF/CNPJ<input type="text" name="cpfCnpj" inputmode="numeric" autocomplete="off" required></label>',
+          '<p data-asaas-customer-error></p>',
+          '<div>',
+            '<button type="button" class="btn-hero-ghost" data-asaas-customer-cancel>Cancelar</button>',
+            '<button type="submit" class="btn-hero">Continuar</button>',
+          '</div>',
+        '</form>',
+      '</div>'
+    ].join('');
+    document.body.appendChild(modal);
+    return modal;
+  }
+
+  function collectCustomer() {
+    if (customerPromise) return customerPromise;
+
+    customerPromise = new Promise(function (resolve, reject) {
+      var modal = ensureCustomerModal();
+      var form = modal.querySelector('[data-asaas-customer-form]');
+      var error = modal.querySelector('[data-asaas-customer-error]');
+      var firstInput = form.querySelector('input');
+
+      function close() {
+        modal.hidden = true;
+        document.body.classList.remove('asaas-customer-modal-open');
+        form.removeEventListener('submit', submit);
+        modal.querySelectorAll('[data-asaas-customer-cancel]').forEach(function (button) {
+          button.removeEventListener('click', cancel);
+        });
+        customerPromise = null;
+      }
+
+      function cancel() {
+        close();
+        reject(new Error('checkout_cancelado'));
+      }
+
+      function submit(event) {
+        event.preventDefault();
+        var formData = new FormData(form);
+        var customer = {
+          name: String(formData.get('name') || '').trim(),
+          email: String(formData.get('email') || '').trim(),
+          cpfCnpj: String(formData.get('cpfCnpj') || '').replace(/\D/g, '')
+        };
+
+        if (!customer.name || !customer.email || !customer.cpfCnpj) {
+          error.textContent = 'Preencha nome, email e CPF/CNPJ para continuar.';
+          return;
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customer.email)) {
+          error.textContent = 'Informe um email valido.';
+          return;
+        }
+
+        close();
+        resolve(customer);
+      }
+
+      error.textContent = '';
+      form.addEventListener('submit', submit);
+      modal.querySelectorAll('[data-asaas-customer-cancel]').forEach(function (button) {
+        button.addEventListener('click', cancel);
+      });
+      modal.hidden = false;
+      document.body.classList.add('asaas-customer-modal-open');
+      window.setTimeout(function () {
+        if (firstInput) firstInput.focus();
+      }, 0);
+    });
+
+    return customerPromise;
+  }
+
+  function buildProductCheckoutPayload(form, customer) {
     var formData = new FormData(form);
     var variantId = String(formData.get('id') || '').trim();
     var quantity = getQuantity(form);
@@ -79,6 +169,9 @@
     if (!productHandle) throw new Error('Nao foi possivel identificar o produto.');
 
     return {
+      name: customer.name,
+      email: customer.email,
+      cpfCnpj: customer.cpfCnpj,
       value: value,
       externalReference: uniqueReference('theme'),
       items: [
@@ -123,13 +216,17 @@
     }
     setCheckoutMessage(form, '');
 
-    return postCheckout(buildProductCheckoutPayload(form))
+    return collectCustomer()
+      .then(function (customer) {
+        return postCheckout(buildProductCheckoutPayload(form, customer));
+      })
       .then(function (data) {
         var checkoutUrl = data.checkoutUrl;
         if (!checkoutUrl) throw new Error('Pagamento gerado sem URL de checkout.');
         window.location.href = checkoutUrl;
       })
       .catch(function (error) {
+        if (error && error.message === 'checkout_cancelado') return;
         setCheckoutMessage(form, (error && error.message) || 'Nao foi possivel gerar o pagamento. Confira seus dados e tente novamente.', true);
       })
       .finally(function () {
@@ -142,6 +239,7 @@
   }
 
   window.IronAirCheckout = {
+    collectCustomer: collectCustomer,
     postCheckout: postCheckout,
     uniqueReference: uniqueReference,
     decimalFromCents: decimalFromCents
