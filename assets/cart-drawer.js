@@ -178,6 +178,13 @@
     return action.indexOf('/cart/add') !== -1;
   }
 
+  function itemProductHandle(item) {
+    if (item.handle) return item.handle;
+    if (!item.url) return '';
+    var match = String(item.url).match(/\/products\/([^/?#]+)/);
+    return match ? match[1] : '';
+  }
+
   function buildAsaasCheckoutPayload(cart, customer) {
     return {
       name: customer.name,
@@ -195,7 +202,7 @@
           variantId: String(item.variant_id),
           variantGid: 'gid://shopify/ProductVariant/' + String(item.variant_id),
           quantity: quantity,
-          productHandle: item.handle || '',
+          productHandle: itemProductHandle(item),
           productId: String(item.product_id),
           title: item.product_title,
           variantTitle: item.variant_title,
@@ -243,7 +250,7 @@
         return window.IronAirCheckout.postCheckout(buildAsaasCheckoutPayload(cart, checkoutContext.customer));
       })
       .then(function (data) {
-        var checkoutUrl = data.checkoutUrl || data.url || data.redirectUrl || data.invoiceUrl;
+        var checkoutUrl = data.checkoutUrl;
         if (!checkoutUrl) throw new Error('Checkout sem URL');
         window.location.href = checkoutUrl;
       })

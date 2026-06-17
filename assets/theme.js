@@ -221,7 +221,7 @@
         return postCheckout(buildProductCheckoutPayload(form, customer));
       })
       .then(function (data) {
-        var checkoutUrl = data.checkoutUrl || data.url || data.redirectUrl || data.invoiceUrl;
+        var checkoutUrl = data.checkoutUrl;
         if (!checkoutUrl) throw new Error('Pagamento gerado sem URL de checkout.');
         window.location.href = checkoutUrl;
       })
