@@ -207,15 +207,12 @@
 
 @media (max-width: 900px) {
   .shopify-featured-product { padding: 0 20px; }
-  .products-grid.cols4,
-  .products-grid.cols3 { grid-template-columns: repeat(2, 1fr); }
-  .products-grid.is-carousel .product-card { width: calc((100% - 12px) / 2); min-width: calc((100% - 12px) / 2); }
+  .products-grid.is-stack-mobile { grid-template-columns: 1fr; gap: 12px; }
+  .products-grid.is-carousel .product-card { width: min(82%, 320px); min-width: min(82%, 320px); }
 }
 
 @media (max-width: 640px) {
   .products-carousel-nav { display: none; }
   .mobile-scroll-shell { overflow: visible; margin-left: -16px; margin-right: -16px; }
   .products-grid.is-carousel { padding-left: 16px; padding-right: 16px; scroll-padding-left: 16px; }
-  .products-grid.is-carousel .product-card { width: min(82%, 320px); min-width: min(82%, 320px); }
-  .products-grid.is-stack-mobile { grid-template-columns: 1fr; gap: 12px; }
 }
