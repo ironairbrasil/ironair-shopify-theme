@@ -185,11 +185,8 @@
     return match ? match[1] : '';
   }
 
-  function buildAsaasCheckoutPayload(cart, customer) {
+  function buildAsaasCheckoutPayload(cart) {
     return {
-      name: customer.name,
-      email: customer.email,
-      cpfCnpj: customer.cpfCnpj,
       value: Number(((cart.total_price || 0) / 100).toFixed(2)),
       externalReference: window.IronAirCheckout ? window.IronAirCheckout.uniqueReference('theme') : 'theme-' + Date.now() + '-' + Math.random().toString(16).slice(2),
       discountCode: discountCode,
@@ -234,20 +231,14 @@
       return;
     }
 
-    return window.IronAirCheckout.collectCustomer()
-      .then(function (customer) {
-        return fetchCart().then(function (cart) {
-          return { cart: cart, customer: customer };
-        });
-      })
-      .then(function (checkoutContext) {
-        var cart = checkoutContext.cart;
+    return fetchCart()
+      .then(function (cart) {
         if (!cart.item_count) {
           if (root) renderCart(cart);
           throw new Error('Carrinho vazio');
         }
 
-        return window.IronAirCheckout.postCheckout(buildAsaasCheckoutPayload(cart, checkoutContext.customer));
+        return window.IronAirCheckout.postCheckout(buildAsaasCheckoutPayload(cart));
       })
       .then(function (data) {
         var checkoutUrl = data.checkoutUrl;
@@ -263,9 +254,7 @@
             button.textContent = originalText;
           }, 2500);
         }
-        if (!error || error.message !== 'checkout_cancelado') {
-          window.alert((error && error.message) || 'Nao foi possivel gerar o pagamento. Confira seus dados e tente novamente.');
-        }
+        window.alert((error && error.message) || 'Nao foi possivel gerar o pagamento. Confira seus dados e tente novamente.');
       });
   }
 
