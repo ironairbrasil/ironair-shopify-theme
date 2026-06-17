@@ -44,17 +44,13 @@
         "account": {
           "type": "account",
           "settings": {
-            "enabled": true,
-            "label": "Conta",
-            "show_label": true
+            "enabled": true
           }
         },
         "cart": {
           "type": "cart",
           "settings": {
-            "enabled": true,
-            "label": "Carrinho",
-            "show_label": true
+            "enabled": true
           }
         }
       },
