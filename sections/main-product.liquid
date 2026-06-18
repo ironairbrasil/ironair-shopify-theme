@@ -23,7 +23,7 @@
   {% assign discount = compare_price | minus: price | times: 100 | divided_by: compare_price %}
 {% endif %}
 
-<section class="page product-page shopify-padding-section" data-product-root data-product-handle="{{ product.handle | escape }}" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
+<section class="page product-page shopify-padding-section" data-product-root data-product-handle="{{ product.handle | escape }}" data-product-title="{{ product.title | escape }}" {% if product.featured_image %}data-product-image="{{ product.featured_image | image_url: width: 400 }}"{% endif %} style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
   <div class="product-detail-shell">
     <div class="product-media-column">
       <div class="product-gallery">
@@ -134,12 +134,19 @@
 
           {% when 'buy_buttons' %}
             <div {{ block.shopify_attributes }}>
-              {% form 'product', product, class: 'product-form', data-asaas-checkout: true, data-product-handle: product.handle, data-product-title: product.title %}
+              {% if product.featured_image %}
+                {% assign product_checkout_image_url = product.featured_image | image_url: width: 400 %}
+              {% endif %}
+              {% form 'product', product, class: 'product-form', data-asaas-checkout: true, data-product-handle: product.handle, data-product-title: product.title, data-product-image: product_checkout_image_url %}
                 {% unless product.has_only_default_variant %}
                   <select id="ProductSelect-{{ section.id }}" name="id" class="product-variant-native-select" data-product-variant-select aria-label="{{ block.settings.variant_label | default: 'Selecionar variante' }}">
                     {% for variant in product.variants %}
                       {% assign variant_price = variant.price %}
                       {% assign variant_compare_price = variant.compare_at_price %}
+                      {% assign variant_checkout_image = product.featured_image %}
+                      {% if variant.featured_image %}
+                        {% assign variant_checkout_image = variant.featured_image %}
+                      {% endif %}
                       {% assign variant_pix_price = variant_price | times: pix_multiplier | divided_by: 100 %}
                       {% assign variant_installments = variant_price | divided_by: installments_count %}
                       {% assign variant_discount = 0 %}
@@ -157,8 +164,11 @@
                       {% endcapture %}
                       <option
                         value="{{ variant.id }}"
+                        data-variant-gid="gid://shopify/ProductVariant/{{ variant.id }}"
                         data-price-cents="{{ variant_price }}"
                         data-price="{{ variant_price | money }}"
+                        data-product-title="{{ product.title | escape }}"
+                        {% if variant_checkout_image %}data-product-image="{{ variant_checkout_image | image_url: width: 400 }}"{% endif %}
                         data-compare-price="{{ variant_compare_price | money }}"
                         data-has-compare-price="{% if variant_compare_price > variant_price %}true{% else %}false{% endif %}"
                         data-discount="{{ variant_discount }}% OFF"
@@ -207,7 +217,11 @@
                     {% endfor %}
                   </div>
                 {% else %}
-                  <input type="hidden" name="id" value="{{ current_variant.id }}" data-price-cents="{{ current_variant.price }}">
+                  {% assign current_checkout_image = product.featured_image %}
+                  {% if current_variant.featured_image %}
+                    {% assign current_checkout_image = current_variant.featured_image %}
+                  {% endif %}
+                  <input type="hidden" name="id" value="{{ current_variant.id }}" data-variant-gid="gid://shopify/ProductVariant/{{ current_variant.id }}" data-price-cents="{{ current_variant.price }}" data-product-title="{{ product.title | escape }}" {% if current_checkout_image %}data-product-image="{{ current_checkout_image | image_url: width: 400 }}"{% endif %}>
                 {% endunless %}
                 {% if block.settings.show_stock %}
                   {% if current_variant.inventory_management %}
