@@ -54,8 +54,15 @@
       {% endif %}
     </div>
     {% if featured_variant and featured_product.has_only_default_variant %}
-      <form method="post" action="{{ routes.cart_add_url }}">
-        <input type="hidden" name="id" value="{{ featured_variant.id }}">
+      {% assign featured_checkout_image = featured_product.featured_image %}
+      {% if featured_variant.featured_image %}
+        {% assign featured_checkout_image = featured_variant.featured_image %}
+      {% endif %}
+      {% if featured_product.featured_image %}
+        {% assign featured_product_checkout_image_url = featured_product.featured_image | image_url: width: 400 %}
+      {% endif %}
+      <form method="post" action="{{ routes.cart_add_url }}" data-asaas-checkout data-product-handle="{{ featured_product.handle | escape }}" data-product-title="{{ featured_product.title | escape }}" {% if featured_product_checkout_image_url %}data-product-image="{{ featured_product_checkout_image_url }}"{% endif %}>
+        <input type="hidden" name="id" value="{{ featured_variant.id }}" data-variant-gid="gid://shopify/ProductVariant/{{ featured_variant.id }}" data-price-cents="{{ featured_variant.price }}" data-product-title="{{ featured_product.title | escape }}" {% if featured_checkout_image %}data-product-image="{{ featured_checkout_image | image_url: width: 400 }}"{% endif %}>
         <button class="fc-btn" type="submit">🛒 {{ section.settings.button_label }}</button>
       </form>
     {% elsif featured_product != blank %}

@@ -1,5 +1,6 @@
 (function () {
   var checkoutEndpoint = 'https://ironair-payments.vercel.app/api/checkout/start';
+  var directCheckoutUrl = 'https://ironair-payments.vercel.app/checkout-ironair';
 
   function uniqueReference(prefix) {
     var randomPart = '';
@@ -38,6 +39,46 @@
     }
 
     return 0;
+  }
+
+  function getProductFormVariantData(form, variantId) {
+    var select = form.querySelector('select[name="id"]');
+    var selected = select && select.options[select.selectedIndex];
+    var hidden = form.querySelector('input[name="id"]');
+    var productRoot = form.closest('[data-product-root]');
+    var variantJson = productRoot && productRoot.querySelector('[data-product-variants-json]');
+    var variants = [];
+    var variant = null;
+
+    if (variantJson) {
+      try {
+        variants = JSON.parse(variantJson.textContent || '[]');
+      } catch (error) {
+        variants = [];
+      }
+      variant = variants.find(function (item) {
+        return String(item.id) === String(variantId);
+      });
+    }
+
+    return {
+      id: variantId,
+      gid: (selected && selected.getAttribute('data-variant-gid')) ||
+        (hidden && hidden.getAttribute('data-variant-gid')) ||
+        (variant && variant.admin_graphql_api_id) ||
+        ('gid://shopify/ProductVariant/' + variantId),
+      title: (selected && selected.getAttribute('data-product-title')) ||
+        (hidden && hidden.getAttribute('data-product-title')) ||
+        form.getAttribute('data-product-title') ||
+        (productRoot && productRoot.getAttribute('data-product-title')) ||
+        '',
+      image: (selected && selected.getAttribute('data-product-image')) ||
+        (hidden && hidden.getAttribute('data-product-image')) ||
+        form.getAttribute('data-product-image') ||
+        (productRoot && productRoot.getAttribute('data-product-image')) ||
+        '',
+      priceCents: getProductFormPriceCents(form, variantId)
+    };
   }
 
   function getQuantity(form) {
@@ -93,6 +134,29 @@
     };
   }
 
+  function buildDirectProductCheckoutUrl(form) {
+    var formData = new FormData(form);
+    var variantId = String(formData.get('id') || '').trim();
+    var quantity = getQuantity(form);
+    var variantData;
+    var params;
+
+    if (!variantId) throw new Error('Selecione uma variante para continuar.');
+
+    variantData = getProductFormVariantData(form, variantId);
+    if (!variantData.priceCents) throw new Error('Nao foi possivel identificar o preco do produto.');
+    if (!variantData.title) throw new Error('Nao foi possivel identificar o produto.');
+
+    params = new URLSearchParams();
+    params.set('variantId', variantData.gid);
+    params.set('quantity', String(quantity));
+    params.set('title', variantData.title);
+    params.set('price', decimalFromCents(variantData.priceCents).toFixed(2));
+    params.set('image', variantData.image || '');
+
+    return directCheckoutUrl + '?' + params.toString();
+  }
+
   function postCheckout(payload) {
     return fetch(checkoutEndpoint, {
       method: 'POST',
@@ -119,26 +183,32 @@
     form.setAttribute('data-asaas-checkout-loading', 'true');
     if (button) {
       button.disabled = true;
-      button.textContent = 'Gerando pagamento...';
+      button.textContent = 'Abrindo checkout...';
     }
     setCheckoutMessage(form, '');
 
-    return postCheckout(buildProductCheckoutPayload(form))
-      .then(function (data) {
-        var checkoutUrl = data.checkoutUrl;
-        if (!checkoutUrl) throw new Error('Pagamento gerado sem URL de checkout.');
-        window.location.href = checkoutUrl;
-      })
-      .catch(function (error) {
-        setCheckoutMessage(form, (error && error.message) || 'Nao foi possivel gerar o pagamento. Confira seus dados e tente novamente.', true);
-      })
-      .finally(function () {
+    try {
+      window.location.href = buildDirectProductCheckoutUrl(form);
+    } catch (error) {
+      setCheckoutMessage(form, (error && error.message) || 'Nao foi possivel abrir o checkout. Confira seus dados e tente novamente.', true);
+      form.removeAttribute('data-asaas-checkout-loading');
+      if (button) {
+        button.disabled = false;
+        button.textContent = originalText;
+      }
+      return;
+    }
+
+    window.setTimeout(function () {
+      if (document.visibilityState === 'hidden') return;
+      if (form.getAttribute('data-asaas-checkout-loading') === 'true') {
         form.removeAttribute('data-asaas-checkout-loading');
         if (button) {
           button.disabled = false;
           button.textContent = originalText;
         }
-      });
+      }
+    }, 3000);
   }
 
   window.IronAirCheckout = {
