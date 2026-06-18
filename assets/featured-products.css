@@ -101,6 +101,11 @@
   min-width: calc((100% - 12px) / 2);
 }
 
+.products-grid.is-carousel.cols1 .product-card {
+  width: 100%;
+  min-width: 100%;
+}
+
 .product-site-video {
   position: relative;
   width: 100vw;
@@ -182,6 +187,10 @@
 .product-site-video-cta:hover {
   background: transparent;
   color: #fff;
+}
+
+.cols1 {
+  grid-template-columns: 1fr;
 }
 
 .cols2 {
