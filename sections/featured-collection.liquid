@@ -215,9 +215,13 @@
         {
           "type": "select",
           "id": "carousel_columns_desktop",
-          "label": "Produtos visíveis no desktop",
+          "label": "Produtos por slide",
           "visible_if": "{{ block.settings.display_mode == 'carousel' }}",
           "options": [
+            {
+              "value": "1",
+              "label": "1"
+            },
             {
               "value": "2",
               "label": "2"
@@ -231,7 +235,7 @@
               "label": "4"
             }
           ],
-          "default": "4"
+          "default": "1"
         },
         {
           "type": "checkbox",
