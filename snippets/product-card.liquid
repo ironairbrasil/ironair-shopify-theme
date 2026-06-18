@@ -57,12 +57,17 @@
     {% endif %}
 
     {% if product.has_only_default_variant %}
-      <form method="post" action="{{ routes.cart_add_url }}" class="product-card-form">
-        <input type="hidden" name="id" value="{{ variant.id }}">
-        <button class="pc-btn" type="submit" {% unless variant.available %}disabled{% endunless %}>
-          Adicionar ao carrinho
-        </button>
-      </form>
+      {% assign card_checkout_image = product.featured_image %}
+      {% if variant.featured_image %}
+        {% assign card_checkout_image = variant.featured_image %}
+      {% endif %}
+      <a
+        class="pc-btn"
+        href="https://ironair-payments.vercel.app/checkout-ironair?variantId={{ variant.admin_graphql_api_id | url_encode }}&quantity=1&title={{ product.title | url_encode }}&price={{ variant.price | money_without_currency | replace: ',', '.' }}{% if card_checkout_image %}&image={{ card_checkout_image | image_url: width: 400 | url_encode }}{% endif %}&productHandle={{ product.handle | url_encode }}"
+        {% unless variant.available %}aria-disabled="true"{% endunless %}
+      >
+        Comprar agora
+      </a>
     {% else %}
       <a class="pc-btn" href="{{ product.url }}">Escolher opção</a>
     {% endif %}

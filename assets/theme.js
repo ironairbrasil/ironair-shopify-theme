@@ -1,5 +1,4 @@
 (function () {
-  var checkoutEndpoint = 'https://ironair-payments.vercel.app/api/checkout/start';
   var directCheckoutUrl = 'https://ironair-payments.vercel.app/checkout-ironair';
 
   function uniqueReference(prefix) {
@@ -93,45 +92,16 @@
     var node;
 
     if (!container) return;
-    node = container.querySelector('[data-asaas-checkout-message]');
+    node = container.querySelector('[data-ironair-checkout-message]');
     if (!node) {
       node = document.createElement('div');
-      node.setAttribute('data-asaas-checkout-message', '');
+      node.setAttribute('data-ironair-checkout-message', '');
       node.style.marginTop = '10px';
       node.style.fontWeight = '800';
       container.appendChild(node);
     }
     node.textContent = message || '';
     node.style.color = isError ? 'var(--red)' : 'var(--dark-green)';
-  }
-
-  function buildProductCheckoutPayload(form) {
-    var formData = new FormData(form);
-    var variantId = String(formData.get('id') || '').trim();
-    var quantity = getQuantity(form);
-    var priceCents = getProductFormPriceCents(form, variantId);
-    var productRoot = form.closest('[data-product-root]');
-    var productHandle = form.getAttribute('data-product-handle') || (productRoot && productRoot.getAttribute('data-product-handle')) || '';
-    var unitValue = decimalFromCents(priceCents);
-    var value = Number((unitValue * quantity).toFixed(2));
-
-    if (!variantId) throw new Error('Selecione uma variante para continuar.');
-    if (!priceCents) throw new Error('Nao foi possivel identificar o preco do produto.');
-    if (!productHandle) throw new Error('Nao foi possivel identificar o produto.');
-
-    return {
-      value: value,
-      externalReference: uniqueReference('theme'),
-      items: [
-        {
-          variantId: variantId,
-          variantGid: 'gid://shopify/ProductVariant/' + variantId,
-          quantity: quantity,
-          productHandle: productHandle
-        }
-      ],
-      source: 'shopify-theme'
-    };
   }
 
   function buildDirectProductCheckoutUrl(form) {
@@ -153,34 +123,17 @@
     params.set('title', variantData.title);
     params.set('price', decimalFromCents(variantData.priceCents).toFixed(2));
     params.set('image', variantData.image || '');
+    params.set('productHandle', form.getAttribute('data-product-handle') || '');
 
     return directCheckoutUrl + '?' + params.toString();
   }
 
-  function postCheckout(payload) {
-    return fetch(checkoutEndpoint, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(payload)
-    }).then(function (response) {
-      return response.json().catch(function () {
-        return {};
-      }).then(function (data) {
-        if (!response.ok) throw new Error(data.error || data.message || 'Nao foi possivel gerar o pagamento agora.');
-        return data;
-      });
-    });
-  }
-
   function startProductCheckout(form) {
-    var button = form.querySelector('[data-asaas-checkout]') || form.querySelector('[type="submit"]');
+    var button = form.querySelector('[data-ironair-checkout]') || form.querySelector('[type="submit"]');
     var originalText = button ? button.textContent : '';
 
-    if (form.getAttribute('data-asaas-checkout-loading') === 'true') return;
-    form.setAttribute('data-asaas-checkout-loading', 'true');
+    if (form.getAttribute('data-ironair-checkout-loading') === 'true') return;
+    form.setAttribute('data-ironair-checkout-loading', 'true');
     if (button) {
       button.disabled = true;
       button.textContent = 'Abrindo checkout...';
@@ -191,7 +144,7 @@
       window.location.href = buildDirectProductCheckoutUrl(form);
     } catch (error) {
       setCheckoutMessage(form, (error && error.message) || 'Nao foi possivel abrir o checkout. Confira seus dados e tente novamente.', true);
-      form.removeAttribute('data-asaas-checkout-loading');
+      form.removeAttribute('data-ironair-checkout-loading');
       if (button) {
         button.disabled = false;
         button.textContent = originalText;
@@ -201,8 +154,8 @@
 
     window.setTimeout(function () {
       if (document.visibilityState === 'hidden') return;
-      if (form.getAttribute('data-asaas-checkout-loading') === 'true') {
-        form.removeAttribute('data-asaas-checkout-loading');
+      if (form.getAttribute('data-ironair-checkout-loading') === 'true') {
+        form.removeAttribute('data-ironair-checkout-loading');
         if (button) {
           button.disabled = false;
           button.textContent = originalText;
@@ -212,15 +165,15 @@
   }
 
   window.IronAirCheckout = {
-    postCheckout: postCheckout,
+    directCheckoutUrl: directCheckoutUrl,
     uniqueReference: uniqueReference,
     decimalFromCents: decimalFromCents
   };
 
-  function initAsaasProductCheckout() {
+  function initIronAirProductCheckout() {
     document.addEventListener('submit', function (event) {
       var form = event.target;
-      if (!form || !form.matches || !form.matches('form[data-asaas-checkout]')) return;
+      if (!form || !form.matches || !form.matches('form[data-ironair-checkout]')) return;
       event.preventDefault();
       event.stopImmediatePropagation();
       startProductCheckout(form);
@@ -394,7 +347,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    initAsaasProductCheckout();
+    initIronAirProductCheckout();
     initHeader();
     initGallery();
     initVariantPricing();

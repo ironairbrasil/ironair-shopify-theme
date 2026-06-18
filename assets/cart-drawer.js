@@ -2,6 +2,7 @@
   var root;
   var drawer;
   var lastFocused;
+  var checkoutBaseUrl = 'https://ironair-payments.vercel.app/checkout-ironair';
   var discountCode = window.sessionStorage ? window.sessionStorage.getItem('ironair_discount_code') || '' : '';
 
   function money(cents) {
@@ -185,50 +186,34 @@
     return match ? match[1] : '';
   }
 
-  function buildAsaasCheckoutPayload(cart) {
-    return {
-      value: Number(((cart.total_price || 0) / 100).toFixed(2)),
-      externalReference: window.IronAirCheckout ? window.IronAirCheckout.uniqueReference('theme') : 'theme-' + Date.now() + '-' + Math.random().toString(16).slice(2),
-      discountCode: discountCode,
-      currency: cart.currency || 'BRL',
-      source: 'shopify-theme',
-      items: (cart.items || []).map(function (item) {
-        var quantity = Number(item.quantity || 1);
-        var unitPrice = quantity > 0 ? (item.final_line_price || item.final_price || item.price || 0) / quantity : 0;
-        return {
-          variantId: String(item.variant_id),
-          variantGid: 'gid://shopify/ProductVariant/' + String(item.variant_id),
-          quantity: quantity,
-          productHandle: itemProductHandle(item),
-          productId: String(item.product_id),
-          title: item.product_title,
-          variantTitle: item.variant_title,
-          sku: item.sku,
-          price: Number((unitPrice / 100).toFixed(2)),
-          linePrice: Number(((item.final_line_price || 0) / 100).toFixed(2))
-        };
-      })
-    };
+  function buildCartCheckoutUrl(cart) {
+    var params = new URLSearchParams();
+    params.set('source', 'cart');
+
+    (cart.items || []).forEach(function (item, index) {
+      var quantity = Number(item.quantity || 1);
+      var unitPrice = quantity > 0 ? (item.final_line_price || item.final_price || item.price || 0) / quantity : 0;
+      var prefix = 'items[' + index + ']';
+
+      params.set(prefix + '[variantId]', 'gid://shopify/ProductVariant/' + String(item.variant_id));
+      params.set(prefix + '[quantity]', String(quantity));
+      params.set(prefix + '[title]', item.product_title || '');
+      params.set(prefix + '[image]', item.image || '');
+      params.set(prefix + '[price]', Number((unitPrice / 100).toFixed(2)).toFixed(2));
+      params.set(prefix + '[productHandle]', itemProductHandle(item));
+    });
+
+    return checkoutBaseUrl + '?' + params.toString();
   }
 
-  function startAsaasCheckout(button) {
+  function startCartCheckout(button) {
     var originalText = button ? button.textContent : '';
 
-    if (button && button.getAttribute('data-asaas-checkout-loading') === 'true') return;
+    if (button && button.getAttribute('data-checkout-loading') === 'true') return;
     if (button) {
       button.disabled = true;
-      button.setAttribute('data-asaas-checkout-loading', 'true');
-      button.textContent = 'Gerando pagamento...';
-    }
-
-    if (!window.IronAirCheckout) {
-      if (button) {
-        button.disabled = false;
-        button.removeAttribute('data-asaas-checkout-loading');
-        button.textContent = originalText;
-      }
-      window.alert('Nao foi possivel abrir o checkout agora. Recarregue a pagina e tente novamente.');
-      return;
+      button.setAttribute('data-checkout-loading', 'true');
+      button.textContent = 'Abrindo checkout...';
     }
 
     return fetchCart()
@@ -238,23 +223,18 @@
           throw new Error('Carrinho vazio');
         }
 
-        return window.IronAirCheckout.postCheckout(buildAsaasCheckoutPayload(cart));
-      })
-      .then(function (data) {
-        var checkoutUrl = data.checkoutUrl;
-        if (!checkoutUrl) throw new Error('Checkout sem URL');
-        window.location.href = checkoutUrl;
+        window.location.href = buildCartCheckoutUrl(cart);
       })
       .catch(function (error) {
         if (button) {
           button.disabled = false;
-          button.removeAttribute('data-asaas-checkout-loading');
+          button.removeAttribute('data-checkout-loading');
           button.textContent = 'Tentar novamente';
           window.setTimeout(function () {
             button.textContent = originalText;
           }, 2500);
         }
-        window.alert((error && error.message) || 'Nao foi possivel gerar o pagamento. Confira seus dados e tente novamente.');
+        window.alert((error && error.message) || 'Nao foi possivel abrir o checkout. Recarregue a pagina e tente novamente.');
       });
   }
 
@@ -331,7 +311,7 @@
       var checkout = event.target.closest('[data-cart-checkout]');
       if (!checkout) return;
       event.preventDefault();
-      startAsaasCheckout(checkout);
+      startCartCheckout(checkout);
     });
 
     document.addEventListener('submit', function (event) {
