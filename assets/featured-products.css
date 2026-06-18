@@ -12,6 +12,7 @@
 .products-carousel-shell {
   min-width: 0;
   overflow: visible;
+  container-type: inline-size;
 }
 
 .products-carousel-head {
@@ -241,6 +242,14 @@
     width: 100%;
     max-width: 100%;
     min-width: 100%;
+  }
+}
+
+@container (max-width: 749px) {
+  .products-grid.is-carousel.mobile-cols1 .product-card {
+    width: 100% !important;
+    max-width: 100%;
+    min-width: 100% !important;
   }
 }
 
