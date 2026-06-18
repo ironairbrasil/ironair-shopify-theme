@@ -7,9 +7,9 @@
     {% if title_block != blank or section.settings.heading != blank %}
       <div class="sec-header">
         <div class="sec-header-copy">
-          <div class="sec-title" style="font-size: {{ title_block.settings.title_size | default: 26 }}px;" {% if title_block != blank %}{{ title_block.shopify_attributes }}{% endif %}>{{ title_block.settings.title | default: section.settings.heading | escape }}</div>
+          <div class="sec-title responsive-font-size" style="--font-size-desktop: {{ title_block.settings.title_size | default: 26 }}px; --font-size-mobile: {{ title_block.settings.title_size_mobile | default: title_block.settings.title_size | default: 26 }}px;" {% if title_block != blank %}{{ title_block.shopify_attributes }}{% endif %}>{{ title_block.settings.title | default: section.settings.heading | escape }}</div>
           {% if title_block.settings.subtitle != blank or section.settings.subtitle != blank %}
-            <span class="sec-subtitle" style="font-size: {{ title_block.settings.subtitle_size | default: 13 }}px;">{{ title_block.settings.subtitle | default: section.settings.subtitle | escape }}</span>
+            <span class="sec-subtitle responsive-font-size" style="--font-size-desktop: {{ title_block.settings.subtitle_size | default: 13 }}px; --font-size-mobile: {{ title_block.settings.subtitle_size_mobile | default: title_block.settings.subtitle_size | default: 13 }}px;">{{ title_block.settings.subtitle | default: section.settings.subtitle | escape }}</span>
           {% endif %}
         </div>
       </div>
@@ -102,7 +102,17 @@
         {
           "type": "range",
           "id": "title_size",
-          "label": "Tamanho do título",
+          "label": "Tamanho do título no desktop",
+          "min": 18,
+          "max": 56,
+          "step": 1,
+          "unit": "px",
+          "default": 26
+        },
+        {
+          "type": "range",
+          "id": "title_size_mobile",
+          "label": "Tamanho do título no mobile",
           "min": 18,
           "max": 56,
           "step": 1,
@@ -118,7 +128,17 @@
         {
           "type": "range",
           "id": "subtitle_size",
-          "label": "Tamanho do subtítulo",
+          "label": "Tamanho do subtítulo no desktop",
+          "min": 10,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 13
+        },
+        {
+          "type": "range",
+          "id": "subtitle_size_mobile",
+          "label": "Tamanho do subtítulo no mobile",
           "min": 10,
           "max": 24,
           "step": 1,

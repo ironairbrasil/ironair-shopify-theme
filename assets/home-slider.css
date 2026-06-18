@@ -555,20 +555,21 @@
   .home-slide-copy h2,
   .home-slide-copy.copy-size-medium h2,
   .home-slide-copy.copy-size-large h2 {
-    font-size: min(var(--hero-heading-size, calc(var(--font-size-hero) - 14px)), calc(var(--font-size-hero) - 14px));
+    font-size: var(--hero-heading-mobile-size, var(--hero-heading-size, calc(var(--font-size-hero) - 14px)));
   }
 
   .home-slide-copy.copy-size-small h2 {
-    font-size: min(var(--hero-heading-size, var(--font-size-heading)), var(--font-size-heading));
+    font-size: var(--hero-heading-mobile-size, var(--hero-heading-size, var(--font-size-heading)));
   }
 
   .home-slide-text {
-    font-size: min(var(--hero-text-size, var(--font-size-body)), var(--font-size-body));
+    font-size: var(--hero-text-mobile-size, var(--hero-text-size, var(--font-size-body)));
   }
 
   .home-slide-button {
     width: 100%;
     min-width: 0;
+    font-size: var(--hero-button-mobile-size, var(--hero-button-size, var(--font-size-body)));
   }
 
   .home-slider-nav {

@@ -32,7 +32,7 @@
           {% if block.type == 'text' %}
             <div
               class="home-slide-copy copy-size-{{ block.settings.text_width | default: block.settings.text_size | default: 'large' }}"
-              style="--hero-heading-size: {{ block.settings.heading_size | default: 52 }}px; --hero-text-size: {{ block.settings.description_size | default: 16 }}px;"
+              style="--hero-heading-size: {{ block.settings.heading_size | default: 52 }}px; --hero-heading-mobile-size: {{ block.settings.heading_size_mobile | default: block.settings.heading_size | default: 52 }}px; --hero-text-size: {{ block.settings.description_size | default: 16 }}px; --hero-text-mobile-size: {{ block.settings.description_size_mobile | default: block.settings.description_size | default: 16 }}px;"
               {{ block.shopify_attributes }}
             >
               {% if block.settings.heading != blank %}
@@ -45,7 +45,7 @@
           {% endif %}
 
           {% if block.type == 'button' and block.settings.label != blank %}
-            <div class="home-slide-actions" style="--hero-button-size: {{ block.settings.label_size | default: 14 }}px;" {{ block.shopify_attributes }}>
+            <div class="home-slide-actions" style="--hero-button-size: {{ block.settings.label_size | default: 14 }}px; --hero-button-mobile-size: {{ block.settings.label_size_mobile | default: block.settings.label_size | default: 14 }}px;" {{ block.shopify_attributes }}>
               <a
                 class="home-slide-button is-{{ block.settings.style }}"
                 href="{{ block.settings.url | default: routes.all_products_collection_url }}"
@@ -273,7 +273,17 @@
         {
           "type": "range",
           "id": "heading_size",
-          "label": "Tamanho do título",
+          "label": "Tamanho do título no desktop",
+          "min": 24,
+          "max": 88,
+          "step": 1,
+          "unit": "px",
+          "default": 52
+        },
+        {
+          "type": "range",
+          "id": "heading_size_mobile",
+          "label": "Tamanho do título no mobile",
           "min": 24,
           "max": 88,
           "step": 1,
@@ -283,7 +293,17 @@
         {
           "type": "range",
           "id": "description_size",
-          "label": "Tamanho da descrição",
+          "label": "Tamanho da descrição no desktop",
+          "min": 12,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "description_size_mobile",
+          "label": "Tamanho da descrição no mobile",
           "min": 12,
           "max": 28,
           "step": 1,
@@ -325,7 +345,17 @@
         {
           "type": "range",
           "id": "label_size",
-          "label": "Tamanho do texto",
+          "label": "Tamanho do texto no desktop",
+          "min": 11,
+          "max": 22,
+          "step": 1,
+          "unit": "px",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "label_size_mobile",
+          "label": "Tamanho do texto no mobile",
           "min": 11,
           "max": 22,
           "step": 1,

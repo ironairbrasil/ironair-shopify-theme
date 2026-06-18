@@ -17,10 +17,10 @@
   {% assign title_block = title_blocks.first %}
   <div class="fc-left">
     {% if title_block != blank or section.settings.title != blank %}
-      <h2 style="font-size: {{ title_block.settings.title_size | default: 52 }}px;" {% if title_block != blank %}{{ title_block.shopify_attributes }}{% endif %}>{{ title_block.settings.title | default: section.settings.title | newline_to_br }}</h2>
+      <h2 class="responsive-font-size" style="--font-size-desktop: {{ title_block.settings.title_size | default: 52 }}px; --font-size-mobile: {{ title_block.settings.title_size_mobile | default: title_block.settings.title_size | default: 52 }}px;" {% if title_block != blank %}{{ title_block.shopify_attributes }}{% endif %}>{{ title_block.settings.title | default: section.settings.title | newline_to_br }}</h2>
     {% endif %}
     {% if title_block.settings.text != blank or section.settings.text != blank %}
-      <p style="font-size: {{ title_block.settings.text_size | default: 14 }}px;">{{ title_block.settings.text | default: section.settings.text }}</p>
+      <p class="responsive-font-size" style="--font-size-desktop: {{ title_block.settings.text_size | default: 14 }}px; --font-size-mobile: {{ title_block.settings.text_size_mobile | default: title_block.settings.text_size | default: 14 }}px;">{{ title_block.settings.text | default: section.settings.text }}</p>
     {% endif %}
     <div class="final-points">
       {% for block in section.blocks %}
@@ -126,7 +126,17 @@
         {
           "type": "range",
           "id": "title_size",
-          "label": "Tamanho do título",
+          "label": "Tamanho do título no desktop",
+          "min": 24,
+          "max": 72,
+          "step": 1,
+          "unit": "px",
+          "default": 52
+        },
+        {
+          "type": "range",
+          "id": "title_size_mobile",
+          "label": "Tamanho do título no mobile",
           "min": 24,
           "max": 72,
           "step": 1,
@@ -142,7 +152,17 @@
         {
           "type": "range",
           "id": "text_size",
-          "label": "Tamanho do texto",
+          "label": "Tamanho do texto no desktop",
+          "min": 12,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 14
+        },
+        {
+          "type": "range",
+          "id": "text_size_mobile",
+          "label": "Tamanho do texto no mobile",
           "min": 12,
           "max": 24,
           "step": 1,

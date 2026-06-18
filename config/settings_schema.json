@@ -21,7 +21,17 @@
       {
         "type": "range",
         "id": "font_size_body",
-        "label": "Texto base",
+        "label": "Texto base no desktop",
+        "min": 12,
+        "max": 20,
+        "step": 1,
+        "unit": "px",
+        "default": 14
+      },
+      {
+        "type": "range",
+        "id": "font_size_body_mobile",
+        "label": "Texto base no mobile",
         "min": 12,
         "max": 20,
         "step": 1,
@@ -31,7 +41,17 @@
       {
         "type": "range",
         "id": "font_size_paragraph",
-        "label": "Descrições e parágrafos",
+        "label": "Descrições e parágrafos no desktop",
+        "min": 13,
+        "max": 22,
+        "step": 1,
+        "unit": "px",
+        "default": 15
+      },
+      {
+        "type": "range",
+        "id": "font_size_paragraph_mobile",
+        "label": "Descrições e parágrafos no mobile",
         "min": 13,
         "max": 22,
         "step": 1,
@@ -41,7 +61,17 @@
       {
         "type": "range",
         "id": "font_size_small",
-        "label": "Textos pequenos",
+        "label": "Textos pequenos no desktop",
+        "min": 10,
+        "max": 16,
+        "step": 1,
+        "unit": "px",
+        "default": 13
+      },
+      {
+        "type": "range",
+        "id": "font_size_small_mobile",
+        "label": "Textos pequenos no mobile",
         "min": 10,
         "max": 16,
         "step": 1,
@@ -51,7 +81,17 @@
       {
         "type": "range",
         "id": "font_size_button",
-        "label": "Menus e botões",
+        "label": "Menus e botões no desktop",
+        "min": 11,
+        "max": 18,
+        "step": 1,
+        "unit": "px",
+        "default": 13
+      },
+      {
+        "type": "range",
+        "id": "font_size_button_mobile",
+        "label": "Menus e botões no mobile",
         "min": 11,
         "max": 18,
         "step": 1,
@@ -61,7 +101,17 @@
       {
         "type": "range",
         "id": "font_size_heading",
-        "label": "Títulos de seção",
+        "label": "Títulos de seção no desktop",
+        "min": 22,
+        "max": 48,
+        "step": 1,
+        "unit": "px",
+        "default": 30
+      },
+      {
+        "type": "range",
+        "id": "font_size_heading_mobile",
+        "label": "Títulos de seção no mobile",
         "min": 22,
         "max": 48,
         "step": 1,
@@ -71,7 +121,17 @@
       {
         "type": "range",
         "id": "font_size_heading_small",
-        "label": "Títulos menores",
+        "label": "Títulos menores no desktop",
+        "min": 16,
+        "max": 32,
+        "step": 1,
+        "unit": "px",
+        "default": 20
+      },
+      {
+        "type": "range",
+        "id": "font_size_heading_small_mobile",
+        "label": "Títulos menores no mobile",
         "min": 16,
         "max": 32,
         "step": 1,
@@ -81,7 +141,17 @@
       {
         "type": "range",
         "id": "font_size_hero",
-        "label": "Títulos grandes / banner",
+        "label": "Títulos grandes / banner no desktop",
+        "min": 32,
+        "max": 82,
+        "step": 1,
+        "unit": "px",
+        "default": 52
+      },
+      {
+        "type": "range",
+        "id": "font_size_hero_mobile",
+        "label": "Títulos grandes / banner no mobile",
         "min": 32,
         "max": 82,
         "step": 1,
@@ -91,7 +161,17 @@
       {
         "type": "range",
         "id": "font_size_product_title",
-        "label": "Título do produto",
+        "label": "Título do produto no desktop",
+        "min": 24,
+        "max": 56,
+        "step": 1,
+        "unit": "px",
+        "default": 40
+      },
+      {
+        "type": "range",
+        "id": "font_size_product_title_mobile",
+        "label": "Título do produto no mobile",
         "min": 24,
         "max": 56,
         "step": 1,
@@ -101,7 +181,17 @@
       {
         "type": "range",
         "id": "font_size_price",
-        "label": "Preços",
+        "label": "Preços no desktop",
+        "min": 24,
+        "max": 60,
+        "step": 1,
+        "unit": "px",
+        "default": 32
+      },
+      {
+        "type": "range",
+        "id": "font_size_price_mobile",
+        "label": "Preços no mobile",
         "min": 24,
         "max": 60,
         "step": 1,

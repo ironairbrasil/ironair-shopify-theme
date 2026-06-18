@@ -52,6 +52,7 @@
           "settings": {
             "title": "Tutoriais",
             "title_size": 26,
+            "title_size_mobile": 26,
             "subtitle": "Conteúdos curtos para tirar dúvidas comuns de montagem, ajuste, preparo das peças e manutenção.",
             "subtitle_size": 13
           }

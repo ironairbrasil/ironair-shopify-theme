@@ -17,8 +17,10 @@
           "settings": {
             "title": "Todos os produtos",
             "title_size": 26,
+            "title_size_mobile": 26,
             "subtitle": "",
             "subtitle_size": 13,
+            "subtitle_size_mobile": 13,
             "show_product_count": false
           }
         },

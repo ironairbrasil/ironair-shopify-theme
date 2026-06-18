@@ -131,8 +131,18 @@ footer#contato {
   font-weight: 900;
 }
 
+.responsive-font-size {
+  font-size: var(--font-size-desktop) !important;
+}
+
 @media (max-width: 900px) {
   .section-head { align-items: flex-start; flex-direction: column; }
+}
+
+@media (max-width: 749px) {
+  .responsive-font-size {
+    font-size: var(--font-size-mobile, var(--font-size-desktop)) !important;
+  }
 }
 
 @media (max-width: 640px) {

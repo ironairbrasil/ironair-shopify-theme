@@ -110,4 +110,16 @@
   .ads-copy {
     width: min(420px, calc(100% - 32px));
   }
+
+  .ads-title {
+    font-size: var(--ads-title-mobile-size, var(--ads-title-size, 34px));
+  }
+
+  .ads-description {
+    font-size: var(--ads-description-mobile-size, var(--ads-description-size, 14px));
+  }
+
+  .ads-button {
+    font-size: var(--ads-button-mobile-size, var(--ads-button-size, 12px));
+  }
 }

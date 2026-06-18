@@ -9,7 +9,7 @@
     {% if title_block != blank or section.settings.title != blank %}
       <div class="section-head">
         <div>
-          <h2 style="font-size: {{ title_block.settings.title_size | default: 30 }}px;" {% if title_block != blank %}{{ title_block.shopify_attributes }}{% endif %}>{{ title_block.settings.title | default: section.settings.title }}</h2>
+          <h2 class="responsive-font-size" style="--font-size-desktop: {{ title_block.settings.title_size | default: 30 }}px; --font-size-mobile: {{ title_block.settings.title_size_mobile | default: title_block.settings.title_size | default: 30 }}px;" {% if title_block != blank %}{{ title_block.shopify_attributes }}{% endif %}>{{ title_block.settings.title | default: section.settings.title }}</h2>
         </div>
       </div>
     {% endif %}
@@ -76,7 +76,17 @@
         {
           "type": "range",
           "id": "title_size",
-          "label": "Tamanho do título",
+          "label": "Tamanho do título no desktop",
+          "min": 18,
+          "max": 56,
+          "step": 1,
+          "unit": "px",
+          "default": 30
+        },
+        {
+          "type": "range",
+          "id": "title_size_mobile",
+          "label": "Tamanho do título no mobile",
           "min": 18,
           "max": 56,
           "step": 1,

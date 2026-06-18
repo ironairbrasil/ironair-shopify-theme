@@ -118,7 +118,9 @@
             "heading": "A maneira mais fácil de cuidar das suas roupas",
             "text": "<p>O fluxo de ar quente automático seca, alisa e refresca as roupas sem que você precise usar as mãos. Sem ferro de passar. Sem tábua de passar. Sem ficar esperando.</p>",
             "heading_size": 52,
+            "heading_size_mobile": 52,
             "description_size": 16,
+            "description_size_mobile": 16,
             "text_width": "large"
           }
         },
@@ -127,6 +129,7 @@
           "settings": {
             "label": "Ver como funciona",
             "label_size": 14,
+            "label_size_mobile": 14,
             "url": "",
             "style": "primary",
             "new_tab": false
