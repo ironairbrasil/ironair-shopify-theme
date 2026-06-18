@@ -172,7 +172,7 @@
             "carousel_link_url": "",
             "products_limit": 12,
             "columns_desktop": "4",
-            "carousel_columns_desktop": "1",
+            "carousel_columns_desktop": "4",
             "show_media": true,
             "media_ratio": "square",
             "border_style": "none",
