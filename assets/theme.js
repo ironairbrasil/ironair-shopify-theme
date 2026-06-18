@@ -86,6 +86,13 @@
     return Math.max(1, Number.isFinite(quantity) ? quantity : 1);
   }
 
+  function appendCustomerPrefill(params) {
+    var prefill = window.IronAirCheckoutPrefill || {};
+    Object.keys(prefill).forEach(function (key) {
+      if (prefill[key]) params.set(key, prefill[key]);
+    });
+  }
+
   function setCheckoutMessage(target, message, isError) {
     var form = target && target.closest ? target.closest('form') : null;
     var container = form || (target && target.parentNode);
@@ -124,6 +131,7 @@
     params.set('price', decimalFromCents(variantData.priceCents).toFixed(2));
     params.set('image', variantData.image || '');
     params.set('productHandle', form.getAttribute('data-product-handle') || '');
+    appendCustomerPrefill(params);
 
     return directCheckoutUrl + '?' + params.toString();
   }

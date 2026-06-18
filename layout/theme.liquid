@@ -74,6 +74,24 @@
       {% section 'footer' %}
     </div>
     {% render 'cart-drawer' %}
+    <script>
+      window.IronAirCheckoutPrefill = {};
+      {% if customer %}
+        {% assign checkout_customer_phone = customer.phone | default: customer.default_address.phone %}
+        {% assign checkout_customer_cpf = customer.metafields.custom.cpf.value | default: customer.metafields.custom.cpf %}
+        window.IronAirCheckoutPrefill = {
+          {% if customer.email != blank %}"customer[email]": {{ customer.email | json }},{% endif %}
+          {% if customer.name != blank %}"customer[name]": {{ customer.name | json }},{% endif %}
+          {% if checkout_customer_phone != blank %}"customer[phone]": {{ checkout_customer_phone | json }},{% endif %}
+          {% if checkout_customer_cpf != blank %}"customer[cpf]": {{ checkout_customer_cpf | json }},{% endif %}
+          {% if customer.default_address.zip != blank %}"defaultAddress[zip]": {{ customer.default_address.zip | json }},{% endif %}
+          {% if customer.default_address.address1 != blank %}"defaultAddress[address1]": {{ customer.default_address.address1 | json }},{% endif %}
+          {% if customer.default_address.address2 != blank %}"defaultAddress[address2]": {{ customer.default_address.address2 | json }},{% endif %}
+          {% if customer.default_address.city != blank %}"defaultAddress[city]": {{ customer.default_address.city | json }},{% endif %}
+          {% if customer.default_address.province_code != blank %}"defaultAddress[province_code]": {{ customer.default_address.province_code | json }}{% endif %}
+        };
+      {% endif %}
+    </script>
     {{ 'app.js' | asset_url | script_tag }}
     {{ 'theme.js' | asset_url | script_tag }}
     <script src="{{ 'cart-drawer.js' | asset_url }}" defer></script>

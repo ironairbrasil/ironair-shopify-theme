@@ -186,6 +186,13 @@
     return match ? match[1] : '';
   }
 
+  function appendCustomerPrefill(params) {
+    var prefill = window.IronAirCheckoutPrefill || {};
+    Object.keys(prefill).forEach(function (key) {
+      if (prefill[key]) params.set(key, prefill[key]);
+    });
+  }
+
   function buildCartCheckoutUrl(cart) {
     var params = new URLSearchParams();
     params.set('source', 'cart');
@@ -202,6 +209,7 @@
       params.set(prefix + '[price]', Number((unitPrice / 100).toFixed(2)).toFixed(2));
       params.set(prefix + '[productHandle]', itemProductHandle(item));
     });
+    appendCustomerPrefill(params);
 
     return checkoutBaseUrl + '?' + params.toString();
   }

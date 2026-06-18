@@ -15,7 +15,7 @@
           <strong>Total: {{ cart.total_price | money }}</strong>
           <div class="cart-footer-actions">
             <button class="btn-hero-ghost" type="submit">Atualizar</button>
-            <a class="btn-hero" href="https://ironair-payments.vercel.app/checkout-ironair?source=cart" data-cart-checkout>Finalizar compra</a>
+            <a class="btn-hero" href="https://ironair-payments.vercel.app/checkout-ironair?source=cart{% render 'ironair-checkout-prefill' %}" data-cart-checkout>Finalizar compra</a>
           </div>
         </div>
       </form>

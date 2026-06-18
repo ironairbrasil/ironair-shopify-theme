@@ -1,0 +1,13 @@
+{% if customer %}
+  {% if customer.email != blank %}&customer[email]={{ customer.email | url_encode }}{% endif %}
+  {% if customer.name != blank %}&customer[name]={{ customer.name | url_encode }}{% endif %}
+  {% assign checkout_customer_phone = customer.phone | default: customer.default_address.phone %}
+  {% if checkout_customer_phone != blank %}&customer[phone]={{ checkout_customer_phone | url_encode }}{% endif %}
+  {% assign checkout_customer_cpf = customer.metafields.custom.cpf.value | default: customer.metafields.custom.cpf %}
+  {% if checkout_customer_cpf != blank %}&customer[cpf]={{ checkout_customer_cpf | url_encode }}{% endif %}
+  {% if customer.default_address.zip != blank %}&defaultAddress[zip]={{ customer.default_address.zip | url_encode }}{% endif %}
+  {% if customer.default_address.address1 != blank %}&defaultAddress[address1]={{ customer.default_address.address1 | url_encode }}{% endif %}
+  {% if customer.default_address.address2 != blank %}&defaultAddress[address2]={{ customer.default_address.address2 | url_encode }}{% endif %}
+  {% if customer.default_address.city != blank %}&defaultAddress[city]={{ customer.default_address.city | url_encode }}{% endif %}
+  {% if customer.default_address.province_code != blank %}&defaultAddress[province_code]={{ customer.default_address.province_code | url_encode }}{% endif %}
+{% endif %}
