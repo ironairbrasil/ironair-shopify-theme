@@ -193,9 +193,9 @@
     var sidebar = document.querySelector('[data-mobile-sidebar]');
     var overlay = document.querySelector('.mobile-nav-overlay');
     var closers = document.querySelectorAll('[data-mobile-menu-close]');
-    if (!toggle || !sidebar || !overlay) return;
 
     function setOpen(open) {
+      if (!sidebar || !overlay || !toggle) return;
       sidebar.classList.toggle('open', open);
       overlay.classList.toggle('open', open);
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
@@ -203,14 +203,53 @@
       document.body.style.overflow = open ? 'hidden' : '';
     }
 
-    toggle.addEventListener('click', function () {
-      setOpen(!sidebar.classList.contains('open'));
-    });
+    if (toggle && sidebar && overlay) {
+      toggle.addEventListener('click', function () {
+        setOpen(!sidebar.classList.contains('open'));
+      });
+    }
     closers.forEach(function (button) {
       button.addEventListener('click', function () { setOpen(false); });
     });
-    sidebar.querySelectorAll('a').forEach(function (link) {
-      link.addEventListener('click', function () { setOpen(false); });
+    if (sidebar) {
+      sidebar.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () { setOpen(false); });
+      });
+    }
+  }
+
+  function closeAccountMenus(exceptMenu) {
+    document.querySelectorAll('[data-account-menu]').forEach(function (menu) {
+      if (exceptMenu && menu === exceptMenu) return;
+      var button = menu.querySelector('[data-account-menu-toggle]');
+      var panel = menu.querySelector('[data-account-menu-panel]');
+      if (button) button.setAttribute('aria-expanded', 'false');
+      if (panel) panel.hidden = true;
+    });
+  }
+
+  function initAccountMenus() {
+    document.querySelectorAll('[data-account-menu]').forEach(function (menu) {
+      var button = menu.querySelector('[data-account-menu-toggle]');
+      var panel = menu.querySelector('[data-account-menu-panel]');
+      if (!button || !panel) return;
+
+      button.addEventListener('click', function (event) {
+        var isOpen = button.getAttribute('aria-expanded') === 'true';
+        event.stopPropagation();
+        closeAccountMenus(menu);
+        button.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+        panel.hidden = isOpen;
+      });
+    });
+
+    document.addEventListener('click', function (event) {
+      if (event.target.closest('[data-account-menu]')) return;
+      closeAccountMenus();
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') closeAccountMenus();
     });
   }
 
@@ -357,6 +396,7 @@
   document.addEventListener('DOMContentLoaded', function () {
     initIronAirProductCheckout();
     initHeader();
+    initAccountMenus();
     initGallery();
     initVariantPricing();
   });

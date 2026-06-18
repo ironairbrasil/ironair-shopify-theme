@@ -69,9 +69,9 @@
           {% case block.type %}
             {% when 'account' %}
               {% if block.settings.enabled %}
-                <a class="hicon" href="{{ routes.account_url }}" aria-label="Conta" {{ block.shopify_attributes }}>
-                  {% render 'icon', icon: 'account' %}
-                </a>
+                <div {{ block.shopify_attributes }}>
+                  {% render 'header-account-menu' %}
+                </div>
               {% endif %}
 
             {% when 'cart' %}
@@ -85,9 +85,7 @@
         {% endfor %}
 
         {% unless has_account_block %}
-          <a class="hicon" href="{{ routes.account_url }}" aria-label="Conta">
-            {% render 'icon', icon: 'account' %}
-          </a>
+          {% render 'header-account-menu' %}
         {% endunless %}
 
         {% unless has_cart_block %}
@@ -99,6 +97,7 @@
       </div>
 
       <div class="mobile-header-actions">
+        {% render 'header-account-menu', class: 'mobile-header-action' %}
         <button type="button" class="hicon mobile-header-action mobile-cart-button js-cart-drawer-open" aria-controls="CartDrawer" aria-expanded="false" aria-label="Carrinho">
           {% render 'icon', icon: 'cart' %}
           <span class="mobile-cart-badge" data-cart-count>{{ cart.item_count }}</span>

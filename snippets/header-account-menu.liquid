@@ -1,0 +1,37 @@
+{% if customer %}
+  {% assign account_name = customer.first_name | default: customer.name %}
+  {% assign account_initial = account_name | strip | slice: 0 | upcase %}
+  <div class="header-account" data-account-menu>
+    <button
+      type="button"
+      class="account-avatar{% if class != blank %} {{ class }}{% endif %}"
+      aria-label="Abrir menu da conta"
+      aria-expanded="false"
+      data-account-menu-toggle
+    >
+      {{ account_initial }}
+    </button>
+    <div class="account-dropdown" data-account-menu-panel hidden>
+      <div class="account-dropdown-copy">
+        <strong>Olá, {{ account_name }}</strong>
+        {% if customer.email != blank %}
+          <span>{{ customer.email }}</span>
+        {% endif %}
+      </div>
+      <div class="account-dropdown-actions">
+        <a href="{{ routes.account_url }}">
+          {% render 'icon', icon: 'orders' %}
+          <span>Pedidos</span>
+        </a>
+        <a href="/account/profile">
+          {% render 'icon', icon: 'profile' %}
+          <span>Perfil</span>
+        </a>
+      </div>
+    </div>
+  </div>
+{% else %}
+  <a class="hicon{% if class != blank %} {{ class }}{% endif %}" href="{{ routes.account_login_url | default: routes.account_url }}" aria-label="Entrar">
+    {% render 'icon', icon: 'account' %}
+  </a>
+{% endif %}
