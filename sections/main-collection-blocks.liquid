@@ -36,8 +36,10 @@
       {% when 'products' %}
         {% assign display_mode = block.settings.display_mode | default: 'grid' %}
         {% assign columns_desktop = block.settings.columns_desktop | default: '4' %}
+        {% assign columns_mobile = '1' %}
         {% if block.settings.display_mode == 'carousel' %}
           {% assign columns_desktop = block.settings.carousel_columns_desktop | default: columns_desktop %}
+          {% assign columns_mobile = block.settings.carousel_columns_mobile | default: '1' %}
         {% endif %}
         {% assign products_limit = block.settings.products_limit | default: 50 %}
         {% assign use_carousel = false %}
@@ -58,7 +60,7 @@
             </div>
         {% endif %}
 
-        <div class="products-grid cols{{ columns_desktop }} {% if use_carousel %}is-carousel{% else %}is-stack-mobile{% endif %}" {% unless use_carousel %}{{ block.shopify_attributes }}{% endunless %} {% if use_carousel %}data-products-track{% endif %}>
+        <div class="products-grid cols{{ columns_desktop }} mobile-cols{{ columns_mobile }} {% if use_carousel %}is-carousel{% else %}is-stack-mobile{% endif %}" {% unless use_carousel %}{{ block.shopify_attributes }}{% endunless %} {% if use_carousel %}data-products-track{% endif %}>
           {% for product in products_by_creation limit: products_limit %}
             {% render 'product-card',
               product: product,
@@ -81,8 +83,10 @@
       {% when 'product_grid' %}
         {% assign display_mode = block.settings.display_mode | default: 'grid' %}
         {% assign columns_desktop = block.settings.columns_desktop | default: '4' %}
+        {% assign columns_mobile = '1' %}
         {% if block.settings.display_mode == 'carousel' %}
           {% assign columns_desktop = block.settings.carousel_columns_desktop | default: columns_desktop %}
+          {% assign columns_mobile = block.settings.carousel_columns_mobile | default: '1' %}
         {% endif %}
         {% assign products_limit = block.settings.products_limit | default: 50 %}
         {% assign use_carousel = false %}
@@ -103,7 +107,7 @@
             </div>
         {% endif %}
 
-        <div class="products-grid cols{{ columns_desktop }} {% if use_carousel %}is-carousel{% else %}is-stack-mobile{% endif %}" {% unless use_carousel %}{{ block.shopify_attributes }}{% endunless %} {% if use_carousel %}data-products-track{% endif %}>
+        <div class="products-grid cols{{ columns_desktop }} mobile-cols{{ columns_mobile }} {% if use_carousel %}is-carousel{% else %}is-stack-mobile{% endif %}" {% unless use_carousel %}{{ block.shopify_attributes }}{% endunless %} {% if use_carousel %}data-products-track{% endif %}>
           {% for product in products_by_creation limit: products_limit %}
             {% render 'product-card',
               product: product,
@@ -272,13 +276,9 @@
         {
           "type": "select",
           "id": "carousel_columns_desktop",
-          "label": "Produtos por slide",
+          "label": "Produtos por slide no desktop",
           "visible_if": "{{ block.settings.display_mode == 'carousel' }}",
           "options": [
-            {
-              "value": "1",
-              "label": "1"
-            },
             {
               "value": "2",
               "label": "2"
@@ -290,6 +290,19 @@
             {
               "value": "4",
               "label": "4"
+            }
+          ],
+          "default": "4"
+        },
+        {
+          "type": "select",
+          "id": "carousel_columns_mobile",
+          "label": "Produtos por slide no mobile",
+          "visible_if": "{{ block.settings.display_mode == 'carousel' }}",
+          "options": [
+            {
+              "value": "1",
+              "label": "1"
             }
           ],
           "default": "1"

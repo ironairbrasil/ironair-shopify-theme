@@ -173,6 +173,7 @@
             "products_limit": 12,
             "columns_desktop": "4",
             "carousel_columns_desktop": "4",
+            "carousel_columns_mobile": "1",
             "show_media": true,
             "media_ratio": "square",
             "border_style": "none",
