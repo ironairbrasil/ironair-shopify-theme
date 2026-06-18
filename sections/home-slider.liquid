@@ -4,7 +4,7 @@
 {% assign button_blocks = section.blocks | where: 'type', 'button' %}
 
 <section class="home-slider shopify-padding-section" aria-label="{{ section.settings.aria_label }}" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
-  <div class="home-slider-stage height-{{ section.settings.height }} mobile-height-{{ section.settings.mobile_height }} content-{{ section.settings.content_position }} text-{{ section.settings.text_alignment }}">
+  <div class="home-slider-stage media-height-auto content-{{ section.settings.content_position }} text-{{ section.settings.text_alignment }}">
     <article class="home-slide tone-{{ section.settings.tone }} {% if section.settings.mobile_image != blank or section.settings.mobile_video != blank %}has-mobile-media{% endif %} is-active" aria-hidden="false">
       <div class="home-slide-media">
         {% if section.settings.background_mode == 'video' %}
@@ -115,46 +115,6 @@
       "id": "mobile_video",
       "label": "Vídeo de fundo no celular",
       "visible_if": "{{ section.settings.background_mode == 'video' }}"
-    },
-    {
-      "type": "select",
-      "id": "height",
-      "label": "Altura no desktop",
-      "default": "large",
-      "options": [
-        {
-          "value": "medium",
-          "label": "Média"
-        },
-        {
-          "value": "large",
-          "label": "Grande"
-        },
-        {
-          "value": "full",
-          "label": "Tela cheia"
-        }
-      ]
-    },
-    {
-      "type": "select",
-      "id": "mobile_height",
-      "label": "Altura no celular",
-      "default": "medium",
-      "options": [
-        {
-          "value": "small",
-          "label": "Pequena"
-        },
-        {
-          "value": "medium",
-          "label": "Média"
-        },
-        {
-          "value": "large",
-          "label": "Grande"
-        }
-      ]
     },
     {
       "type": "select",

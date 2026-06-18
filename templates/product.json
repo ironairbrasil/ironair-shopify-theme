@@ -141,8 +141,6 @@
         "aria_label": "Hero principal da Iron Air",
         "background_mode": "video",
         "video": "shopify://files/videos/site.mp4",
-        "height": "large",
-        "mobile_height": "medium",
         "content_position": "center",
         "text_alignment": "center",
         "tone": "navy",
