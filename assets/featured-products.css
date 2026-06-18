@@ -251,6 +251,12 @@
     max-width: 100%;
     min-width: 100% !important;
   }
+
+  .products-grid.is-carousel.mobile-cols2 .product-card {
+    width: calc((100% - 12px) / 2) !important;
+    max-width: calc((100% - 12px) / 2);
+    min-width: calc((100% - 12px) / 2) !important;
+  }
 }
 
 @media (max-width: 640px) {
