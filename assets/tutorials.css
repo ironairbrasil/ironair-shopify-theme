@@ -104,7 +104,7 @@
 
 .tutorial-card-copy h3 {
   font-family: var(--font-title);
-  font-size: calc(var(--font-size-heading) - 2px);
+  font-size: 30px;
   line-height: .98;
 }
 
@@ -132,5 +132,9 @@
 @media (max-width: 640px) {
   .tutorials-grid {
     grid-template-columns: 1fr;
+  }
+
+  .tutorial-card-copy h3 {
+    font-size: 20px;
   }
 }
