@@ -193,9 +193,17 @@
     });
   }
 
+  function currentDiscountCode() {
+    var input = root && root.querySelector('[data-cart-discount-input]');
+    var value = input ? input.value.trim() : discountCode;
+    return value || discountCode || '';
+  }
+
   function buildCartCheckoutUrl(cart) {
     var params = new URLSearchParams();
+    var couponCode = currentDiscountCode();
     params.set('source', 'cart');
+    if (couponCode) params.set('couponCode', couponCode);
 
     (cart.items || []).forEach(function (item, index) {
       var quantity = Number(item.quantity || 1);
