@@ -78,10 +78,18 @@ footer {
   stroke: none;
 }
 
-.f-social-youtube svg,
 .f-social-yt svg {
+  stroke: none;
   width: 20px;
   height: 20px;
+}
+
+.f-social-youtube-shape {
+  fill: #ff0000;
+}
+
+.f-social-youtube-play {
+  fill: #fff;
 }
 
 .f-social a:hover {

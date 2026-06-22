@@ -120,17 +120,17 @@
                 <div class="pc-price-old" data-product-compare-price {% unless compare_price > price %}hidden{% endunless %}>{{ compare_price | money }}</div>
               {% endif %}
               {% if block.settings.show_price %}
-                <div class="product-main-price" data-product-price>{{ price | money }}</div>
+                <div class="product-main-price product-main-price--hidden" data-product-price>{{ price | money }}</div>
               {% endif %}
               {% if block.settings.show_pix_price %}
                 <div class="product-card-payment-pix">
                   <strong data-product-pix-price>{{ pix_price | money }}</strong>
-                  {{ block.settings.pix_label | replace: '[discount]', pix_discount_percent }}
+                  <span>{{ block.settings.pix_label | replace: '[discount]', pix_discount_percent }}</span>
                 </div>
               {% endif %}
               {% if block.settings.show_installments %}
                 <div class="product-card-payment-card">
-                  ou <span data-product-card-price>{{ price | money }}</span> em até
+                  ou <strong data-product-card-price>{{ price | money }}</strong> em até
                   <strong><span data-product-installments-count>{{ installments_count }}</span>x de <span data-product-installments>{{ installments | money }}</span></strong> s/juros
                 </div>
               {% endif %}

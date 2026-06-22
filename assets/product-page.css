@@ -156,11 +156,24 @@
   color: var(--dark-green) !important;
 }
 
+.product-main-price--hidden {
+  display: none;
+}
+
+.product-price-block .product-card-payment-pix {
+  display: grid;
+  gap: 2px;
+}
+
 .product-price-block .product-card-payment-pix strong,
-.custom-product-price .product-card-payment-pix strong,
+.custom-product-price .product-card-payment-pix strong {
+  color: var(--green) !important;
+}
+
 .product-price-block .product-card-payment-card strong,
 .custom-product-price .product-card-payment-card strong {
-  color: var(--green) !important;
+  color: var(--ink) !important;
+  font-weight: 900;
 }
 
 .product-form {
