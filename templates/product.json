@@ -15,7 +15,9 @@
         "title_XntNA3": {
           "type": "title",
           "settings": {
-            "title_override": ""
+            "title_override": "",
+            "title_size": 30,
+            "title_size_mobile": 20
           }
         },
         "price_hhznYQ": {
@@ -160,7 +162,8 @@
           "type": "title",
           "settings": {
             "title": "Perguntas frequentes",
-            "title_size": 30
+            "title_size": 30,
+            "title_size_mobile": 30
           }
         },
         "item_FpLxna": {
