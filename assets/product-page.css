@@ -168,7 +168,7 @@
 .product-price-block .product-card-payment-pix strong,
 .custom-product-price .product-card-payment-pix strong {
   font-family: var(--font-title);
-  font-size: calc(var(--font-size-price) + 16px);
+  font-size: calc(var(--font-size-price) + 8px);
   font-weight: 900;
   line-height: 1;
   color: var(--green) !important;
