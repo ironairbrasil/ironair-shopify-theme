@@ -57,13 +57,21 @@
     });
   }
 
+  function discountCents(cart) {
+    var code = (discountCode || '').trim().toUpperCase();
+    if (code === 'PIX10') return Math.round((cart.total_price || 0) * 0.1);
+    return cart.total_discount || 0;
+  }
+
   function updateDiscountUi(cart) {
     var input = root.querySelector('[data-cart-discount-input]');
     var message = root.querySelector('[data-cart-discount-message]');
     var checkout = root.querySelector('[data-cart-checkout]');
     var row = root.querySelector('[data-cart-discount-row]');
     var amount = root.querySelector('[data-cart-drawer-discount]');
-    var totalDiscount = cart.total_discount || 0;
+    var subtotal = root.querySelector('[data-cart-drawer-subtotal]');
+    var totalDiscount = discountCents(cart);
+    var estimatedTotal = Math.max(0, (cart.total_price || 0) - totalDiscount);
 
     if (input && discountCode) input.value = discountCode;
     if (message) message.textContent = discountCode ? 'Cupom aplicado no checkout: ' + discountCode : '';
@@ -72,6 +80,7 @@
       row.hidden = totalDiscount <= 0;
       amount.textContent = '-' + money(totalDiscount);
     }
+    if (subtotal) subtotal.textContent = money(estimatedTotal);
   }
 
   function renderCart(cart) {
