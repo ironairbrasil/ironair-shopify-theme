@@ -254,16 +254,20 @@
   }
 
   function initGallery() {
-    document.querySelectorAll('[data-product-root]').forEach(function (root) {
-      var main = root.querySelector('[data-main-product-image]');
-      if (!main) return;
-      root.querySelectorAll('[data-gallery-image]').forEach(function (button) {
-        button.addEventListener('click', function () {
-          main.src = button.getAttribute('data-gallery-image');
-          root.querySelectorAll('[data-gallery-image]').forEach(function (item) {
-            item.classList.toggle('is-active', item === button);
-          });
-        });
+    document.addEventListener('click', function (event) {
+      var button = event.target.closest('[data-gallery-image]');
+      var root = button && button.closest('[data-product-root]');
+      var main = root && root.querySelector('[data-main-product-image]');
+      var imageUrl = button && button.getAttribute('data-gallery-image');
+
+      if (!button || !root || !main || !imageUrl) return;
+
+      main.removeAttribute('srcset');
+      main.removeAttribute('sizes');
+      main.src = imageUrl;
+
+      root.querySelectorAll('[data-gallery-image]').forEach(function (item) {
+        item.classList.toggle('is-active', item === button);
       });
     });
   }
