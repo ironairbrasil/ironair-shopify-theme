@@ -211,11 +211,15 @@ header {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 34px;
+  height: 34px;
 }
 
 .account-avatar {
   width: 34px;
   height: 34px;
+  min-width: 34px;
+  padding: 0;
   border: 0;
   border-radius: 999px;
   background: #050505;
@@ -235,6 +239,7 @@ header {
   width: 34px !important;
   min-width: 34px !important;
   height: 34px !important;
+  padding: 0 !important;
 }
 
 .account-avatar:hover {

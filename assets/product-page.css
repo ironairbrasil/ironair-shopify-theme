@@ -167,6 +167,10 @@
 
 .product-price-block .product-card-payment-pix strong,
 .custom-product-price .product-card-payment-pix strong {
+  font-family: var(--font-title);
+  font-size: calc(var(--font-size-price) + 16px);
+  font-weight: 900;
+  line-height: 1;
   color: var(--green) !important;
 }
 
@@ -332,26 +336,9 @@
   line-height: 1.2;
 }
 
-.product-upsell-payment-pix {
-  display: grid;
-  gap: 2px;
-}
-
-.product-upsell-payment-pix strong {
-  color: var(--green);
-  font-size: var(--font-size-body);
-  line-height: 1;
-}
-
-.product-upsell-payment-pix span,
-.product-upsell-payment-card {
-  color: var(--muted);
-  font-size: calc(var(--font-size-small) - 1px);
-  line-height: 1.25;
-}
-
-.product-upsell-payment-card strong {
+.product-upsell-copy strong {
   color: var(--ink);
+  font-size: var(--font-size-body);
   font-weight: 900;
 }
 
