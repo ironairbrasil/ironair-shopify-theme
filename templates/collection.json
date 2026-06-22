@@ -16,7 +16,7 @@
           "type": "title",
           "settings": {
             "title": "Todos os produtos",
-            "title_size": 26,
+            "title_size": 30,
             "title_size_mobile": 26,
             "subtitle": "",
             "subtitle_size": 13,
@@ -47,6 +47,7 @@
       ],
       "name": "Galeria de Produtos",
       "settings": {
+        "collection": "",
         "padding_top": 48,
         "padding_bottom": 48
       }
