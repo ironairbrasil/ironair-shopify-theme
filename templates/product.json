@@ -15,9 +15,7 @@
         "title_XntNA3": {
           "type": "title",
           "settings": {
-            "title_override": "",
-            "title_size": 30,
-            "title_size_mobile": 20
+            "title_override": ""
           }
         },
         "price_hhznYQ": {
@@ -44,7 +42,7 @@
         "upsells_6YLYQj": {
           "type": "upsells",
           "settings": {
-            "title": "Outros produtos",
+            "title": "Adicione também ao carrinho",
             "products": [
               "iron-air",
               "kit-iron-air-borrifador-tira-pelos",
@@ -162,8 +160,7 @@
           "type": "title",
           "settings": {
             "title": "Perguntas frequentes",
-            "title_size": 30,
-            "title_size_mobile": 30
+            "title_size": 30
           }
         },
         "item_FpLxna": {
