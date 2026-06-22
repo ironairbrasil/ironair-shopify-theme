@@ -58,6 +58,7 @@
     var activeRealIndex = 0;
     var previousActiveIndex = -1;
     var scrollTimer = null;
+    var autoplayTimer = null;
     var normalizing = false;
 
     if (originalCount > 1) {
@@ -167,6 +168,20 @@
       centerCard(activeIndex + direction, 'smooth');
     }
 
+    function startAutoplay() {
+      if (originalCount < 2 || autoplayTimer) return;
+      autoplayTimer = window.setInterval(function () {
+        if (document.hidden) return;
+        scroll(1);
+      }, 2600);
+    }
+
+    function stopAutoplay() {
+      if (!autoplayTimer) return;
+      window.clearInterval(autoplayTimer);
+      autoplayTimer = null;
+    }
+
     function getMiddleIndex(realIndex) {
       return loopOffset + Number(realIndex || 0);
     }
@@ -250,9 +265,18 @@
       centerCard(activeIndex, 'auto');
     });
 
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) {
+        stopAutoplay();
+      } else {
+        startAutoplay();
+      }
+    });
+
     setActive(originalCount > 1 ? loopOffset : getClosestIndex());
     window.setTimeout(function () {
       centerCard(activeIndex, 'auto');
+      startAutoplay();
     }, 80);
   }
 
