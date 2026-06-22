@@ -264,6 +264,9 @@
                         {% if upsell_manual_limit < upsell_display_limit %}
                           {% assign upsell_manual_limit = upsell_manual_limit | plus: 1 %}
                           {% assign upsell_variant = upsell_product.selected_or_first_available_variant %}
+                          {% assign upsell_price = upsell_variant.price %}
+                          {% assign upsell_pix_price = upsell_price | times: 90 | divided_by: 100 %}
+                          {% assign upsell_installments = upsell_price | divided_by: 12 %}
                           <article class="product-upsell-card">
                             <a class="product-upsell-media" href="{{ upsell_product.url }}">
                               {% if upsell_product.featured_image %}
@@ -274,7 +277,13 @@
                             </a>
                             <div class="product-upsell-copy">
                               <a href="{{ upsell_product.url }}">{{ upsell_product.title }}</a>
-                              <strong>{{ upsell_variant.price | money }}</strong>
+                              <div class="product-upsell-payment-pix">
+                                <strong>{{ upsell_pix_price | money }}</strong>
+                                <span>com 10% OFF no Pix</span>
+                              </div>
+                              <div class="product-upsell-payment-card">
+                                ou <strong>{{ upsell_price | money }}</strong> em até <strong>12x de {{ upsell_installments | money }}</strong> s/juros
+                              </div>
                             </div>
                             {% if upsell_product.has_only_default_variant %}
                               <form method="post" action="{{ routes.cart_add_url }}">
@@ -294,6 +303,9 @@
                         {% if upsell_fallback_limit < upsell_display_limit %}
                           {% assign upsell_fallback_limit = upsell_fallback_limit | plus: 1 %}
                           {% assign upsell_variant = upsell_product.selected_or_first_available_variant %}
+                          {% assign upsell_price = upsell_variant.price %}
+                          {% assign upsell_pix_price = upsell_price | times: 90 | divided_by: 100 %}
+                          {% assign upsell_installments = upsell_price | divided_by: 12 %}
                           <article class="product-upsell-card">
                             <a class="product-upsell-media" href="{{ upsell_product.url }}">
                               {% if upsell_product.featured_image %}
@@ -304,7 +316,13 @@
                             </a>
                             <div class="product-upsell-copy">
                               <a href="{{ upsell_product.url }}">{{ upsell_product.title }}</a>
-                              <strong>{{ upsell_variant.price | money }}</strong>
+                              <div class="product-upsell-payment-pix">
+                                <strong>{{ upsell_pix_price | money }}</strong>
+                                <span>com 10% OFF no Pix</span>
+                              </div>
+                              <div class="product-upsell-payment-card">
+                                ou <strong>{{ upsell_price | money }}</strong> em até <strong>12x de {{ upsell_installments | money }}</strong> s/juros
+                              </div>
                             </div>
                             {% if upsell_product.has_only_default_variant %}
                               <form method="post" action="{{ routes.cart_add_url }}">
@@ -518,13 +536,13 @@
     },
     {
       "type": "upsells",
-      "name": "Outros produtos",
+      "name": "Adicione também",
       "settings": [
         {
           "type": "text",
           "id": "title",
           "label": "Título",
-          "default": "Outros produtos"
+          "default": "Adicione também ao carrinho"
         },
         {
           "type": "product_list",
