@@ -159,7 +159,7 @@
           "settings": {
             "title": "Nossos produtos",
             "title_size": 30,
-            "title_size_mobile": 30,
+            "title_size_mobile": 20,
             "subtitle": "",
             "subtitle_size": 13,
             "subtitle_size_mobile": 13,
@@ -246,9 +246,10 @@
           "settings": {
             "title": "Veja o Iron Air em ação",
             "title_size": 30,
-            "title_size_mobile": 30,
+            "title_size_mobile": 20,
             "subtitle": "Vídeos rápidos mostrando o produto no dia a dia.",
-            "subtitle_size": 15
+            "subtitle_size": 15,
+            "subtitle_size_mobile": 15
           }
         },
         "video_1": {
@@ -321,7 +322,8 @@
           "type": "title",
           "settings": {
             "title": "O que dizem os clientes",
-            "title_size": 30
+            "title_size": 30,
+            "title_size_mobile": 20
           }
         },
         "review_gKLEY3": {
@@ -378,7 +380,8 @@
           "type": "title",
           "settings": {
             "title": "Perguntas frequentes",
-            "title_size": 30
+            "title_size": 30,
+            "title_size_mobile": 20
           }
         },
         "item_UmT3c6": {
