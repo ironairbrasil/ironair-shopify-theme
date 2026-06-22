@@ -252,7 +252,7 @@
   display: flex;
   justify-content: space-between;
   gap: 12px;
-  color: var(--green);
+  color: var(--red);
   font-weight: 900;
 }
 
