@@ -181,7 +181,9 @@
   function initIronAirProductCheckout() {
     document.addEventListener('submit', function (event) {
       var form = event.target;
+      var submitter = event.submitter || document.activeElement;
       if (!form || !form.matches || !form.matches('form[data-ironair-checkout]')) return;
+      if (submitter && submitter.matches && submitter.matches('[data-add-to-cart]')) return;
       event.preventDefault();
       event.stopImmediatePropagation();
       startProductCheckout(form);
@@ -284,7 +286,7 @@
       var pixPrice = root.querySelector('[data-product-pix-price]');
       var installments = root.querySelector('[data-product-installments]');
       var stockMessage = root.querySelector('[data-product-stock-message]');
-      var submit = root.querySelector('[data-product-submit]');
+      var submitButtons = root.querySelectorAll('[data-product-submit]');
       var variantJson = root.querySelector('[data-product-variants-json]');
       var optionGroups = root.querySelectorAll('[data-option-position]');
       var optionButtons = root.querySelectorAll('[data-variant-option-button]');
@@ -367,7 +369,9 @@
           stockMessage.textContent = (isAvailable && stockPrefix ? stockPrefix + ' ' : '') + (option.getAttribute('data-stock-message') || '');
           stockMessage.classList.toggle('is-out', !isAvailable);
         }
-        if (submit) submit.disabled = !isAvailable;
+        submitButtons.forEach(function (submit) {
+          submit.disabled = !isAvailable;
+        });
         syncOptionButtons(selectedVariantId);
         syncOptionAvailability();
       }

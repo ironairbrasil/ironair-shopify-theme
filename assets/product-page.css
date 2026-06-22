@@ -252,6 +252,19 @@
   text-align: center;
 }
 
+.product-submit-secondary {
+  background: #fff;
+  border: 1px solid var(--dark-green);
+  box-shadow: none;
+  color: var(--dark-green);
+}
+
+.product-submit-secondary:hover {
+  background: rgba(var(--iron-green-rgb), 0.06);
+  color: var(--dark-green);
+  box-shadow: none;
+}
+
 .product-upsells {
   border-top: 1px solid var(--border);
   margin-top: 18px;

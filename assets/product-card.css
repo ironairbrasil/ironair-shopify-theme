@@ -289,6 +289,7 @@
   margin-top: 12px;
   background: var(--dark-green);
   color: #fff;
+  border: 1px solid var(--dark-green);
   padding: 10px;
   font-size: var(--font-size-small);
   min-height: 44px;
@@ -298,6 +299,17 @@
 
 .pc-btn:hover {
   background: var(--dark-green-d);
+}
+
+.pc-btn-secondary {
+  margin-top: 8px;
+  background: #fff;
+  color: var(--dark-green);
+}
+
+.pc-btn-secondary:hover {
+  background: rgba(var(--iron-green-rgb), 0.06);
+  color: var(--dark-green);
 }
 
 .pc-img img {

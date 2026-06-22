@@ -72,5 +72,13 @@
     {% else %}
       <a class="pc-btn" href="{{ product.url }}">Escolher opção</a>
     {% endif %}
+
+    <form method="post" action="{{ routes.cart_add_url }}" class="product-card-add-form">
+      <input type="hidden" name="id" value="{{ variant.id }}">
+      <input type="hidden" name="quantity" value="1">
+      <button class="pc-btn pc-btn-secondary" type="submit" {% unless variant.available %}disabled{% endunless %}>
+        Adicionar ao carrinho
+      </button>
+    </form>
   </div>
 </article>

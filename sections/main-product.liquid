@@ -239,6 +239,9 @@
                 <button class="btn-hero product-submit" type="submit" data-product-submit data-ironair-checkout {% unless current_variant.available %}disabled{% endunless %}>
                   {{ block.settings.button_label }}
                 </button>
+                <button class="btn-hero product-submit product-submit-secondary" type="submit" data-product-submit data-add-to-cart {% unless current_variant.available %}disabled{% endunless %}>
+                  Adicionar ao carrinho
+                </button>
               {% endform %}
             </div>
 
