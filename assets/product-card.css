@@ -262,7 +262,7 @@
 }
 
 .product-card-payment-card strong {
-  color: var(--green);
+  color: var(--ink);
   font-weight: 900;
 }
 
