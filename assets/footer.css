@@ -69,8 +69,11 @@ footer {
   stroke-linejoin: round;
 }
 
+.f-social-facebook svg,
 .f-social-fb svg,
-.f-social-tk svg {
+.f-social-tiktok svg,
+.f-social-tk svg,
+.f-social-x svg {
   fill: currentColor;
   stroke: none;
 }

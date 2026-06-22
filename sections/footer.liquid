@@ -15,8 +15,48 @@
         <div class="f-social">
           {% for block in section.blocks %}
             {% if block.type == 'social' %}
-              <a href="{{ block.settings.url }}" class="f-social-link" target="_blank" rel="noreferrer" aria-label="{{ block.settings.label }}">
-                <span aria-hidden="true">{{ block.settings.label }}</span>
+              {% assign social_icon = block.settings.platform | default: 'custom' %}
+              {% assign social_label = block.settings.label | default: social_icon %}
+              {% assign social_label_downcase = social_label | downcase %}
+              {% if social_icon == 'custom' %}
+                {% if social_label_downcase == 'ig' or social_label_downcase contains 'instagram' %}
+                  {% assign social_icon = 'instagram' %}
+                  {% assign social_label = 'Instagram' %}
+                {% elsif social_label_downcase == 'fb' or social_label_downcase contains 'facebook' %}
+                  {% assign social_icon = 'facebook' %}
+                  {% assign social_label = 'Facebook' %}
+                {% elsif social_label_downcase == 'yt' or social_label_downcase contains 'youtube' %}
+                  {% assign social_icon = 'youtube' %}
+                  {% assign social_label = 'YouTube' %}
+                {% elsif social_label_downcase == 'tk' or social_label_downcase contains 'tiktok' or social_label_downcase contains 'tik tok' %}
+                  {% assign social_icon = 'tiktok' %}
+                  {% assign social_label = 'TikTok' %}
+                {% elsif social_label_downcase == 'wa' or social_label_downcase contains 'whatsapp' %}
+                  {% assign social_icon = 'whatsapp' %}
+                  {% assign social_label = 'WhatsApp' %}
+                {% elsif social_label_downcase == 'x' or social_label_downcase contains 'twitter' %}
+                  {% assign social_icon = 'x' %}
+                  {% assign social_label = 'X' %}
+                {% endif %}
+              {% endif %}
+
+              <a href="{{ block.settings.url }}" class="f-social-link f-social-{{ social_icon }}" target="_blank" rel="noreferrer" aria-label="{{ social_label }}" {{ block.shopify_attributes }}>
+                {% case social_icon %}
+                  {% when 'instagram' %}
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.4" cy="6.6" r="1.2" fill="currentColor" stroke="none"/></svg>
+                  {% when 'facebook' %}
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3c-3.1 0-5 1.9-5 5v3H6v4h3v6h4v-6h3.2l.8-4h-4V9c0-.7.3-1 1-1Z"/></svg>
+                  {% when 'youtube' %}
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path class="f-social-youtube-shape" d="M21.6 7.2a3 3 0 0 0-2.1-2.1C17.6 4.6 12 4.6 12 4.6s-5.6 0-7.5.5a3 3 0 0 0-2.1 2.1A31 31 0 0 0 2 12a31 31 0 0 0 .4 4.8 3 3 0 0 0 2.1 2.1c1.9.5 7.5.5 7.5.5s5.6 0 7.5-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 22 12a31 31 0 0 0-.4-4.8Z"/><path class="f-social-youtube-play" d="m10 15.5 5.2-3.5L10 8.5v7Z"/></svg>
+                  {% when 'tiktok' %}
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3c.5 3 2.2 4.8 5 5v3.8a8.5 8.5 0 0 1-5-1.7v5.7a5.2 5.2 0 1 1-5.2-5.2c.4 0 .8 0 1.2.1v4a1.7 1.7 0 1 0 .8 1.4V3h3.2Z"/></svg>
+                  {% when 'whatsapp' %}
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.6 19.4 5.7 16A8 8 0 1 1 8 18.3l-3.4 1.1Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M9.2 8.8c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.4l.6 1.4c.1.3.1.5-.1.7l-.4.5c.6 1 1.4 1.8 2.5 2.4l.5-.5c.2-.2.4-.2.7-.1l1.5.7c.3.1.4.3.4.6v.5c0 .3-.1.5-.4.7-.5.3-1.1.5-1.7.4-3.1-.4-5.7-2.9-6.1-6.1-.1-.6.1-1.2.4-1.7Z" fill="currentColor" stroke="none"/></svg>
+                  {% when 'x' %}
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h4.7l4.2 5.6L17.7 4H20l-6 7 6.5 9h-4.7l-4.6-6.2L5.9 20H3.5l6.5-7.6L4 4Zm3.4 1.8 9.3 12.4h1L8.4 5.8h-1Z"/></svg>
+                  {% else %}
+                    <span aria-hidden="true">{{ block.settings.label }}</span>
+                {% endcase %}
               </a>
             {% endif %}
           {% endfor %}
@@ -76,7 +116,22 @@
       "type": "social",
       "name": "Rede social",
       "settings": [
-        { "type": "text", "id": "label", "label": "Sigla", "default": "IG" },
+        {
+          "type": "select",
+          "id": "platform",
+          "label": "Rede",
+          "default": "custom",
+          "options": [
+            { "value": "custom", "label": "Automático pela sigla" },
+            { "value": "instagram", "label": "Instagram" },
+            { "value": "facebook", "label": "Facebook" },
+            { "value": "youtube", "label": "YouTube" },
+            { "value": "tiktok", "label": "TikTok" },
+            { "value": "whatsapp", "label": "WhatsApp" },
+            { "value": "x", "label": "X / Twitter" }
+          ]
+        },
+        { "type": "text", "id": "label", "label": "Texto alternativo", "default": "Instagram" },
         { "type": "url", "id": "url", "label": "URL" }
       ]
     }
