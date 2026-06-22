@@ -80,7 +80,10 @@
       row.hidden = totalDiscount <= 0;
       amount.textContent = '-' + money(totalDiscount);
     }
-    if (subtotal) subtotal.textContent = money(estimatedTotal);
+    if (subtotal) {
+      subtotal.textContent = money(estimatedTotal);
+      subtotal.classList.toggle('has-pix-discount', totalDiscount > 0);
+    }
   }
 
   function renderCart(cart) {

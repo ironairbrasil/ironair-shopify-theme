@@ -258,8 +258,12 @@
 
 .cart-drawer-subtotal strong {
   font-family: var(--font-title);
-  color: var(--dark-green);
+  color: var(--ink);
   font-size: calc(var(--font-size-heading) - 4px);
+}
+
+.cart-drawer-subtotal strong.has-pix-discount {
+  color: var(--green);
 }
 
 .cart-drawer-checkout {
