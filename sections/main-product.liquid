@@ -88,7 +88,11 @@
             </div>
 
           {% when 'title' %}
-            <h1 {{ block.shopify_attributes }}>
+            <h1
+              class="responsive-font-size"
+              style="--font-size-desktop: {{ block.settings.title_size | default: 40 }}px; --font-size-mobile: {{ block.settings.title_size_mobile | default: block.settings.title_size | default: 40 }}px;"
+              {{ block.shopify_attributes }}
+            >
               {% if block.settings.title_override != blank %}
                 {{ block.settings.title_override }}
               {% else %}
@@ -389,6 +393,26 @@
           "id": "title_override",
           "label": "Nome personalizado",
           "info": "Deixe vazio para usar o nome do produto."
+        },
+        {
+          "type": "range",
+          "id": "title_size",
+          "label": "Tamanho no desktop",
+          "min": 20,
+          "max": 72,
+          "step": 1,
+          "unit": "px",
+          "default": 40
+        },
+        {
+          "type": "range",
+          "id": "title_size_mobile",
+          "label": "Tamanho no mobile",
+          "min": 20,
+          "max": 56,
+          "step": 1,
+          "unit": "px",
+          "default": 40
         }
       ]
     },
