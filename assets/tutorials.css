@@ -35,10 +35,10 @@
 
 .tutorial-card {
   display: grid;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border: 0;
+  border-radius: 0;
   overflow: hidden;
-  background: #fff;
+  background: transparent;
 }
 
 .tutorial-video {
@@ -60,6 +60,7 @@
   width: 100%;
   height: 100%;
   border: 0;
+  border-radius: 0;
   background: #111;
 }
 
