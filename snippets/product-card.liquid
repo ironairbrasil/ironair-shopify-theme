@@ -38,14 +38,16 @@
   <div class="pc-body">
     <div class="pc-brand">{{ product.vendor | default: shop.name }}</div>
     <a href="{{ product.url }}" class="pc-name">{{ product.title }}</a>
-    {% render 'product-price', product: product, variant: variant %}
+    {% if compare_price > price %}
+      <div class="pc-price-old">{{ compare_price | money }}</div>
+    {% endif %}
     <div class="product-card-payment-lines">
       <div class="product-card-payment-pix">
         <strong>{{ pix_price | money }}</strong>
         <span>com 10% OFF no Pix</span>
       </div>
       <div class="product-card-payment-card">
-        ou {{ price | money }} em até <strong>12x de {{ installments | money }}</strong> s/juros
+        ou <strong>{{ price | money }}</strong> em até <strong>12x de {{ installments | money }}</strong> s/juros
       </div>
     </div>
 
