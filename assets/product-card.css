@@ -247,6 +247,11 @@
   flex-wrap: wrap;
 }
 
+.product-card-payment-pix {
+  display: grid;
+  gap: 2px;
+}
+
 .product-card-payment-pix strong {
   font-family: var(--font-title);
   font-size: calc(var(--font-size-price) - 4px);
