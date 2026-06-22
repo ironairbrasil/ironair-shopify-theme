@@ -17,7 +17,7 @@
         "announcement": {
           "type": "announcement",
           "settings": {
-            "text": "🚚 FRETE GRÁTIS em todo Brasil + 12X SEM JUROS no cartão + 10% OFF no Pix"
+            "text": "🚚 Frete grátis em todo Brasil + Use o cupom PIX10 para 10% OFF"
           }
         }
       },
@@ -77,7 +77,10 @@
       "block_order": [
         "menu_R7MtR9"
       ],
-      "settings": {}
+      "settings": {
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
     }
   },
   "order": [
