@@ -9,6 +9,19 @@
  */
 {
   "sections": {
+    "stock_reserve_popup": {
+      "type": "stock-reserve-popup",
+      "settings": {
+        "enabled": true,
+        "product": "",
+        "fallback_product_handle": "iron-air",
+        "eyebrow": "Lote esgotado",
+        "title": "Esgotamos nosso primeiro lote",
+        "text": "Reserve o seu Iron Air agora e não perca a oportunidade de garantir prioridade no próximo lote.",
+        "button_label": "Enviar reserva",
+        "delay": 1
+      }
+    },
     "slides_hDX8yJ": {
       "type": "slides",
       "blocks": {
@@ -159,7 +172,7 @@
           "settings": {
             "title": "Nossos produtos",
             "title_size": 30,
-            "title_size_mobile": 20,
+            "title_size_mobile": 30,
             "subtitle": "",
             "subtitle_size": 13,
             "subtitle_size_mobile": 13,
@@ -202,10 +215,10 @@
           "settings": {
             "heading": "A maneira mais fácil de cuidar das suas roupas",
             "text": "<p>O fluxo de ar quente automático seca, alisa e refresca as roupas sem que você precise usar as mãos. Sem ferro de passar. Sem tábua de passar. Sem ficar esperando.</p>",
-            "heading_size": 50,
-            "heading_size_mobile": 30,
-            "description_size": 15,
-            "description_size_mobile": 13,
+            "heading_size": 52,
+            "heading_size_mobile": 52,
+            "description_size": 16,
+            "description_size_mobile": 16,
             "text_width": "large"
           }
         },
@@ -230,7 +243,7 @@
         "background_mode": "video",
         "video": "shopify://files/videos/site.mp4",
         "height": "media",
-        "mobile_height": "small",
+        "mobile_height": "media",
         "content_position": "center",
         "text_alignment": "center",
         "tone": "navy",
@@ -246,10 +259,9 @@
           "settings": {
             "title": "Veja o Iron Air em ação",
             "title_size": 30,
-            "title_size_mobile": 20,
+            "title_size_mobile": 30,
             "subtitle": "Vídeos rápidos mostrando o produto no dia a dia.",
-            "subtitle_size": 15,
-            "subtitle_size_mobile": 13
+            "subtitle_size": 15
           }
         },
         "video_1": {
@@ -322,8 +334,7 @@
           "type": "title",
           "settings": {
             "title": "O que dizem os clientes",
-            "title_size": 30,
-            "title_size_mobile": 20
+            "title_size": 30
           }
         },
         "review_gKLEY3": {
@@ -380,8 +391,7 @@
           "type": "title",
           "settings": {
             "title": "Perguntas frequentes",
-            "title_size": 30,
-            "title_size_mobile": 20
+            "title_size": 30
           }
         },
         "item_UmT3c6": {
@@ -459,6 +469,7 @@
     }
   },
   "order": [
+    "stock_reserve_popup",
     "slides_hDX8yJ",
     "trust",
     "products",

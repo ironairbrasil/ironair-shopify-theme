@@ -1,0 +1,333 @@
+{% liquid
+  assign reserve_product = section.settings.product
+  if reserve_product == blank and section.settings.fallback_product_handle != blank
+    assign reserve_product = all_products[section.settings.fallback_product_handle]
+  endif
+
+  assign should_show_popup = false
+  if section.settings.enabled and reserve_product != blank and reserve_product.available == false
+    assign should_show_popup = true
+  endif
+
+  assign popup_id = 'StockReservePopup-' | append: section.id
+  assign form_id = 'StockReserveForm-' | append: section.id
+%}
+
+{% if should_show_popup %}
+  <div
+    class="stock-reserve-popup"
+    id="{{ popup_id }}"
+    data-stock-reserve-popup
+    data-popup-key="ironair-stock-reserve-{{ reserve_product.id }}"
+    aria-hidden="true">
+    <div class="stock-reserve-popup__overlay" data-stock-reserve-close></div>
+
+    <section class="stock-reserve-popup__panel" role="dialog" aria-modal="true" aria-labelledby="{{ popup_id }}-title">
+      <button class="stock-reserve-popup__close" type="button" data-stock-reserve-close aria-label="Fechar">
+        <span aria-hidden="true">&times;</span>
+      </button>
+
+      <div class="stock-reserve-popup__eyebrow">{{ section.settings.eyebrow }}</div>
+      <h2 id="{{ popup_id }}-title">{{ section.settings.title }}</h2>
+      <p>{{ section.settings.text }}</p>
+
+      {% form 'contact', id: form_id, class: 'stock-reserve-popup__form' %}
+        <input type="hidden" name="contact[subject]" value="Reserva de {{ reserve_product.title | escape }}">
+        <input type="hidden" name="contact[body]" value="Cliente quer reservar o {{ reserve_product.title | escape }} quando voltar ao estoque.">
+
+        {% if form.posted_successfully? %}
+          <div class="stock-reserve-popup__success" tabindex="-1">
+            Obrigado! Recebemos sua reserva e vamos avisar assim que o Iron Air voltar.
+          </div>
+        {% endif %}
+
+        {% if form.errors %}
+          <div class="stock-reserve-popup__error">
+            Confira os campos e tente enviar novamente.
+          </div>
+        {% endif %}
+
+        <label for="{{ form_id }}-name">
+          <span>Nome</span>
+          <input id="{{ form_id }}-name" type="text" name="contact[name]" autocomplete="name" required>
+        </label>
+
+        <label for="{{ form_id }}-email">
+          <span>E-mail</span>
+          <input id="{{ form_id }}-email" type="email" name="contact[email]" autocomplete="email" required>
+        </label>
+
+        <label for="{{ form_id }}-phone">
+          <span>Telefone</span>
+          <input id="{{ form_id }}-phone" type="tel" name="contact[phone]" autocomplete="tel" required>
+        </label>
+
+        <button class="stock-reserve-popup__submit" type="submit">{{ section.settings.button_label }}</button>
+      {% endform %}
+    </section>
+  </div>
+
+  <style>
+    .stock-reserve-popup {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .stock-reserve-popup.is-open {
+      display: flex;
+    }
+
+    .stock-reserve-popup__overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(8, 25, 26, 0.68);
+      backdrop-filter: blur(5px);
+    }
+
+    .stock-reserve-popup__panel {
+      position: relative;
+      width: min(100%, 480px);
+      max-height: min(92dvh, 720px);
+      overflow: auto;
+      border-radius: 8px;
+      background: var(--bg, #ffffff);
+      color: var(--ink, #102426);
+      padding: 34px;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+    }
+
+    .stock-reserve-popup__close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(16, 61, 62, 0.08);
+      color: var(--dark-green, #103d3e);
+      cursor: pointer;
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .stock-reserve-popup__eyebrow {
+      width: fit-content;
+      margin-bottom: 12px;
+      border-radius: 999px;
+      background: rgba(16, 61, 62, 0.1);
+      color: var(--dark-green, #103d3e);
+      padding: 7px 12px;
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .stock-reserve-popup h2 {
+      margin: 0 34px 10px 0;
+      color: var(--dark-green, #103d3e);
+      font-size: clamp(26px, 4vw, 38px);
+      line-height: 1.05;
+    }
+
+    .stock-reserve-popup p {
+      margin: 0 0 22px;
+      color: rgba(16, 36, 38, 0.78);
+      line-height: 1.55;
+    }
+
+    .stock-reserve-popup__form {
+      display: grid;
+      gap: 14px;
+    }
+
+    .stock-reserve-popup__form label {
+      display: grid;
+      gap: 7px;
+      color: var(--ink, #102426);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .stock-reserve-popup__form input {
+      min-height: 48px;
+      width: 100%;
+      border: 1px solid rgba(16, 61, 62, 0.18);
+      border-radius: 8px;
+      background: #ffffff;
+      color: var(--ink, #102426);
+      padding: 0 14px;
+      outline: none;
+    }
+
+    .stock-reserve-popup__form input:focus {
+      border-color: var(--dark-green, #103d3e);
+      box-shadow: 0 0 0 3px rgba(16, 61, 62, 0.12);
+    }
+
+    .stock-reserve-popup__submit {
+      min-height: 50px;
+      border-radius: 8px;
+      background: var(--dark-green, #103d3e);
+      color: #ffffff;
+      cursor: pointer;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .stock-reserve-popup__submit:hover {
+      filter: brightness(1.08);
+    }
+
+    .stock-reserve-popup__success,
+    .stock-reserve-popup__error {
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-weight: 800;
+      line-height: 1.35;
+    }
+
+    .stock-reserve-popup__success {
+      background: rgba(22, 125, 85, 0.12);
+      color: #136b49;
+    }
+
+    .stock-reserve-popup__error {
+      background: rgba(180, 42, 42, 0.12);
+      color: #a02727;
+    }
+
+    @media (max-width: 640px) {
+      .stock-reserve-popup {
+        padding: 12px;
+        align-items: flex-end;
+      }
+
+      .stock-reserve-popup__panel {
+        width: 100%;
+        padding: 28px 20px 22px;
+      }
+
+      .stock-reserve-popup h2 {
+        margin-right: 38px;
+        font-size: 28px;
+      }
+    }
+  </style>
+
+  <script>
+    (function () {
+      var popup = document.getElementById({{ popup_id | json }});
+      if (!popup) return;
+
+      var key = popup.getAttribute('data-popup-key') || 'ironair-stock-reserve';
+      var hasSubmitted = popup.querySelector('.stock-reserve-popup__success');
+      var shouldOpen = hasSubmitted || window.sessionStorage.getItem(key) !== 'closed';
+      var previousActiveElement = null;
+
+      function openPopup() {
+        previousActiveElement = document.activeElement;
+        popup.classList.add('is-open');
+        popup.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+
+        var focusTarget = popup.querySelector('.stock-reserve-popup__success') || popup.querySelector('input, button');
+        if (focusTarget) focusTarget.focus();
+      }
+
+      function closePopup() {
+        popup.classList.remove('is-open');
+        popup.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        window.sessionStorage.setItem(key, 'closed');
+
+        if (previousActiveElement && typeof previousActiveElement.focus === 'function') {
+          previousActiveElement.focus();
+        }
+      }
+
+      popup.querySelectorAll('[data-stock-reserve-close]').forEach(function (button) {
+        button.addEventListener('click', closePopup);
+      });
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && popup.classList.contains('is-open')) closePopup();
+      });
+
+      if (shouldOpen) {
+        window.setTimeout(openPopup, {{ section.settings.delay | times: 1000 }});
+      }
+    })();
+  </script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Popup de reserva",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enabled",
+      "label": "Ativar popup",
+      "default": true
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Produto para verificar estoque"
+    },
+    {
+      "type": "text",
+      "id": "fallback_product_handle",
+      "label": "Handle do produto reserva",
+      "default": "iron-air",
+      "info": "Usado se o produto acima não estiver selecionado."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Chamada pequena",
+      "default": "Lote esgotado"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Esgotamos nosso primeiro lote"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Texto",
+      "default": "Reserve o seu Iron Air agora e não perca a oportunidade de garantir prioridade no próximo lote."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Texto do botão",
+      "default": "Enviar reserva"
+    },
+    {
+      "type": "range",
+      "id": "delay",
+      "label": "Atraso para abrir",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 1
+    }
+  ],
+  "presets": [
+    {
+      "name": "Popup de reserva"
+    }
+  ]
+}
+{% endschema %}
