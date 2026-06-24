@@ -6,13 +6,15 @@
       </div>
     </div>
   {% endif %}
-  <div class="content-card custom-liquid-content">
-    {{ section.settings.custom_liquid }}
-  </div>
+  {% if section.settings.custom_liquid != blank and section.settings.custom_liquid != '<p>Adicione seu conteúdo.</p>' %}
+    <div class="custom-liquid-content">
+      {{ section.settings.custom_liquid }}
+    </div>
+  {% endif %}
   {% for block in section.blocks %}
     {% case block.type %}
       {% when 'text' %}
-        <div class="content-card custom-liquid-block custom-liquid-text" {{ block.shopify_attributes }}>
+        <div class="custom-liquid-block custom-liquid-text" {{ block.shopify_attributes }}>
           {{ block.settings.text }}
         </div>
       {% when 'image' %}
@@ -56,12 +58,11 @@
       "id": "title",
       "label": "Título"
     },
-    {
-      "type": "liquid",
-      "id": "custom_liquid",
-      "label": "Liquid",
-      "default": "<p>Adicione seu conteúdo.</p>"
-    },
+        {
+          "type": "liquid",
+          "id": "custom_liquid",
+          "label": "Liquid"
+        },
     {
       "type": "header",
       "content": "Preenchimento"
