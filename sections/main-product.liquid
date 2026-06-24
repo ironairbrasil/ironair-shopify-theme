@@ -49,30 +49,6 @@
           {% endfor %}
         </div>
       </div>
-
-      {% for block in section.blocks %}
-        {% if block.type == 'description' %}
-          {% assign product_description_html = product.description %}
-          {% if block.settings.description_override != blank %}
-            {% assign product_description_html = block.settings.description_override %}
-          {% endif %}
-
-          {% if product_description_html != blank %}
-            <div
-              class="product-description-card product-description-card--{{ block.settings.width }} product-description-card--align-{{ block.settings.alignment }} {% if block.settings.show_background %}has-background{% endif %} {% if block.settings.show_border %}has-border{% endif %}"
-              style="--description-padding-top: {{ block.settings.padding_top }}px; --description-padding-bottom: {{ block.settings.padding_bottom }}px; --description-padding-left: {{ block.settings.padding_left }}px; --description-padding-right: {{ block.settings.padding_right }}px; --description-border-radius: {{ block.settings.border_radius }}px;"
-              {{ block.shopify_attributes }}
-            >
-              {% if block.settings.heading != blank %}
-                <h2>{{ block.settings.heading | escape }}</h2>
-              {% endif %}
-              <div class="product-detail-copy">
-                {{ product_description_html }}
-              </div>
-            </div>
-          {% endif %}
-        {% endif %}
-      {% endfor %}
     </div>
 
     <div class="product-purchase-panel">
@@ -347,6 +323,32 @@
       {% endfor %}
     </div>
   </div>
+
+  {% for block in section.blocks %}
+    {% if block.type == 'description' %}
+      {% assign product_description_html = product.description %}
+      {% if block.settings.description_override != blank %}
+        {% assign product_description_html = block.settings.description_override %}
+      {% endif %}
+
+      {% if product_description_html != blank %}
+        <div class="product-description-section">
+          <div
+            class="product-description-card product-description-card--{{ block.settings.width }} product-description-card--align-{{ block.settings.alignment }} {% if block.settings.show_background %}has-background{% endif %} {% if block.settings.show_border %}has-border{% endif %}"
+            style="--description-padding-top: {{ block.settings.padding_top }}px; --description-padding-bottom: {{ block.settings.padding_bottom }}px; --description-padding-left: {{ block.settings.padding_left }}px; --description-padding-right: {{ block.settings.padding_right }}px; --description-border-radius: {{ block.settings.border_radius }}px;"
+            {{ block.shopify_attributes }}
+          >
+            {% if block.settings.heading != blank %}
+              <h2>{{ block.settings.heading | escape }}</h2>
+            {% endif %}
+            <div class="product-detail-copy">
+              {{ product_description_html }}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endif %}
+  {% endfor %}
 </section>
 
 {% schema %}

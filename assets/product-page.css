@@ -75,6 +75,10 @@
   box-shadow: none;
 }
 
+.product-description-section {
+  margin-top: 16px;
+}
+
 .product-description-card--fit {
   justify-self: start;
   width: fit-content;
