@@ -14,9 +14,11 @@
   {% for block in section.blocks %}
     {% case block.type %}
       {% when 'text' %}
-        <div class="custom-liquid-block custom-liquid-text" {{ block.shopify_attributes }}>
-          {{ block.settings.text }}
-        </div>
+        {% if block.settings.text != blank and block.settings.text != '<p>Texto</p>' %}
+          <div class="custom-liquid-block custom-liquid-text" {{ block.shopify_attributes }}>
+            {{ block.settings.text }}
+          </div>
+        {% endif %}
       {% when 'image' %}
         {% if block.settings.image != blank %}
           <div class="custom-liquid-block custom-liquid-image" {{ block.shopify_attributes }}>
@@ -96,8 +98,7 @@
         {
           "type": "richtext",
           "id": "text",
-          "label": "Texto",
-          "default": "<p>Texto</p>"
+          "label": "Texto"
         }
       ]
     },
