@@ -112,6 +112,43 @@ footer#contato {
   height: auto;
 }
 
+.custom-liquid-text {
+  display: grid;
+  gap: 12px;
+}
+
+.custom-liquid-text.copy-size-small {
+  max-width: 520px;
+}
+
+.custom-liquid-text.copy-size-medium {
+  max-width: 680px;
+}
+
+.custom-liquid-text.copy-size-large {
+  max-width: 820px;
+}
+
+.custom-liquid-text h2 {
+  margin: 0;
+  font-family: var(--font-title);
+  font-size: var(--hero-heading-size, 52px);
+  line-height: 0.98;
+  font-weight: 900;
+  letter-spacing: 0;
+  color: var(--ink);
+}
+
+.custom-liquid-text-copy {
+  color: var(--mid);
+  font-size: var(--hero-text-size, var(--font-size-paragraph));
+  line-height: 1.55;
+}
+
+.custom-liquid-text-copy p {
+  font-size: inherit;
+}
+
 .section-head {
   max-width: var(--shell-max-width);
   margin: 0 auto 18px;
@@ -148,4 +185,10 @@ footer#contato {
 @media (max-width: 640px) {
   .page { padding: 16px; }
   .page-home { padding-top: 0; }
+  .custom-liquid-text h2 {
+    font-size: var(--hero-heading-mobile-size, var(--hero-heading-size, 40px));
+  }
+  .custom-liquid-text-copy {
+    font-size: var(--hero-text-mobile-size, var(--hero-text-size, var(--font-size-body)));
+  }
 }

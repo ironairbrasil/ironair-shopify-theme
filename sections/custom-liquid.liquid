@@ -14,9 +14,18 @@
   {% for block in section.blocks %}
     {% case block.type %}
       {% when 'text' %}
-        {% if block.settings.text != blank and block.settings.text != '<p>Texto</p>' %}
-          <div class="custom-liquid-block custom-liquid-text" {{ block.shopify_attributes }}>
-            {{ block.settings.text }}
+        {% if block.settings.heading != blank or block.settings.text != blank %}
+          <div
+            class="custom-liquid-block custom-liquid-text copy-size-{{ block.settings.text_width | default: block.settings.text_size | default: 'large' }}"
+            style="--hero-heading-size: {{ block.settings.heading_size | default: 52 }}px; --hero-heading-mobile-size: {{ block.settings.heading_size_mobile | default: block.settings.heading_size | default: 52 }}px; --hero-text-size: {{ block.settings.description_size | default: 16 }}px; --hero-text-mobile-size: {{ block.settings.description_size_mobile | default: block.settings.description_size | default: 16 }}px;"
+            {{ block.shopify_attributes }}
+          >
+            {% if block.settings.heading != blank %}
+              <h2>{{ block.settings.heading }}</h2>
+            {% endif %}
+            {% if block.settings.text != blank %}
+              <div class="custom-liquid-text-copy">{{ block.settings.text }}</div>
+            {% endif %}
           </div>
         {% endif %}
       {% when 'image' %}
@@ -96,9 +105,76 @@
       "name": "Texto",
       "settings": [
         {
+          "type": "text",
+          "id": "heading",
+          "label": "Título",
+          "default": "Adicione texto ao seu hero"
+        },
+        {
           "type": "richtext",
           "id": "text",
-          "label": "Texto"
+          "label": "Descrição",
+          "default": "<p>Use blocos de texto e botão para montar a chamada.</p>"
+        },
+        {
+          "type": "range",
+          "id": "heading_size",
+          "label": "Tamanho do título no desktop",
+          "min": 24,
+          "max": 88,
+          "step": 1,
+          "unit": "px",
+          "default": 52
+        },
+        {
+          "type": "range",
+          "id": "heading_size_mobile",
+          "label": "Tamanho do título no mobile",
+          "min": 24,
+          "max": 88,
+          "step": 1,
+          "unit": "px",
+          "default": 52
+        },
+        {
+          "type": "range",
+          "id": "description_size",
+          "label": "Tamanho da descrição no desktop",
+          "min": 12,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 16
+        },
+        {
+          "type": "range",
+          "id": "description_size_mobile",
+          "label": "Tamanho da descrição no mobile",
+          "min": 12,
+          "max": 28,
+          "step": 1,
+          "unit": "px",
+          "default": 16
+        },
+        {
+          "type": "select",
+          "id": "text_width",
+          "label": "Largura",
+          "default": "large",
+          "options": [
+            {
+              "value": "small",
+              "label": "Pequena"
+            },
+            {
+              "value": "medium",
+              "label": "Média"
+            },
+            {
+              "value": "large",
+              "label": "Grande"
+            }
+          ]
         }
       ]
     },
