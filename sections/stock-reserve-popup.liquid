@@ -30,6 +30,11 @@
       <div class="stock-reserve-popup__eyebrow">{{ section.settings.eyebrow }}</div>
       <h2 id="{{ popup_id }}-title">{{ section.settings.title }}</h2>
       <p>{{ section.settings.text }}</p>
+      {% if section.settings.show_counter and section.settings.reservation_count > 0 %}
+        <div class="stock-reserve-popup__counter">
+          {{ section.settings.counter_text | replace: '[count]', section.settings.reservation_count }}
+        </div>
+      {% endif %}
 
       {% form 'customer', id: form_id, class: 'stock-reserve-popup__form' %}
         <input type="hidden" name="contact[tags]" value="reserva-iron-air">
@@ -141,6 +146,17 @@
       margin: 0 0 22px;
       color: rgba(16, 36, 38, 0.78);
       line-height: 1.55;
+    }
+
+    .stock-reserve-popup__counter {
+      margin: -8px 0 20px;
+      border-radius: 8px;
+      background: rgba(16, 61, 62, 0.08);
+      color: var(--dark-green, #103d3e);
+      padding: 10px 12px;
+      font-size: 13px;
+      font-weight: 900;
+      line-height: 1.35;
     }
 
     .stock-reserve-popup__form {
@@ -308,6 +324,27 @@
       "id": "text",
       "label": "Texto",
       "default": "Reserve o seu Iron Air agora e não perca a oportunidade de garantir prioridade no próximo lote."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_counter",
+      "label": "Mostrar contador de reservas",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "reservation_count",
+      "label": "Quantidade de reservas",
+      "min": 0,
+      "max": 500,
+      "step": 5,
+      "default": 45
+    },
+    {
+      "type": "text",
+      "id": "counter_text",
+      "label": "Texto do contador",
+      "default": "Mais de [count] pessoas já reservaram"
     },
     {
       "type": "text",
