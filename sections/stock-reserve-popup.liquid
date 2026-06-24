@@ -4,8 +4,23 @@
     assign reserve_product = all_products[section.settings.fallback_product_handle]
   endif
 
+  assign reserve_product_has_stock = false
+  if reserve_product != blank
+    for reserve_variant in reserve_product.variants
+      if reserve_variant.inventory_management
+        if reserve_variant.inventory_quantity > 0
+          assign reserve_product_has_stock = true
+          break
+        endif
+      elsif reserve_variant.available
+        assign reserve_product_has_stock = true
+        break
+      endif
+    endfor
+  endif
+
   assign should_show_popup = false
-  if section.settings.enabled and reserve_product != blank and reserve_product.available == false
+  if section.settings.enabled and reserve_product != blank and reserve_product_has_stock == false
     assign should_show_popup = true
   endif
 
@@ -18,7 +33,7 @@
     class="stock-reserve-popup"
     id="{{ popup_id }}"
     data-stock-reserve-popup
-    data-popup-key="ironair-stock-reserve-{{ reserve_product.id }}"
+    data-popup-key="ironair-stock-reserve-global-v2-{{ reserve_product.id }}"
     aria-hidden="true">
     <div class="stock-reserve-popup__overlay" data-stock-reserve-close></div>
 

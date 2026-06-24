@@ -9,22 +9,6 @@
  */
 {
   "sections": {
-    "stock_reserve_popup": {
-      "type": "stock-reserve-popup",
-      "settings": {
-        "enabled": true,
-        "product": "",
-        "fallback_product_handle": "iron-air",
-        "eyebrow": "Lote esgotado",
-        "title": "Esgotamos nosso primeiro lote",
-        "text": "Reserve o seu Iron Air agora e não perca a oportunidade de garantir prioridade no próximo lote.",
-        "show_counter": true,
-        "reservation_count": 45,
-        "counter_text": "Mais de [count] pessoas já reservaram",
-        "button_label": "Enviar reserva",
-        "delay": 1
-      }
-    },
     "slides_hDX8yJ": {
       "type": "slides",
       "blocks": {
@@ -472,7 +456,6 @@
     }
   },
   "order": [
-    "stock_reserve_popup",
     "slides_hDX8yJ",
     "trust",
     "products",
