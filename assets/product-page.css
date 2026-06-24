@@ -282,6 +282,11 @@
   box-shadow: none;
 }
 
+.product-submit-secondary:disabled {
+  border: 0;
+  color: #fff;
+}
+
 .product-upsells {
   border-top: 1px solid var(--border);
   margin-top: 18px;
