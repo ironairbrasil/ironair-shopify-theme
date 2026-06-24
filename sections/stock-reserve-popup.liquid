@@ -31,25 +31,27 @@
       <h2 id="{{ popup_id }}-title">{{ section.settings.title }}</h2>
       <p>{{ section.settings.text }}</p>
 
-      {% form 'contact', id: form_id, class: 'stock-reserve-popup__form' %}
-        <input type="hidden" name="contact[subject]" value="Reserva de {{ reserve_product.title | escape }}">
-        <input type="hidden" name="contact[body]" value="Cliente quer reservar o {{ reserve_product.title | escape }} quando voltar ao estoque.">
+      {% form 'customer', id: form_id, class: 'stock-reserve-popup__form' %}
+        <input type="hidden" name="contact[tags]" value="reserva-iron-air">
+        <input type="hidden" name="contact[origin]" value="popup-reserva-home">
+        <input type="hidden" name="contact[note]" value="Origem: popup-reserva-home. Reserva do {{ reserve_product.title | escape }}.">
+        <input type="hidden" name="contact[accepts_marketing]" value="true">
 
         {% if form.posted_successfully? %}
           <div class="stock-reserve-popup__success" tabindex="-1">
-            Obrigado! Recebemos sua reserva e vamos avisar assim que o Iron Air voltar.
+            Reserva recebida! Vamos te avisar assim que o Iron Air voltar ao estoque.
           </div>
         {% endif %}
 
         {% if form.errors %}
           <div class="stock-reserve-popup__error">
-            Confira os campos e tente enviar novamente.
+            Não foi possível concluir sua reserva. Se este e-mail já estiver cadastrado, tente outro e-mail ou fale com nosso atendimento.
           </div>
         {% endif %}
 
         <label for="{{ form_id }}-name">
           <span>Nome</span>
-          <input id="{{ form_id }}-name" type="text" name="contact[name]" autocomplete="name" required>
+          <input id="{{ form_id }}-name" type="text" name="contact[first_name]" autocomplete="name" required>
         </label>
 
         <label for="{{ form_id }}-email">
