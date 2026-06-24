@@ -111,50 +111,6 @@
         "padding_bottom": 48
       }
     },
-    "home_slider_YjgREV": {
-      "type": "home-slider",
-      "blocks": {
-        "text_UUHC7r": {
-          "type": "text",
-          "settings": {
-            "heading": "A maneira mais fácil de cuidar das suas roupas",
-            "text": "<p>O fluxo de ar quente automático seca, alisa e refresca as roupas sem que você precise usar as mãos. Sem ferro de passar. Sem tábua de passar. Sem ficar esperando.</p>",
-            "heading_size": 52,
-            "heading_size_mobile": 52,
-            "description_size": 16,
-            "description_size_mobile": 16,
-            "text_width": "large"
-          }
-        },
-        "button_nKLxzC": {
-          "type": "button",
-          "settings": {
-            "label": "Ver como funciona",
-            "label_size": 14,
-            "label_size_mobile": 14,
-            "url": "",
-            "style": "primary",
-            "new_tab": false
-          }
-        }
-      },
-      "block_order": [
-        "text_UUHC7r",
-        "button_nKLxzC"
-      ],
-      "settings": {
-        "aria_label": "Hero principal da Iron Air",
-        "background_mode": "video",
-        "video": "shopify://files/videos/site.mp4",
-        "height": "media",
-        "mobile_height": "media",
-        "content_position": "center",
-        "text_alignment": "center",
-        "tone": "navy",
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
-    },
     "faq_37BkRG": {
       "type": "faq",
       "blocks": {
@@ -244,7 +200,6 @@
     "main",
     "header_custom_liquid_DcAfLy",
     "related",
-    "home_slider_YjgREV",
     "faq_37BkRG"
   ]
 }
