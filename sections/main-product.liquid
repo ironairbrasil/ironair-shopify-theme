@@ -144,6 +144,7 @@
               {% form 'product', product, class: 'product-form', data-ironair-checkout: true, data-product-handle: product.handle, data-product-title: product.title, data-product-image: product_checkout_image_url %}
                 {% unless product.has_only_default_variant %}
                   <select id="ProductSelect-{{ section.id }}" name="id" class="product-variant-native-select" data-product-variant-select aria-label="{{ block.settings.variant_label | default: 'Selecionar variante' }}">
+                    <option value="" selected disabled>{{ block.settings.variant_label | default: 'Selecionar variante' }}</option>
                     {% for variant in product.variants %}
                       {% assign variant_price = variant.price %}
                       {% assign variant_compare_price = variant.compare_at_price %}
@@ -181,7 +182,6 @@
                         data-available="{% if variant.available %}true{% else %}false{% endif %}"
                         data-stock-message="{{ variant_stock_message | strip | escape }}"
                         data-stock-state="{% if variant.available %}in{% else %}out{% endif %}"
-                        {% if variant == current_variant %}selected{% endif %}
                         {% unless variant.available %}disabled{% endunless %}
                       >
                         {{ variant.title }}{% unless variant.available %} - esgotado{% endunless %}
@@ -206,12 +206,12 @@
                             {% endif %}
                             <button
                               type="button"
-                              class="product-variant-button {% if option.selected_value == value %}is-active{% endif %}"
+                              class="product-variant-button"
                               data-variant-option-button
                               data-option-position="{{ option.position }}"
                               data-option-value="{{ value | escape }}"
                               {% if value_variant != blank %}data-variant-id="{{ value_variant.id }}"{% endif %}
-                              aria-pressed="{% if option.selected_value == value %}true{% else %}false{% endif %}"
+                              aria-pressed="false"
                             >
                               {{ value }}
                             </button>
@@ -228,18 +228,22 @@
                   <input type="hidden" name="id" value="{{ current_variant.id }}" data-variant-gid="gid://shopify/ProductVariant/{{ current_variant.id }}" data-price-cents="{{ current_variant.price }}" data-product-title="{{ product.title | escape }}" {% if current_checkout_image %}data-product-image="{{ current_checkout_image | image_url: width: 400 }}"{% endif %}>
                 {% endunless %}
                 {% if block.settings.show_stock %}
-                  {% if current_variant.inventory_management %}
-                    <div class="product-stock-line {% unless current_variant.available %}is-out{% endunless %}" data-product-stock-message data-stock-prefix="{{ block.settings.stock_prefix | escape }}">{{ block.settings.stock_prefix }} {{ current_variant.inventory_quantity }} unidade(s) em estoque</div>
-                  {% elsif current_variant.available %}
-                    <div class="product-stock-line" data-product-stock-message data-stock-prefix="{{ block.settings.stock_prefix | escape }}">{{ block.settings.stock_prefix }} Em estoque</div>
+                  {% if product.has_only_default_variant %}
+                    {% if current_variant.inventory_management %}
+                      <div class="product-stock-line {% unless current_variant.available %}is-out{% endunless %}" data-product-stock-message data-stock-prefix="{{ block.settings.stock_prefix | escape }}">{{ block.settings.stock_prefix }} {{ current_variant.inventory_quantity }} unidade(s) em estoque</div>
+                    {% elsif current_variant.available %}
+                      <div class="product-stock-line" data-product-stock-message data-stock-prefix="{{ block.settings.stock_prefix | escape }}">{{ block.settings.stock_prefix }} Em estoque</div>
+                    {% else %}
+                      <div class="product-stock-line is-out" data-product-stock-message data-stock-prefix="{{ block.settings.stock_prefix | escape }}">Produto esgotado no momento</div>
+                    {% endif %}
                   {% else %}
-                    <div class="product-stock-line is-out" data-product-stock-message data-stock-prefix="{{ block.settings.stock_prefix | escape }}">Produto esgotado no momento</div>
+                    <div class="product-stock-line is-out" data-product-stock-message data-stock-prefix="{{ block.settings.stock_prefix | escape }}">Selecione a voltagem para continuar</div>
                   {% endif %}
                 {% endif %}
-                <button class="btn-hero product-submit" type="submit" data-product-submit data-ironair-checkout {% unless current_variant.available %}disabled{% endunless %}>
+                <button class="btn-hero product-submit" type="submit" data-product-submit data-ironair-checkout {% if product.has_only_default_variant %}{% unless current_variant.available %}disabled{% endunless %}{% else %}disabled{% endif %}>
                   {{ block.settings.button_label }}
                 </button>
-                <button class="btn-hero product-submit product-submit-secondary" type="submit" data-product-submit data-add-to-cart {% unless current_variant.available %}disabled{% endunless %}>
+                <button class="btn-hero product-submit product-submit-secondary" type="submit" data-product-submit data-add-to-cart {% if product.has_only_default_variant %}{% unless current_variant.available %}disabled{% endunless %}{% else %}disabled{% endif %}>
                   Adicionar ao carrinho
                 </button>
               {% endform %}

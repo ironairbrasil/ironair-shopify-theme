@@ -320,6 +320,14 @@
       }
 
       function syncOptionButtons(selectedVariantId) {
+        if (!selectedVariantId) {
+          optionButtons.forEach(function (button) {
+            button.classList.remove('is-active');
+            button.setAttribute('aria-pressed', 'false');
+          });
+          return;
+        }
+
         var selectedVariant = variants.find(function (variant) {
           return String(variant.id) === String(selectedVariantId);
         });
@@ -348,6 +356,19 @@
       function update() {
         var option = select.options[select.selectedIndex];
         if (!option) return;
+        if (!option.value) {
+          if (stockMessage) {
+            stockMessage.textContent = 'Selecione a voltagem para continuar';
+            stockMessage.classList.add('is-out');
+          }
+          submitButtons.forEach(function (submit) {
+            submit.disabled = true;
+          });
+          syncOptionButtons('');
+          syncOptionAvailability();
+          return;
+        }
+
         var hasComparePrice = option.getAttribute('data-has-compare-price') === 'true';
         var isAvailable = option.getAttribute('data-available') === 'true';
         var selectedVariantId = option.value;
