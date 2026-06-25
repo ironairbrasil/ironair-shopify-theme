@@ -201,12 +201,12 @@
           "type": "text",
           "settings": {
             "heading": "A maneira mais fácil de cuidar das suas roupas",
-            "text": "<p>O fluxo de ar quente automático seca, alisa e refresca as roupas sem que você precise usar as mãos. Sem ferro de passar. Sem tábua de passar. Sem ficar esperando.</p>",
+            "text": "<p>O fluxo de ar quente automático seca, alisa e refresca as roupas sem que você precise usar as mãos. Sem ferro de passar, sem tábua de passar, sem riscos de estragar suas roupas.</p>",
             "heading_size": 52,
             "heading_size_mobile": 30,
             "description_size": 16,
             "description_size_mobile": 15,
-            "text_width": "large"
+            "text_width": "small"
           }
         },
         "button_UYdegJ": {
@@ -224,13 +224,14 @@
       "name": "Liquid customizado",
       "settings": {
         "title": "",
-        "custom_liquid": "",
+        "custom_liquid": "<style>\n  /* Ocultar texto placeholder do Hero */\n  .home-slider .placeholder-text,\n  .home-slider [data-placeholder],\n  .home-slider .empty-state,\n  .home-slider .hero-placeholder {\n    display: none !important;\n  }\n  \n  /* Garantir que o vídeo continue visível */\n  .home-slider video,\n  .home-slider .video-container {\n    display: block !important;\n  }\n</style>",
         "padding_top": 48,
         "padding_bottom": 48
       }
     },
     "slider": {
       "type": "home-slider",
+      "custom_css": [],
       "settings": {
         "aria_label": "Hero principal da Iron Air",
         "background_mode": "video",
