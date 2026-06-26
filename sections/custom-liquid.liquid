@@ -1,13 +1,13 @@
 <section class="page page-stack custom-liquid-section shopify-padding-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
   {% if section.settings.title != blank %}
-    <div class="section-head">
+    <div class="section-head section-head--align-{{ section.settings.title_alignment | default: 'left' }}">
       <div>
         <h1>{{ section.settings.title }}</h1>
       </div>
     </div>
   {% endif %}
   {% if section.settings.custom_liquid != blank and section.settings.custom_liquid != '<p>Adicione seu conteúdo.</p>' %}
-    <div class="custom-liquid-content">
+    <div class="custom-liquid-content align-{{ section.settings.custom_liquid_alignment | default: 'left' }}">
       {{ section.settings.custom_liquid }}
     </div>
   {% endif %}
@@ -16,7 +16,7 @@
       {% when 'text' %}
         {% if block.settings.heading != blank or block.settings.text != blank %}
           <div
-            class="custom-liquid-block custom-liquid-text copy-size-{{ block.settings.text_width | default: block.settings.text_size | default: 'large' }}"
+            class="custom-liquid-block custom-liquid-text copy-size-{{ block.settings.text_width | default: block.settings.text_size | default: 'large' }} align-{{ block.settings.text_alignment | default: 'left' }}"
             style="--hero-heading-size: {{ block.settings.heading_size | default: 52 }}px; --hero-heading-mobile-size: {{ block.settings.heading_size_mobile | default: block.settings.heading_size | default: 52 }}px; --hero-text-size: {{ block.settings.description_size | default: 16 }}px; --hero-text-mobile-size: {{ block.settings.description_size_mobile | default: block.settings.description_size | default: 16 }}px;"
             {{ block.shopify_attributes }}
           >
@@ -36,7 +36,7 @@
         {% endif %}
       {% when 'button' %}
         {% if block.settings.label != blank %}
-          <div class="custom-liquid-block" {{ block.shopify_attributes }}>
+          <div class="custom-liquid-block align-{{ block.settings.button_alignment | default: 'left' }}" {{ block.shopify_attributes }}>
             <a class="btn-hero" href="{{ block.settings.url | default: routes.root_url }}">{{ block.settings.label }}</a>
           </div>
         {% endif %}
@@ -48,7 +48,7 @@
         {% endif %}
       {% when 'custom_liquid' %}
         {% if block.settings.custom_liquid != blank %}
-          <div class="custom-liquid-block" {{ block.shopify_attributes }}>
+          <div class="custom-liquid-block align-{{ block.settings.custom_liquid_alignment | default: 'left' }}" {{ block.shopify_attributes }}>
             {{ block.settings.custom_liquid }}
           </div>
         {% endif %}
@@ -70,9 +70,49 @@
       "label": "Título"
     },
     {
+      "type": "select",
+      "id": "title_alignment",
+      "label": "Alinhamento do título",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
       "type": "liquid",
       "id": "custom_liquid",
       "label": "Liquid"
+    },
+    {
+      "type": "select",
+      "id": "custom_liquid_alignment",
+      "label": "Alinhamento do Liquid",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
     },
     {
       "type": "header",
@@ -115,6 +155,26 @@
           "id": "text",
           "label": "Descrição",
           "default": "<p>Use blocos de texto e botão para montar a chamada.</p>"
+        },
+        {
+          "type": "select",
+          "id": "text_alignment",
+          "label": "Alinhamento",
+          "default": "left",
+          "options": [
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
         },
         {
           "type": "range",
@@ -208,6 +268,26 @@
           "type": "url",
           "id": "url",
           "label": "Link"
+        },
+        {
+          "type": "select",
+          "id": "button_alignment",
+          "label": "Alinhamento",
+          "default": "left",
+          "options": [
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
         }
       ]
     },
@@ -230,6 +310,26 @@
           "type": "liquid",
           "id": "custom_liquid",
           "label": "Liquid"
+        },
+        {
+          "type": "select",
+          "id": "custom_liquid_alignment",
+          "label": "Alinhamento",
+          "default": "left",
+          "options": [
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
         }
       ]
     },

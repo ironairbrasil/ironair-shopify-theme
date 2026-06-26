@@ -14,9 +14,23 @@
   display: grid;
   justify-items: center;
   gap: 12px;
-  text-align: center;
   padding: 0 20px;
   margin-bottom: 32px;
+}
+
+.action-videos-head.align-left {
+  justify-items: start;
+  text-align: left;
+}
+
+.action-videos-head.align-center {
+  justify-items: center;
+  text-align: center;
+}
+
+.action-videos-head.align-right {
+  justify-items: end;
+  text-align: right;
 }
 
 .action-videos-title {

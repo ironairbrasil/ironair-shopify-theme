@@ -69,6 +69,26 @@
   margin-bottom: 16px;
 }
 
+.sec-header.sec-header--align-left {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.sec-header.sec-header--align-center {
+  justify-content: center;
+  text-align: center;
+}
+
+.sec-header.sec-header--align-right {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.sec-header.sec-header--align-center .sec-header-copy,
+.sec-header.sec-header--align-right .sec-header-copy {
+  width: 100%;
+}
+
 .sec-header-copy {
   display: flex;
   flex-direction: column;

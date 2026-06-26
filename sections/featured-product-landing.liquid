@@ -5,7 +5,7 @@
 {% assign selected_collection = section.settings.collection | default: collections.all %}
 
 <section class="section-anchor shopify-featured-product shopify-padding-section" id="produtos" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
-  <div class="section-head">
+  <div class="section-head section-head--align-{{ section.settings.title_alignment | default: 'left' }}">
     <div>
       <h2>{{ section.settings.title }}</h2>
     </div>
@@ -38,6 +38,26 @@
       "id": "title",
       "label": "Título",
       "default": "Nossos produtos"
+    },
+    {
+      "type": "select",
+      "id": "title_alignment",
+      "label": "Alinhamento do título",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
     },
     {
       "type": "text",

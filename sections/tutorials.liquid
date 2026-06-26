@@ -5,7 +5,7 @@
     {% assign title_blocks = section.blocks | where: 'type', 'title' %}
     {% assign title_block = title_blocks.first %}
     {% if title_block != blank or section.settings.heading != blank %}
-      <div class="sec-header">
+      <div class="sec-header sec-header--align-{{ title_block.settings.title_alignment | default: 'left' }}">
         <div class="sec-header-copy">
           <div class="sec-title responsive-font-size" style="--font-size-desktop: {{ title_block.settings.title_size | default: 26 }}px; --font-size-mobile: {{ title_block.settings.title_size_mobile | default: title_block.settings.title_size | default: 26 }}px;" {% if title_block != blank %}{{ title_block.shopify_attributes }}{% endif %}>{{ title_block.settings.title | default: section.settings.heading | escape }}</div>
           {% if title_block.settings.subtitle != blank or section.settings.subtitle != blank %}
@@ -98,6 +98,26 @@
           "id": "title",
           "label": "Título",
           "default": "Tutoriais"
+        },
+        {
+          "type": "select",
+          "id": "title_alignment",
+          "label": "Alinhamento",
+          "default": "left",
+          "options": [
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
         },
         {
           "type": "range",

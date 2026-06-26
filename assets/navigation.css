@@ -67,6 +67,27 @@
   box-sizing: border-box;
 }
 
+.header-custom-liquid.align-left {
+  text-align: left;
+}
+
+.header-custom-liquid.align-center {
+  text-align: center;
+}
+
+.header-custom-liquid.align-right {
+  text-align: right;
+}
+
+.header-custom-liquid.align-center > * {
+  margin-inline: auto;
+}
+
+.header-custom-liquid.align-right > * {
+  margin-left: auto;
+  margin-right: 0;
+}
+
 .header-custom-liquid + .header-custom-liquid {
   margin-top: 16px;
 }

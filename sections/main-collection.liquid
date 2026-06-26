@@ -9,7 +9,7 @@
     {% for block in section.blocks %}
       {% case block.type %}
         {% when 'title' %}
-          <div class="sec-header" {{ block.shopify_attributes }}>
+          <div class="sec-header sec-header--align-{{ block.settings.title_alignment | default: 'left' }}" {{ block.shopify_attributes }}>
             <div class="sec-header-copy">
               <div class="sec-title responsive-font-size" style="--font-size-desktop: {{ block.settings.title_size | default: 26 }}px; --font-size-mobile: {{ block.settings.title_size_mobile | default: block.settings.title_size | default: 26 }}px;">{{ block.settings.title | escape }}</div>
               {% if block.settings.show_product_count %}
@@ -96,6 +96,26 @@
           "id": "title",
           "label": "Título",
           "default": "Todos os produtos"
+        },
+        {
+          "type": "select",
+          "id": "title_alignment",
+          "label": "Alinhamento",
+          "default": "left",
+          "options": [
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
         },
         {
           "type": "range",
