@@ -225,7 +225,7 @@
       "settings": {
         "title": "",
         "custom_liquid": "<style>\n  .custom-liquid-section {\n    text-align: center;\n  }\n  \n  .custom-liquid-section .text-block {\n    text-align: center;\n  }\n  \n  .custom-liquid-section .button-block {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n  }\n  \n  .custom-liquid-section .button-block a,\n  .custom-liquid-section .button-block button {\n    margin: 0 auto;\n  }\n</style>",
-        "padding_top": 48,
+        "padding_top": 0,
         "padding_bottom": 48
       }
     },
