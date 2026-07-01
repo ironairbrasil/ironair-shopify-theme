@@ -123,6 +123,63 @@
   list-style-type: decimal;
 }
 
+.product-info-dropdown {
+  padding: 0;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.product-info-dropdown-summary {
+  min-height: 56px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  cursor: pointer;
+  font-family: var(--font-title);
+  font-size: calc(var(--font-size-body) + 2px);
+  font-weight: 800;
+  line-height: 1.2;
+  list-style: none;
+  text-align: left;
+  background: #fff;
+}
+
+.product-info-dropdown-summary::-webkit-details-marker {
+  display: none;
+}
+
+.product-info-dropdown-icon {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 24px;
+  border-radius: 50%;
+  background: var(--dark-green-l);
+  color: var(--dark-green);
+  font-family: var(--font-body);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+  transition: transform 0.18s ease;
+}
+
+.product-info-dropdown[open] .product-info-dropdown-icon {
+  transform: rotate(45deg);
+}
+
+.product-info-dropdown-content {
+  padding: 0 20px 20px;
+  text-align: left;
+}
+
+.product-info-dropdown-content > :first-child {
+  margin-top: 0;
+}
+
 .product-purchase-panel h1 {
   font-family: var(--font-title);
   font-size: var(--font-size-product-title);
