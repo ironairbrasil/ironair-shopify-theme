@@ -4,7 +4,7 @@
   {% assign title_blocks = section.blocks | where: 'type', 'title' %}
   {% assign title_block = title_blocks.first %}
   {% if title_block != blank or section.settings.title != blank %}
-    <div class="section-head section-head--align-{{ title_block.settings.title_alignment | default: 'left' }}">
+    <div class="section-head">
       <div>
         <h2 class="responsive-font-size" style="--font-size-desktop: {{ title_block.settings.title_size | default: 30 }}px; --font-size-mobile: {{ title_block.settings.title_size_mobile | default: title_block.settings.title_size | default: 30 }}px;" {% if title_block != blank %}{{ title_block.shopify_attributes }}{% endif %}>{{ title_block.settings.title | default: section.settings.title }}</h2>
       </div>
@@ -72,26 +72,6 @@
           "id": "title",
           "label": "Título",
           "default": "Como funciona"
-        },
-        {
-          "type": "select",
-          "id": "title_alignment",
-          "label": "Alinhamento",
-          "default": "left",
-          "options": [
-            {
-              "value": "left",
-              "label": "Esquerda"
-            },
-            {
-              "value": "center",
-              "label": "Centro"
-            },
-            {
-              "value": "right",
-              "label": "Direita"
-            }
-          ]
         },
         {
           "type": "range",

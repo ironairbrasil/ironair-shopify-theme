@@ -36,13 +36,13 @@
 
       {% when 'custom_liquid' %}
         {% if block.settings.custom_liquid != blank %}
-          <div class="header-custom-liquid align-{{ block.settings.custom_liquid_alignment | default: 'left' }}" {{ block.shopify_attributes }}>
+          <div class="header-custom-liquid" {{ block.shopify_attributes }}>
             {{ block.settings.custom_liquid }}
           </div>
         {% endif %}
 
       {% when 'text' %}
-        <div class="header-custom-liquid align-{{ block.settings.text_alignment | default: 'left' }}" {{ block.shopify_attributes }}>
+        <div class="header-custom-liquid" {{ block.shopify_attributes }}>
           {{ block.settings.text }}
         </div>
 
@@ -55,7 +55,7 @@
 
       {% when 'button' %}
         {% if block.settings.label != blank %}
-          <div class="header-custom-liquid align-{{ block.settings.button_alignment | default: 'left' }}" {{ block.shopify_attributes }}>
+          <div class="header-custom-liquid" {{ block.shopify_attributes }}>
             <a class="btn-hero" href="{{ block.settings.url | default: routes.root_url }}">{{ block.settings.label }}</a>
           </div>
         {% endif %}
@@ -152,26 +152,6 @@
           "type": "liquid",
           "id": "custom_liquid",
           "label": "Liquid"
-        },
-        {
-          "type": "select",
-          "id": "custom_liquid_alignment",
-          "label": "Alinhamento",
-          "default": "left",
-          "options": [
-            {
-              "value": "left",
-              "label": "Esquerda"
-            },
-            {
-              "value": "center",
-              "label": "Centro"
-            },
-            {
-              "value": "right",
-              "label": "Direita"
-            }
-          ]
         }
       ]
     },
@@ -184,26 +164,6 @@
           "id": "text",
           "label": "Texto",
           "default": "<p>Texto</p>"
-        },
-        {
-          "type": "select",
-          "id": "text_alignment",
-          "label": "Alinhamento",
-          "default": "left",
-          "options": [
-            {
-              "value": "left",
-              "label": "Esquerda"
-            },
-            {
-              "value": "center",
-              "label": "Centro"
-            },
-            {
-              "value": "right",
-              "label": "Direita"
-            }
-          ]
         }
       ]
     },
@@ -237,26 +197,6 @@
           "type": "url",
           "id": "url",
           "label": "Link"
-        },
-        {
-          "type": "select",
-          "id": "button_alignment",
-          "label": "Alinhamento",
-          "default": "left",
-          "options": [
-            {
-              "value": "left",
-              "label": "Esquerda"
-            },
-            {
-              "value": "center",
-              "label": "Centro"
-            },
-            {
-              "value": "right",
-              "label": "Direita"
-            }
-          ]
         }
       ]
     },

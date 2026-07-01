@@ -6,7 +6,7 @@
   {% assign title_block = title_blocks.first %}
   {% assign video_blocks = section.blocks | where: 'type', 'video' %}
   <div class="action-videos-inner">
-    <div class="action-videos-head align-{{ title_block.settings.title_alignment | default: 'center' }}">
+    <div class="action-videos-head">
       {% if title_block != blank or section.settings.title != blank %}
         <h2 class="action-videos-title responsive-font-size" style="--font-size-desktop: {{ title_block.settings.title_size | default: 30 }}px; --font-size-mobile: {{ title_block.settings.title_size_mobile | default: title_block.settings.title_size | default: 30 }}px;" {% if title_block != blank %}{{ title_block.shopify_attributes }}{% endif %}>{{ title_block.settings.title | default: section.settings.title | escape }}</h2>
       {% endif %}
@@ -135,26 +135,6 @@
           "id": "title",
           "label": "Título",
           "default": "Veja o Iron Air em ação"
-        },
-        {
-          "type": "select",
-          "id": "title_alignment",
-          "label": "Alinhamento",
-          "default": "center",
-          "options": [
-            {
-              "value": "left",
-              "label": "Esquerda"
-            },
-            {
-              "value": "center",
-              "label": "Centro"
-            },
-            {
-              "value": "right",
-              "label": "Direita"
-            }
-          ]
         },
         {
           "type": "range",

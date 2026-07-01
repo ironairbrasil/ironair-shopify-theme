@@ -158,7 +158,6 @@
           "type": "title",
           "settings": {
             "title": "Nossos produtos",
-            "title_alignment": "left",
             "title_size": 30,
             "title_size_mobile": 30,
             "subtitle": "",
@@ -192,51 +191,40 @@
       "settings": {
         "collection": "",
         "padding_top": 48,
-        "padding_bottom": 0
-      }
-    },
-    "custom_liquid_izrydp": {
-      "type": "custom-liquid",
-      "blocks": {
-        "text_M3MWiC": {
-          "type": "text",
-          "settings": {
-            "heading": "A maneira mais fácil de cuidar das suas roupas",
-            "text": "<p>O fluxo de ar quente automático seca, alisa e refresca as roupas sem que você precise usar as mãos. Sem ferro de passar, sem tábua de passar, sem riscos de estragar suas roupas.</p>",
-            "text_alignment": "center",
-            "heading_size": 45,
-            "heading_size_mobile": 30,
-            "description_size": 16,
-            "description_size_mobile": 15,
-            "text_width": "small"
-          }
-        },
-        "button_UYdegJ": {
-          "type": "button",
-          "settings": {
-            "label": "Ver como funciona",
-            "url": "https://ironair.com.br/products/iron-air",
-            "button_alignment": "center"
-          }
-        }
-      },
-      "block_order": [
-        "text_M3MWiC",
-        "button_UYdegJ"
-      ],
-      "name": "Liquid customizado",
-      "settings": {
-        "title": "",
-        "title_alignment": "center",
-        "custom_liquid": "",
-        "custom_liquid_alignment": "center",
-        "padding_top": 0,
         "padding_bottom": 48
       }
     },
     "slider": {
       "type": "home-slider",
-      "custom_css": [],
+      "blocks": {
+        "text_pjPTid": {
+          "type": "text",
+          "settings": {
+            "heading": "A maneira mais fácil de cuidar das suas roupas",
+            "text": "<p>O fluxo de ar quente automático seca, alisa e refresca as roupas sem que você precise usar as mãos. Sem ferro de passar. Sem tábua de passar. Sem ficar esperando.</p>",
+            "heading_size": 52,
+            "heading_size_mobile": 52,
+            "description_size": 16,
+            "description_size_mobile": 16,
+            "text_width": "large"
+          }
+        },
+        "button_DTnD6g": {
+          "type": "button",
+          "settings": {
+            "label": "Ver como funciona",
+            "label_size": 14,
+            "label_size_mobile": 14,
+            "url": "",
+            "style": "primary",
+            "new_tab": false
+          }
+        }
+      },
+      "block_order": [
+        "text_pjPTid",
+        "button_DTnD6g"
+      ],
       "settings": {
         "aria_label": "Hero principal da Iron Air",
         "background_mode": "video",
@@ -257,12 +245,10 @@
           "type": "title",
           "settings": {
             "title": "Veja o Iron Air em ação",
-            "title_alignment": "center",
             "title_size": 30,
             "title_size_mobile": 30,
             "subtitle": "Vídeos rápidos mostrando o produto no dia a dia.",
-            "subtitle_size": 15,
-            "subtitle_size_mobile": 15
+            "subtitle_size": 15
           }
         },
         "video_1": {
@@ -335,9 +321,7 @@
           "type": "title",
           "settings": {
             "title": "O que dizem os clientes",
-            "title_alignment": "left",
-            "title_size": 30,
-            "title_size_mobile": 30
+            "title_size": 30
           }
         },
         "review_gKLEY3": {
@@ -345,7 +329,7 @@
           "settings": {
             "stars": "★★★★★",
             "text": "Comprei sem acreditar muito porque parecia aquelas coisas que prometem demais. Testei numa camisa social e me surpreendeu.",
-            "name": "Roberto Junior- Pedro Leopoldo M.G"
+            "name": "Roberto"
           }
         },
         "review_HBCJ8n": {
@@ -353,7 +337,7 @@
           "settings": {
             "stars": "★★★★★",
             "text": "Tenho filho pequeno e roupa acumula. Antes era um sofrimento montar tábua e ferro. Agora coloco e vou fazendo outras coisas.",
-            "name": "Sonya Capri-  São Paulo S.P"
+            "name": "Sonya"
           }
         },
         "review_h8JLFR": {
@@ -361,7 +345,7 @@
           "settings": {
             "stars": "★★★★★",
             "text": "Pra quem odeia passar roupa igual eu, virou rotina aqui em casa. Coloco enquanto tomo banho e a roupa já sai pronta. Só precisa pegar o jeito de prender a roupa direito.",
-            "name": "Gustavo Santos - Curitiba PR"
+            "name": "Gustavo"
           }
         },
         "review_L6qjDE": {
@@ -369,7 +353,7 @@
           "settings": {
             "stars": "★★★★",
             "text": "Gostei muito, passa bem as roupas, mas minha jaqueta não passou bem, acredito por ser muito grossa e ser dificil passar até no ferro tradicional.",
-            "name": "Jeferson de Jesus - Belo Horizonte M.G"
+            "name": "Jeferson"
           }
         }
       },
@@ -394,9 +378,7 @@
           "type": "title",
           "settings": {
             "title": "Perguntas frequentes",
-            "title_alignment": "left",
-            "title_size": 30,
-            "title_size_mobile": 30
+            "title_size": 30
           }
         },
         "item_UmT3c6": {
@@ -477,7 +459,6 @@
     "slides_hDX8yJ",
     "trust",
     "products",
-    "custom_liquid_izrydp",
     "slider",
     "action_videos",
     "reviews",
