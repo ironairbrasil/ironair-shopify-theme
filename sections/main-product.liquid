@@ -326,12 +326,18 @@
 
   {% for block in section.blocks %}
     {% if block.type == 'description' %}
-      {% assign product_description_html = product.description %}
-      {% if block.settings.description_override != blank %}
-        {% assign product_description_html = block.settings.description_override %}
-      {% endif %}
+      {% capture product_description_html %}
+        {% if block.settings.description_override != blank %}
+          {{ block.settings.description_override }}
+        {% elsif product.metafields.custom.description != blank %}
+          {{ product.metafields.custom.description | metafield_tag }}
+        {% else %}
+          {{ product.description }}
+        {% endif %}
+      {% endcapture %}
 
-      {% if product_description_html != blank %}
+      {% assign product_description_html_stripped = product_description_html | strip %}
+      {% if product_description_html_stripped != blank %}
         <div class="product-description-section">
           <div
             class="product-description-card product-description-card--{{ block.settings.width }} product-description-card--align-{{ block.settings.alignment }} {% if block.settings.show_background %}has-background{% endif %} {% if block.settings.show_border %}has-border{% endif %}"
@@ -343,6 +349,32 @@
             {% endif %}
             <div class="product-detail-copy">
               {{ product_description_html }}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% elsif block.type == 'specifications' %}
+      {% capture product_specifications_html %}
+        {% if block.settings.specifications_override != blank %}
+          {{ block.settings.specifications_override }}
+        {% elsif product.metafields.custom.specifications != blank %}
+          {{ product.metafields.custom.specifications | metafield_tag }}
+        {% endif %}
+      {% endcapture %}
+
+      {% assign product_specifications_html_stripped = product_specifications_html | strip %}
+      {% if product_specifications_html_stripped != blank %}
+        <div class="product-description-section">
+          <div
+            class="product-description-card product-description-card--{{ block.settings.width }} product-description-card--align-{{ block.settings.alignment }} {% if block.settings.show_background %}has-background{% endif %} {% if block.settings.show_border %}has-border{% endif %}"
+            style="--description-padding-top: {{ block.settings.padding_top }}px; --description-padding-bottom: {{ block.settings.padding_bottom }}px; --description-padding-left: {{ block.settings.padding_left }}px; --description-padding-right: {{ block.settings.padding_right }}px; --description-border-radius: {{ block.settings.border_radius }}px;"
+            {{ block.shopify_attributes }}
+          >
+            {% if block.settings.heading != blank %}
+              <h2>{{ block.settings.heading | escape }}</h2>
+            {% endif %}
+            <div class="product-detail-copy">
+              {{ product_specifications_html }}
             </div>
           </div>
         </div>
@@ -565,6 +597,123 @@
           "id": "description_override",
           "label": "Texto",
           "info": "Deixe vazio para usar a descrição do produto."
+        },
+        {
+          "type": "paragraph",
+          "content": "Se existir, o metafield custom.description substitui a descrição padrão do produto."
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "width",
+          "label": "Largura",
+          "default": "fill",
+          "options": [
+            { "value": "fit", "label": "Ajustar" },
+            { "value": "fill", "label": "Preencher" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "alignment",
+          "label": "Alinhamento",
+          "default": "left",
+          "options": [
+            { "value": "left", "label": "Esquerda" },
+            { "value": "center", "label": "Centro" },
+            { "value": "right", "label": "Direita" }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Aparência"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_background",
+          "label": "Plano de fundo",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "show_border",
+          "label": "Borda",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "border_radius",
+          "label": "Raio do canto",
+          "min": 0,
+          "max": 32,
+          "step": 2,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Preenchimento"
+        },
+        {
+          "type": "range",
+          "id": "padding_top",
+          "label": "Superior",
+          "min": 0,
+          "max": 80,
+          "step": 4,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "padding_bottom",
+          "label": "Inferior",
+          "min": 0,
+          "max": 80,
+          "step": 4,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "padding_left",
+          "label": "Esquerda",
+          "min": 0,
+          "max": 80,
+          "step": 4,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "padding_right",
+          "label": "Direita",
+          "min": 0,
+          "max": 80,
+          "step": 4,
+          "unit": "px",
+          "default": 0
+        }
+      ]
+    },
+    {
+      "type": "specifications",
+      "name": "Especificações",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Título",
+          "default": "Especificações técnicas"
+        },
+        {
+          "type": "richtext",
+          "id": "specifications_override",
+          "label": "Texto",
+          "info": "Deixe vazio para usar o metafield custom.specifications do produto."
         },
         {
           "type": "header",

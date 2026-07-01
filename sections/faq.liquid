@@ -1,27 +1,60 @@
 {{ 'faq.css' | asset_url | stylesheet_tag }}
-{{ 'faq.js' | asset_url | script_tag }}
+<script src="{{ 'faq.js' | asset_url }}" defer="defer"></script>
+
+{% assign product_faq_count = 0 %}
+{% if product != blank and section.settings.use_product_faq %}
+  {% for index in (1..10) %}
+    {% assign question_key = 'faq_' | append: index | append: '_question' %}
+    {% assign answer_key = 'faq_' | append: index | append: '_answer' %}
+    {% assign question_metafield = product.metafields.custom[question_key] %}
+    {% assign answer_metafield = product.metafields.custom[answer_key] %}
+    {% if question_metafield != blank and answer_metafield != blank %}
+      {% assign product_faq_count = product_faq_count | plus: 1 %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
 
 <section class="faq-section section-anchor shopify-padding-section" id="faq" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
   {% assign title_blocks = section.blocks | where: 'type', 'title' %}
   {% assign title_block = title_blocks.first %}
   {% if title_block != blank or section.settings.title != blank %}
-    <div class="section-head section-head--align-{{ title_block.settings.title_alignment | default: 'left' }}">
+    <div class="section-head">
       <div>
         <h2 class="responsive-font-size" style="--font-size-desktop: {{ title_block.settings.title_size | default: 30 }}px; --font-size-mobile: {{ title_block.settings.title_size_mobile | default: title_block.settings.title_size | default: 30 }}px;" {% if title_block != blank %}{{ title_block.shopify_attributes }}{% endif %}>{{ title_block.settings.title | default: section.settings.title }}</h2>
       </div>
     </div>
   {% endif %}
   <div class="faq-cols">
-    {% for block in section.blocks %}
-      {% if block.type == 'title' %}{% continue %}{% endif %}
-      <div class="faq-item" {{ block.shopify_attributes }}>
-        <button type="button" class="faq-q" data-faq-toggle>
-          {{ block.settings.question }}
-          <span class="faq-toggle">+</span>
-        </button>
-        <div class="faq-a">{{ block.settings.answer }}</div>
-      </div>
-    {% endfor %}
+    {% if product_faq_count > 0 %}
+      {% for index in (1..10) %}
+        {% assign question_key = 'faq_' | append: index | append: '_question' %}
+        {% assign answer_key = 'faq_' | append: index | append: '_answer' %}
+        {% assign question_metafield = product.metafields.custom[question_key] %}
+        {% assign answer_metafield = product.metafields.custom[answer_key] %}
+        {% if question_metafield != blank and answer_metafield != blank %}
+          <div class="faq-item">
+            <button type="button" class="faq-q" data-faq-toggle>
+              {{ question_metafield.value | default: question_metafield }}
+              <span class="faq-toggle">+</span>
+            </button>
+            <div class="faq-a">
+              {{ answer_metafield | metafield_tag }}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      {% for block in section.blocks %}
+        {% if block.type == 'title' %}{% continue %}{% endif %}
+        <div class="faq-item" {{ block.shopify_attributes }}>
+          <button type="button" class="faq-q" data-faq-toggle>
+            {{ block.settings.question }}
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-a">{{ block.settings.answer }}</div>
+        </div>
+      {% endfor %}
+    {% endif %}
   </div>
 </section>
 
@@ -29,6 +62,13 @@
 {
   "name": "FAQ",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "use_product_faq",
+      "label": "Usar FAQ cadastrado no produto",
+      "default": true,
+      "info": "Procura metafields custom.faq_1_question/custom.faq_1_answer até custom.faq_10_question/custom.faq_10_answer. Se não encontrar, usa os blocos abaixo."
+    },
     {
       "type": "header",
       "content": "Preenchimento"
@@ -65,26 +105,6 @@
           "id": "title",
           "label": "Título",
           "default": "Perguntas frequentes"
-        },
-        {
-          "type": "select",
-          "id": "title_alignment",
-          "label": "Alinhamento",
-          "default": "left",
-          "options": [
-            {
-              "value": "left",
-              "label": "Esquerda"
-            },
-            {
-              "value": "center",
-              "label": "Centro"
-            },
-            {
-              "value": "right",
-              "label": "Direita"
-            }
-          ]
         },
         {
           "type": "range",
