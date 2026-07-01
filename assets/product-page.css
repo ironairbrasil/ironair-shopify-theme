@@ -2,12 +2,13 @@
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(320px, .95fr);
   gap: 28px;
-  align-items: start;
+  align-items: stretch;
 }
 
 .product-media-column {
   display: grid;
   gap: 16px;
+  align-self: stretch;
 }
 
 .product-gallery,
@@ -20,10 +21,16 @@
 
 .product-gallery {
   padding: 18px;
+  height: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .product-gallery-main {
-  aspect-ratio: 1.12 / 1;
+  aspect-ratio: 1 / 1;
+  flex: 1;
+  min-height: 480px;
   display: grid;
   place-items: center;
   background: #f8f8f8;
@@ -76,6 +83,10 @@
 }
 
 .product-description-section {
+  margin-top: 20px;
+}
+
+.product-description-section + .product-description-section {
   margin-top: 16px;
 }
 
@@ -128,7 +139,8 @@
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
-  margin-bottom: 12px;
+  margin-bottom: 0;
+  background: #fff;
 }
 
 .product-info-dropdown-summary {
@@ -139,7 +151,11 @@
   align-items: center;
   cursor: pointer;
   font-size: var(--font-size-body);
-  font-weight: 700;
+  font-weight: 900;
+  text-transform: uppercase;
+  background: var(--dark-green);
+  color: #fff;
+  letter-spacing: 0;
   transition: background 0.15s;
   gap: 12px;
   list-style: none;
@@ -151,32 +167,32 @@
 }
 
 .product-info-dropdown-summary:hover {
-  background: #fafafa;
+  background: var(--dark-green-d);
 }
 
 .product-info-dropdown[open] .product-info-dropdown-summary {
-  background: var(--dark-green-l);
-  color: var(--dark-green);
+  background: var(--dark-green);
+  color: #fff;
 }
 
 .product-info-dropdown-icon {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: var(--border);
+  background: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: calc(var(--font-size-paragraph) + 1px);
   flex-shrink: 0;
   transition: all 0.2s;
-  color: var(--mid);
+  color: var(--dark-green);
   line-height: 1;
 }
 
 .product-info-dropdown[open] .product-info-dropdown-icon {
-  background: #e02020;
-  color: #fff;
+  background: #fff;
+  color: var(--dark-green);
   transform: rotate(45deg);
 }
 
