@@ -406,6 +406,7 @@
           "settings": {
             "block_text_alignment": "inherit",
             "block_mobile_text_alignment": "inherit",
+            "video": "shopify://files/videos/REELS 2.mp4",
             "title": "Mais praticidade",
             "caption": "Sem ferro e sem tábua",
             "product": "",
@@ -417,6 +418,7 @@
           "settings": {
             "block_text_alignment": "inherit",
             "block_mobile_text_alignment": "inherit",
+            "video": "shopify://files/videos/REELS 1.mp4",
             "title": "Iron Air em ação",
             "caption": "Veja como funciona",
             "product": "",
