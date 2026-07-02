@@ -1,6 +1,6 @@
 {{ 'footer.css' | asset_url | stylesheet_tag }}
 
-<footer id="contato" class="theme-text-align-{{ section.settings.text_alignment | default: 'left' }}{% if section.settings.hide_on_mobile %} theme-hide-mobile{% endif %}{% if section.settings.hide_on_desktop %} theme-hide-desktop{% endif %}">
+<footer id="contato" class="theme-text-align-{{ section.settings.text_alignment | default: 'left' }} theme-mobile-text-align-{{ section.settings.mobile_text_alignment | default: section.settings.text_alignment | default: 'left' }} theme-content-align-{{ section.settings.content_alignment | default: section.settings.text_alignment | default: 'left' }} theme-mobile-content-align-{{ section.settings.mobile_content_alignment | default: section.settings.content_alignment | default: section.settings.mobile_text_alignment | default: section.settings.text_alignment | default: 'left' }}{% if section.settings.hide_on_mobile %} theme-hide-mobile{% endif %}{% if section.settings.hide_on_desktop %} theme-hide-desktop{% endif %}">
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
@@ -40,7 +40,7 @@
                 {% endif %}
               {% endif %}
 
-              <a href="{{ block.settings.url }}" class="f-social-link f-social-{{ social_icon }}" target="_blank" rel="noreferrer" aria-label="{{ social_label }}" {{ block.shopify_attributes }}>
+              <a href="{{ block.settings.url }}" class="f-social-link f-social-{{ social_icon }} theme-block-align-{{ block.settings.block_text_alignment | default: 'inherit' }} theme-block-mobile-align-{{ block.settings.block_mobile_text_alignment | default: block.settings.block_text_alignment | default: 'inherit' }}" target="_blank" rel="noreferrer" aria-label="{{ social_label }}" {{ block.shopify_attributes }}>
                 {% case social_icon %}
                   {% when 'instagram' %}
                     <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.4" cy="6.6" r="1.2" fill="currentColor" stroke="none"/></svg>
@@ -110,7 +110,67 @@
     {
       "type": "select",
       "id": "text_alignment",
-      "label": "Alinhamento dos textos",
+      "label": "Alinhamento dos textos no desktop",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_text_alignment",
+      "label": "Alinhamento dos textos no mobile",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Alinhamento do conteúdo no desktop",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_content_alignment",
+      "label": "Alinhamento do conteúdo no mobile",
       "default": "left",
       "options": [
         {
@@ -189,6 +249,58 @@
       "type": "social",
       "name": "Rede social",
       "settings": [
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "block_text_alignment",
+          "label": "Alinhamento do texto no desktop",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "block_mobile_text_alignment",
+          "label": "Alinhamento do texto no mobile",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
         {
           "type": "select",
           "id": "platform",

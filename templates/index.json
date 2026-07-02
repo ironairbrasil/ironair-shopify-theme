@@ -93,6 +93,9 @@
         "speed": 4,
         "padding_top": 0,
         "padding_bottom": 0,
+        "mobile_text_alignment": "center",
+        "content_alignment": "center",
+        "mobile_content_alignment": "center",
         "hide_on_mobile": false,
         "hide_on_desktop": false
       }
@@ -149,7 +152,6 @@
         "item_9AKP8H"
       ],
       "settings": {
-        "text_alignment": "left",
         "padding_top": 20,
         "padding_bottom": 20,
         "hide_on_mobile": false,
@@ -194,10 +196,9 @@
       ],
       "name": "Galeria de Produtos",
       "settings": {
-        "text_alignment": "left",
         "collection": "",
         "padding_top": 48,
-        "padding_bottom": 0,
+        "padding_bottom": 48,
         "hide_on_mobile": false,
         "hide_on_desktop": false
       }
@@ -231,36 +232,22 @@
       ],
       "name": "Liquid customizado",
       "settings": {
-        "text_alignment": "center",
         "title": "",
         "custom_liquid": "",
         "padding_top": 48,
         "padding_bottom": 48,
+        "text_alignment": "center",
         "hide_on_mobile": false,
-        "hide_on_desktop": true
+        "hide_on_desktop": false,
+        "mobile_text_alignment": "center",
+        "content_alignment": "center",
+        "mobile_content_alignment": "center"
       }
     },
     "slider": {
       "type": "home-slider",
-      "settings": {
-        "aria_label": "Hero principal da Iron Air",
-        "background_mode": "video",
-        "video": "shopify://files/videos/site.mp4",
-        "height": "media",
-        "mobile_height": "media",
-        "content_position": "center",
-        "text_alignment": "center",
-        "tone": "navy",
-        "padding_top": 0,
-        "padding_bottom": 0,
-        "hide_on_mobile": false,
-        "hide_on_desktop": true
-      }
-    },
-    "home_slider_63xQTP": {
-      "type": "home-slider",
       "blocks": {
-        "text_VhWpdh": {
+        "text_pjPTid": {
           "type": "text",
           "settings": {
             "heading": "A maneira mais fácil de cuidar das suas roupas",
@@ -272,7 +259,7 @@
             "text_width": "large"
           }
         },
-        "button_QgR84V": {
+        "button_DTnD6g": {
           "type": "button",
           "settings": {
             "label": "Ver como funciona",
@@ -285,8 +272,8 @@
         }
       },
       "block_order": [
-        "text_VhWpdh",
-        "button_QgR84V"
+        "text_pjPTid",
+        "button_DTnD6g"
       ],
       "settings": {
         "aria_label": "Hero principal da Iron Air",
@@ -299,7 +286,10 @@
         "tone": "navy",
         "padding_top": 0,
         "padding_bottom": 0,
-        "hide_on_mobile": true,
+        "mobile_text_alignment": "center",
+        "content_alignment": "center",
+        "mobile_content_alignment": "center",
+        "hide_on_mobile": false,
         "hide_on_desktop": false
       }
     },
@@ -313,8 +303,7 @@
             "title_size": 30,
             "title_size_mobile": 30,
             "subtitle": "Vídeos rápidos mostrando o produto no dia a dia.",
-            "subtitle_size": 15,
-            "subtitle_size_mobile": 15
+            "subtitle_size": 15
           }
         },
         "video_1": {
@@ -375,7 +364,6 @@
         "video_5"
       ],
       "settings": {
-        "text_alignment": "left",
         "product": "",
         "padding_top": 56,
         "padding_bottom": 56,
@@ -390,8 +378,7 @@
           "type": "title",
           "settings": {
             "title": "O que dizem os clientes",
-            "title_size": 30,
-            "title_size_mobile": 30
+            "title_size": 30
           }
         },
         "review_gKLEY3": {
@@ -435,7 +422,6 @@
         "review_L6qjDE"
       ],
       "settings": {
-        "text_alignment": "left",
         "rating": "4.8",
         "count": "20",
         "padding_top": 48,
@@ -451,8 +437,7 @@
           "type": "title",
           "settings": {
             "title": "Perguntas frequentes",
-            "title_size": 30,
-            "title_size_mobile": 30
+            "title_size": 30
           }
         },
         "item_UmT3c6": {
@@ -524,8 +509,6 @@
         "item_jpjKQ6"
       ],
       "settings": {
-        "text_alignment": "left",
-        "use_product_faq": true,
         "padding_top": 48,
         "padding_bottom": 48,
         "hide_on_mobile": false,
@@ -539,7 +522,6 @@
     "products",
     "custom_liquid_izrydp",
     "slider",
-    "home_slider_63xQTP",
     "action_videos",
     "reviews",
     "faq"

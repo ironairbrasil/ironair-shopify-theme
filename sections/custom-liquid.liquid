@@ -1,4 +1,4 @@
-<section class="page page-stack custom-liquid-section shopify-padding-section theme-text-align-{{ section.settings.text_alignment | default: 'left' }}{% if section.settings.hide_on_mobile %} theme-hide-mobile{% endif %}{% if section.settings.hide_on_desktop %} theme-hide-desktop{% endif %}" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
+<section class="page page-stack custom-liquid-section shopify-padding-section theme-text-align-{{ section.settings.text_alignment | default: 'left' }} theme-mobile-text-align-{{ section.settings.mobile_text_alignment | default: section.settings.text_alignment | default: 'left' }} theme-content-align-{{ section.settings.content_alignment | default: section.settings.text_alignment | default: 'left' }} theme-mobile-content-align-{{ section.settings.mobile_content_alignment | default: section.settings.content_alignment | default: section.settings.mobile_text_alignment | default: section.settings.text_alignment | default: 'left' }}{% if section.settings.hide_on_mobile %} theme-hide-mobile{% endif %}{% if section.settings.hide_on_desktop %} theme-hide-desktop{% endif %}" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
   {% if section.settings.title != blank %}
     <div class="section-head">
       <div>
@@ -16,7 +16,7 @@
       {% when 'text' %}
         {% if block.settings.heading != blank or block.settings.text != blank %}
           <div
-            class="custom-liquid-block custom-liquid-text copy-size-{{ block.settings.text_width | default: block.settings.text_size | default: 'large' }}"
+            class="custom-liquid-block custom-liquid-text copy-size-{{ block.settings.text_width | default: block.settings.text_size | default: 'large' }} theme-block-align-{{ block.settings.block_text_alignment | default: 'inherit' }} theme-block-mobile-align-{{ block.settings.block_mobile_text_alignment | default: block.settings.block_text_alignment | default: 'inherit' }}"
             style="--hero-heading-size: {{ block.settings.heading_size | default: 52 }}px; --hero-heading-mobile-size: {{ block.settings.heading_size_mobile | default: block.settings.heading_size | default: 52 }}px; --hero-text-size: {{ block.settings.description_size | default: 16 }}px; --hero-text-mobile-size: {{ block.settings.description_size_mobile | default: block.settings.description_size | default: 16 }}px;"
             {{ block.shopify_attributes }}
           >
@@ -30,25 +30,25 @@
         {% endif %}
       {% when 'image' %}
         {% if block.settings.image != blank %}
-          <div class="custom-liquid-block custom-liquid-image" {{ block.shopify_attributes }}>
+          <div class="custom-liquid-block custom-liquid-image theme-block-align-{{ block.settings.block_text_alignment | default: 'inherit' }} theme-block-mobile-align-{{ block.settings.block_mobile_text_alignment | default: block.settings.block_text_alignment | default: 'inherit' }}" {{ block.shopify_attributes }}>
             {{ block.settings.image | image_url: width: 1600 | image_tag: loading: 'lazy', alt: block.settings.alt }}
           </div>
         {% endif %}
       {% when 'button' %}
         {% if block.settings.label != blank %}
-          <div class="custom-liquid-block" {{ block.shopify_attributes }}>
+          <div class="custom-liquid-block theme-block-align-{{ block.settings.block_text_alignment | default: 'inherit' }} theme-block-mobile-align-{{ block.settings.block_mobile_text_alignment | default: block.settings.block_text_alignment | default: 'inherit' }}" {{ block.shopify_attributes }}>
             <a class="btn-hero" href="{{ block.settings.url | default: routes.root_url }}">{{ block.settings.label }}</a>
           </div>
         {% endif %}
       {% when 'video' %}
         {% if block.settings.video_url != blank %}
-          <div class="custom-liquid-block custom-liquid-video" {{ block.shopify_attributes }}>
+          <div class="custom-liquid-block custom-liquid-video theme-block-align-{{ block.settings.block_text_alignment | default: 'inherit' }} theme-block-mobile-align-{{ block.settings.block_mobile_text_alignment | default: block.settings.block_text_alignment | default: 'inherit' }}" {{ block.shopify_attributes }}>
             <video controls src="{{ block.settings.video_url }}"></video>
           </div>
         {% endif %}
       {% when 'custom_liquid' %}
         {% if block.settings.custom_liquid != blank %}
-          <div class="custom-liquid-block" {{ block.shopify_attributes }}>
+          <div class="custom-liquid-block theme-block-align-{{ block.settings.block_text_alignment | default: 'inherit' }} theme-block-mobile-align-{{ block.settings.block_mobile_text_alignment | default: block.settings.block_text_alignment | default: 'inherit' }}" {{ block.shopify_attributes }}>
             {{ block.settings.custom_liquid }}
           </div>
         {% endif %}
@@ -71,7 +71,67 @@
     {
       "type": "select",
       "id": "text_alignment",
-      "label": "Alinhamento dos textos",
+      "label": "Alinhamento dos textos no desktop",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_text_alignment",
+      "label": "Alinhamento dos textos no mobile",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Alinhamento do conteúdo no desktop",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_content_alignment",
+      "label": "Alinhamento do conteúdo no mobile",
       "default": "left",
       "options": [
         {
@@ -144,6 +204,58 @@
       "type": "text",
       "name": "Texto",
       "settings": [
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "block_text_alignment",
+          "label": "Alinhamento do texto no desktop",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "block_mobile_text_alignment",
+          "label": "Alinhamento do texto no mobile",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
         {
           "type": "text",
           "id": "heading",
@@ -239,6 +351,58 @@
       "name": "Botão",
       "settings": [
         {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "block_text_alignment",
+          "label": "Alinhamento do texto no desktop",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "block_mobile_text_alignment",
+          "label": "Alinhamento do texto no mobile",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
+        {
           "type": "text",
           "id": "label",
           "label": "Texto",
@@ -278,6 +442,58 @@
       "name": "Benefícios do produto",
       "settings": [
         {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "block_text_alignment",
+          "label": "Alinhamento do texto no desktop",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "block_mobile_text_alignment",
+          "label": "Alinhamento do texto no mobile",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
+        {
           "type": "text",
           "id": "benefit_1",
           "label": "Benefício 1",
@@ -301,6 +517,58 @@
       "name": "Badge do produto",
       "settings": [
         {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "block_text_alignment",
+          "label": "Alinhamento do texto no desktop",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "block_mobile_text_alignment",
+          "label": "Alinhamento do texto no mobile",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
+        {
           "type": "text",
           "id": "badge_text",
           "label": "Texto personalizado",
@@ -312,6 +580,58 @@
       "type": "product_vendor",
       "name": "Marca do produto",
       "settings": [
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "block_text_alignment",
+          "label": "Alinhamento do texto no desktop",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "block_mobile_text_alignment",
+          "label": "Alinhamento do texto no mobile",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
         {
           "type": "text",
           "id": "text",
@@ -331,6 +651,58 @@
       "type": "product_rating",
       "name": "Avaliações",
       "settings": [
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "block_text_alignment",
+          "label": "Alinhamento do texto no desktop",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "block_mobile_text_alignment",
+          "label": "Alinhamento do texto no mobile",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
         {
           "type": "range",
           "id": "rating",
@@ -374,6 +746,58 @@
       "name": "Botão de compra",
       "settings": [
         {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "block_text_alignment",
+          "label": "Alinhamento do texto no desktop",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "block_mobile_text_alignment",
+          "label": "Alinhamento do texto no mobile",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
+        {
           "type": "text",
           "id": "button_label",
           "label": "Texto do botão",
@@ -392,6 +816,58 @@
       "type": "product_upsells",
       "name": "Outros produtos",
       "settings": [
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "block_text_alignment",
+          "label": "Alinhamento do texto no desktop",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "block_mobile_text_alignment",
+          "label": "Alinhamento do texto no mobile",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
         {
           "type": "text",
           "id": "title",

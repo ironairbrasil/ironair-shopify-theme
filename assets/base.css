@@ -113,10 +113,62 @@ footer#contato {
   text-align: right;
 }
 
+.theme-content-align-left {
+  --theme-content-align: flex-start;
+  --theme-content-margin-left: 0;
+  --theme-content-margin-right: auto;
+}
+
+.theme-content-align-center {
+  --theme-content-align: center;
+  --theme-content-margin-left: auto;
+  --theme-content-margin-right: auto;
+}
+
+.theme-content-align-right {
+  --theme-content-align: flex-end;
+  --theme-content-margin-left: auto;
+  --theme-content-margin-right: 0;
+}
+
 .theme-text-align-left :where(.section-head, .sec-header, .sec-header-copy, .action-videos-head, .ads-copy, .faq-q, .faq-a, .hiw-step, .review-card, .trust-item, .trust-label, .product-card-info, .product-purchase-panel, .product-detail-copy, .content-card, .page-content, .tutorial-card-copy, .footer-inner, .footer-brand, .footer-col, .compare-hint, .topbar, .cart-page-summary),
 .theme-text-align-center :where(.section-head, .sec-header, .sec-header-copy, .action-videos-head, .ads-copy, .faq-q, .faq-a, .hiw-step, .review-card, .trust-item, .trust-label, .product-card-info, .product-purchase-panel, .product-detail-copy, .content-card, .page-content, .tutorial-card-copy, .footer-inner, .footer-brand, .footer-col, .compare-hint, .topbar, .cart-page-summary),
 .theme-text-align-right :where(.section-head, .sec-header, .sec-header-copy, .action-videos-head, .ads-copy, .faq-q, .faq-a, .hiw-step, .review-card, .trust-item, .trust-label, .product-card-info, .product-purchase-panel, .product-detail-copy, .content-card, .page-content, .tutorial-card-copy, .footer-inner, .footer-brand, .footer-col, .compare-hint, .topbar, .cart-page-summary) {
   text-align: var(--theme-text-align) !important;
+}
+
+.theme-block-align-left {
+  --theme-block-text-align: left;
+  text-align: left !important;
+}
+
+.theme-block-align-center {
+  --theme-block-text-align: center;
+  text-align: center !important;
+}
+
+.theme-block-align-right {
+  --theme-block-text-align: right;
+  text-align: right !important;
+}
+
+.theme-block-align-left :where(h1, h2, h3, p, span, div, a),
+.theme-block-align-center :where(h1, h2, h3, p, span, div, a),
+.theme-block-align-right :where(h1, h2, h3, p, span, div, a) {
+  text-align: var(--theme-block-text-align) !important;
+}
+
+.theme-content-align-left :where(.section-head, .sec-header, .action-videos-head, .home-slide-actions, .cart-footer-actions, .final-actions, .products-carousel-head),
+.theme-content-align-center :where(.section-head, .sec-header, .action-videos-head, .home-slide-actions, .cart-footer-actions, .final-actions, .products-carousel-head),
+.theme-content-align-right :where(.section-head, .sec-header, .action-videos-head, .home-slide-actions, .cart-footer-actions, .final-actions, .products-carousel-head) {
+  justify-content: var(--theme-content-align) !important;
+}
+
+.theme-content-align-left :where(.section-head > div, .sec-header-copy, .custom-liquid-text, .home-slide-copy, .action-videos-head, .content-card, .page-content),
+.theme-content-align-center :where(.section-head > div, .sec-header-copy, .custom-liquid-text, .home-slide-copy, .action-videos-head, .content-card, .page-content),
+.theme-content-align-right :where(.section-head > div, .sec-header-copy, .custom-liquid-text, .home-slide-copy, .action-videos-head, .content-card, .page-content) {
+  margin-left: var(--theme-content-margin-left);
+  margin-right: var(--theme-content-margin-right);
 }
 
 .theme-text-align-center .section-head,
@@ -243,6 +295,54 @@ footer#contato {
 }
 
 @media (max-width: 749px) {
+  .theme-mobile-text-align-left {
+    --theme-text-align: left;
+    text-align: left;
+  }
+
+  .theme-mobile-text-align-center {
+    --theme-text-align: center;
+    text-align: center;
+  }
+
+  .theme-mobile-text-align-right {
+    --theme-text-align: right;
+    text-align: right;
+  }
+
+  .theme-mobile-content-align-left {
+    --theme-content-align: flex-start;
+    --theme-content-margin-left: 0;
+    --theme-content-margin-right: auto;
+  }
+
+  .theme-mobile-content-align-center {
+    --theme-content-align: center;
+    --theme-content-margin-left: auto;
+    --theme-content-margin-right: auto;
+  }
+
+  .theme-mobile-content-align-right {
+    --theme-content-align: flex-end;
+    --theme-content-margin-left: auto;
+    --theme-content-margin-right: 0;
+  }
+
+  .theme-block-mobile-align-left {
+    --theme-block-text-align: left;
+    text-align: left !important;
+  }
+
+  .theme-block-mobile-align-center {
+    --theme-block-text-align: center;
+    text-align: center !important;
+  }
+
+  .theme-block-mobile-align-right {
+    --theme-block-text-align: right;
+    text-align: right !important;
+  }
+
   .responsive-font-size {
     font-size: var(--font-size-mobile, var(--font-size-desktop)) !important;
   }

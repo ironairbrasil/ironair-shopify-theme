@@ -2,7 +2,7 @@
 
 {% for block in section.blocks %}
   {% if block.type == 'announcement' and block.settings.text != blank %}
-    <div class="topbar theme-text-align-{{ section.settings.text_alignment | default: 'left' }}{% if section.settings.hide_on_mobile %} theme-hide-mobile{% endif %}{% if section.settings.hide_on_desktop %} theme-hide-desktop{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+    <div class="topbar theme-text-align-{{ section.settings.text_alignment | default: 'left' }} theme-mobile-text-align-{{ section.settings.mobile_text_alignment | default: section.settings.text_alignment | default: 'left' }} theme-content-align-{{ section.settings.content_alignment | default: section.settings.text_alignment | default: 'left' }} theme-mobile-content-align-{{ section.settings.mobile_content_alignment | default: section.settings.content_alignment | default: section.settings.mobile_text_alignment | default: section.settings.text_alignment | default: 'left' }}{% if section.settings.hide_on_mobile %} theme-hide-mobile{% endif %}{% if section.settings.hide_on_desktop %} theme-hide-desktop{% endif %} theme-block-align-{{ block.settings.block_text_alignment | default: 'inherit' }} theme-block-mobile-align-{{ block.settings.block_mobile_text_alignment | default: block.settings.block_text_alignment | default: 'inherit' }}" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
   {% endif %}
 {% endfor %}
 
@@ -17,7 +17,67 @@
     {
       "type": "select",
       "id": "text_alignment",
-      "label": "Alinhamento dos textos",
+      "label": "Alinhamento dos textos no desktop",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_text_alignment",
+      "label": "Alinhamento dos textos no mobile",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Alinhamento do conteúdo no desktop",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_content_alignment",
+      "label": "Alinhamento do conteúdo no mobile",
       "default": "left",
       "options": [
         {
@@ -56,6 +116,58 @@
       "type": "announcement",
       "name": "Anúncio",
       "settings": [
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "block_text_alignment",
+          "label": "Alinhamento do texto no desktop",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "block_mobile_text_alignment",
+          "label": "Alinhamento do texto no mobile",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
         {
           "type": "text",
           "id": "text",

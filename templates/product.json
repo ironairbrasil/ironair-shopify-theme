@@ -96,7 +96,9 @@
       ],
       "settings": {
         "padding_top": 48,
-        "padding_bottom": 48
+        "padding_bottom": 48,
+        "hide_on_mobile": false,
+        "hide_on_desktop": false
       }
     },
     "header_custom_liquid_DcAfLy": {
@@ -104,7 +106,8 @@
       "blocks": {
         "product_description_JLYjtz": {
           "type": "product_description",
-          "settings": {}
+          "settings": {
+          }
         }
       },
       "block_order": [
@@ -114,7 +117,9 @@
       "name": "Liquid personalizado",
       "settings": {
         "padding_top": 0,
-        "padding_bottom": 48
+        "padding_bottom": 48,
+        "hide_on_mobile": false,
+        "hide_on_desktop": false
       }
     },
     "related": {
@@ -123,7 +128,9 @@
       "settings": {
         "limit": 4,
         "padding_top": 48,
-        "padding_bottom": 48
+        "padding_bottom": 48,
+        "hide_on_mobile": false,
+        "hide_on_desktop": false
       }
     },
     "home_slider_YjgREV": {
@@ -167,7 +174,12 @@
         "text_alignment": "center",
         "tone": "navy",
         "padding_top": 0,
-        "padding_bottom": 0
+        "padding_bottom": 0,
+        "mobile_text_alignment": "center",
+        "content_alignment": "center",
+        "mobile_content_alignment": "center",
+        "hide_on_mobile": false,
+        "hide_on_desktop": false
       }
     },
     "faq_37BkRG": {
@@ -250,7 +262,9 @@
       ],
       "settings": {
         "padding_top": 48,
-        "padding_bottom": 48
+        "padding_bottom": 48,
+        "hide_on_mobile": false,
+        "hide_on_desktop": false
       }
     }
   },

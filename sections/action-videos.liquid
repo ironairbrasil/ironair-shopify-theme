@@ -1,14 +1,14 @@
 {{ 'action-videos.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'action-videos.js' | asset_url }}" defer></script>
 
-<section class="action-videos shopify-padding-section theme-text-align-{{ section.settings.text_alignment | default: 'left' }}{% if section.settings.hide_on_mobile %} theme-hide-mobile{% endif %}{% if section.settings.hide_on_desktop %} theme-hide-desktop{% endif %}" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;" data-action-videos>
+<section class="action-videos shopify-padding-section theme-text-align-{{ section.settings.text_alignment | default: 'left' }} theme-mobile-text-align-{{ section.settings.mobile_text_alignment | default: section.settings.text_alignment | default: 'left' }} theme-content-align-{{ section.settings.content_alignment | default: section.settings.text_alignment | default: 'left' }} theme-mobile-content-align-{{ section.settings.mobile_content_alignment | default: section.settings.content_alignment | default: section.settings.mobile_text_alignment | default: section.settings.text_alignment | default: 'left' }}{% if section.settings.hide_on_mobile %} theme-hide-mobile{% endif %}{% if section.settings.hide_on_desktop %} theme-hide-desktop{% endif %}" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;" data-action-videos>
   {% assign title_blocks = section.blocks | where: 'type', 'title' %}
   {% assign title_block = title_blocks.first %}
   {% assign video_blocks = section.blocks | where: 'type', 'video' %}
   <div class="action-videos-inner">
     <div class="action-videos-head">
       {% if title_block != blank or section.settings.title != blank %}
-        <h2 class="action-videos-title responsive-font-size" style="--font-size-desktop: {{ title_block.settings.title_size | default: 30 }}px; --font-size-mobile: {{ title_block.settings.title_size_mobile | default: title_block.settings.title_size | default: 30 }}px;" {% if title_block != blank %}{{ title_block.shopify_attributes }}{% endif %}>{{ title_block.settings.title | default: section.settings.title | escape }}</h2>
+        <h2 class="action-videos-title responsive-font-size theme-block-align-{{ title_block.settings.block_text_alignment | default: 'inherit' }} theme-block-mobile-align-{{ title_block.settings.block_mobile_text_alignment | default: title_block.settings.block_text_alignment | default: 'inherit' }}" style="--font-size-desktop: {{ title_block.settings.title_size | default: 30 }}px; --font-size-mobile: {{ title_block.settings.title_size_mobile | default: title_block.settings.title_size | default: 30 }}px;" {% if title_block != blank %}{{ title_block.shopify_attributes }}{% endif %}>{{ title_block.settings.title | default: section.settings.title | escape }}</h2>
       {% endif %}
       {% if title_block.settings.subtitle != blank or section.settings.subtitle != blank %}
         <p class="action-videos-subtitle responsive-font-size" style="--font-size-desktop: {{ title_block.settings.subtitle_size | default: 15 }}px; --font-size-mobile: {{ title_block.settings.subtitle_size_mobile | default: title_block.settings.subtitle_size | default: 15 }}px;">{{ title_block.settings.subtitle | default: section.settings.subtitle | escape }}</p>
@@ -24,7 +24,7 @@
       <div class="action-videos-track" data-action-videos-track>
         {% for block in video_blocks %}
           {% assign product = block.settings.product | default: section.settings.product %}
-          <article class="action-video-card" data-action-video-card {{ block.shopify_attributes }}>
+          <article class="action-video-card theme-block-align-{{ block.settings.block_text_alignment | default: 'inherit' }} theme-block-mobile-align-{{ block.settings.block_mobile_text_alignment | default: block.settings.block_text_alignment | default: 'inherit' }}" data-action-video-card {{ block.shopify_attributes }}>
             <div class="action-video-media">
               {% if block.settings.video != blank %}
                 {{ block.settings.video | video_tag: autoplay: false, loop: true, muted: true, controls: false, playsinline: true, preload: 'metadata', image_size: '900x', class: 'action-video-player' }}
@@ -101,7 +101,67 @@
     {
       "type": "select",
       "id": "text_alignment",
-      "label": "Alinhamento dos textos",
+      "label": "Alinhamento dos textos no desktop",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_text_alignment",
+      "label": "Alinhamento dos textos no mobile",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Alinhamento do conteúdo no desktop",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_content_alignment",
+      "label": "Alinhamento do conteúdo no mobile",
       "default": "left",
       "options": [
         {
@@ -171,6 +231,58 @@
       "limit": 1,
       "settings": [
         {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "block_text_alignment",
+          "label": "Alinhamento do texto no desktop",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "block_mobile_text_alignment",
+          "label": "Alinhamento do texto no mobile",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
+        {
           "type": "text",
           "id": "title",
           "label": "Título",
@@ -228,6 +340,58 @@
       "type": "video",
       "name": "Vídeo",
       "settings": [
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "block_text_alignment",
+          "label": "Alinhamento do texto no desktop",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "block_mobile_text_alignment",
+          "label": "Alinhamento do texto no mobile",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
         {
           "type": "video",
           "id": "video",

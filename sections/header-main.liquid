@@ -19,7 +19,7 @@
   {% endcase %}
 {% endfor %}
 
-<div class="header-shell theme-text-align-{{ section.settings.text_alignment | default: 'left' }}{% if section.settings.hide_on_mobile %} theme-hide-mobile{% endif %}{% if section.settings.hide_on_desktop %} theme-hide-desktop{% endif %}" data-ironair-header>
+<div class="header-shell theme-text-align-{{ section.settings.text_alignment | default: 'left' }} theme-mobile-text-align-{{ section.settings.mobile_text_alignment | default: section.settings.text_alignment | default: 'left' }} theme-content-align-{{ section.settings.content_alignment | default: section.settings.text_alignment | default: 'left' }} theme-mobile-content-align-{{ section.settings.mobile_content_alignment | default: section.settings.content_alignment | default: section.settings.mobile_text_alignment | default: section.settings.text_alignment | default: 'left' }}{% if section.settings.hide_on_mobile %} theme-hide-mobile{% endif %}{% if section.settings.hide_on_desktop %} theme-hide-desktop{% endif %}" data-ironair-header>
   <header>
     <div class="header-inner">
       <button type="button" class="mobile-menu-toggle" data-mobile-menu-toggle aria-label="Abrir menu" aria-expanded="false">
@@ -29,7 +29,7 @@
       {% for block in section.blocks %}
         {% case block.type %}
           {% when 'logo' %}
-            <a href="{{ routes.root_url }}" class="logo" {{ block.shopify_attributes }}>
+            <a href="{{ routes.root_url }}" class="logo theme-block-align-{{ block.settings.block_text_alignment | default: 'inherit' }} theme-block-mobile-align-{{ block.settings.block_mobile_text_alignment | default: block.settings.block_text_alignment | default: 'inherit' }}" {{ block.shopify_attributes }}>
               {% if block.settings.logo != blank %}
                 {{ block.settings.logo | image_url: width: 520 | image_tag: alt: shop.name, loading: 'eager' }}
               {% else %}
@@ -39,7 +39,7 @@
 
           {% when 'search' %}
             {% if block.settings.enabled %}
-              <form action="{{ routes.search_url }}" method="get" class="header-search" role="search" {{ block.shopify_attributes }}>
+              <form action="{{ routes.search_url }}" method="get" class="header-search theme-block-align-{{ block.settings.block_text_alignment | default: 'inherit' }} theme-block-mobile-align-{{ block.settings.block_mobile_text_alignment | default: block.settings.block_text_alignment | default: 'inherit' }}" role="search" {{ block.shopify_attributes }}>
                 <div class="header-search-bar">
                   <input name="q" type="search" value="{{ search.terms | escape }}" placeholder="{{ block.settings.placeholder }}">
                   <button type="submit" aria-label="{{ block.settings.button_label }}">{% render 'icon', icon: 'search' %}</button>
@@ -69,14 +69,14 @@
           {% case block.type %}
             {% when 'account' %}
               {% if block.settings.enabled %}
-                <div {{ block.shopify_attributes }}>
+                <div class="theme-block-align-{{ block.settings.block_text_alignment | default: 'inherit' }} theme-block-mobile-align-{{ block.settings.block_mobile_text_alignment | default: block.settings.block_text_alignment | default: 'inherit' }}" {{ block.shopify_attributes }}>
                   {% render 'header-account-menu' %}
                 </div>
               {% endif %}
 
             {% when 'cart' %}
               {% if block.settings.enabled %}
-                <button type="button" class="hicon js-cart-drawer-open" aria-controls="CartDrawer" aria-expanded="false" aria-label="Carrinho" {{ block.shopify_attributes }}>
+                <button type="button" class="hicon js-cart-drawer-open theme-block-align-{{ block.settings.block_text_alignment | default: 'inherit' }} theme-block-mobile-align-{{ block.settings.block_mobile_text_alignment | default: block.settings.block_text_alignment | default: 'inherit' }}" aria-controls="CartDrawer" aria-expanded="false" aria-label="Carrinho" {{ block.shopify_attributes }}>
                   {% render 'icon', icon: 'cart' %}
                   <span class="badge" data-cart-count>{{ cart.item_count }}</span>
                 </button>
@@ -119,7 +119,67 @@
     {
       "type": "select",
       "id": "text_alignment",
-      "label": "Alinhamento dos textos",
+      "label": "Alinhamento dos textos no desktop",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_text_alignment",
+      "label": "Alinhamento dos textos no mobile",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Alinhamento do conteúdo no desktop",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_content_alignment",
+      "label": "Alinhamento do conteúdo no mobile",
       "default": "left",
       "options": [
         {
@@ -171,6 +231,58 @@
       "name": "Busca",
       "limit": 1,
       "settings": [
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "block_text_alignment",
+          "label": "Alinhamento do texto no desktop",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "block_mobile_text_alignment",
+          "label": "Alinhamento do texto no mobile",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
         {
           "type": "checkbox",
           "id": "enabled",

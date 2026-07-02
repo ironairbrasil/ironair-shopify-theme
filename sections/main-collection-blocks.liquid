@@ -6,11 +6,11 @@
 {% assign selected_collection = section.settings.collection | default: collection | default: collections.all %}
 {% assign products_by_creation = selected_collection.products | sort: 'created_at' %}
 
-<section class="page page-stack shopify-padding-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
+<section class="page page-stack shopify-padding-section theme-text-align-{{ section.settings.text_alignment | default: 'left' }} theme-mobile-text-align-{{ section.settings.mobile_text_alignment | default: section.settings.text_alignment | default: 'left' }} theme-content-align-{{ section.settings.content_alignment | default: section.settings.text_alignment | default: 'left' }} theme-mobile-content-align-{{ section.settings.mobile_content_alignment | default: section.settings.content_alignment | default: section.settings.mobile_text_alignment | default: section.settings.text_alignment | default: 'left' }}{% if section.settings.hide_on_mobile %} theme-hide-mobile{% endif %}{% if section.settings.hide_on_desktop %} theme-hide-desktop{% endif %}" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
   {% for block in section.blocks %}
     {% case block.type %}
       {% when 'title' %}
-        <div class="sec-header" {{ block.shopify_attributes }}>
+        <div class="sec-header theme-block-align-{{ block.settings.block_text_alignment | default: 'inherit' }} theme-block-mobile-align-{{ block.settings.block_mobile_text_alignment | default: block.settings.block_text_alignment | default: 'inherit' }}" {{ block.shopify_attributes }}>
           <div class="sec-header-copy">
             <div class="sec-title responsive-font-size" style="--font-size-desktop: {{ block.settings.title_size | default: 26 }}px; --font-size-mobile: {{ block.settings.title_size_mobile | default: block.settings.title_size | default: 26 }}px;">{{ block.settings.title | escape }}</div>
             {% if block.settings.show_product_count %}
@@ -22,7 +22,7 @@
         </div>
 
       {% when 'heading' %}
-        <div class="sec-header" {{ block.shopify_attributes }}>
+        <div class="sec-header theme-block-align-{{ block.settings.block_text_alignment | default: 'inherit' }} theme-block-mobile-align-{{ block.settings.block_mobile_text_alignment | default: block.settings.block_text_alignment | default: 'inherit' }}" {{ block.shopify_attributes }}>
           <div class="sec-header-copy">
             <div class="sec-title responsive-font-size" style="--font-size-desktop: {{ block.settings.title_size | default: 26 }}px; --font-size-mobile: {{ block.settings.title_size_mobile | default: block.settings.title_size | default: 26 }}px;">{{ block.settings.title | escape }}</div>
             {% if block.settings.show_product_count %}
@@ -48,7 +48,7 @@
         {% endif %}
 
         {% if use_carousel %}
-          <div class="products-carousel-shell" data-products-carousel {{ block.shopify_attributes }}>
+          <div class="products-carousel-shell theme-block-align-{{ block.settings.block_text_alignment | default: 'inherit' }} theme-block-mobile-align-{{ block.settings.block_mobile_text_alignment | default: block.settings.block_text_alignment | default: 'inherit' }}" data-products-carousel {{ block.shopify_attributes }}>
             <div class="products-carousel-head">
               {% if block.settings.carousel_link_label != blank %}
                 <a class="products-carousel-link" href="{{ block.settings.carousel_link_url | default: routes.all_products_collection_url }}">{{ block.settings.carousel_link_label }}</a>
@@ -60,7 +60,7 @@
             </div>
         {% endif %}
 
-        <div class="products-grid cols{{ columns_desktop }} mobile-cols{{ columns_mobile }} {% if use_carousel %}is-carousel{% else %}is-stack-mobile{% endif %}" {% unless use_carousel %}{{ block.shopify_attributes }}{% endunless %} {% if use_carousel %}data-products-track{% endif %}>
+        <div class="products-grid cols{{ columns_desktop }} mobile-cols{{ columns_mobile }} {% if use_carousel %}is-carousel{% else %}is-stack-mobile{% endif %} theme-block-align-{{ block.settings.block_text_alignment | default: 'inherit' }} theme-block-mobile-align-{{ block.settings.block_mobile_text_alignment | default: block.settings.block_text_alignment | default: 'inherit' }}" {% unless use_carousel %}{{ block.shopify_attributes }}{% endunless %} {% if use_carousel %}data-products-track{% endif %}>
           {% for product in products_by_creation limit: products_limit %}
             {% render 'product-card',
               product: product,
@@ -95,7 +95,7 @@
         {% endif %}
 
         {% if use_carousel %}
-          <div class="products-carousel-shell" data-products-carousel {{ block.shopify_attributes }}>
+          <div class="products-carousel-shell theme-block-align-{{ block.settings.block_text_alignment | default: 'inherit' }} theme-block-mobile-align-{{ block.settings.block_mobile_text_alignment | default: block.settings.block_text_alignment | default: 'inherit' }}" data-products-carousel {{ block.shopify_attributes }}>
             <div class="products-carousel-head">
               {% if block.settings.carousel_link_label != blank %}
                 <a class="products-carousel-link" href="{{ block.settings.carousel_link_url | default: routes.all_products_collection_url }}">{{ block.settings.carousel_link_label }}</a>
@@ -107,7 +107,7 @@
             </div>
         {% endif %}
 
-        <div class="products-grid cols{{ columns_desktop }} mobile-cols{{ columns_mobile }} {% if use_carousel %}is-carousel{% else %}is-stack-mobile{% endif %}" {% unless use_carousel %}{{ block.shopify_attributes }}{% endunless %} {% if use_carousel %}data-products-track{% endif %}>
+        <div class="products-grid cols{{ columns_desktop }} mobile-cols{{ columns_mobile }} {% if use_carousel %}is-carousel{% else %}is-stack-mobile{% endif %} theme-block-align-{{ block.settings.block_text_alignment | default: 'inherit' }} theme-block-mobile-align-{{ block.settings.block_mobile_text_alignment | default: block.settings.block_text_alignment | default: 'inherit' }}" {% unless use_carousel %}{{ block.shopify_attributes }}{% endunless %} {% if use_carousel %}data-products-track{% endif %}>
           {% for product in products_by_creation limit: products_limit %}
             {% render 'product-card',
               product: product,
@@ -134,6 +134,90 @@
 {
   "name": "Galeria de Produtos",
   "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Alinhamento dos textos no desktop",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_text_alignment",
+      "label": "Alinhamento dos textos no mobile",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Alinhamento do conteúdo no desktop",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_content_alignment",
+      "label": "Alinhamento do conteúdo no mobile",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
     {
       "type": "collection",
       "id": "collection",
@@ -162,6 +246,22 @@
       "step": 4,
       "unit": "px",
       "default": 48
+    },
+    {
+      "type": "header",
+      "content": "Visibilidade"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_mobile",
+      "label": "Ocultar no mobile",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_desktop",
+      "label": "Ocultar no desktop",
+      "default": false
     }
   ],
   "blocks": [
@@ -170,6 +270,58 @@
       "name": "Título",
       "limit": 1,
       "settings": [
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "block_text_alignment",
+          "label": "Alinhamento do texto no desktop",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "block_mobile_text_alignment",
+          "label": "Alinhamento do texto no mobile",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
         {
           "type": "text",
           "id": "title",
@@ -234,6 +386,58 @@
       "name": "Produtos",
       "limit": 1,
       "settings": [
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "block_text_alignment",
+          "label": "Alinhamento do texto no desktop",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "block_mobile_text_alignment",
+          "label": "Alinhamento do texto no mobile",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
         {
           "type": "select",
           "id": "display_mode",
