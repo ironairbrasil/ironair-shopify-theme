@@ -433,9 +433,9 @@
         "video_5"
       ],
       "settings": {
-        "text_alignment": "left",
-        "mobile_text_alignment": "left",
-        "content_alignment": "left",
+        "text_alignment": "center",
+        "mobile_text_alignment": "center",
+        "content_alignment": "center",
         "mobile_content_alignment": "left",
         "product": "",
         "padding_top": 56,
