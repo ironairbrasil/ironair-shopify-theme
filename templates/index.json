@@ -226,7 +226,7 @@
         "mobile_content_alignment": "left",
         "collection": "",
         "padding_top": 48,
-        "padding_bottom": 48,
+        "padding_bottom": 0,
         "hide_on_mobile": false,
         "hide_on_desktop": false
       }
@@ -356,7 +356,7 @@
           "type": "title",
           "settings": {
             "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
+            "block_mobile_text_alignment": "center",
             "title": "Veja o Iron Air em ação",
             "title_size": 30,
             "title_size_mobile": 30,
