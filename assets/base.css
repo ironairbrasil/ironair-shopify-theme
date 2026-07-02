@@ -98,43 +98,78 @@ footer#contato {
   display: block;
 }
 
+.theme-text-align-left {
+  --theme-text-align: left;
+  text-align: left;
+}
+
+.theme-text-align-center {
+  --theme-text-align: center;
+  text-align: center;
+}
+
+.theme-text-align-right {
+  --theme-text-align: right;
+  text-align: right;
+}
+
+.theme-text-align-left :where(.section-head, .sec-header, .sec-header-copy, .action-videos-head, .ads-copy, .faq-q, .faq-a, .hiw-step, .review-card, .trust-item, .trust-label, .product-card-info, .product-purchase-panel, .product-detail-copy, .content-card, .page-content, .tutorial-card-copy, .footer-inner, .footer-brand, .footer-col, .compare-hint, .topbar, .cart-page-summary),
+.theme-text-align-center :where(.section-head, .sec-header, .sec-header-copy, .action-videos-head, .ads-copy, .faq-q, .faq-a, .hiw-step, .review-card, .trust-item, .trust-label, .product-card-info, .product-purchase-panel, .product-detail-copy, .content-card, .page-content, .tutorial-card-copy, .footer-inner, .footer-brand, .footer-col, .compare-hint, .topbar, .cart-page-summary),
+.theme-text-align-right :where(.section-head, .sec-header, .sec-header-copy, .action-videos-head, .ads-copy, .faq-q, .faq-a, .hiw-step, .review-card, .trust-item, .trust-label, .product-card-info, .product-purchase-panel, .product-detail-copy, .content-card, .page-content, .tutorial-card-copy, .footer-inner, .footer-brand, .footer-col, .compare-hint, .topbar, .cart-page-summary) {
+  text-align: var(--theme-text-align) !important;
+}
+
+.theme-text-align-center .section-head,
+.theme-text-align-center .sec-header,
+.theme-text-align-center .action-videos-head {
+  justify-content: center;
+  text-align: center;
+}
+
+.theme-text-align-right .section-head,
+.theme-text-align-right .sec-header,
+.theme-text-align-right .action-videos-head {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+.theme-text-align-center .section-head,
+.theme-text-align-right .section-head {
+  align-items: center;
+}
+
+.theme-text-align-center .section-head > div,
+.theme-text-align-center .sec-header-copy,
+.theme-text-align-center .custom-liquid-text {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.theme-text-align-right .section-head > div,
+.theme-text-align-right .sec-header-copy,
+.theme-text-align-right .custom-liquid-text {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.theme-text-align-center .home-slide-actions,
+.theme-text-align-center .cart-footer-actions,
+.theme-text-align-center .final-actions {
+  justify-content: center;
+}
+
+.theme-text-align-right .home-slide-actions,
+.theme-text-align-right .cart-footer-actions,
+.theme-text-align-right .final-actions {
+  justify-content: flex-end;
+}
+
 .custom-liquid-content,
 .custom-liquid-block {
   width: 100%;
   max-width: var(--shell-max-width);
   margin-inline: auto;
   box-sizing: border-box;
-}
-
-.custom-liquid-content.align-left,
-.custom-liquid-block.align-left {
-  margin-left: 0;
-  margin-right: auto;
-  text-align: left;
-}
-
-.custom-liquid-content.align-center,
-.custom-liquid-block.align-center {
-  margin-inline: auto;
-  text-align: center;
-}
-
-.custom-liquid-content.align-right,
-.custom-liquid-block.align-right {
-  margin-left: auto;
-  margin-right: 0;
-  text-align: right;
-}
-
-.custom-liquid-content.align-center > *,
-.custom-liquid-block.align-center > * {
-  margin-inline: auto;
-}
-
-.custom-liquid-content.align-right > *,
-.custom-liquid-block.align-right > * {
-  margin-left: auto;
-  margin-right: 0;
 }
 
 .custom-liquid-block img,
@@ -190,22 +225,6 @@ footer#contato {
   gap: 16px;
 }
 
-.section-head.section-head--align-left {
-  justify-content: flex-start;
-  text-align: left;
-}
-
-.section-head.section-head--align-center {
-  justify-content: center;
-  text-align: center;
-}
-
-.section-head.section-head--align-right {
-  justify-content: flex-end;
-  text-align: right;
-}
-
-.section-head h1,
 .section-head h2 {
   margin: 0;
 }
@@ -226,6 +245,16 @@ footer#contato {
 @media (max-width: 749px) {
   .responsive-font-size {
     font-size: var(--font-size-mobile, var(--font-size-desktop)) !important;
+  }
+
+  .theme-hide-mobile {
+    display: none !important;
+  }
+}
+
+@media (min-width: 750px) {
+  .theme-hide-desktop {
+    display: none !important;
   }
 }
 

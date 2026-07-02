@@ -1,6 +1,6 @@
 {{ 'footer.css' | asset_url | stylesheet_tag }}
 
-<footer id="contato">
+<footer id="contato" class="theme-text-align-{{ section.settings.text_alignment | default: 'left' }}{% if section.settings.hide_on_mobile %} theme-hide-mobile{% endif %}{% if section.settings.hide_on_desktop %} theme-hide-desktop{% endif %}">
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
@@ -103,13 +103,86 @@
 {
   "name": "Rodapé Iron Air",
   "settings": [
-    { "type": "image_picker", "id": "logo", "label": "Logo claro" },
-    { "type": "textarea", "id": "description", "label": "Descrição", "default": "Elevando o padrão de cuidado com roupas através de tecnologia, precisão e confiabilidade." },
-    { "type": "text", "id": "support_title", "label": "Título do menu", "default": "Suporte" },
-    { "type": "link_list", "id": "support_menu", "label": "Menu de suporte" },
-    { "type": "text", "id": "hours", "label": "Horário", "default": "seg a sexta - 9h as 17h" },
-    { "type": "text", "id": "location", "label": "Localização", "default": "Belo Horizonte, MG" },
-    { "type": "text", "id": "document", "label": "CNPJ", "default": "CNPJ: 64.158.825/0001-11" }
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Alinhamento dos textos",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo claro"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Descrição",
+      "default": "Elevando o padrão de cuidado com roupas através de tecnologia, precisão e confiabilidade."
+    },
+    {
+      "type": "text",
+      "id": "support_title",
+      "label": "Título do menu",
+      "default": "Suporte"
+    },
+    {
+      "type": "link_list",
+      "id": "support_menu",
+      "label": "Menu de suporte"
+    },
+    {
+      "type": "text",
+      "id": "hours",
+      "label": "Horário",
+      "default": "seg a sexta - 9h as 17h"
+    },
+    {
+      "type": "text",
+      "id": "location",
+      "label": "Localização",
+      "default": "Belo Horizonte, MG"
+    },
+    {
+      "type": "text",
+      "id": "document",
+      "label": "CNPJ",
+      "default": "CNPJ: 64.158.825/0001-11"
+    },
+    {
+      "type": "header",
+      "content": "Visibilidade"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_mobile",
+      "label": "Ocultar no mobile",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_desktop",
+      "label": "Ocultar no desktop",
+      "default": false
+    }
   ],
   "blocks": [
     {
@@ -122,17 +195,47 @@
           "label": "Rede",
           "default": "custom",
           "options": [
-            { "value": "custom", "label": "Automático pela sigla" },
-            { "value": "instagram", "label": "Instagram" },
-            { "value": "facebook", "label": "Facebook" },
-            { "value": "youtube", "label": "YouTube" },
-            { "value": "tiktok", "label": "TikTok" },
-            { "value": "whatsapp", "label": "WhatsApp" },
-            { "value": "x", "label": "X / Twitter" }
+            {
+              "value": "custom",
+              "label": "Automático pela sigla"
+            },
+            {
+              "value": "instagram",
+              "label": "Instagram"
+            },
+            {
+              "value": "facebook",
+              "label": "Facebook"
+            },
+            {
+              "value": "youtube",
+              "label": "YouTube"
+            },
+            {
+              "value": "tiktok",
+              "label": "TikTok"
+            },
+            {
+              "value": "whatsapp",
+              "label": "WhatsApp"
+            },
+            {
+              "value": "x",
+              "label": "X / Twitter"
+            }
           ]
         },
-        { "type": "text", "id": "label", "label": "Texto alternativo", "default": "Instagram" },
-        { "type": "url", "id": "url", "label": "URL" }
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Texto alternativo",
+          "default": "Instagram"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "URL"
+        }
       ]
     }
   ]

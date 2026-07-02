@@ -2,20 +2,66 @@
 
 {% for block in section.blocks %}
   {% if block.type == 'announcement' and block.settings.text != blank %}
-    <div class="topbar" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+    <div class="topbar theme-text-align-{{ section.settings.text_alignment | default: 'left' }}{% if section.settings.hide_on_mobile %} theme-hide-mobile{% endif %}{% if section.settings.hide_on_desktop %} theme-hide-desktop{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
   {% endif %}
 {% endfor %}
 
 {% schema %}
 {
   "name": "Barra de anúncios",
-  "settings": [],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Alinhamento dos textos",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Visibilidade"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_mobile",
+      "label": "Ocultar no mobile",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_desktop",
+      "label": "Ocultar no desktop",
+      "default": false
+    }
+  ],
   "blocks": [
     {
       "type": "announcement",
       "name": "Anúncio",
       "settings": [
-        { "type": "text", "id": "text", "label": "Texto", "default": "🚚 FRETE GRÁTIS em todo Brasil + 12X SEM JUROS no cartão + 10% OFF no Pix" }
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto",
+          "default": "🚚 FRETE GRÁTIS em todo Brasil + 12X SEM JUROS no cartão + 10% OFF no Pix"
+        }
       ]
     }
   ],
@@ -23,7 +69,9 @@
     {
       "name": "Barra de anúncios",
       "blocks": [
-        { "type": "announcement" }
+        {
+          "type": "announcement"
+        }
       ]
     }
   ]

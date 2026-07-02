@@ -198,11 +198,22 @@
 
 .product-info-dropdown-content {
   padding: 16px 20px 16px;
-  text-align: left;
 }
 
 .product-info-dropdown-content > :first-child {
   margin-top: 0;
+}
+
+.product-description-card--align-left .product-info-dropdown-content {
+  text-align: left;
+}
+
+.product-description-card--align-center .product-info-dropdown-content {
+  text-align: center;
+}
+
+.product-description-card--align-right .product-info-dropdown-content {
+  text-align: right;
 }
 
 .product-purchase-panel h1 {

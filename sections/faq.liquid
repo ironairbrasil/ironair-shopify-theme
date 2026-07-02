@@ -14,7 +14,7 @@
   {% endfor %}
 {% endif %}
 
-<section class="faq-section section-anchor shopify-padding-section" id="faq" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
+<section class="faq-section section-anchor shopify-padding-section theme-text-align-{{ section.settings.text_alignment | default: 'left' }}{% if section.settings.hide_on_mobile %} theme-hide-mobile{% endif %}{% if section.settings.hide_on_desktop %} theme-hide-desktop{% endif %}" id="faq" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
   {% assign title_blocks = section.blocks | where: 'type', 'title' %}
   {% assign title_block = title_blocks.first %}
   {% if title_block != blank or section.settings.title != blank %}
@@ -63,6 +63,30 @@
   "name": "FAQ",
   "settings": [
     {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Alinhamento dos textos",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
       "type": "checkbox",
       "id": "use_product_faq",
       "label": "Usar FAQ cadastrado no produto",
@@ -92,6 +116,22 @@
       "step": 4,
       "unit": "px",
       "default": 48
+    },
+    {
+      "type": "header",
+      "content": "Visibilidade"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_mobile",
+      "label": "Ocultar no mobile",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_desktop",
+      "label": "Ocultar no desktop",
+      "default": false
     }
   ],
   "blocks": [

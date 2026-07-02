@@ -19,7 +19,7 @@
   {% endcase %}
 {% endfor %}
 
-<div class="header-shell" data-ironair-header>
+<div class="header-shell theme-text-align-{{ section.settings.text_alignment | default: 'left' }}{% if section.settings.hide_on_mobile %} theme-hide-mobile{% endif %}{% if section.settings.hide_on_desktop %} theme-hide-desktop{% endif %}" data-ironair-header>
   <header>
     <div class="header-inner">
       <button type="button" class="mobile-menu-toggle" data-mobile-menu-toggle aria-label="Abrir menu" aria-expanded="false">
@@ -111,14 +111,59 @@
 {% schema %}
 {
   "name": "Cabeçalho",
-  "settings": [],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Alinhamento dos textos",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Visibilidade"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_mobile",
+      "label": "Ocultar no mobile",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_desktop",
+      "label": "Ocultar no desktop",
+      "default": false
+    }
+  ],
   "blocks": [
     {
       "type": "logo",
       "name": "Logo",
       "limit": 1,
       "settings": [
-        { "type": "image_picker", "id": "logo", "label": "Logo" }
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo"
+        }
       ]
     },
     {
@@ -126,9 +171,24 @@
       "name": "Busca",
       "limit": 1,
       "settings": [
-        { "type": "checkbox", "id": "enabled", "label": "Mostrar busca", "default": true },
-        { "type": "text", "id": "placeholder", "label": "Placeholder", "default": "Buscar produtos..." },
-        { "type": "text", "id": "button_label", "label": "Rótulo do botão", "default": "Buscar" }
+        {
+          "type": "checkbox",
+          "id": "enabled",
+          "label": "Mostrar busca",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "placeholder",
+          "label": "Placeholder",
+          "default": "Buscar produtos..."
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Rótulo do botão",
+          "default": "Buscar"
+        }
       ]
     },
     {
@@ -136,7 +196,12 @@
       "name": "Conta",
       "limit": 1,
       "settings": [
-        { "type": "checkbox", "id": "enabled", "label": "Mostrar conta", "default": true }
+        {
+          "type": "checkbox",
+          "id": "enabled",
+          "label": "Mostrar conta",
+          "default": true
+        }
       ]
     },
     {
@@ -144,7 +209,12 @@
       "name": "Carrinho",
       "limit": 1,
       "settings": [
-        { "type": "checkbox", "id": "enabled", "label": "Mostrar carrinho", "default": true }
+        {
+          "type": "checkbox",
+          "id": "enabled",
+          "label": "Mostrar carrinho",
+          "default": true
+        }
       ]
     }
   ],
@@ -152,10 +222,18 @@
     {
       "name": "Cabeçalho",
       "blocks": [
-        { "type": "logo" },
-        { "type": "search" },
-        { "type": "account" },
-        { "type": "cart" }
+        {
+          "type": "logo"
+        },
+        {
+          "type": "search"
+        },
+        {
+          "type": "account"
+        },
+        {
+          "type": "cart"
+        }
       ]
     }
   ]

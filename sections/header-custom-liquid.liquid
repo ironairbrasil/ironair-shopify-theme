@@ -1,6 +1,6 @@
 {{ 'navigation.css' | asset_url | stylesheet_tag }}
 
-<section class="header-custom-liquid-section shopify-padding-section" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
+<section class="header-custom-liquid-section shopify-padding-section theme-text-align-{{ section.settings.text_alignment | default: 'left' }}{% if section.settings.hide_on_mobile %} theme-hide-mobile{% endif %}{% if section.settings.hide_on_desktop %} theme-hide-desktop{% endif %}" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
   {% for block in section.blocks %}
     {% case block.type %}
       {% when 'menu' %}
@@ -81,6 +81,30 @@
   "settings": [
     {
       "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Alinhamento dos textos",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "header",
       "content": "Preenchimento"
     },
     {
@@ -102,6 +126,22 @@
       "step": 4,
       "unit": "px",
       "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Visibilidade"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_mobile",
+      "label": "Ocultar no mobile",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_desktop",
+      "label": "Ocultar no desktop",
+      "default": false
     }
   ],
   "blocks": [
@@ -261,7 +301,9 @@
     {
       "type": "product_title",
       "name": "Nome do produto",
-      "settings": []
+      "settings": [
+
+      ]
     },
     {
       "type": "product_rating",
@@ -287,17 +329,23 @@
     {
       "type": "product_description",
       "name": "Descrição do produto",
-      "settings": []
+      "settings": [
+
+      ]
     },
     {
       "type": "product_price",
       "name": "Preço do produto",
-      "settings": []
+      "settings": [
+
+      ]
     },
     {
       "type": "product_variant_picker",
       "name": "Variantes do produto",
-      "settings": []
+      "settings": [
+
+      ]
     },
     {
       "type": "product_buy_button",
@@ -314,7 +362,9 @@
     {
       "type": "product_stock",
       "name": "Estoque do produto",
-      "settings": []
+      "settings": [
+
+      ]
     },
     {
       "type": "product_upsells",
