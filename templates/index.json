@@ -197,7 +197,7 @@
         "text_alignment": "left",
         "collection": "",
         "padding_top": 48,
-        "padding_bottom": 48,
+        "padding_bottom": 0,
         "hide_on_mobile": false,
         "hide_on_desktop": false
       }
