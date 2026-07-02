@@ -92,7 +92,9 @@
         "autoplay": true,
         "speed": 4,
         "padding_top": 0,
-        "padding_bottom": 0
+        "padding_bottom": 0,
+        "hide_on_mobile": false,
+        "hide_on_desktop": false
       }
     },
     "trust": {
@@ -147,8 +149,11 @@
         "item_9AKP8H"
       ],
       "settings": {
+        "text_alignment": "left",
         "padding_top": 20,
-        "padding_bottom": 20
+        "padding_bottom": 20,
+        "hide_on_mobile": false,
+        "hide_on_desktop": false
       }
     },
     "products": {
@@ -189,9 +194,12 @@
       ],
       "name": "Galeria de Produtos",
       "settings": {
+        "text_alignment": "left",
         "collection": "",
         "padding_top": 48,
-        "padding_bottom": 48
+        "padding_bottom": 48,
+        "hide_on_mobile": false,
+        "hide_on_desktop": false
       }
     },
     "custom_liquid_izrydp": {
@@ -223,19 +231,49 @@
       ],
       "name": "Liquid customizado",
       "settings": {
+        "text_alignment": "center",
         "title": "",
         "custom_liquid": "",
         "padding_top": 48,
         "padding_bottom": 48,
-        "text_alignment": "center",
         "hide_on_mobile": false,
-        "hide_on_desktop": false
+        "hide_on_desktop": true
+      }
+    },
+    "custom_liquid_rCjUCi": {
+      "type": "custom-liquid",
+      "name": "Liquid customizado",
+      "settings": {
+        "text_alignment": "center",
+        "title": "A maneira mais fácil de cuidar das suas roupas",
+        "custom_liquid": "O fluxo de ar quente automático seca, alisa e refresca as roupas sem que você precise usar as mãos. Sem ferro de passar. Sem tábua de passar. Sem ficar esperando.",
+        "padding_top": 48,
+        "padding_bottom": 48,
+        "hide_on_mobile": false,
+        "hide_on_desktop": true
       }
     },
     "slider": {
       "type": "home-slider",
+      "settings": {
+        "aria_label": "Hero principal da Iron Air",
+        "background_mode": "video",
+        "video": "shopify://files/videos/site.mp4",
+        "height": "media",
+        "mobile_height": "media",
+        "content_position": "center",
+        "text_alignment": "center",
+        "tone": "navy",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "hide_on_mobile": false,
+        "hide_on_desktop": true
+      }
+    },
+    "home_slider_63xQTP": {
+      "type": "home-slider",
       "blocks": {
-        "text_pjPTid": {
+        "text_VhWpdh": {
           "type": "text",
           "settings": {
             "heading": "A maneira mais fácil de cuidar das suas roupas",
@@ -247,7 +285,7 @@
             "text_width": "large"
           }
         },
-        "button_DTnD6g": {
+        "button_QgR84V": {
           "type": "button",
           "settings": {
             "label": "Ver como funciona",
@@ -260,8 +298,8 @@
         }
       },
       "block_order": [
-        "text_pjPTid",
-        "button_DTnD6g"
+        "text_VhWpdh",
+        "button_QgR84V"
       ],
       "settings": {
         "aria_label": "Hero principal da Iron Air",
@@ -273,7 +311,9 @@
         "text_alignment": "center",
         "tone": "navy",
         "padding_top": 0,
-        "padding_bottom": 0
+        "padding_bottom": 0,
+        "hide_on_mobile": true,
+        "hide_on_desktop": false
       }
     },
     "action_videos": {
@@ -286,7 +326,8 @@
             "title_size": 30,
             "title_size_mobile": 30,
             "subtitle": "Vídeos rápidos mostrando o produto no dia a dia.",
-            "subtitle_size": 15
+            "subtitle_size": 15,
+            "subtitle_size_mobile": 15
           }
         },
         "video_1": {
@@ -347,9 +388,12 @@
         "video_5"
       ],
       "settings": {
+        "text_alignment": "left",
         "product": "",
         "padding_top": 56,
-        "padding_bottom": 56
+        "padding_bottom": 56,
+        "hide_on_mobile": false,
+        "hide_on_desktop": false
       }
     },
     "reviews": {
@@ -359,7 +403,8 @@
           "type": "title",
           "settings": {
             "title": "O que dizem os clientes",
-            "title_size": 30
+            "title_size": 30,
+            "title_size_mobile": 30
           }
         },
         "review_gKLEY3": {
@@ -403,10 +448,13 @@
         "review_L6qjDE"
       ],
       "settings": {
+        "text_alignment": "left",
         "rating": "4.8",
         "count": "20",
         "padding_top": 48,
-        "padding_bottom": 48
+        "padding_bottom": 48,
+        "hide_on_mobile": false,
+        "hide_on_desktop": false
       }
     },
     "faq": {
@@ -416,7 +464,8 @@
           "type": "title",
           "settings": {
             "title": "Perguntas frequentes",
-            "title_size": 30
+            "title_size": 30,
+            "title_size_mobile": 30
           }
         },
         "item_UmT3c6": {
@@ -488,8 +537,12 @@
         "item_jpjKQ6"
       ],
       "settings": {
+        "text_alignment": "left",
+        "use_product_faq": true,
         "padding_top": 48,
-        "padding_bottom": 48
+        "padding_bottom": 48,
+        "hide_on_mobile": false,
+        "hide_on_desktop": false
       }
     }
   },
@@ -498,7 +551,9 @@
     "trust",
     "products",
     "custom_liquid_izrydp",
+    "custom_liquid_rCjUCi",
     "slider",
+    "home_slider_63xQTP",
     "action_videos",
     "reviews",
     "faq"
