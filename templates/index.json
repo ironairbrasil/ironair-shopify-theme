@@ -240,19 +240,6 @@
         "hide_on_desktop": true
       }
     },
-    "custom_liquid_rCjUCi": {
-      "type": "custom-liquid",
-      "name": "Liquid customizado",
-      "settings": {
-        "text_alignment": "center",
-        "title": "A maneira mais fácil de cuidar das suas roupas",
-        "custom_liquid": "O fluxo de ar quente automático seca, alisa e refresca as roupas sem que você precise usar as mãos. Sem ferro de passar. Sem tábua de passar. Sem ficar esperando.",
-        "padding_top": 48,
-        "padding_bottom": 48,
-        "hide_on_mobile": false,
-        "hide_on_desktop": true
-      }
-    },
     "slider": {
       "type": "home-slider",
       "settings": {
@@ -551,7 +538,6 @@
     "trust",
     "products",
     "custom_liquid_izrydp",
-    "custom_liquid_rCjUCi",
     "slider",
     "home_slider_63xQTP",
     "action_videos",
