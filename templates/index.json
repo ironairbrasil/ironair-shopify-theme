@@ -451,7 +451,7 @@
           "type": "title",
           "settings": {
             "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
+            "block_mobile_text_alignment": "center",
             "title": "O que dizem os clientes",
             "title_size": 30,
             "title_size_mobile": 30
@@ -525,7 +525,7 @@
           "type": "title",
           "settings": {
             "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
+            "block_mobile_text_alignment": "center",
             "title": "Perguntas frequentes",
             "title_size": 30,
             "title_size_mobile": 30
