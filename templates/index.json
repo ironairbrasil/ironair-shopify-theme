@@ -321,7 +321,7 @@
             "label": "Ver como funciona",
             "label_size": 14,
             "label_size_mobile": 14,
-            "url": "",
+            "url": "shopify://pages/tutoriais",
             "style": "primary",
             "new_tab": false
           }
