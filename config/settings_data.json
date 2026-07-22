@@ -16,9 +16,6 @@
           "instagram": {
             "type": "social",
             "settings": {
-              "block_text_alignment": "inherit",
-              "block_mobile_text_alignment": "inherit",
-              "platform": "custom",
               "label": "IG",
               "url": "https://www.instagram.com/ironairbrasil/"
             }
@@ -26,9 +23,6 @@
           "facebook": {
             "type": "social",
             "settings": {
-              "block_text_alignment": "inherit",
-              "block_mobile_text_alignment": "inherit",
-              "platform": "custom",
               "label": "FB",
               "url": "https://www.facebook.com/profile.php?id=61589217872180"
             }
@@ -36,9 +30,6 @@
           "youtube": {
             "type": "social",
             "settings": {
-              "block_text_alignment": "inherit",
-              "block_mobile_text_alignment": "inherit",
-              "platform": "custom",
               "label": "YT",
               "url": "https://www.youtube.com/@IronAirBrasil"
             }
@@ -46,9 +37,6 @@
           "tiktok": {
             "type": "social",
             "settings": {
-              "block_text_alignment": "inherit",
-              "block_mobile_text_alignment": "inherit",
-              "platform": "custom",
               "label": "TK",
               "url": "https://www.tiktok.com/@ironairbrasil"
             }
@@ -61,40 +49,12 @@
           "tiktok"
         ],
         "settings": {
-          "text_alignment": "left",
-          "mobile_text_alignment": "left",
-          "content_alignment": "left",
-          "mobile_content_alignment": "left",
           "description": "Elevando o padrão de cuidado com roupas através de tecnologia, precisão e confiabilidade.",
           "support_title": "Suporte",
           "support_menu": "footer",
           "hours": "seg a sexta - 9h as 17h",
           "location": "Belo Horizonte, MG",
-          "document": "CNPJ: 64.158.825/0001-11",
-          "hide_on_mobile": false,
-          "hide_on_desktop": false
-        }
-      },
-      "stock-reserve-popup": {
-        "type": "stock-reserve-popup",
-        "settings": {
-          "text_alignment": "left",
-          "mobile_text_alignment": "left",
-          "content_alignment": "left",
-          "mobile_content_alignment": "left",
-          "enabled": true,
-          "product": "",
-          "fallback_product_handle": "iron-air",
-          "eyebrow": "Lote esgotado",
-          "title": "Esgotamos nosso primeiro lote",
-          "text": "Reserve o seu Iron Air agora e não perca a oportunidade de garantir prioridade no próximo lote.",
-          "show_counter": true,
-          "reservation_count": 45,
-          "counter_text": "Mais de [count] pessoas já reservaram",
-          "button_label": "Enviar reserva",
-          "delay": 1,
-          "hide_on_mobile": false,
-          "hide_on_desktop": false
+          "document": "CNPJ: 64.158.825/0001-11"
         }
       }
     },
@@ -103,16 +63,6 @@
       "8329602812678528339": {
         "type": "shopify://apps/bk-reviews/blocks/bk-reviews-embed/592f39b6-a0c6-4829-a095-8e5558e58026",
         "disabled": false,
-        "settings": {}
-      },
-      "2567389343055140935": {
-        "type": "shopify://apps/microsoft-clarity/blocks/clarity_js/31c3d126-8116-4b4a-8ba1-baeda7c4aeea",
-        "disabled": false,
-        "settings": {}
-      },
-      "2200952712151285029": {
-        "type": "shopify://apps/microsoft-clarity/blocks/brandAgents_js/31c3d126-8116-4b4a-8ba1-baeda7c4aeea",
-        "disabled": true,
         "settings": {}
       }
     }

@@ -66,7 +66,7 @@
       {% endif %}
       <a
         class="pc-btn"
-        href="https://ironair-payments.vercel.app/checkout-ironair?variantId={{ 'gid://shopify/ProductVariant/' | append: variant.id | url_encode }}&quantity=1&title={{ product.title | url_encode }}&price={{ checkout_price }}{% if card_checkout_image %}&image={{ card_checkout_image | image_url: width: 400 | url_encode }}{% endif %}&productHandle={{ product.handle | url_encode }}{% render 'ironair-checkout-prefill' %}"
+        href="https://ironair-payments.vercel.app/checkout-pre-venda?variantId={{ 'gid://shopify/ProductVariant/' | append: variant.id | url_encode }}&quantity=1&title={{ product.title | url_encode }}&price={{ checkout_price }}{% if card_checkout_image %}&image={{ card_checkout_image | image_url: width: 400 | url_encode }}{% endif %}&productHandle={{ product.handle | url_encode }}{% render 'ironair-checkout-prefill' %}"
         {% unless variant.available %}aria-disabled="true"{% endunless %}
       >
         Comprar agora

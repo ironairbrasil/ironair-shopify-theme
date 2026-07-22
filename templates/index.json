@@ -15,8 +15,6 @@
         "banner_9andEy": {
           "type": "banner",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
             "label": "Banner Iron Air",
             "media_type": "image",
             "image": "shopify://shop_images/IMG_SITE_03.jpg",
@@ -37,8 +35,6 @@
         "banner_3gTnTc": {
           "type": "banner",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
             "label": "Banner Iron Air",
             "media_type": "image",
             "image": "shopify://shop_images/IMG_SITE_01.jpg",
@@ -59,8 +55,6 @@
         "banner_bUVLpR": {
           "type": "banner",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
             "label": "Banner Iron Air",
             "media_type": "image",
             "image": "shopify://shop_images/IMG_SITE_02.jpg",
@@ -93,15 +87,15 @@
         "mobile_height": "medium",
         "content_position": "center",
         "text_alignment": "center",
-        "mobile_text_alignment": "center",
-        "content_alignment": "center",
-        "mobile_content_alignment": "center",
         "nav_icons": "large",
         "pagination": "dots",
         "autoplay": true,
         "speed": 4,
         "padding_top": 0,
         "padding_bottom": 0,
+        "mobile_text_alignment": "center",
+        "content_alignment": "center",
+        "mobile_content_alignment": "center",
         "hide_on_mobile": false,
         "hide_on_desktop": false
       }
@@ -112,8 +106,6 @@
         "item_kAagTd": {
           "type": "item",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
             "title": "Frete Grátis",
             "text": "Para todo o Brasil",
             "icon": "truck"
@@ -122,8 +114,6 @@
         "item_WMpXLJ": {
           "type": "item",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
             "title": "12x sem juros",
             "text": "Em todos os cartões",
             "icon": "card"
@@ -132,8 +122,6 @@
         "item_hhgGUE": {
           "type": "item",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
             "title": "Compra Segura",
             "text": "Site 100% protegido",
             "icon": "shield"
@@ -142,8 +130,6 @@
         "item_hL6MbX": {
           "type": "item",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
             "title": "7 dias de troca",
             "text": "Sem burocracia",
             "icon": "refresh"
@@ -152,8 +138,6 @@
         "item_9AKP8H": {
           "type": "item",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
             "title": "Garantia 1 ano",
             "text": "Contra defeitos",
             "icon": "check"
@@ -168,10 +152,6 @@
         "item_9AKP8H"
       ],
       "settings": {
-        "text_alignment": "left",
-        "mobile_text_alignment": "left",
-        "content_alignment": "left",
-        "mobile_content_alignment": "left",
         "padding_top": 20,
         "padding_bottom": 20,
         "hide_on_mobile": false,
@@ -184,8 +164,6 @@
         "title": {
           "type": "title",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
             "title": "Nossos produtos",
             "title_size": 30,
             "title_size_mobile": 30,
@@ -198,8 +176,6 @@
         "products": {
           "type": "products",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
             "display_mode": "carousel",
             "carousel_link_label": "Ver todos →",
             "carousel_link_url": "",
@@ -220,13 +196,9 @@
       ],
       "name": "Galeria de Produtos",
       "settings": {
-        "text_alignment": "left",
-        "mobile_text_alignment": "left",
-        "content_alignment": "left",
-        "mobile_content_alignment": "left",
         "collection": "",
         "padding_top": 48,
-        "padding_bottom": 0,
+        "padding_bottom": 48,
         "hide_on_mobile": false,
         "hide_on_desktop": false
       }
@@ -237,8 +209,6 @@
         "text_M3MWiC": {
           "type": "text",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
             "heading": "A maneira mais fácil de cuidar das suas roupas",
             "text": "<p>O fluxo de ar quente automático seca, alisa e refresca as roupas sem que você precise usar as mãos. Sem ferro de passar, sem tábua de passar, sem riscos de estragar suas roupas.</p>",
             "heading_size": 45,
@@ -251,8 +221,6 @@
         "button_UYdegJ": {
           "type": "button",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
             "label": "Ver como funciona",
             "url": ""
           }
@@ -264,46 +232,24 @@
       ],
       "name": "Liquid customizado",
       "settings": {
-        "text_alignment": "center",
-        "mobile_text_alignment": "center",
-        "content_alignment": "center",
-        "mobile_content_alignment": "center",
         "title": "",
         "custom_liquid": "",
         "padding_top": 48,
         "padding_bottom": 48,
+        "text_alignment": "center",
         "hide_on_mobile": false,
-        "hide_on_desktop": true
+        "hide_on_desktop": false,
+        "mobile_text_alignment": "center",
+        "content_alignment": "center",
+        "mobile_content_alignment": "center"
       }
     },
     "slider": {
       "type": "home-slider",
-      "settings": {
-        "aria_label": "Hero principal da Iron Air",
-        "background_mode": "video",
-        "video": "shopify://files/videos/site.mp4",
-        "height": "media",
-        "mobile_height": "media",
-        "content_position": "center",
-        "text_alignment": "center",
-        "mobile_text_alignment": "center",
-        "content_alignment": "center",
-        "mobile_content_alignment": "center",
-        "tone": "navy",
-        "padding_top": 0,
-        "padding_bottom": 0,
-        "hide_on_mobile": false,
-        "hide_on_desktop": true
-      }
-    },
-    "home_slider_zUpjeJ": {
-      "type": "home-slider",
       "blocks": {
-        "text_LwwQCc": {
+        "text_pjPTid": {
           "type": "text",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
             "heading": "A maneira mais fácil de cuidar das suas roupas",
             "text": "<p>O fluxo de ar quente automático seca, alisa e refresca as roupas sem que você precise usar as mãos. Sem ferro de passar. Sem tábua de passar. Sem ficar esperando.</p>",
             "heading_size": 52,
@@ -313,23 +259,21 @@
             "text_width": "large"
           }
         },
-        "button_nd8CNH": {
+        "button_DTnD6g": {
           "type": "button",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
             "label": "Ver como funciona",
             "label_size": 14,
             "label_size_mobile": 14,
-            "url": "shopify://pages/tutoriais",
+            "url": "",
             "style": "primary",
             "new_tab": false
           }
         }
       },
       "block_order": [
-        "text_LwwQCc",
-        "button_nd8CNH"
+        "text_pjPTid",
+        "button_DTnD6g"
       ],
       "settings": {
         "aria_label": "Hero principal da Iron Air",
@@ -339,13 +283,13 @@
         "mobile_height": "media",
         "content_position": "center",
         "text_alignment": "center",
-        "mobile_text_alignment": "center",
-        "content_alignment": "center",
-        "mobile_content_alignment": "center",
         "tone": "navy",
         "padding_top": 0,
         "padding_bottom": 0,
-        "hide_on_mobile": true,
+        "mobile_text_alignment": "center",
+        "content_alignment": "center",
+        "mobile_content_alignment": "center",
+        "hide_on_mobile": false,
         "hide_on_desktop": false
       }
     },
@@ -355,21 +299,16 @@
         "title": {
           "type": "title",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "center",
             "title": "Veja o Iron Air em ação",
             "title_size": 30,
             "title_size_mobile": 30,
             "subtitle": "Vídeos rápidos mostrando o produto no dia a dia.",
-            "subtitle_size": 15,
-            "subtitle_size_mobile": 15
+            "subtitle_size": 15
           }
         },
         "video_1": {
           "type": "video",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
             "video": "shopify://files/videos/1.mp4",
             "title": "Iron Air",
             "caption": "Veja o resultado",
@@ -380,8 +319,6 @@
         "video_2": {
           "type": "video",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
             "video": "shopify://files/videos/2.mp4",
             "title": "Roupas sem esforço",
             "caption": "No dia a dia",
@@ -392,8 +329,6 @@
         "video_3": {
           "type": "video",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
             "video": "shopify://files/videos/3.mp4",
             "title": "Pronto em minutos",
             "caption": "Antes e depois",
@@ -404,9 +339,6 @@
         "video_4": {
           "type": "video",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
-            "video": "shopify://files/videos/REELS 13.mp4",
             "title": "Mais praticidade",
             "caption": "Sem ferro e sem tábua",
             "product": "",
@@ -416,9 +348,6 @@
         "video_5": {
           "type": "video",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
-            "video": "shopify://files/videos/REELS 7.mp4",
             "title": "Iron Air em ação",
             "caption": "Veja como funciona",
             "product": "",
@@ -435,10 +364,6 @@
         "video_5"
       ],
       "settings": {
-        "text_alignment": "center",
-        "mobile_text_alignment": "center",
-        "content_alignment": "center",
-        "mobile_content_alignment": "left",
         "product": "",
         "padding_top": 56,
         "padding_bottom": 56,
@@ -452,18 +377,13 @@
         "title": {
           "type": "title",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "center",
             "title": "O que dizem os clientes",
-            "title_size": 30,
-            "title_size_mobile": 30
+            "title_size": 30
           }
         },
         "review_gKLEY3": {
           "type": "review",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
             "stars": "★★★★★",
             "text": "Comprei sem acreditar muito porque parecia aquelas coisas que prometem demais. Testei numa camisa social e me surpreendeu.",
             "name": "Roberto"
@@ -472,8 +392,6 @@
         "review_HBCJ8n": {
           "type": "review",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
             "stars": "★★★★★",
             "text": "Tenho filho pequeno e roupa acumula. Antes era um sofrimento montar tábua e ferro. Agora coloco e vou fazendo outras coisas.",
             "name": "Sonya"
@@ -482,8 +400,6 @@
         "review_h8JLFR": {
           "type": "review",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
             "stars": "★★★★★",
             "text": "Pra quem odeia passar roupa igual eu, virou rotina aqui em casa. Coloco enquanto tomo banho e a roupa já sai pronta. Só precisa pegar o jeito de prender a roupa direito.",
             "name": "Gustavo"
@@ -492,8 +408,6 @@
         "review_L6qjDE": {
           "type": "review",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
             "stars": "★★★★",
             "text": "Gostei muito, passa bem as roupas, mas minha jaqueta não passou bem, acredito por ser muito grossa e ser dificil passar até no ferro tradicional.",
             "name": "Jeferson"
@@ -508,10 +422,6 @@
         "review_L6qjDE"
       ],
       "settings": {
-        "text_alignment": "left",
-        "mobile_text_alignment": "left",
-        "content_alignment": "left",
-        "mobile_content_alignment": "left",
         "rating": "4.8",
         "count": "20",
         "padding_top": 48,
@@ -526,18 +436,13 @@
         "title": {
           "type": "title",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "center",
             "title": "Perguntas frequentes",
-            "title_size": 30,
-            "title_size_mobile": 30
+            "title_size": 30
           }
         },
         "item_UmT3c6": {
           "type": "item",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
             "question": "O Iron Air funciona com todo tipo de tecido?",
             "answer": "Sim. O controle inteligente de temperatura se ajusta automaticamente e funciona com algodão, poliéster, seda, lã, malha e a maior parte dos tecidos do dia a dia."
           }
@@ -545,8 +450,6 @@
         "item_eeBR7m": {
           "type": "item",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
             "question": "Quanto tempo leva para passar uma peça?",
             "answer": "A maioria das camisas e calças fica pronta em 6 a 12 minutos. O diferencial é que você não precisa acompanhar o processo."
           }
@@ -554,8 +457,6 @@
         "item_qmeG94": {
           "type": "item",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
             "question": "Qual a voltagem?",
             "answer": "Temos a opção de 127V (1250W) e 220V (1400W)."
           }
@@ -563,8 +464,6 @@
         "item_HzWdVL": {
           "type": "item",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
             "question": "Como armazenar quando não estiver usando?",
             "answer": "Esvazie o balão, dobre o suporte e guarde em armário ou gaveta maior. O aparelho pesa cerca de 2,3kg e ocupa pouco espaço."
           }
@@ -572,8 +471,6 @@
         "item_Pn8mWx": {
           "type": "item",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
             "question": "Preciso colocar a roupa seca ou molhada?",
             "answer": "O ideal é utilizar a roupa levemente úmida. Você pode colocá-la diretamente após a lavagem ou borrifar um pouco de água antes de iniciar o processo."
           }
@@ -581,8 +478,6 @@
         "item_kpPECy": {
           "type": "item",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
             "question": "Consome muita energia?",
             "answer": "Não. O Iron Air possui eficiência energética Classe A, garantindo um consumo otimizado mesmo com alta performance."
           }
@@ -590,8 +485,6 @@
         "item_GRwLUM": {
           "type": "item",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
             "question": "Serve para qualquer tamanho?",
             "answer": "Sim. O balão ajustável atende roupas até o tamanho 3XL. Ele possui zíperes laterais que permitem aumentar ou diminuir o ajuste conforme a peça."
           }
@@ -599,8 +492,6 @@
         "item_jpjKQ6": {
           "type": "item",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
             "question": "Faz barulho?",
             "answer": "O funcionamento gera um leve ruído semelhante a um ar condicionado, mas nada que incomode no ambiente."
           }
@@ -618,11 +509,6 @@
         "item_jpjKQ6"
       ],
       "settings": {
-        "text_alignment": "left",
-        "mobile_text_alignment": "left",
-        "content_alignment": "left",
-        "mobile_content_alignment": "left",
-        "use_product_faq": true,
         "padding_top": 48,
         "padding_bottom": 48,
         "hide_on_mobile": false,
@@ -636,7 +522,6 @@
     "products",
     "custom_liquid_izrydp",
     "slider",
-    "home_slider_zUpjeJ",
     "action_videos",
     "reviews",
     "faq"

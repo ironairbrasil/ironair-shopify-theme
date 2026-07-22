@@ -14,9 +14,9 @@
           <div class="sec-header-copy">
             <div class="sec-title responsive-font-size" style="--font-size-desktop: {{ block.settings.title_size | default: 26 }}px; --font-size-mobile: {{ block.settings.title_size_mobile | default: block.settings.title_size | default: 26 }}px;">{{ block.settings.title | escape }}</div>
             {% if block.settings.show_product_count %}
-              <span class="sec-subtitle responsive-font-size theme-block-align-{{ block.settings.block_text_alignment | default: 'inherit' }} theme-block-mobile-align-{{ block.settings.block_mobile_text_alignment | default: block.settings.block_text_alignment | default: 'inherit' }}" style="--font-size-desktop: {{ block.settings.subtitle_size | default: 13 }}px; --font-size-mobile: {{ block.settings.subtitle_size_mobile | default: block.settings.subtitle_size | default: 13 }}px;">{{ selected_collection.products_count }} produto{% unless selected_collection.products_count == 1 %}s{% endunless %}</span>
+              <span class="sec-subtitle responsive-font-size" style="--font-size-desktop: {{ block.settings.subtitle_size | default: 13 }}px; --font-size-mobile: {{ block.settings.subtitle_size_mobile | default: block.settings.subtitle_size | default: 13 }}px;">{{ selected_collection.products_count }} produto{% unless selected_collection.products_count == 1 %}s{% endunless %}</span>
             {% elsif block.settings.subtitle != blank %}
-              <span class="sec-subtitle responsive-font-size theme-block-align-{{ block.settings.block_text_alignment | default: 'inherit' }} theme-block-mobile-align-{{ block.settings.block_mobile_text_alignment | default: block.settings.block_text_alignment | default: 'inherit' }}" style="--font-size-desktop: {{ block.settings.subtitle_size | default: 13 }}px; --font-size-mobile: {{ block.settings.subtitle_size_mobile | default: block.settings.subtitle_size | default: 13 }}px;">{{ block.settings.subtitle | escape }}</span>
+              <span class="sec-subtitle responsive-font-size" style="--font-size-desktop: {{ block.settings.subtitle_size | default: 13 }}px; --font-size-mobile: {{ block.settings.subtitle_size_mobile | default: block.settings.subtitle_size | default: 13 }}px;">{{ block.settings.subtitle | escape }}</span>
             {% endif %}
           </div>
         </div>
@@ -26,9 +26,9 @@
           <div class="sec-header-copy">
             <div class="sec-title responsive-font-size" style="--font-size-desktop: {{ block.settings.title_size | default: 26 }}px; --font-size-mobile: {{ block.settings.title_size_mobile | default: block.settings.title_size | default: 26 }}px;">{{ block.settings.title | escape }}</div>
             {% if block.settings.show_product_count %}
-              <span class="sec-subtitle responsive-font-size theme-block-align-{{ block.settings.block_text_alignment | default: 'inherit' }} theme-block-mobile-align-{{ block.settings.block_mobile_text_alignment | default: block.settings.block_text_alignment | default: 'inherit' }}" style="--font-size-desktop: {{ block.settings.subtitle_size | default: 13 }}px; --font-size-mobile: {{ block.settings.subtitle_size_mobile | default: block.settings.subtitle_size | default: 13 }}px;">{{ selected_collection.products_count }} produto{% unless selected_collection.products_count == 1 %}s{% endunless %}</span>
+              <span class="sec-subtitle responsive-font-size" style="--font-size-desktop: {{ block.settings.subtitle_size | default: 13 }}px; --font-size-mobile: {{ block.settings.subtitle_size_mobile | default: block.settings.subtitle_size | default: 13 }}px;">{{ selected_collection.products_count }} produto{% unless selected_collection.products_count == 1 %}s{% endunless %}</span>
             {% elsif block.settings.subtitle != blank %}
-              <span class="sec-subtitle responsive-font-size theme-block-align-{{ block.settings.block_text_alignment | default: 'inherit' }} theme-block-mobile-align-{{ block.settings.block_mobile_text_alignment | default: block.settings.block_text_alignment | default: 'inherit' }}" style="--font-size-desktop: {{ block.settings.subtitle_size | default: 13 }}px; --font-size-mobile: {{ block.settings.subtitle_size_mobile | default: block.settings.subtitle_size | default: 13 }}px;">{{ block.settings.subtitle | escape }}</span>
+              <span class="sec-subtitle responsive-font-size" style="--font-size-desktop: {{ block.settings.subtitle_size | default: 13 }}px; --font-size-mobile: {{ block.settings.subtitle_size_mobile | default: block.settings.subtitle_size | default: 13 }}px;">{{ block.settings.subtitle | escape }}</span>
             {% endif %}
           </div>
         </div>

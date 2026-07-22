@@ -2,7 +2,7 @@
   var root;
   var drawer;
   var lastFocused;
-  var checkoutBaseUrl = 'https://ironair-payments.vercel.app/checkout-ironair';
+  var checkoutBaseUrl = 'https://ironair-payments.vercel.app/checkout-pre-venda';
   var discountCode = window.sessionStorage ? window.sessionStorage.getItem('ironair_discount_code') || '' : '';
 
   function money(cents) {

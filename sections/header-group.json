@@ -17,23 +17,14 @@
         "announcement": {
           "type": "announcement",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
-            "text": "Frete grátis para todo Brasil. Use o cupom PIX10 para 10% OFF"
+            "text": "🚚 FRETE GRÁTIS em todo Brasil + 12X SEM JUROS no cartão + 10% OFF no Pix"
           }
         }
       },
       "block_order": [
         "announcement"
       ],
-      "settings": {
-        "text_alignment": "left",
-        "mobile_text_alignment": "left",
-        "content_alignment": "left",
-        "mobile_content_alignment": "left",
-        "hide_on_mobile": false,
-        "hide_on_desktop": false
-      }
+      "settings": {}
     },
     "header_main": {
       "type": "header-main",
@@ -45,8 +36,6 @@
         "search": {
           "type": "search",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
             "enabled": true,
             "placeholder": "Buscar produtos...",
             "button_label": "Buscar"
@@ -71,14 +60,7 @@
         "account",
         "cart"
       ],
-      "settings": {
-        "text_alignment": "left",
-        "mobile_text_alignment": "left",
-        "content_alignment": "left",
-        "mobile_content_alignment": "left",
-        "hide_on_mobile": false,
-        "hide_on_desktop": false
-      }
+      "settings": {}
     },
     "header_custom_liquid": {
       "type": "header-custom-liquid",
@@ -86,8 +68,6 @@
         "menu_R7MtR9": {
           "type": "menu",
           "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
             "menu": "main-menu",
             "menu_label": "Menu principal",
             "menu_position": "center"
@@ -97,16 +77,7 @@
       "block_order": [
         "menu_R7MtR9"
       ],
-      "settings": {
-        "text_alignment": "left",
-        "mobile_text_alignment": "left",
-        "content_alignment": "left",
-        "mobile_content_alignment": "left",
-        "padding_top": 0,
-        "padding_bottom": 0,
-        "hide_on_mobile": false,
-        "hide_on_desktop": false
-      }
+      "settings": {}
     }
   },
   "order": [
