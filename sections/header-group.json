@@ -19,6 +19,9 @@
           "settings": {
             "block_text_alignment": "inherit",
             "block_mobile_text_alignment": "inherit",
+            "font_size": 15,
+            "mobile_font_size": 11,
+            "font_weight": "700",
             "text": "PRÉ-VENDA ABERTA — GARANTA SUA UNIDADE DO PRÓXIMO LOTE"
           }
         },
@@ -27,6 +30,9 @@
           "settings": {
             "block_text_alignment": "inherit",
             "block_mobile_text_alignment": "inherit",
+            "font_size": 13,
+            "mobile_font_size": 11,
+            "font_weight": "400",
             "text": "Chegada prevista em até 30 dias • Frete grátis para todo o Brasil"
           }
         }
