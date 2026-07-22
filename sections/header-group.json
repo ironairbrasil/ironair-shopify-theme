@@ -21,10 +21,19 @@
             "block_mobile_text_alignment": "inherit",
             "text": "PRÉ-VENDA ABERTA — GARANTA SUA UNIDADE DO PRÓXIMO LOTE"
           }
+        },
+        "announcement_NHAfg9": {
+          "type": "announcement",
+          "settings": {
+            "block_text_alignment": "inherit",
+            "block_mobile_text_alignment": "inherit",
+            "text": "Chegada prevista em até 30 dias • Frete grátis para todo o Brasil"
+          }
         }
       },
       "block_order": [
-        "announcement"
+        "announcement",
+        "announcement_NHAfg9"
       ],
       "settings": {
         "text_alignment": "left",
