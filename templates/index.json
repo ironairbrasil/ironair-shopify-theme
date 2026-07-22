@@ -231,6 +231,26 @@
         "hide_on_desktop": false
       }
     },
+    "slider": {
+      "type": "home-slider",
+      "settings": {
+        "aria_label": "Hero principal da Iron Air",
+        "background_mode": "video",
+        "video": "shopify://files/videos/site.mp4",
+        "height": "media",
+        "mobile_height": "media",
+        "content_position": "center",
+        "text_alignment": "center",
+        "mobile_text_alignment": "center",
+        "content_alignment": "center",
+        "mobile_content_alignment": "center",
+        "tone": "navy",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "hide_on_mobile": false,
+        "hide_on_desktop": false
+      }
+    },
     "custom_liquid_izrydp": {
       "type": "custom-liquid",
       "blocks": {
@@ -273,13 +293,13 @@
         "padding_top": 48,
         "padding_bottom": 48,
         "hide_on_mobile": false,
-        "hide_on_desktop": false
+        "hide_on_desktop": true
       }
     },
-    "slider": {
+    "home_slider_dPpcYT": {
       "type": "home-slider",
       "blocks": {
-        "text_pjPTid": {
+        "text_TRPczQ": {
           "type": "text",
           "settings": {
             "block_text_alignment": "inherit",
@@ -293,7 +313,7 @@
             "text_width": "large"
           }
         },
-        "button_DTnD6g": {
+        "button_8UFqQg": {
           "type": "button",
           "settings": {
             "block_text_alignment": "inherit",
@@ -308,8 +328,8 @@
         }
       },
       "block_order": [
-        "text_pjPTid",
-        "button_DTnD6g"
+        "text_TRPczQ",
+        "button_8UFqQg"
       ],
       "settings": {
         "aria_label": "Hero principal da Iron Air",
@@ -325,7 +345,7 @@
         "tone": "navy",
         "padding_top": 0,
         "padding_bottom": 0,
-        "hide_on_mobile": false,
+        "hide_on_mobile": true,
         "hide_on_desktop": false
       }
     },
@@ -614,8 +634,9 @@
     "slides_hDX8yJ",
     "trust",
     "products",
-    "custom_liquid_izrydp",
     "slider",
+    "custom_liquid_izrydp",
+    "home_slider_dPpcYT",
     "action_videos",
     "reviews",
     "faq"
