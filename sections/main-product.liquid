@@ -23,7 +23,7 @@
   {% assign discount = compare_price | minus: price | times: 100 | divided_by: compare_price %}
 {% endif %}
 
-<section class="page product-page shopify-padding-section" data-product-root data-product-handle="{{ product.handle | escape }}" data-product-title="{{ product.title | escape }}" {% if product.featured_image %}data-product-image="{{ product.featured_image | image_url: width: 400 }}"{% endif %} style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
+<section class="page product-page shopify-padding-section theme-text-align-{{ section.settings.text_alignment | default: 'left' }} theme-mobile-text-align-{{ section.settings.mobile_text_alignment | default: section.settings.text_alignment | default: 'left' }} theme-content-align-{{ section.settings.content_alignment | default: section.settings.text_alignment | default: 'left' }} theme-mobile-content-align-{{ section.settings.mobile_content_alignment | default: section.settings.content_alignment | default: section.settings.mobile_text_alignment | default: section.settings.text_alignment | default: 'left' }}{% if section.settings.hide_on_mobile %} theme-hide-mobile{% endif %}{% if section.settings.hide_on_desktop %} theme-hide-desktop{% endif %}" data-product-root data-product-handle="{{ product.handle | escape }}" data-product-title="{{ product.title | escape }}" {% if product.featured_image %}data-product-image="{{ product.featured_image | image_url: width: 400 }}"{% endif %} style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
   <div class="product-detail-shell">
     <div class="product-media-column">
       <div class="product-gallery">
@@ -55,7 +55,7 @@
       {% for block in section.blocks %}
         {% case block.type %}
           {% when 'vendor' %}
-            <div class="pc-brand" {{ block.shopify_attributes }}>
+            <div class="pc-brand theme-block-align-{{ block.settings.block_text_alignment | default: 'inherit' }} theme-block-mobile-align-{{ block.settings.block_mobile_text_alignment | default: block.settings.block_text_alignment | default: 'inherit' }}" {{ block.shopify_attributes }}>
               {% if block.settings.text != blank %}
                 {{ block.settings.text }}
               {% else %}
@@ -65,7 +65,7 @@
 
           {% when 'title' %}
             <h1
-              class="responsive-font-size"
+              class="responsive-font-size theme-block-align-{{ block.settings.block_text_alignment | default: 'inherit' }} theme-block-mobile-align-{{ block.settings.block_mobile_text_alignment | default: block.settings.block_text_alignment | default: 'inherit' }}"
               style="--font-size-desktop: {{ block.settings.title_size | default: 40 }}px; --font-size-mobile: {{ block.settings.title_size_mobile | default: block.settings.title_size | default: 40 }}px;"
               {{ block.shopify_attributes }}
             >
@@ -78,7 +78,7 @@
 
           {% when 'badge' %}
             <div
-              class="pc-badge badge-off"
+              class="pc-badge badge-off theme-block-align-{{ block.settings.block_text_alignment | default: 'inherit' }} theme-block-mobile-align-{{ block.settings.block_mobile_text_alignment | default: block.settings.block_text_alignment | default: 'inherit' }}"
               {% if block.settings.badge_text == blank %}data-product-discount{% endif %}
               {{ block.shopify_attributes }}
               {% unless compare_price > price or block.settings.badge_text != blank %}hidden{% endunless %}
@@ -91,7 +91,7 @@
             </div>
 
           {% when 'price' %}
-            <div class="product-price-block" {{ block.shopify_attributes }}>
+            <div class="product-price-block theme-block-align-{{ block.settings.block_text_alignment | default: 'inherit' }} theme-block-mobile-align-{{ block.settings.block_mobile_text_alignment | default: block.settings.block_text_alignment | default: 'inherit' }}" {{ block.shopify_attributes }}>
               {% if block.settings.show_compare_price %}
                 <div class="pc-price-old" data-product-compare-price {% unless compare_price > price %}hidden{% endunless %}>{{ compare_price | money }}</div>
               {% endif %}
@@ -113,7 +113,7 @@
             </div>
 
           {% when 'buy_buttons' %}
-            <div {{ block.shopify_attributes }}>
+            <div class="theme-block-align-{{ block.settings.block_text_alignment | default: 'inherit' }} theme-block-mobile-align-{{ block.settings.block_mobile_text_alignment | default: block.settings.block_text_alignment | default: 'inherit' }}" {{ block.shopify_attributes }}>
               {% if product.featured_image %}
                 {% assign product_checkout_image_url = product.featured_image | image_url: width: 400 %}
               {% endif %}
@@ -220,7 +220,7 @@
                   {{ block.settings.button_label }}
                 </button>
                 <button class="btn-hero product-submit product-submit-secondary" type="submit" data-product-submit data-add-to-cart {% if product.has_only_default_variant %}{% unless current_variant.available %}disabled{% endunless %}{% else %}disabled{% endif %}>
-                  Adicionar ao carrinho
+                  Reservar minha unidade
                 </button>
               {% endform %}
             </div>
@@ -230,7 +230,7 @@
             {% assign fallback_collection = product.collections.first %}
             {% assign upsell_display_limit = block.settings.limit | default: 4 %}
             {% if upsell_products != blank or fallback_collection != blank %}
-              <div class="product-upsells" {{ block.shopify_attributes }}>
+              <div class="product-upsells theme-block-align-{{ block.settings.block_text_alignment | default: 'inherit' }} theme-block-mobile-align-{{ block.settings.block_mobile_text_alignment | default: block.settings.block_text_alignment | default: 'inherit' }}" {{ block.shopify_attributes }}>
                 {% if block.settings.title != blank %}
                   <h2>{{ block.settings.title }}</h2>
                 {% endif %}
@@ -303,7 +303,7 @@
           {% when 'description' %}
 
           {% when 'benefits' %}
-            <div class="final-points product-points" {{ block.shopify_attributes }}>
+            <div class="final-points product-points theme-block-align-{{ block.settings.block_text_alignment | default: 'inherit' }} theme-block-mobile-align-{{ block.settings.block_mobile_text_alignment | default: block.settings.block_text_alignment | default: 'inherit' }}" {{ block.shopify_attributes }}>
               {% if block.settings.benefit_1 != blank %}<div>{{ block.settings.benefit_1 }}</div>{% endif %}
               {% if block.settings.benefit_2 != blank %}<div>{{ block.settings.benefit_2 }}</div>{% endif %}
               {% if block.settings.show_stock %}
@@ -337,7 +337,7 @@
       {% if product_description_html_stripped != blank %}
         <div class="product-description-section">
           <details
-            class="product-info-dropdown product-description-card product-description-card--{{ block.settings.width }} product-description-card--align-{{ block.settings.alignment }} {% if block.settings.show_background %}has-background{% endif %} {% if block.settings.show_border %}has-border{% endif %}"
+            class="product-info-dropdown product-description-card product-description-card--{{ block.settings.width }} product-description-card--align-{{ block.settings.alignment }} theme-block-align-{{ block.settings.block_text_alignment | default: block.settings.alignment | default: 'inherit' }} theme-block-mobile-align-{{ block.settings.block_mobile_text_alignment | default: block.settings.block_text_alignment | default: block.settings.alignment | default: 'inherit' }} {% if block.settings.show_background %}has-background{% endif %} {% if block.settings.show_border %}has-border{% endif %}"
             style="--description-padding-top: {{ block.settings.padding_top }}px; --description-padding-bottom: {{ block.settings.padding_bottom }}px; --description-padding-left: {{ block.settings.padding_left }}px; --description-padding-right: {{ block.settings.padding_right }}px; --description-border-radius: {{ block.settings.border_radius }}px;"
             {{ block.shopify_attributes }}
           >
@@ -364,7 +364,7 @@
       {% if product_specifications_html_stripped != blank %}
         <div class="product-description-section">
           <details
-            class="product-info-dropdown product-description-card product-description-card--{{ block.settings.width }} product-description-card--align-{{ block.settings.alignment }} {% if block.settings.show_background %}has-background{% endif %} {% if block.settings.show_border %}has-border{% endif %}"
+            class="product-info-dropdown product-description-card product-description-card--{{ block.settings.width }} product-description-card--align-{{ block.settings.alignment }} theme-block-align-{{ block.settings.block_text_alignment | default: block.settings.alignment | default: 'inherit' }} theme-block-mobile-align-{{ block.settings.block_mobile_text_alignment | default: block.settings.block_text_alignment | default: block.settings.alignment | default: 'inherit' }} {% if block.settings.show_background %}has-background{% endif %} {% if block.settings.show_border %}has-border{% endif %}"
             style="--description-padding-top: {{ block.settings.padding_top }}px; --description-padding-bottom: {{ block.settings.padding_bottom }}px; --description-padding-left: {{ block.settings.padding_left }}px; --description-padding-right: {{ block.settings.padding_right }}px; --description-border-radius: {{ block.settings.border_radius }}px;"
             {{ block.shopify_attributes }}
           >
@@ -388,6 +388,90 @@
   "settings": [
     {
       "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Alinhamento dos textos no desktop",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_text_alignment",
+      "label": "Alinhamento dos textos no mobile",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Alinhamento do conteúdo no desktop",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_content_alignment",
+      "label": "Alinhamento do conteúdo no mobile",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "header",
       "content": "Preenchimento"
     },
     {
@@ -409,6 +493,22 @@
       "step": 4,
       "unit": "px",
       "default": 48
+    },
+    {
+      "type": "header",
+      "content": "Visibilidade"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_mobile",
+      "label": "Ocultar no mobile",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_desktop",
+      "label": "Ocultar no desktop",
+      "default": false
     }
   ],
   "blocks": [
@@ -416,6 +516,58 @@
       "type": "vendor",
       "name": "Marca",
       "settings": [
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "block_text_alignment",
+          "label": "Alinhamento do texto no desktop",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "block_mobile_text_alignment",
+          "label": "Alinhamento do texto no mobile",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
         {
           "type": "text",
           "id": "text",
@@ -428,6 +580,58 @@
       "type": "title",
       "name": "Nome",
       "settings": [
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "block_text_alignment",
+          "label": "Alinhamento do texto no desktop",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "block_mobile_text_alignment",
+          "label": "Alinhamento do texto no mobile",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
         {
           "type": "text",
           "id": "title_override",
@@ -461,6 +665,58 @@
       "name": "Badge",
       "settings": [
         {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "block_text_alignment",
+          "label": "Alinhamento do texto no desktop",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "block_mobile_text_alignment",
+          "label": "Alinhamento do texto no mobile",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
+        {
           "type": "text",
           "id": "badge_text",
           "label": "Texto personalizado",
@@ -472,6 +728,58 @@
       "type": "price",
       "name": "Preço",
       "settings": [
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "block_text_alignment",
+          "label": "Alinhamento do texto no desktop",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "block_mobile_text_alignment",
+          "label": "Alinhamento do texto no mobile",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
         {
           "type": "checkbox",
           "id": "show_compare_price",
@@ -528,6 +836,58 @@
       "name": "Botão",
       "settings": [
         {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "block_text_alignment",
+          "label": "Alinhamento do texto no desktop",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "block_mobile_text_alignment",
+          "label": "Alinhamento do texto no mobile",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
+        {
           "type": "text",
           "id": "variant_label",
           "label": "Texto do seletor de variante",
@@ -537,7 +897,7 @@
           "type": "text",
           "id": "button_label",
           "label": "Texto do botão",
-          "default": "Comprar agora"
+          "default": "Garantir minha unidade"
         },
         {
           "type": "checkbox",
@@ -557,6 +917,58 @@
       "type": "upsells",
       "name": "Adicione também",
       "settings": [
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "block_text_alignment",
+          "label": "Alinhamento do texto no desktop",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "block_mobile_text_alignment",
+          "label": "Alinhamento do texto no mobile",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
         {
           "type": "text",
           "id": "title",
@@ -586,6 +998,58 @@
       "name": "Descrição",
       "settings": [
         {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "block_text_alignment",
+          "label": "Alinhamento do texto no desktop",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "block_mobile_text_alignment",
+          "label": "Alinhamento do texto no mobile",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
+        {
           "type": "text",
           "id": "heading",
           "label": "Título",
@@ -611,8 +1075,14 @@
           "label": "Largura",
           "default": "fill",
           "options": [
-            { "value": "fit", "label": "Ajustar" },
-            { "value": "fill", "label": "Preencher" }
+            {
+              "value": "fit",
+              "label": "Ajustar"
+            },
+            {
+              "value": "fill",
+              "label": "Preencher"
+            }
           ]
         },
         {
@@ -621,9 +1091,18 @@
           "label": "Alinhamento",
           "default": "left",
           "options": [
-            { "value": "left", "label": "Esquerda" },
-            { "value": "center", "label": "Centro" },
-            { "value": "right", "label": "Direita" }
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
           ]
         },
         {
@@ -703,6 +1182,58 @@
       "name": "Especificações",
       "settings": [
         {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "block_text_alignment",
+          "label": "Alinhamento do texto no desktop",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "block_mobile_text_alignment",
+          "label": "Alinhamento do texto no mobile",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
+        {
           "type": "text",
           "id": "heading",
           "label": "Título",
@@ -724,8 +1255,14 @@
           "label": "Largura",
           "default": "fill",
           "options": [
-            { "value": "fit", "label": "Ajustar" },
-            { "value": "fill", "label": "Preencher" }
+            {
+              "value": "fit",
+              "label": "Ajustar"
+            },
+            {
+              "value": "fill",
+              "label": "Preencher"
+            }
           ]
         },
         {
@@ -734,9 +1271,18 @@
           "label": "Alinhamento",
           "default": "left",
           "options": [
-            { "value": "left", "label": "Esquerda" },
-            { "value": "center", "label": "Centro" },
-            { "value": "right", "label": "Direita" }
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
           ]
         },
         {
@@ -815,6 +1361,58 @@
       "type": "benefits",
       "name": "Benefícios e estoque",
       "settings": [
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "block_text_alignment",
+          "label": "Alinhamento do texto no desktop",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "block_mobile_text_alignment",
+          "label": "Alinhamento do texto no mobile",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
         {
           "type": "text",
           "id": "benefit_1",

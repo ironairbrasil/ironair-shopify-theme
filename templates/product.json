@@ -34,7 +34,7 @@
           "type": "buy_buttons",
           "settings": {
             "variant_label": "Selecionar variante",
-            "button_label": "Comprar agora",
+            "button_label": "Garantir minha unidade",
             "show_stock": true,
             "stock_prefix": "✓"
           }
