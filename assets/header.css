@@ -3,8 +3,8 @@
   color: #fff;
   text-align: center;
   padding: 8px 20px;
-  font-size: var(--font-size-small);
-  font-weight: 700;
+  font-size: var(--announcement-font-size, var(--font-size-small));
+  font-weight: var(--announcement-font-weight, 700);
   letter-spacing: 0.3px;
 }
 
@@ -353,7 +353,7 @@ header {
 }
 
 @media (max-width: 900px) {
-  .topbar { font-size: calc(var(--font-size-small) - 2px); padding: 7px 12px; }
+  .topbar { font-size: var(--announcement-mobile-font-size, calc(var(--font-size-small) - 2px)); padding: 7px 12px; }
   .topbar span { margin: 0 4px; }
   .header-inner {
     position: relative;

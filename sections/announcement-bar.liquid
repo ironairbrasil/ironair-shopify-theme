@@ -2,7 +2,7 @@
 
 {% for block in section.blocks %}
   {% if block.type == 'announcement' and block.settings.text != blank %}
-    <div class="topbar theme-text-align-{{ section.settings.text_alignment | default: 'left' }} theme-mobile-text-align-{{ section.settings.mobile_text_alignment | default: section.settings.text_alignment | default: 'left' }} theme-content-align-{{ section.settings.content_alignment | default: section.settings.text_alignment | default: 'left' }} theme-mobile-content-align-{{ section.settings.mobile_content_alignment | default: section.settings.content_alignment | default: section.settings.mobile_text_alignment | default: section.settings.text_alignment | default: 'left' }}{% if section.settings.hide_on_mobile %} theme-hide-mobile{% endif %}{% if section.settings.hide_on_desktop %} theme-hide-desktop{% endif %} theme-block-align-{{ block.settings.block_text_alignment | default: 'inherit' }} theme-block-mobile-align-{{ block.settings.block_mobile_text_alignment | default: block.settings.block_text_alignment | default: 'inherit' }}" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+    <div class="topbar theme-text-align-{{ section.settings.text_alignment | default: 'left' }} theme-mobile-text-align-{{ section.settings.mobile_text_alignment | default: section.settings.text_alignment | default: 'left' }} theme-content-align-{{ section.settings.content_alignment | default: section.settings.text_alignment | default: 'left' }} theme-mobile-content-align-{{ section.settings.mobile_content_alignment | default: section.settings.content_alignment | default: section.settings.mobile_text_alignment | default: section.settings.text_alignment | default: 'left' }}{% if section.settings.hide_on_mobile %} theme-hide-mobile{% endif %}{% if section.settings.hide_on_desktop %} theme-hide-desktop{% endif %} theme-block-align-{{ block.settings.block_text_alignment | default: 'inherit' }} theme-block-mobile-align-{{ block.settings.block_mobile_text_alignment | default: block.settings.block_text_alignment | default: 'inherit' }}" style="--announcement-font-size: {{ block.settings.font_size | default: 13 }}px; --announcement-mobile-font-size: {{ block.settings.mobile_font_size | default: 11 }}px; --announcement-font-weight: {{ block.settings.font_weight | default: 700 }};" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
   {% endif %}
 {% endfor %}
 
@@ -165,6 +165,62 @@
             {
               "value": "right",
               "label": "Direita"
+            }
+          ]
+        },
+        {
+          "type": "header",
+          "content": "Tipografia"
+        },
+        {
+          "type": "range",
+          "id": "font_size",
+          "label": "Tamanho do texto no desktop",
+          "min": 10,
+          "max": 32,
+          "step": 1,
+          "unit": "px",
+          "default": 13
+        },
+        {
+          "type": "range",
+          "id": "mobile_font_size",
+          "label": "Tamanho do texto no mobile",
+          "min": 9,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 11
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Peso da fonte",
+          "default": "700",
+          "options": [
+            {
+              "value": "400",
+              "label": "Normal (400)"
+            },
+            {
+              "value": "500",
+              "label": "Médio (500)"
+            },
+            {
+              "value": "600",
+              "label": "Seminegrito (600)"
+            },
+            {
+              "value": "700",
+              "label": "Negrito (700)"
+            },
+            {
+              "value": "800",
+              "label": "Extra negrito (800)"
+            },
+            {
+              "value": "900",
+              "label": "Preto (900)"
             }
           ]
         },
