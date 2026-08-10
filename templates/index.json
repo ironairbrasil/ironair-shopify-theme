@@ -560,13 +560,13 @@
             "answer": "Temos a opção de 127V (1250W) e 220V (1400W)."
           }
         },
-        "item_HzWdVL": {
+        "item_gmdQ78": {
           "type": "item",
           "settings": {
             "block_text_alignment": "inherit",
             "block_mobile_text_alignment": "inherit",
-            "question": "Como armazenar quando não estiver usando?",
-            "answer": "Esvazie o balão, dobre o suporte e guarde em armário ou gaveta maior. O aparelho pesa cerca de 2,3kg e ocupa pouco espaço."
+            "question": "O Iron Air relaxa ou estica as roupas?",
+            "answer": "Não. O Iron Air não relaxa nem estica o tecido. Ele apenas preenche a roupa com ar, sem gerar pressão, utilizando uma tecnologia 100% segura para passar as roupas."
           }
         },
         "item_Pn8mWx": {
@@ -604,6 +604,15 @@
             "question": "Faz barulho?",
             "answer": "O funcionamento gera um leve ruído semelhante a um ar condicionado, mas nada que incomode no ambiente."
           }
+        },
+        "item_HzWdVL": {
+          "type": "item",
+          "settings": {
+            "block_text_alignment": "inherit",
+            "block_mobile_text_alignment": "inherit",
+            "question": "Como armazenar quando não estiver usando?",
+            "answer": "Esvazie o balão, dobre o suporte e guarde em armário ou gaveta maior. O aparelho pesa cerca de 2,3kg e ocupa pouco espaço."
+          }
         }
       },
       "block_order": [
@@ -611,11 +620,12 @@
         "item_UmT3c6",
         "item_eeBR7m",
         "item_qmeG94",
-        "item_HzWdVL",
+        "item_gmdQ78",
         "item_Pn8mWx",
         "item_kpPECy",
         "item_GRwLUM",
-        "item_jpjKQ6"
+        "item_jpjKQ6",
+        "item_HzWdVL"
       ],
       "settings": {
         "text_alignment": "left",
