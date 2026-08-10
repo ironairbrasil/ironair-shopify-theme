@@ -18,12 +18,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="{{ settings.color_primary | default: '#103d3e' }}">
-    <title>
-      {{ page_title }}
-      {%- if current_tags %} &ndash; {{ current_tags | join: ', ' }}{% endif -%}
-      {%- if current_page != 1 %} &ndash; Página {{ current_page }}{% endif -%}
-      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
-    </title>
+    <title>Iron Air Brasil</title>
     {% if page_description %}
       <meta name="description" content="{{ page_description | escape }}">
     {% endif %}
