@@ -1,5 +1,5 @@
 (function () {
-  var directCheckoutUrl = 'https://ironair-payments.vercel.app/checkout-pre-venda';
+  var directCheckoutUrl = 'https://ironair-payments.vercel.app/checkout-ironair';
 
   function uniqueReference(prefix) {
     var randomPart = '';
