@@ -42,7 +42,7 @@
             "block_text_alignment": "inherit",
             "block_mobile_text_alignment": "inherit",
             "variant_label": "Selecionar variante",
-            "button_label": "Garantir minha unidade",
+            "button_label": "Comprar agora",
             "show_stock": true,
             "stock_prefix": "✓"
           }
