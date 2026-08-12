@@ -1,0 +1,55 @@
+{{ 'tracking-order.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'tracking-order.js' | asset_url }}" defer></script>
+
+<section class="tracking-order" data-tracking-order data-api-url="https://ironair-payments.vercel.app/api/shipping/correios/tracking">
+  <div class="tracking-order__hero">
+    <p class="tracking-order__eyebrow">Acompanhe sua entrega</p>
+    <h1>Rastreie seu pedido</h1>
+    <p>Digite o código recebido por e-mail para ver as atualizações da sua entrega em tempo real.</p>
+  </div>
+
+  <div class="tracking-order__card">
+    <form class="tracking-order__form" data-tracking-form novalidate>
+      <label for="TrackingCode">Código de rastreio</label>
+      <div class="tracking-order__input-row">
+        <input id="TrackingCode" name="tracking_code" type="text" inputmode="text" autocomplete="off" placeholder="Ex.: AD123456789BR" maxlength="13" data-tracking-input>
+        <button type="submit" data-tracking-submit>
+          <span>Rastrear pedido</span>
+          <span aria-hidden="true">→</span>
+        </button>
+      </div>
+      <p class="tracking-order__help">Você encontra esse código no e-mail de confirmação de envio.</p>
+    </form>
+
+    <div class="tracking-order__loading" data-tracking-loading hidden>
+      <span></span> Consultando atualizações nos Correios…
+    </div>
+    <p class="tracking-order__error" role="alert" data-tracking-error hidden></p>
+
+    <div class="tracking-order__result" data-tracking-result hidden>
+      <div class="tracking-order__result-head">
+        <div>
+          <span class="tracking-order__result-label">Pedido em trânsito</span>
+          <h2 data-tracking-status>Atualização encontrada</h2>
+        </div>
+        <span class="tracking-order__code" data-tracking-code></span>
+      </div>
+      <ol class="tracking-order__timeline" data-tracking-timeline></ol>
+      <a class="tracking-order__official" data-tracking-official target="_blank" rel="noopener noreferrer">Ver no portal oficial dos Correios <span aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+
+  <div class="tracking-order__tips">
+    <div><strong>1</strong><p>Seu pedido é separado e preparado para envio.</p></div>
+    <div><strong>2</strong><p>Assim que postado, o rastreio recebe novos eventos.</p></div>
+    <div><strong>3</strong><p>Você acompanha tudo aqui até a entrega.</p></div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Rastreie seu pedido",
+  "settings": [],
+  "presets": [{ "name": "Rastreie seu pedido" }]
+}
+{% endschema %}
