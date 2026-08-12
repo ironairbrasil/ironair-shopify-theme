@@ -34,6 +34,14 @@
         </div>
         <span class="tracking-order__code" data-tracking-code></span>
       </div>
+      <div class="tracking-order__map" data-tracking-map aria-label="Progresso estimado da entrega">
+        <div class="tracking-order__map-head"><span>Progresso da entrega</span><strong data-tracking-progress-label>Preparando envio</strong></div>
+        <div class="tracking-order__route">
+          <span class="tracking-order__route-base"></span><span class="tracking-order__route-progress" data-tracking-progress></span><span class="tracking-order__truck" data-tracking-truck aria-hidden="true">🚚</span>
+          <span class="tracking-order__route-stop is-active"><i></i><b>Origem</b></span><span class="tracking-order__route-stop"><i></i><b>Triagem</b></span><span class="tracking-order__route-stop"><i></i><b>Em trânsito</b></span><span class="tracking-order__route-stop"><i></i><b>Entrega</b></span>
+        </div>
+        <p>Posição estimada conforme as atualizações oficiais dos Correios.</p>
+      </div>
       <ol class="tracking-order__timeline" data-tracking-timeline></ol>
       <a class="tracking-order__official" data-tracking-official target="_blank" rel="noopener noreferrer">Ver no portal oficial dos Correios <span aria-hidden="true">↗</span></a>
     </div>
