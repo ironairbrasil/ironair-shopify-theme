@@ -19,7 +19,7 @@
             "block_mobile_text_alignment": "inherit",
             "label": "Banner Iron Air",
             "media_type": "image",
-            "image": "shopify://shop_images/BANNER_DIA_DO_CLIENTE.webp",
+            "image": "shopify://shop_images/BANNER_DIA_DO_CLIENTE_WIDESCREEN.webp",
             "mobile_media_type": "image",
             "url": "",
             "link_label": "Ver oferta",
@@ -33,56 +33,10 @@
             "button_new_tab": false,
             "tone": "dark"
           }
-        },
-        "banner_3gTnTc": {
-          "type": "banner",
-          "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
-            "label": "Banner Iron Air",
-            "media_type": "image",
-            "image": "shopify://shop_images/IMG_SITE_01.jpg",
-            "mobile_media_type": "image",
-            "url": "",
-            "link_label": "Ver oferta",
-            "new_tab": false,
-            "heading": "",
-            "text": "",
-            "text_size": "large",
-            "button_label": "",
-            "button_url": "",
-            "button_style": "primary",
-            "button_new_tab": false,
-            "tone": "navy"
-          }
-        },
-        "banner_bUVLpR": {
-          "type": "banner",
-          "settings": {
-            "block_text_alignment": "inherit",
-            "block_mobile_text_alignment": "inherit",
-            "label": "Banner Iron Air",
-            "media_type": "image",
-            "image": "shopify://shop_images/IMG_SITE_02.jpg",
-            "mobile_media_type": "image",
-            "url": "",
-            "link_label": "Ver oferta",
-            "new_tab": false,
-            "heading": "",
-            "text": "",
-            "text_size": "large",
-            "button_label": "",
-            "button_url": "",
-            "button_style": "primary",
-            "button_new_tab": false,
-            "tone": "navy"
-          }
         }
       },
       "block_order": [
-        "banner_9andEy",
-        "banner_3gTnTc",
-        "banner_bUVLpR"
+        "banner_9andEy"
       ],
       "name": "Slides",
       "settings": {
