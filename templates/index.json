@@ -21,7 +21,7 @@
             "media_type": "image",
             "image": "shopify://shop_images/BANNER_SEMANA_DO_CLIENTE_WIDECREEN.webp",
             "mobile_media_type": "image",
-            "url": "",
+            "url": "shopify://products/iron-air",
             "link_label": "Ver oferta",
             "new_tab": false,
             "heading": "",
