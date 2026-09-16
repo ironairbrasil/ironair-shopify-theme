@@ -16,7 +16,7 @@
     {% assign slide_mobile_aspect_ratio = first_banner.settings.mobile_image.aspect_ratio %}
   {% endif %}
 
-  <section class="home-slider slides-section layout-{{ section.settings.layout }} width-{{ section.settings.width }} shopify-padding-section" aria-label="{{ section.settings.aria_label }}" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
+  <section class="home-slider slides-section layout-{{ section.settings.layout }} width-{{ section.settings.width }} shopify-padding-section theme-text-align-{{ section.settings.text_alignment | default: 'left' }} theme-mobile-text-align-{{ section.settings.mobile_text_alignment | default: section.settings.text_alignment | default: 'left' }} theme-content-align-{{ section.settings.content_alignment | default: section.settings.text_alignment | default: 'left' }} theme-mobile-content-align-{{ section.settings.mobile_content_alignment | default: section.settings.content_alignment | default: section.settings.mobile_text_alignment | default: section.settings.text_alignment | default: 'left' }}{% if section.settings.hide_on_mobile %} theme-hide-mobile{% endif %}{% if section.settings.hide_on_desktop %} theme-hide-desktop{% endif %}" aria-label="{{ section.settings.aria_label }}" style="padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px; margin-top: 0; margin-bottom: 0;">
     <div
       class="home-slider-stage height-{{ section.settings.media_height }} mobile-height-{{ section.settings.mobile_height }} content-{{ section.settings.content_position }} text-{{ section.settings.text_alignment }}"
       style="--slide-aspect-ratio: {{ slide_aspect_ratio }}; --slide-mobile-aspect-ratio: {{ slide_mobile_aspect_ratio }};"
@@ -53,7 +53,7 @@
 
           <div class="home-slide-content">
             {% if block.settings.heading != blank or block.settings.text != blank %}
-              <div class="home-slide-copy copy-size-{{ block.settings.text_size }}">
+              <div class="home-slide-copy copy-size-{{ block.settings.text_size }} theme-block-align-{{ block.settings.block_text_alignment | default: 'inherit' }} theme-block-mobile-align-{{ block.settings.block_mobile_text_alignment | default: block.settings.block_text_alignment | default: 'inherit' }}">
                 {% if block.settings.heading != blank %}
                   <h2>{{ block.settings.heading }}</h2>
                 {% endif %}
@@ -64,7 +64,7 @@
             {% endif %}
 
             {% if block.settings.button_label != blank %}
-              <div class="home-slide-actions">
+              <div class="home-slide-actions theme-block-align-{{ block.settings.block_text_alignment | default: 'inherit' }} theme-block-mobile-align-{{ block.settings.block_mobile_text_alignment | default: block.settings.block_text_alignment | default: 'inherit' }}">
                 <a
                   class="home-slide-button is-{{ block.settings.button_style }}"
                   href="{{ block.settings.button_url | default: routes.all_products_collection_url }}"
@@ -216,8 +216,68 @@
     {
       "type": "select",
       "id": "text_alignment",
-      "label": "Alinhamento do texto",
+      "label": "Alinhamento dos textos no desktop",
       "default": "center",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_text_alignment",
+      "label": "Alinhamento dos textos no mobile",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Alinhamento do conteúdo no desktop",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_content_alignment",
+      "label": "Alinhamento do conteúdo no mobile",
+      "default": "left",
       "options": [
         {
           "value": "left",
@@ -312,6 +372,22 @@
       "step": 4,
       "unit": "px",
       "default": 48
+    },
+    {
+      "type": "header",
+      "content": "Visibilidade"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_mobile",
+      "label": "Ocultar no mobile",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_desktop",
+      "label": "Ocultar no desktop",
+      "default": false
     }
   ],
   "blocks": [
@@ -319,6 +395,58 @@
       "type": "banner",
       "name": "Banner",
       "settings": [
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "block_text_alignment",
+          "label": "Alinhamento do texto no desktop",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "block_mobile_text_alignment",
+          "label": "Alinhamento do texto no mobile",
+          "default": "inherit",
+          "options": [
+            {
+              "value": "inherit",
+              "label": "Herdar da seção"
+            },
+            {
+              "value": "left",
+              "label": "Esquerda"
+            },
+            {
+              "value": "center",
+              "label": "Centro"
+            },
+            {
+              "value": "right",
+              "label": "Direita"
+            }
+          ]
+        },
         {
           "type": "text",
           "id": "label",

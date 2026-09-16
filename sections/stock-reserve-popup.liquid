@@ -1,7 +1,13 @@
 {% liquid
+  assign reserve_product_handle = section.settings.fallback_product_handle | default: 'iron-air'
   assign reserve_product = section.settings.product
-  if reserve_product == blank and section.settings.fallback_product_handle != blank
-    assign reserve_product = all_products[section.settings.fallback_product_handle]
+  if request.page_type == 'product' and product != blank and product.handle == reserve_product_handle
+    assign reserve_product = product
+  elsif reserve_product == blank
+    assign reserve_product = all_products[reserve_product_handle]
+  endif
+  if reserve_product != blank
+    assign reserve_product_handle = reserve_product.handle
   endif
 
   assign reserve_product_has_stock = false
@@ -20,7 +26,12 @@
   endif
 
   assign should_show_popup = false
-  if section.settings.enabled and reserve_product != blank and reserve_product_has_stock == false
+  assign is_ironair_product_url = false
+  if request.path == '/products/iron-air'
+    assign is_ironair_product_url = true
+  endif
+
+  if is_ironair_product_url and reserve_product != blank and reserve_product_has_stock == false
     assign should_show_popup = true
   endif
 
@@ -30,10 +41,10 @@
 
 {% if should_show_popup %}
   <div
-    class="stock-reserve-popup"
+    class="stock-reserve-popup theme-text-align-{{ section.settings.text_alignment | default: 'left' }} theme-mobile-text-align-{{ section.settings.mobile_text_alignment | default: section.settings.text_alignment | default: 'left' }} theme-content-align-{{ section.settings.content_alignment | default: section.settings.text_alignment | default: 'left' }} theme-mobile-content-align-{{ section.settings.mobile_content_alignment | default: section.settings.content_alignment | default: section.settings.mobile_text_alignment | default: section.settings.text_alignment | default: 'left' }}{% if section.settings.hide_on_mobile %} theme-hide-mobile{% endif %}{% if section.settings.hide_on_desktop %} theme-hide-desktop{% endif %}"
     id="{{ popup_id }}"
     data-stock-reserve-popup
-    data-popup-key="ironair-stock-reserve-global-v2-{{ reserve_product.id }}"
+    data-popup-key="ironair-stock-reserve-product-v3-{{ reserve_product.id }}"
     aria-hidden="true">
     <div class="stock-reserve-popup__overlay" data-stock-reserve-close></div>
 
@@ -305,6 +316,90 @@
   "name": "Popup de reserva",
   "settings": [
     {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Alinhamento dos textos no desktop",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_text_alignment",
+      "label": "Alinhamento dos textos no mobile",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Alinhamento do conteúdo no desktop",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_content_alignment",
+      "label": "Alinhamento do conteúdo no mobile",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        },
+        {
+          "value": "right",
+          "label": "Direita"
+        }
+      ]
+    },
+    {
       "type": "checkbox",
       "id": "enabled",
       "label": "Ativar popup",
@@ -376,6 +471,22 @@
       "step": 1,
       "unit": "s",
       "default": 1
+    },
+    {
+      "type": "header",
+      "content": "Visibilidade"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_mobile",
+      "label": "Ocultar no mobile",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_desktop",
+      "label": "Ocultar no desktop",
+      "default": false
     }
   ],
   "presets": [

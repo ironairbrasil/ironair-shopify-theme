@@ -1,0 +1,3 @@
+# A página inicial é configurada pelo editor da Shopify.
+# Não sobrescrever vídeos, blocos e demais escolhas salvas no admin em pushes completos.
+templates/index.json

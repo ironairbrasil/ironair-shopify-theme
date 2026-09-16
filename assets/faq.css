@@ -1,12 +1,13 @@
 .faq-section {
   padding: 40px;
+  padding-inline: 0;
   margin-bottom: 24px;
 }
 
 .faq-cols {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 12px;
+  gap: 18px;
   max-width: var(--shell-max-width);
   margin-top: 24px;
   margin-inline: auto;
@@ -17,7 +18,7 @@
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
-  margin-bottom: 12px;
+  margin: 0;
 }
 
 .faq-q {
@@ -74,7 +75,7 @@
 }
 
 .faq-a.open {
-  max-height: 200px;
+  max-height: none;
   padding: 0 20px 16px;
 }
 
@@ -91,9 +92,13 @@
 }
 
 @media (max-width: 640px) {
-  .faq-section { padding: 24px 20px; }
+  .faq-section {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
   .faq-cols {
     grid-template-columns: 1fr;
-    padding-inline: 0;
+    gap: 14px;
+    padding-inline: 20px;
   }
 }
