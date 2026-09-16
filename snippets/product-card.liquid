@@ -2,6 +2,9 @@
 {% assign price = variant.price %}
 {% assign checkout_price = variant.price | money_without_currency | remove: '.' | replace: ',', '.' %}
 {% assign compare_price = variant.compare_at_price %}
+{% if product.handle == 'iron-air' %}
+  {% assign compare_price = 199900 %}
+{% endif %}
 {% assign pix_price = price | times: 90 | divided_by: 100 %}
 {% assign installments = price | divided_by: 12 %}
 {% assign media_ratio = media_ratio | default: 'square' %}

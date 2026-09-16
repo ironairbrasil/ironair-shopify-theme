@@ -5,6 +5,9 @@
 {% if featured_variant %}
   {% assign featured_price = featured_variant.price %}
   {% assign featured_compare_price = featured_variant.compare_at_price %}
+  {% if featured_product.handle == 'iron-air' %}
+    {% assign featured_compare_price = 199900 %}
+  {% endif %}
   {% assign featured_pix_price = featured_price | times: 90 | divided_by: 100 %}
   {% assign featured_installments = featured_price | divided_by: 12 %}
   {% if featured_compare_price > featured_price %}

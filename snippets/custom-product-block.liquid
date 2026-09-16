@@ -18,6 +18,9 @@
     {% when 'product_badge' %}
       {% assign badge_variant_price = current_variant.price %}
       {% assign badge_compare_price = current_variant.compare_at_price %}
+      {% if current_product.handle == 'iron-air' %}
+        {% assign badge_compare_price = 199900 %}
+      {% endif %}
       {% if badge_compare_price > badge_variant_price or block.settings.badge_text != blank %}
         {% if badge_compare_price > badge_variant_price %}
           {% assign badge_discount = badge_compare_price | minus: badge_variant_price | times: 100 | divided_by: badge_compare_price %}
@@ -41,6 +44,9 @@
     {% when 'product_price' %}
       {% assign custom_price = current_variant.price %}
       {% assign custom_compare_price = current_variant.compare_at_price %}
+      {% if current_product.handle == 'iron-air' %}
+        {% assign custom_compare_price = 199900 %}
+      {% endif %}
       {% assign custom_pix_price = custom_price | times: 90 | divided_by: 100 %}
       {% assign custom_installments = custom_price | divided_by: 12 %}
       <div class="custom-product-price" {{ block.shopify_attributes }}>
