@@ -11,6 +11,34 @@
   "sections": {
     "slides_hDX8yJ": {
       "type": "slides",
+      "blocks": {
+        "banner_Wg6Jh7": {
+          "type": "banner",
+          "settings": {
+            "block_text_alignment": "inherit",
+            "block_mobile_text_alignment": "inherit",
+            "label": "Banner Iron Air",
+            "media_type": "image",
+            "image": "shopify://shop_images/BANNER_SEMANA_DO_CLIENTE_WIDECREEN.webp",
+            "mobile_media_type": "image",
+            "mobile_image": "shopify://shop_images/BANNER_SEMANA_DO_CLIENTE_MOBILE_590ff860-fa73-40fa-bb17-531047c8d32f.webp",
+            "url": "",
+            "link_label": "Ver oferta",
+            "new_tab": false,
+            "heading": "",
+            "text": "",
+            "text_size": "large",
+            "button_label": "",
+            "button_url": "",
+            "button_style": "primary",
+            "button_new_tab": false,
+            "tone": "navy"
+          }
+        }
+      },
+      "block_order": [
+        "banner_Wg6Jh7"
+      ],
       "name": "Slides",
       "settings": {
         "aria_label": "Apresentação de slides da Iron Air",
