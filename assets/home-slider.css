@@ -184,6 +184,7 @@
 .home-slide-content {
   position: relative;
   z-index: 3;
+  pointer-events: none;
   max-width: var(--shell-max-width);
   min-height: 100%;
   margin: 0 auto;
@@ -331,6 +332,11 @@
 .home-slide-copy {
   position: relative;
   z-index: 4;
+}
+
+.home-slide-actions,
+.home-slide-button {
+  pointer-events: auto;
 }
 
 .home-slider-nav {
